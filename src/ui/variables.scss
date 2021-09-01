@@ -1,0 +1,32 @@
+/* 改变主题色变量 */
+$--color-primary: #409eff !default;
+$--color-success: #67c23a !default;
+$--color-warning: #e6a23c !default;
+$--color-danger: #f56c6c !default;
+$--color-info: #909399 !default;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: "~element-plus/theme-chalk/fonts";
+@import "~element-plus/packages/theme-chalk/src/index";
+
+// base color
+$--color-dark-blue: #324157;
+$--color-light-blue: #3a71a8;
+$--color-red: #c03639;
+$--color-pink: #e65d6e;
+$--color-green: #30b08f;
+$--color-yellow: #fec171;
+
+:export {
+  colorPrimary: $--color-primary;
+  colorSuccess: $--color-success;
+  colorWarning: $--color-warning;
+  colorDanger: $--color-danger;
+  colorInfo: $--color-info;
+  colorDarkBlue: $--color-dark-blue;
+  colorLightBlue: $--color-light-blue;
+  colorRed: $--color-red;
+  colorPink: $--color-pink;
+  colorGreen: $--color-green;
+  colorYellow: $--color-yellow;
+}
