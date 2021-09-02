@@ -2,7 +2,7 @@
  * @Description:ElementUI按需引入
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2021-09-01 18:38:35
+ * @LastEditTime: 2021-09-02 10:35:26
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -17,6 +17,7 @@ import {
     ElInputNumber,
     ElTable,
     ElTableColumn,
+    ElMessage,
     ElLoading,
     ElDivider,
     ElPopover,
@@ -38,6 +39,7 @@ const components = [
     ElInputNumber,
     ElTable,
     ElTableColumn,
+    ElMessage,
     ElLoading,
     ElDivider,
     ElPopover,
