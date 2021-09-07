@@ -6,9 +6,22 @@
   "scripts": {
     "serve:dev": "vue-cli-service serve --open --mode dev",
     "serve:test": "vue-cli-service serve --open --mode test",
-    "build": "vue-cli-service build --mode pro",
+    "build:test": "vue-cli-service build --mode test",
+    "build:pro": "vue-cli-service build --mode pro",
     "lint": "vue-cli-service lint --mode dev"
   },
+  "keywords": [
+    "vue",
+    "vue3.x",
+    "typescript",
+    "admin",
+    "dashboard",
+    "element-ui",
+    "boilerplate",
+    "admin-template",
+    "management-system",
+    "authority-management"
+  ],
   "dependencies": {
     "axios": "^0.21.1",
     "element-plus": "^1.1.0-beta.8",

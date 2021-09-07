@@ -1,11 +1,23 @@
+/*
+ * @Description: 
+ * @Autor: HuiSir<273250950@qq.com>
+ * @Date: 2021-09-01 16:37:47
+ * @LastEditTime: 2021-09-07 19:05:09
+ */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
+import Login from '../views/login/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/about',
