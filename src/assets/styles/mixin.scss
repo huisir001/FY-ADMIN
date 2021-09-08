@@ -1,0 +1,37 @@
+/*
+ * @Description: 混合宏
+ * @Autor: HuiSir<273250950@qq.com>
+ * @Date: 2021-09-01 16:37:47
+ * @LastEditTime: 2021-09-08 11:32:29
+ */
+
+/** 
+ * 清除浮动
+ */
+@mixin clearfix {
+  zoom: 1;
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+/** 
+ * 滚动条
+ */
+@mixin scrollBar {
+  &::-webkit-scrollbar-track-piece {
+    background: #d3dce6;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #99a9bf;
+    border-radius: 20px;
+  }
+}

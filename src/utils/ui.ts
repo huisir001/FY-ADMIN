@@ -2,7 +2,7 @@
  * @Description:ElementUI按需引入
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2021-09-02 10:35:26
+ * @LastEditTime: 2021-09-08 13:35:47
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -27,9 +27,6 @@ import {
     ElDescriptions,
     ElDescriptionsItem
 } from 'element-plus'
-
-// 样式
-import './variables.scss'
 
 const components = [
     ElButton,

@@ -2,10 +2,11 @@
  * @Description: axios中间件（初始化和全局配置）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2020-08-06 13:16:24
- * @LastEditTime: 2021-09-02 17:19:50
+ * @LastEditTime: 2021-09-08 17:10:49
  */
-import { ElLoading, ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import axios from 'axios'
+import PageLoaing from './PageLoaing'
 import { useStore } from 'vuex'
 const Store = useStore() // useStore须执行
 
@@ -20,11 +21,7 @@ let Axios: any = axios.create({
 Axios.interceptors.request.use(
     (config: any) => {
         // 加载loading
-        Axios.loading = ElLoading.service({
-            text: 'Loading',
-            // spinner: 'el-icon-loading',
-            background: 'rgba(0, 0, 0, 0.4)',
-        })
+        PageLoaing.show()
         // 由于执行请求时token可能已经改变，故每次请求前都要重新获取token
         const Token = sessionStorage.getItem('_token')
         if (Token) {
@@ -34,7 +31,7 @@ Axios.interceptors.request.use(
         return config
     },
     (error: any) => {
-        Axios.loading.close() // 关闭loading
+        PageLoaing.hide() // 关闭loading
         console.error(error)
     }
 )
@@ -49,7 +46,7 @@ Axios.interceptors.response.use(
                     response.data = JSON.parse(response.data)
                 } catch (error) { }
                 // 关闭loading
-                Axios.loading.close()
+                PageLoaing.hide()
                 return response.data
             }
             if (!response.data.ok) {
@@ -61,12 +58,12 @@ Axios.interceptors.response.use(
             console.error('[Request error]: ' + response.data.msg)
         }
         // 关闭loading
-        Axios.loading.close()
+        PageLoaing.hide()
         return response.data
     },
     (error: any) => {
         const { status, data, statusText } = error.response
-        Axios.loading.close() // 关闭loading
+        PageLoaing.hide() // 关闭loading
         console.error(error)
         // 若这里响应码为403，则改变登陆状态，弹出登录框
         if (status == 403) {

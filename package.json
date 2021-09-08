@@ -4,7 +4,7 @@
   "private": true,
   "author": "HuiSir<273250950@qq.com>",
   "scripts": {
-    "serve:dev": "vue-cli-service serve --open --mode dev",
+    "serve:dev": "vue-cli-service serve --open --hot --mode dev",
     "serve:test": "vue-cli-service serve --open --mode test",
     "build:test": "vue-cli-service build --mode test",
     "build:pro": "vue-cli-service build --mode pro",
