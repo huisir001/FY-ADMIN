@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-09-09 17:13:09
+ * @LastEditTime: 2021-09-09 19:00:43
  */
 import { ActionContext } from 'vuex'
 import { doLogin, doLogout } from '@/api/user'
@@ -10,6 +10,7 @@ import LocalCache from '@/utils/LocalCache'
 import { ElMessage } from 'element-plus'
 
 export default {
+    namespaced: true,
     state: () => ({
         /**
          * 登录状态
