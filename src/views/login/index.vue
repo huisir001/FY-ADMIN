@@ -2,14 +2,14 @@
  * @Description: 登录
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 14:52:06
- * @LastEditTime: 2021-09-09 17:03:17
+ * @LastEditTime: 2021-09-09 17:41:43
 -->
 <template>
     <div class="login">
         <el-form ref="loginForm" :rules="loginFormRules" :model="loginFormData"
             class="login-form-box">
-            <h2>{{Title}}</h2>
-            <h4>账号密码登录</h4>
+            <h3>{{Title}}</h3>
+            <h5>账号密码登录</h5>
             <el-form-item prop="username">
                 <el-input v-model="loginFormData.username" clearable placeholder="账号"
                     prefix-icon="el-icon-user"></el-input>
@@ -100,7 +100,7 @@ export default defineComponent({
         text-align: center;
         padding: 30px 40px;
         transform: translateY(-6vh);
-        h4 {
+        h5 {
             margin-bottom: 16px;
             font-weight: 400;
         }
