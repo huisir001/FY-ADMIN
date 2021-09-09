@@ -2,7 +2,7 @@
  * @Description: 入口
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-08 13:37:00
+ * @LastEditTime: 2021-09-09 16:51:00
  */
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -11,7 +11,9 @@ import store from './store'
 import ui from './utils/ui'
 import './assets/styles/index.scss'
 
-//mockjs
+/**
+ * Mockjs
+ */
 process.env.NODE_ENV == "development" && require('./mock')
 
 createApp(App).use(store).use(router).use(ui).mount('#app')

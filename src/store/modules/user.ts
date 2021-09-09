@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-09-07 18:30:15
+ * @LastEditTime: 2021-09-09 17:13:09
  */
 import { ActionContext } from 'vuex'
 import { doLogin, doLogout } from '@/api/user'
