@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2021-09-10 19:22:53
+ * @LastEditTime: 2021-09-10 19:27:05
 -->
 <template>
     <div class="content">
@@ -21,7 +21,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .content {
     width: 100%;
-    min-height: calc(100% - 40px);
+    height: calc(100% - 40px);
+    overflow-y: auto;
     background: #fff;
     margin-top: 10px;
 }
