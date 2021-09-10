@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-09-09 19:10:51
+ * @LastEditTime: 2021-09-10 18:59:21
 -->
 <template>
     <div class="sidebar">
@@ -21,9 +21,8 @@ export default defineComponent({
  
 <style scoped lang="scss">
 .sidebar {
-    width: 250px;
-    height: 100vh;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
     background: var(--sidebar-bgcolor);
 }
 </style>
