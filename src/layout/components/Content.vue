@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2021-09-10 19:27:05
+ * @LastEditTime: 2021-09-10 19:45:53
 -->
 <template>
     <div class="content">
@@ -20,6 +20,7 @@ export default defineComponent({
  
 <style scoped lang="scss">
 .content {
+    // @include scrollBar;
     width: 100%;
     height: calc(100% - 40px);
     overflow-y: auto;
