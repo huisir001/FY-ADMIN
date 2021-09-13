@@ -1,39 +1,55 @@
 /*
- * @Description: 样式变量
+ * @Description: 公共样式变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-08 11:22:14
+ * @LastEditTime: 2021-09-13 17:42:22
  */
 
-/* 改变element-ui主题色变量 */
-$--color-primary: #409eff !default;
-$--color-success: #67c23a !default;
-$--color-warning: #e6a23c !default;
-$--color-danger: #f56c6c !default;
-$--color-info: #909399 !default;
+/* sass variables */
+// color
+$--color-dark-blue: #324157 !default;
+$--color-light-blue: #3a71a8 !default;
+$--color-red: #c03639 !default;
+$--color-pink: #e65d6e !default;
+$--color-green: #30b08f !default;
+$--color-yellow: #fec171 !default;
+$--color-grey: #ccc !default;
 
-/* 改变 icon 字体路径变量，必需 */
-$--font-path: "~element-plus/theme-chalk/fonts";
-@import "~element-plus/packages/theme-chalk/src/index";
+// font-color
+$--font-color-primary: #303133 !default;
+$--font-color-regular: #606266 !default;
+$--font-color-secondary: #909399 !default;
+$--font-color-placeholder: #c0c4cc !default;
 
-// base color
-$--color-dark-blue: #324157;
-$--color-light-blue: #3a71a8;
-$--color-red: #c03639;
-$--color-pink: #e65d6e;
-$--color-green: #30b08f;
-$--color-yellow: #fec171;
+// border-color
+$--border-color-base: #dcdfe6 !default;
+$--border-color-light: #e4e7ed !default;
+$--border-color-lighter: #ebeef5 !default;
+$--border-color-extra-light: #f2f6fc !default;
 
-:export {
-  colorPrimary: $--color-primary;
-  colorSuccess: $--color-success;
-  colorWarning: $--color-warning;
-  colorDanger: $--color-danger;
-  colorInfo: $--color-info;
-  colorDarkBlue: $--color-dark-blue;
-  colorLightBlue: $--color-light-blue;
-  colorRed: $--color-red;
-  colorPink: $--color-pink;
-  colorGreen: $--color-green;
-  colorYellow: $--color-yellow;
+// background
+$--background-color-base: #f5f7fa !default;
+
+/* public root style variables */
+:root {
+  //base color
+  --color-dark-blue: #{$--color-dark-blue};
+  --color-light-blue: #{$--color-light-blue};
+  --color-red: #{$--color-red};
+  --color-pink: #{$--color-pink};
+  --color-green: #{$--color-green};
+  --color-yellow: #{$--color-yellow};
+  --color-grey: #{$--color-grey};
+  // font color
+  --font-color-dark: #{$--font-color-primary};
+  --font-color-regular: #{$--font-color-regular};
+  --font-color-secondary: #{$--font-color-secondary};
+  --font-color-placeholder: #{$--font-color-placeholder};
+  // border-color
+  --border-color-base: #{$--border-color-base};
+  --border-color-light: #{$--border-color-light};
+  --border-color-lighter: #{$--border-color-lighter};
+  --border-color-extra-light: #{$--border-color-extra-light};
+  // background
+  --background-color-base: #{$--background-color-base};
 }

@@ -2,7 +2,7 @@
  * @Description: LocalStorage临时缓存
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 17:29:01
- * @LastEditTime: 2021-09-09 17:38:56
+ * @LastEditTime: 2021-09-13 14:39:01
  */
 
 /**
@@ -29,8 +29,8 @@ export default class LocalCache {
     /**
      * 获取缓存
      */
-    static getCache(item: ICatchItem): string | null {
-        return JSON.parse((window as any)[typeMap.get(item.type)!].getItem(item.key) || 'null').value
+    static getCache(item: ICatchItem): any | null {
+        return JSON.parse((window as any)[typeMap.get(item.type)!].getItem(item.key) || '{"value":null}').value
     }
 
     /**

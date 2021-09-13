@@ -1,0 +1,17 @@
+/*
+ * @Description: element UI 样式引入
+ * @Autor: HuiSir<273250950@qq.com>
+ * @Date: 2021-09-01 16:37:47
+ * @LastEditTime: 2021-09-13 15:27:47
+ */
+
+/* 改变element-ui主题色变量 */
+$--color-primary: #409eff !default;
+$--color-success: #67c23a !default;
+$--color-warning: #e6a23c !default;
+$--color-danger: #f56c6c !default;
+$--color-info: #909399 !default;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: "~element-plus/theme-chalk/fonts";
+@import "~element-plus/packages/theme-chalk/src/index";
