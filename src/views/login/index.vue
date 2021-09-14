@@ -2,7 +2,7 @@
  * @Description: 登录
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 14:52:06
- * @LastEditTime: 2021-09-09 17:41:43
+ * @LastEditTime: 2021-09-14 15:27:42
 -->
 <template>
     <div class="login">
@@ -64,7 +64,7 @@ export default defineComponent({
             loginForm.value.validate(async (valid: boolean) => {
                 if (valid) {
                     // 登录
-                    await Store.dispatch('login', loginFormData)
+                    await Store.dispatch('user/login', loginFormData)
 
                     return true
                 }

@@ -2,22 +2,23 @@
  * @Description: 蓝色主题
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:36:58
- * @LastEditTime: 2021-09-14 11:37:57
+ * @LastEditTime: 2021-09-14 16:57:43
  */
 :root {
     /* 自定义 */
     --color-sidebar-bg:#2f3447;
+    --color-sidebar-font:#eeeeee;
     --color-navbar-bg:#fff;
 
     /* primary color */
-    --color-primary: #409eff;
-    --color-primary-light-1: #53a8ff;
-    --color-primary-light-2: #66b1ff;
-    --color-primary-light-3: #79bbff;
-    --color-primary-light-4: #8cc5ff;
-    --color-primary-light-5: #a0cfff;
-    --color-primary-light-6: #b3d8ff;
-    --color-primary-light-7: #c6e2ff;
-    --color-primary-light-8: #d9ecff;
-    --color-primary-light-9: #ecf5ff;
+    --el-color-primary: #409eff;
+    --el-color-primary-light-1: #53a8ff;
+    --el-color-primary-light-2: #66b1ff;
+    --el-color-primary-light-3: #79bbff;
+    --el-color-primary-light-4: #8cc5ff;
+    --el-color-primary-light-5: #a0cfff;
+    --el-color-primary-light-6: #b3d8ff;
+    --el-color-primary-light-7: #c6e2ff;
+    --el-color-primary-light-8: #d9ecff;
+    --el-color-primary-light-9: #ecf5ff;
 }

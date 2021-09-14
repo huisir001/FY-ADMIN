@@ -2,12 +2,17 @@
  * @Description: 基础样式
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-14 11:34:51
+ * @LastEditTime: 2021-09-14 18:02:25
  */
 
+/* 自定义变量 */
 @import "./variables.scss";
-@import "./elemui.scss";
 
+/* elemui */
+$--font-path: "~element-plus/theme-chalk/fonts"; // 改变 icon 字体路径变量，必需
+@import "~element-plus/packages/theme-chalk/src/index";
+
+/* base css */
 html {
   box-sizing: border-box;
 }
@@ -41,7 +46,7 @@ td,
 p {
   margin: 0;
   padding: 0;
-  font-weight: $--font-weight-primary;
+  font-weight: var(--el-font-weight-primary);
 }
 
 body {
@@ -51,9 +56,9 @@ body {
   text-rendering: optimizeLegibility;
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-  color: $--font-color-primary;
-  font-size: $--font-size-base;
-  line-height: $--font-line-height-primary;
+  color: var(--el-text-color-primary);
+  font-size: var(--el-font-size-base);
+  line-height: var(--el-font-line-height-primary);
   background: $--color-white;
   overflow: hidden;
 }
@@ -85,7 +90,7 @@ h2,
 h3,
 h4 {
   font-weight: 700;
-  line-height: $--font-line-height-primary;
+  line-height: var(--el-font-line-height-primary);
 }
 
 h1 {
