@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-09-10 18:59:21
+ * @LastEditTime: 2021-09-14 11:37:52
 -->
 <template>
     <div class="sidebar">
@@ -23,6 +23,6 @@ export default defineComponent({
 .sidebar {
     width: 100%;
     height: 100%;
-    background: var(--sidebar-bgcolor);
+    background: var(--color-sidebar-bg);
 }
 </style>

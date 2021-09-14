@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-09-10 18:55:55
+ * @LastEditTime: 2021-09-14 11:38:54
 -->
 <template>
     <div class="navbar">
@@ -23,6 +23,6 @@ export default defineComponent({
 .navbar {
     width: 100%;
     height: 50px;
-    background: var(--navbar-bgcolor);
+    background: var(--color-navbar-bg);
 }
 </style>
