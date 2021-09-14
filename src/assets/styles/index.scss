@@ -2,7 +2,7 @@
  * @Description: 基础样式
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-13 17:45:44
+ * @LastEditTime: 2021-09-14 11:34:51
  */
 
 @import "./variables.scss";
@@ -16,7 +16,6 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
-  transition: 0.3s all;
 }
 
 body,
@@ -42,7 +41,7 @@ td,
 p {
   margin: 0;
   padding: 0;
-  font-weight: 400;
+  font-weight: $--font-weight-primary;
 }
 
 body {
@@ -52,10 +51,10 @@ body {
   text-rendering: optimizeLegibility;
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-  color: var(--font-color-dark);
-  font-size: 14px;
-  line-height: 1.5;
-  background: #fff;
+  color: $--font-color-primary;
+  font-size: $--font-size-base;
+  line-height: $--font-line-height-primary;
+  background: $--color-white;
   overflow: hidden;
 }
 
@@ -86,7 +85,7 @@ h2,
 h3,
 h4 {
   font-weight: 700;
-  line-height: 1.5;
+  line-height: $--font-line-height-primary;
 }
 
 h1 {

@@ -2,54 +2,145 @@
  * @Description: 公共样式变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-13 17:42:22
+ * @LastEditTime: 2021-09-14 11:34:11
  */
 
 /* sass variables */
 // color
-$--color-dark-blue: #324157 !default;
-$--color-light-blue: #3a71a8 !default;
+$--color-white: #ffffff !default;
+$--color-black: #000000 !default;
+// --
+$--color-blue: #3a71a8 !default;
+$--color-blue-dark: #324157 !default;
+$--color-blue-light: #79bbff !default;
+$--color-blue-lighter: #b3d8ff !default;
+// ---
 $--color-red: #c03639 !default;
-$--color-pink: #e65d6e !default;
-$--color-green: #30b08f !default;
+$--color-red-light: #f56c6c !default;
+$--color-red-lighter: #f8bcbc !default;
+// ---
+$--color-pink: #f0468d !default;
+$--color-pink-light: #f58eb9 !default;
+$--color-pink-lighter: #f6b2cf !default;
+// ---
+$--color-green: #67c23a !default;
+$--color-green-light: #96fbd1 !default;
+$--color-green-lighter: #e1f3d8 !default;
+// ---
 $--color-yellow: #fec171 !default;
-$--color-grey: #ccc !default;
+$--color-yellow-light: #f1eca7 !default;
+$--color-yellow-lighter: #faecd8 !default;
+// ---
+$--color-grey: #909399 !default;
+$--color-grey-light: #ccc !default;
+$--color-grey-lighter: #f4f4f5 !default;
+
+// background
+$--background-color-base: #f5f7fa !default;
 
 // font-color
 $--font-color-primary: #303133 !default;
 $--font-color-regular: #606266 !default;
 $--font-color-secondary: #909399 !default;
 $--font-color-placeholder: #c0c4cc !default;
+$--font-color-disabled: #bbb !default;
 
-// border-color
+// font-size
+$--font-size-max: 20px !default;
+$--font-size-large: 18px !default;
+$--font-size-medium: 16px !default;
+$--font-size-base: 14px !default;
+$--font-size-small: 13px !default;
+$--font-size-mini: 12px !default;
+
+// font-other
+$--font-weight-primary: 400 !default;
+$--font-line-height-primary: 1.5 !default;
+
+// border
 $--border-color-base: #dcdfe6 !default;
 $--border-color-light: #e4e7ed !default;
 $--border-color-lighter: #ebeef5 !default;
 $--border-color-extra-light: #f2f6fc !default;
+$--border-width-base: 1px !default;
+$--border-style-base: solid !default;
+$--border-base: $--border-width-base $--border-style-base $--border-color-base !default;
 
-// background
-$--background-color-base: #f5f7fa !default;
+// border-radius
+$--border-radius-base: 4px !default;
+$--border-radius-small: 2px !default;
+$--border-radius-round: 20px !default;
+$--border-radius-circle: 100% !default;
 
-/* public root style variables */
+// box-shadow
+$--box-shadow-base: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04) !default;
+$--box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
+
+/** 
+ *public root style variables 
+ */
 :root {
   //base color
-  --color-dark-blue: #{$--color-dark-blue};
-  --color-light-blue: #{$--color-light-blue};
+  --color-white: #{$--color-white};
+  --color-black: #{$--color-black};
+  --color-blue: #{$--color-blue};
+  --color-blue-dark: #{$--color-blue-dark};
+  --color-blue-light: #{$--color-blue-light};
+  --color-blue-lighter: #{$--color-blue-lighter};
   --color-red: #{$--color-red};
+  --color-red-light: #{$--color-red-light};
+  --color-red-lighter: #{$--color-red-lighter};
   --color-pink: #{$--color-pink};
+  --color-pink-light: #{$--color-pink-light};
+  --color-pink-lighter: #{$--color-pink-lighter};
   --color-green: #{$--color-green};
+  --color-green-light: #{$--color-green-light};
+  --color-green-lighter: #{$--color-green-lighter};
   --color-yellow: #{$--color-yellow};
+  --color-yellow-light: #{$--color-yellow-light};
+  --color-yellow-lighter: #{$--color-yellow-lighter};
   --color-grey: #{$--color-grey};
+  --color-grey-light: #{$--color-grey-light};
+  --color-grey-lighter: #{$--color-grey-lighter};
+
+  // background
+  --background-color-base: #{$--background-color-base};
+
   // font color
   --font-color-dark: #{$--font-color-primary};
   --font-color-regular: #{$--font-color-regular};
   --font-color-secondary: #{$--font-color-secondary};
   --font-color-placeholder: #{$--font-color-placeholder};
-  // border-color
+  --font-color-disabled: #{$--font-color-disabled};
+
+  // font-size
+  --font-size-max: #{$--font-size-max};
+  --font-size-large: #{$--font-size-large};
+  --font-size-medium: #{$--font-size-medium};
+  --font-size-base: #{$--font-size-base};
+  --font-size-small: #{$--font-size-small};
+  --font-size-mini: #{$--font-size-mini};
+
+  // font-other
+  --font-weight-primary: #{$--font-weight-primary};
+  --font-line-height-primary: #{$--font-line-height-primary};
+
+  // border
   --border-color-base: #{$--border-color-base};
   --border-color-light: #{$--border-color-light};
   --border-color-lighter: #{$--border-color-lighter};
   --border-color-extra-light: #{$--border-color-extra-light};
-  // background
-  --background-color-base: #{$--background-color-base};
+  --border-width-base: #{$--border-width-base};
+  --border-style-base: #{$--border-style-base};
+  --border-base: #{$--border-base};
+
+  // border-radius
+  --border-radius-base: #{$--border-radius-base};
+  --border-radius-small: #{$--border-radius-small};
+  --border-radius-round: #{$--border-radius-round};
+  --border-radius-circle: #{$--border-radius-circle};
+
+  // box-shadow
+  --box-shadow-base: #{$--box-shadow-base};
+  --box-shadow-light: #{$--box-shadow-light};
 }
