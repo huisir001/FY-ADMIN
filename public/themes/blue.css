@@ -2,13 +2,13 @@
  * @Description: 蓝色主题
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:36:58
- * @LastEditTime: 2021-09-14 16:57:43
+ * @LastEditTime: 2021-09-15 10:50:15
  */
 :root {
     /* 自定义 */
     --color-sidebar-bg:#2f3447;
-    --color-sidebar-font:#eeeeee;
-    --color-navbar-bg:#fff;
+    --color-sidebar-font:var(--el-color-info-lighter);
+    --color-navbar-bg:var(--el-color-white);
 
     /* primary color */
     --el-color-primary: #409eff;

@@ -2,17 +2,17 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-09-14 16:58:03
+ * @LastEditTime: 2021-09-15 15:52:39
 -->
 <template>
     <div class="sidebar">
         <div class="logo-box">
-            <img src="../../assets/images/logo_43.png">
+            <img :src="logoSrc">
         </div>
         <div class="menu-box">
-            <el-menu default-active="1-4-1" class="zui-sidebar-menu" background-color="transparent"
-                text-color="var(--color-sidebar-font)" @open="handleOpen" @close="handleClose"
-                :collapse="isCollapse">
+            <el-menu class="zui-sidebar-menu" :collapse-transition="false"
+                background-color="transparent" text-color="var(--color-sidebar-font)"
+                @open="handleOpen" @close="handleClose" :collapse="sidebarCollapse">
                 <el-sub-menu index="1">
                     <template #title>
                         <i class="el-icon-location"></i>
@@ -44,29 +44,47 @@
 </template>
  
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useStore } from 'vuex'
+const logoSrc_1 = require('@/assets/images/logo_40.png')
+const logoSrc_2 = require('@/assets/images/logo_icon_w.svg')
 
 export default defineComponent({
     name: 'Sidebar',
-    setup() {},
+    setup() {
+        const Store = useStore()
+
+        // 折叠
+        const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)
+
+        // logo
+        const logoSrc = computed(() => (Store.state.temp.sidebarCollapse ? logoSrc_2 : logoSrc_1))
+
+        return {
+            sidebarCollapse,
+            logoSrc,
+        }
+    },
 })
 </script>
  
 <style scoped lang="scss">
+@import '@/assets/styles/mixin.scss';
 .sidebar {
-    width: 100%;
-    height: 100%;
     background: var(--color-sidebar-bg);
     .logo-box {
         height: 80px;
         line-height: 80px;
         text-align: center;
         img {
-            width: 210px;
+            width: auto;
             height: auto;
+            max-width: 210px;
+            max-height: 40px;
         }
     }
     .menu-box {
+        @include hideScrollBar;
         height: calc(100% - 80px);
         overflow-y: auto;
         .zui-sidebar-menu {

@@ -2,15 +2,11 @@
  * @Description: 基础样式
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-14 18:02:25
+ * @LastEditTime: 2021-09-15 11:02:02
  */
 
 /* 自定义变量 */
 @import "./variables.scss";
-
-/* elemui */
-$--font-path: "~element-plus/theme-chalk/fonts"; // 改变 icon 字体路径变量，必需
-@import "~element-plus/packages/theme-chalk/src/index";
 
 /* base css */
 html {
@@ -59,7 +55,7 @@ body {
   color: var(--el-text-color-primary);
   font-size: var(--el-font-size-base);
   line-height: var(--el-font-line-height-primary);
-  background: $--color-white;
+  background: var(--el-color-white);
   overflow: hidden;
 }
 
