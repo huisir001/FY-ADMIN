@@ -2,7 +2,7 @@
  * @Description: 登录
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 14:52:06
- * @LastEditTime: 2021-09-14 15:27:42
+ * @LastEditTime: 2021-09-16 00:17:27
 -->
 <template>
     <div class="login">
@@ -101,6 +101,7 @@ export default defineComponent({
         padding: 30px 40px;
         transform: translateY(-6vh);
         h5 {
+            margin-top: 5px;
             margin-bottom: 16px;
             font-weight: 400;
         }
