@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-09-15 15:52:39
+ * @LastEditTime: 2021-09-16 00:02:45
 -->
 <template>
     <div class="sidebar">
@@ -12,7 +12,7 @@
         <div class="menu-box">
             <el-menu class="zui-sidebar-menu" :collapse-transition="false"
                 background-color="transparent" text-color="var(--color-sidebar-font)"
-                @open="handleOpen" @close="handleClose" :collapse="sidebarCollapse">
+                :collapse="sidebarCollapse">
                 <el-sub-menu index="1">
                     <template #title>
                         <i class="el-icon-location"></i>
@@ -21,10 +21,6 @@
                     <el-menu-item index="1-1">选项1</el-menu-item>
                     <el-menu-item index="1-2">选项2</el-menu-item>
                     <el-menu-item index="1-3">选项3</el-menu-item>
-                    <el-sub-menu index="1-4">
-                        <template #title>选项4</template>
-                        <el-menu-item index="1-4-1">选项1</el-menu-item>
-                    </el-sub-menu>
                 </el-sub-menu>
                 <el-menu-item index="2">
                     <i class="el-icon-menu"></i>
@@ -46,7 +42,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-const logoSrc_1 = require('@/assets/images/logo_40.png')
+const logoSrc_1 = require('@/assets/images/logo.svg')
 const logoSrc_2 = require('@/assets/images/logo_icon_w.svg')
 
 export default defineComponent({
