@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2021-09-16 19:42:15
+ * @LastEditTime: 2021-09-16 19:45:18
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse}">
@@ -46,6 +46,7 @@ export default defineComponent({
         // 窗口宽度
         const visibleAreaWidth = computed(() => Store.state.temp.visibleAreaWidth)
 
+        // 监听窗口宽度变化做些事
         watch(
             visibleAreaWidth,
             (visibleAreaWidth) => {
