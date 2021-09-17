@@ -2,11 +2,16 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2021-09-16 19:45:18
+ * @LastEditTime: 2021-09-17 19:23:32
 -->
 <template>
-    <div class="layout" :class="{collapse:sidebarCollapse}">
+    <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
+        <!-- 遮罩 -->
+        <div v-if="sidebarHide && !sidebarCollapse" class="layout-mask"
+            @click="sidebarCollapseChenge"></div>
+        <!-- 侧边 -->
         <Sidebar class="left" />
+        <!-- 右侧内容区 -->
         <div class="right">
             <Navbar />
             <div class="r-bot">
@@ -41,8 +46,10 @@ export default defineComponent({
             winResize()
         })
 
-        // 折叠
+        // 侧边栏状态
         const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)
+        const sidebarHide = computed(() => Store.state.temp.sidebarHide)
+
         // 窗口宽度
         const visibleAreaWidth = computed(() => Store.state.temp.visibleAreaWidth)
 
@@ -56,12 +63,27 @@ export default defineComponent({
                     Store.state.temp.sidebarCollapse ||
                         Store.commit('temp/setStates', { sidebarCollapse: true })
                 }
+                // 宽度为768是隐藏侧边栏
+                if (visibleAreaWidth <= 768) {
+                    Store.state.temp.sidebarHide ||
+                        Store.commit('temp/setStates', { sidebarHide: true })
+                } else {
+                    Store.state.temp.sidebarHide &&
+                        Store.commit('temp/setStates', { sidebarHide: false })
+                }
             },
             { immediate: true }
         )
 
+        // 侧边栏展开收缩
+        const sidebarCollapseChenge = () => {
+            Store.commit('temp/changeSidebarCollapse')
+        }
+
         return {
             sidebarCollapse,
+            sidebarHide,
+            sidebarCollapseChenge,
         }
     },
 })
@@ -77,10 +99,19 @@ $--transition-width: width var(--el-transition-duration);
     background: var(--el-background-color-base);
     overflow: hidden;
     display: flex;
+    .layout-mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.35);
+    }
     .left {
         transition: $--transition-width;
         width: $--left-width-default;
         height: 100%;
+        overflow: hidden;
     }
     .right {
         transition: $--transition-width;
@@ -91,12 +122,34 @@ $--transition-width: width var(--el-transition-duration);
             height: calc(100% - 50px);
         }
     }
-    &.collapse {
+    &.collapse:not(.sidebarHide) {
         .left {
             width: $--left-width-collapse;
         }
         .right {
             width: calc(100vw - #{$--left-width-collapse});
+        }
+    }
+    &.collapse.sidebarHide {
+        .left {
+            width: 0;
+            ::v-deep .logo-box {
+                visibility: hidden;
+            }
+        }
+        .right {
+            width: 100vw;
+        }
+    }
+    &.sidebarHide:not(.collapse) {
+        .left {
+            position: absolute;
+            z-index: 999;
+            top: 0;
+            left: 0;
+        }
+        .right {
+            width: 100vw;
         }
     }
 }

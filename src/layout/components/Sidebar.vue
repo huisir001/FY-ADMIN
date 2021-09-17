@@ -2,12 +2,13 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-09-17 13:52:23
+ * @LastEditTime: 2021-09-17 18:20:04
 -->
 <template>
     <div class="sidebar">
         <div class="logo-box">
-            <img :src="logoSrc">
+            <img v-show="sidebarCollapse" src="../../assets/images/logo_icon_w.svg">
+            <img v-show="!sidebarCollapse" src="../../assets/images/logo.svg">
         </div>
         <div class="menu-box">
             <el-menu class="zui-sidebar-menu" :collapse-transition="false"
@@ -42,8 +43,6 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import logoSrc_1 from '@/assets/images/logo.svg'
-import logoSrc_2 from '@/assets/images/logo_icon_w.svg'
 
 export default defineComponent({
     name: 'Sidebar',
@@ -53,12 +52,8 @@ export default defineComponent({
         // 折叠
         const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)
 
-        // logo
-        const logoSrc = computed(() => (Store.state.temp.sidebarCollapse ? logoSrc_2 : logoSrc_1))
-
         return {
             sidebarCollapse,
-            logoSrc,
         }
     },
 })

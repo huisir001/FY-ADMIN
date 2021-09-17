@@ -2,10 +2,11 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-17 17:08:47
+ * @LastEditTime: 2021-09-17 19:33:19
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
+import permission from './permission'
 
 
 /**
@@ -45,5 +46,8 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+// 路由权限验证
+router.beforeEach(permission)
 
 export default router
