@@ -2,7 +2,7 @@
  * @Description: 登录
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 14:52:06
- * @LastEditTime: 2021-09-16 00:17:27
+ * @LastEditTime: 2021-09-17 14:38:31
 -->
 <template>
     <div class="login">
@@ -24,7 +24,7 @@
 </template>
  
 <script lang="ts">
-const { Title } = require('@/settings/system')
+const { Title } = require('@/settings/common.ts')
 import { defineComponent, reactive, ref, Ref } from 'vue'
 import { useStore } from 'vuex'
 import { FormRulesMap } from 'element-plus/lib/components/form/src/form.type'

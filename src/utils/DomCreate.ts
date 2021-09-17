@@ -2,7 +2,7 @@
  * @Description: 标签元素创建
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 18:43:26
- * @LastEditTime: 2021-09-13 14:28:53
+ * @LastEditTime: 2021-09-17 16:30:43
  */
 class DomCreate {
     private El: HTMLElement
@@ -22,6 +22,14 @@ class DomCreate {
 
     getElement() {
         return this.El
+    }
+
+    innerText(text: string) {
+        this.El.innerText = text
+    }
+
+    innerHTML(HTMLTEXT: string) {
+        this.El.innerHTML = HTMLTEXT
     }
 
     setAttr(key: string, value: string) {

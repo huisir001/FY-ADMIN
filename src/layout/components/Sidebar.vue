@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-09-16 00:02:45
+ * @LastEditTime: 2021-09-17 13:52:23
 -->
 <template>
     <div class="sidebar">
@@ -42,8 +42,8 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-const logoSrc_1 = require('@/assets/images/logo.svg')
-const logoSrc_2 = require('@/assets/images/logo_icon_w.svg')
+import logoSrc_1 from '@/assets/images/logo.svg'
+import logoSrc_2 from '@/assets/images/logo_icon_w.svg'
 
 export default defineComponent({
     name: 'Sidebar',

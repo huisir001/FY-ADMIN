@@ -2,9 +2,9 @@
  * @Description: 主题配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:27:56
- * @LastEditTime: 2021-09-13 14:47:01
+ * @LastEditTime: 2021-09-17 16:36:43
  */
-const { ThemeColorList } = require("@/settings/system")
+const { ThemeColorList } = require("@/settings/common.ts")
 import LocalCache from '@/utils/LocalCache'
 import DomCreate from '@/utils/DomCreate';
 
@@ -39,16 +39,22 @@ export default {
         /**
          * 样式dom
          */
-        linkEl: new DomCreate('link', { rel: "stylesheet", type: "text/css" })
+        linkEl: new DomCreate('style', { type: "text/css" })
     }),
     mutations: {
         /**
          * 修改状态
          */
-        setStates(state: IObj, obj: IObj) {
+        async setStates(state: IObj, obj: IObj) {
             // 主题色更改
             if (obj.color) {
-                state.linkEl.setAttr("href", ThemeColorList.find((item: any) => item.name == obj.color).cssPath)
+                const themeStyle = await ThemeColorList.find((item: any) => item.name == obj.color).loadStyle()
+                const themeStyleStr = JSON.stringify(themeStyle.default).replace(/[",]/g, (e) => {
+                    return e == '"' ? '' : ';'
+                })
+
+                state.linkEl.innerText(':root' + themeStyleStr)
+
                 if (document.head.getElementsByClassName(state.linkEl.className).length == 0) {
                     document.head.append(state.linkEl.getElement())
                 }

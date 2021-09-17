@@ -2,19 +2,29 @@
  * @Description: vue-cli配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-08 17:34:47
- * @LastEditTime: 2021-09-09 17:02:59
+ * @LastEditTime: 2021-09-17 15:52:00
  */
-const { Title } = require("./src/settings/system.ts")
+const { Title, CDNResources } = require("./src/settings/common.ts")
 
 module.exports = {
     publicPath: '',
     assetsDir: 'assets',
     productionSourceMap: false,
-    // webpack配置
+    // webpack-marge选项
+    configureWebpack: {
+        resolve: {
+            alias: {
+                '~theme': '/src/assets/styles/themes',
+            }
+        }
+    },
+    // webpack高级配置
     chainWebpack: (config) => {
         config.plugin('html').tap((args) => {
             //初始化配置
             args[0].title = Title
+            args[0].CSSCDN = CDNResources.css
+            args[0].JSCDN = CDNResources.js
             return args
         })
         // 配置图片文件支持

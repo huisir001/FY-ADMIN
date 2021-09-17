@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-09 15:26:50
+ * @LastEditTime: 2021-09-17 13:51:31
  */
 
 /**
@@ -12,6 +12,30 @@ declare module '*.vue' {
   import type { DefineComponent } from 'vue'
   const component: DefineComponent<{}, {}, any>
   export default component
+}
+
+/**
+ * 资源文件预设，必要
+ */
+declare module '*.css' {
+  const mod: any
+  export default mod
+}
+declare module '*.scss' {
+  const mod: any
+  export default mod
+}
+declare module '*.svg' {
+  const mod: any
+  export default mod
+}
+declare module '*.png' {
+  const mod: any
+  export default mod
+}
+declare module '*.jpg' {
+  const mod: any
+  export default mod
 }
 
 /**
