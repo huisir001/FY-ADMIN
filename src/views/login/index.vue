@@ -26,7 +26,7 @@
 <script lang="ts">
 const { Title } = require('@/settings/common.ts')
 import { defineComponent, reactive, ref, Ref } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { FormRulesMap } from 'element-plus/lib/components/form/src/form.type'
 
 export default defineComponent({

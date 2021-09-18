@@ -2,16 +2,25 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-09-09 19:00:43
+ * @LastEditTime: 2021-09-18 19:45:34
  */
 import { ActionContext } from 'vuex'
 import { doLogin, doLogout } from '@/api/user'
 import LocalCache from '@/utils/LocalCache'
 import { ElMessage } from 'element-plus'
 
-export default {
+/**
+ * 用户state接口
+ */
+export interface IUserState extends IObj {
+    loginStatus?: 0 | 1 | 2
+    token?: string | null
+    userInfo?: IObj | null
+}
+
+export const user = {
     namespaced: true,
-    state: () => ({
+    state: {
         /**
          * 登录状态
          * 0-未登录 1-已登录 2-登录失效
@@ -19,16 +28,22 @@ export default {
         loginStatus: 0,
 
         /**
+         * Token 存这里和localStorage两处
+         * 防止用户在登录状态清理浏览器缓存
+         */
+        token: null,
+
+        /**
          * 缓存用户信息
          * 刷新页面重新拉取
          */
         userInfo: null
-    }),
+    },
     mutations: {
         /**
          * 修改状态
          */
-        setStates(state: IObj, obj: IObj) {
+        setStates(state: IUserState, obj: IUserState) {
             Object.keys(obj).forEach((key) => {
                 state[key] = obj[key]
             })
@@ -42,7 +57,7 @@ export default {
             const { ok, data, token } = await doLogin(loginData)
             if (ok === 1) {
                 // 登录成功
-                commit('setStates', { loginStatus: 1, userInfo: data })
+                commit('setStates', { loginStatus: 1, token, userInfo: data })
                 // 缓存token
                 LocalCache.setCache(LocalCache.Token, token)
                 console.log("登录成功")
@@ -60,7 +75,7 @@ export default {
             const { ok } = await doLogout()
             if (ok === 1) {
                 // 状态设置
-                commit('setStates', { loginStatus: 0, userInfo: null })
+                commit('setStates', { loginStatus: 0, token: null, userInfo: null })
 
                 // 删token缓存
                 sessionStorage.removeCache(LocalCache.Token)

@@ -2,11 +2,21 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-09-17 18:31:12
+ * @LastEditTime: 2021-09-18 19:01:07
  */
-export default {
+
+/**
+ * 用户state接口
+ */
+export interface ITempState extends IObj {
+    sidebarCollapse?: boolean
+    sidebarHide?: boolean
+    visibleAreaWidth?: number
+}
+
+export const temp = {
     namespaced: true,
-    state: () => ({
+    state: {
         /**
          * 侧边栏收起
          */
@@ -19,7 +29,7 @@ export default {
          * 屏幕可视区宽度
          */
         visibleAreaWidth: window.innerWidth
-    }),
+    },
     mutations: {
         /**
          * 修改状态

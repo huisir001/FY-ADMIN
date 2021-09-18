@@ -2,7 +2,7 @@
  * @Description: 主题配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:27:56
- * @LastEditTime: 2021-09-17 16:36:43
+ * @LastEditTime: 2021-09-18 18:59:41
  */
 const { ThemeColorList } = require("@/settings/common.ts")
 import LocalCache from '@/utils/LocalCache'
@@ -17,10 +17,19 @@ const {
     showBreadcrumb: c_showBreadcrumb
 } = LocalCache.getCache(LocalCache.Theme) || {}
 
+/**
+ * 用户state接口
+ */
+export interface IThemeState extends IObj {
+    color?: string
+    showPageTagNav?: boolean
+    showBreadcrumb?: boolean
+    linkEl?: DomCreate
+}
 
-export default {
+export const theme = {
     namespaced: true,
-    state: () => ({
+    state: {
         /**
          * 主题配色
          */
@@ -40,7 +49,7 @@ export default {
          * 样式dom
          */
         linkEl: new DomCreate('style', { type: "text/css" })
-    }),
+    },
     mutations: {
         /**
          * 修改状态
@@ -55,6 +64,7 @@ export default {
 
                 state.linkEl.innerText(':root' + themeStyleStr)
 
+                // 判断是否已经插入元素
                 if (document.head.getElementsByClassName(state.linkEl.className).length == 0) {
                     document.head.append(state.linkEl.getElement())
                 }

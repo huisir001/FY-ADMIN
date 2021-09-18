@@ -2,13 +2,12 @@
  * @Description: axios中间件（初始化和全局配置）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2020-08-06 13:16:24
- * @LastEditTime: 2021-09-08 17:10:49
+ * @LastEditTime: 2021-09-18 19:42:46
  */
 import { ElMessage } from 'element-plus'
 import axios from 'axios'
 import PageLoaing from './PageLoaing'
-import { useStore } from 'vuex'
-const Store = useStore() // useStore须执行
+import { useStore } from '@/store'
 
 //初始化
 let Axios: any = axios.create({
@@ -67,7 +66,7 @@ Axios.interceptors.response.use(
         console.error(error)
         // 若这里响应码为403，则改变登陆状态，弹出登录框
         if (status == 403) {
-            Store.commit('setStates', {
+            useStore().commit('setStates', {
                 isLogin: 0, // 登陆状态
                 userInfo: null, // 用户信息缓存
                 showLoginBox: true, // 打开登陆弹窗

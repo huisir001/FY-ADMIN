@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2021-09-17 19:23:32
+ * @LastEditTime: 2021-09-18 19:39:10
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -24,12 +24,12 @@
  
 <script lang="ts">
 import { computed, defineComponent, onMounted, watch } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import Sidebar from './components/Sidebar.vue'
 import Navbar from './components/Navbar.vue'
 import Tabbar from './components/Tabbar.vue'
 import Content from './components/Content.vue'
-import winResize from '../hooks/winResize'
+import useWinResize from '../hooks/useWinResize'
 export default defineComponent({
     name: '',
     components: {
@@ -43,7 +43,7 @@ export default defineComponent({
 
         // 执行监听窗口resize
         onMounted(() => {
-            winResize()
+            useWinResize()
         })
 
         // 侧边栏状态
@@ -56,15 +56,14 @@ export default defineComponent({
         // 监听窗口宽度变化做些事
         watch(
             visibleAreaWidth,
-            (visibleAreaWidth) => {
-                console.log(visibleAreaWidth)
+            (val) => {
                 // 宽度为1000时折叠侧边栏
-                if (visibleAreaWidth <= 1000) {
+                if (val && val <= 1000) {
                     Store.state.temp.sidebarCollapse ||
                         Store.commit('temp/setStates', { sidebarCollapse: true })
                 }
                 // 宽度为768是隐藏侧边栏
-                if (visibleAreaWidth <= 768) {
+                if (val && val <= 768) {
                     Store.state.temp.sidebarHide ||
                         Store.commit('temp/setStates', { sidebarHide: true })
                 } else {
@@ -133,7 +132,7 @@ $--transition-width: width var(--el-transition-duration);
     &.collapse.sidebarHide {
         .left {
             width: 0;
-            ::v-deep .logo-box {
+            :deep(.logo-box) {
                 visibility: hidden;
             }
         }

@@ -20,7 +20,7 @@
  
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 import { Fold } from '@element-plus/icons'
 
 export default defineComponent({
