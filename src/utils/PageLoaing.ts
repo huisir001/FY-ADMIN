@@ -2,7 +2,7 @@
  * @Description: 页面加载loading
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-08 14:29:46
- * @LastEditTime: 2021-09-08 17:12:38
+ * @LastEditTime: 2021-09-20 12:42:58
  */
 
 interface IcssOptions {
@@ -24,7 +24,7 @@ class PageLoading {
         this.styleEl = document.createElement('style')
         this.styleEl.setAttribute('type', 'text/css')
         this.styleEl.innerText = this.getCss(options)
-        let progress = document.createElement('div')
+        const progress = document.createElement('div')
         progress.className = 'page-loading-progress'
         this.loadingEl.className = 'page-loading-mask'
         this.loadingEl.append(progress)

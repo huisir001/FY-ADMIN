@@ -12,11 +12,11 @@ export const getUserInfo: IPromiseFunc = () => Req.get(`${Prefix}/getUserInfo`)
 
 // 注册
 // export const signup: IPromiseFunc =
-//     (params: ISignupData) => Req.post(`${Prefix}/signup`, params)
+//     (params: IUserInfo) => Req.post(`${Prefix}/signup`, params)
 
 // 登录
 export const doLogin: IPromiseFunc =
-    ({ username, password }: ISignupData) => Req.post(`${Prefix}/login`, { username, password })
+    ({ username, password }: IUserInfo) => Req.post(`${Prefix}/login`, { username, password })
 
 // 登出
 export const doLogout: IPromiseFunc = () => Req.post(`${Prefix}/logout`)

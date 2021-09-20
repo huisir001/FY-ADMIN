@@ -2,61 +2,65 @@
  * @Description: 跳转权限-路由前置钩子
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-17 19:28:46
- * @LastEditTime: 2021-09-18 14:11:00
+ * @LastEditTime: 2021-09-21 01:49:58
  */
 import { getUserInfo } from '@/api/user'
 import { NavigationGuardWithThis } from 'vue-router'
-import { useStore } from '@/store'
+import { store } from '@/store'
+import { ElMessage } from 'element-plus'
 
 
 const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
-    const Store = useStore()
-    console.log('Store', Store, from.name)
+    /**
+     * 外站进入\第一次打开、刷新网页
+     */
+    if (!(from.name && store.state)) {
+        //获取token
+        const Token: string = store.getters.getToken()
+        if (Token) {
+            // 查询用户信息
+            const { ok, data } = await getUserInfo()
 
+            // 这里不再判定用户信息是否查到，若有错误会在axios全局配置钩子中处理
+            store.commit('user/setStates', { loginStatus: 1, userInfo: data })
 
-    // 外站进入\第一次打开、刷新网页
-    if (!(from.name && Store)) {
-        console.log(1)
-        //     //获取token
-        //     const token = sessionStorage.getItem('_token')
-        //     if (token) {
-        //         // 查询用户信息
-        //         const { ok, data } = await getUserInfo()
-        //         // 这里不再判定用户信息是否查到，若有错误会在axios全局配置钩子中处理
-        //         router.app.$store.commit('setStates', {
-        //             isLogin: 1, // 登陆状态
-        //             userInfo: data, // 用户信息缓存
-        //         })
-        //         if (!to.meta.notLogin && ok == 0) {
-        //             next('/Startup')
-        //         } else {
-        //             next()
-        //         }
-        //     } else {
-        //         //没有token 设置状态
-        //         router.app.$store.commit('setStates', {
-        //             isLogin: 0, // 登陆状态
-        //             userInfo: null, // 用户信息缓存
-        //         })
-        //         //直接转Startup
-        //         if (!to.meta.notLogin) {
-        //             next('/Startup')
-        //         } else {
-        //             next()
-        //         }
-        //     }
-        //     return
+            // 若该页面是登陆页，则清除登陆状态
+            if (to.name === 'Login') {
+                store.commit('user/clearLoginState')
+            }
+
+            // 该页面必须要登陆，且查不到用户信息
+            if (!to.meta.public && !ok) {
+                next('/login?redirect=' + to.path)
+                return
+            }
+
+            // 已登陆，该页面无权限
+            if (to.meta.unallow) {
+                next('/')
+                return
+            }
+        } else if (!to.meta.public) {
+            //没有Token，直接转login
+            next('/login?redirect=' + to.path)
+            return
+        }
+        next()
+        return
     }
-    // /* 登陆验证 */
-    // if (!to.meta.notLogin && !router.app.$store.state.isLogin) {
-    //     //请登录，弹出登陆框
-    //     router.app.$store.commit('setStates', {
-    //         showLoginBox: true,
-    //     })
-    // } else {
-    //     next()
-    // }
-    next()
+
+    /**
+     * 路由正常跳转
+     */
+    if (!to.meta.public && !store.state.user.loginStatus) {
+        //登陆失效，弹出登陆框
+        store.commit('user/setStates', { loginStatus: 2 })
+    } else if (to.meta.unallow) {
+        // 无权限
+        ElMessage.warning('您暂无权限访问此页！')
+    } else {
+        next()
+    }
 }
 
 export default permission

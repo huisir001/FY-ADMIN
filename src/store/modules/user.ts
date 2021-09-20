@@ -2,12 +2,15 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-09-18 19:45:34
+ * @LastEditTime: 2021-09-21 01:48:21
  */
+// tslint:disable-next-line:no-var-requires
+const { LocalCacheConf } = require("@/settings/common.ts")
 import { ActionContext } from 'vuex'
 import { doLogin, doLogout } from '@/api/user'
 import LocalCache from '@/utils/LocalCache'
 import { ElMessage } from 'element-plus'
+import router from '@/router'
 
 /**
  * 用户state接口
@@ -23,7 +26,7 @@ export const user = {
     state: {
         /**
          * 登录状态
-         * 0-未登录 1-已登录 2-登录失效
+         * 0-未登录 1-已登录 2-登录失效(弹出登陆框)
          */
         loginStatus: 0,
 
@@ -48,23 +51,46 @@ export const user = {
                 state[key] = obj[key]
             })
         },
+        /**
+         * 修改token
+         */
+        setToken(state: IUserState, token: string) {
+            state.token = token
+            LocalCache.setCache(LocalCacheConf.Token, token)
+        },
+        /**
+         * 删除token
+         */
+        removeToken(state: IUserState, token: string) {
+            state.token = null
+            LocalCache.removeCache(LocalCacheConf.Token)
+        },
+        /**
+         * 清除登陆状态
+         */
+        clearLoginState(state: IUserState) {
+            state.loginStatus = 0
+            state.token = null
+            state.userInfo = null
+            LocalCache.removeCache(LocalCacheConf.Token)
+        }
     },
     actions: {
         /**
          * 登录
          */
-        async login({ commit }: ActionContext<{}, {}>, loginData: ISignupData) {
+        async login({ commit }: ActionContext<{}, {}>, loginData: IUserInfo) {
             const { ok, data, token } = await doLogin(loginData)
             if (ok === 1) {
                 // 登录成功
                 commit('setStates', { loginStatus: 1, token, userInfo: data })
                 // 缓存token
-                LocalCache.setCache(LocalCache.Token, token)
-                console.log("登录成功")
-                // 判断当前路由，若为登录页，则跳转到首页或query中的历史页
-                // if () {
-                //      // vm.$router.replace({ name: 'Home' })
-                // }
+                LocalCache.setCache(LocalCacheConf.Token, token)
+                // 若为登录页，跳转到首页或query中的历史页
+                const { name, query } = router.currentRoute.value
+                if (name === 'Login') {
+                    router.replace((query.redirect as string) || '/')
+                }
             }
         },
 
@@ -78,7 +104,7 @@ export const user = {
                 commit('setStates', { loginStatus: 0, token: null, userInfo: null })
 
                 // 删token缓存
-                sessionStorage.removeCache(LocalCache.Token)
+                sessionStorage.removeCache(LocalCacheConf.Token)
 
                 // 提示
                 ElMessage({
@@ -92,5 +118,5 @@ export const user = {
 
             }
         },
-    }
+    },
 }

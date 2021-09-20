@@ -2,7 +2,7 @@
  * @Description: 登录
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 14:52:06
- * @LastEditTime: 2021-09-17 14:38:31
+ * @LastEditTime: 2021-09-21 01:33:20
 -->
 <template>
     <div class="login">
@@ -39,7 +39,7 @@ export default defineComponent({
         const loginForm: Ref = ref(null)
 
         // 登录表单数据
-        const loginFormData: ISignupData = reactive({
+        const loginFormData: IUserInfo = reactive({
             username: '',
             password: '',
         })
@@ -65,7 +65,6 @@ export default defineComponent({
                 if (valid) {
                     // 登录
                     await Store.dispatch('user/login', loginFormData)
-
                     return true
                 }
                 return false

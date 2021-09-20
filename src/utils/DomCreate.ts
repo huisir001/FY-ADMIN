@@ -2,11 +2,11 @@
  * @Description: 标签元素创建
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 18:43:26
- * @LastEditTime: 2021-09-17 16:30:43
+ * @LastEditTime: 2021-09-20 12:40:29
  */
 class DomCreate {
+    className: string
     private El: HTMLElement
-    public className: string
 
     constructor(tagName: string, attribute: IObj = {}) {
         this.El = document.createElement(tagName)
@@ -16,7 +16,7 @@ class DomCreate {
         this.El.setAttribute('class', this.className)
 
         Object.keys(attribute).forEach((key) => {
-            this.El.setAttribute(key, attribute[key]);
+            this.El.setAttribute(key, attribute[key])
         })
     }
 
@@ -33,7 +33,7 @@ class DomCreate {
     }
 
     setAttr(key: string, value: string) {
-        this.El.setAttribute(key, value);
+        this.El.setAttribute(key, value)
     }
 }
 

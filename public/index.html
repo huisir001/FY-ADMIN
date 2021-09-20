@@ -8,7 +8,7 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <!-- CDNResources -->
     <% htmlWebpackPlugin.options.CSSCDN.forEach((value) => { %>
-      <link rel="stylesheet" href="<%= value %>" />
+      <link type="text/css" rel="stylesheet" href="<%= value %>" />
     <% }) %>
     <% htmlWebpackPlugin.options.JSCDN.forEach((value) => { %>
       <script type="text/javascript" src="<%= value %>" ></script>

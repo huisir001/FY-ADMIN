@@ -2,16 +2,16 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2021-09-02 16:56:17
+ * @LastEditTime: 2021-09-20 15:51:24
  */
 
 // 用户信息
 const getUserInfo = {
     data: {
-        id: '@id',
-        username: '@cname',
-        email: '@email',
-        phone: /^1[3-9][0-9]{9}$/,
+        "id": '@id',
+        "username": '@cname',
+        "email": '@email',
+        "phone": /^1[3-9][0-9]{9}$/,
         'sex|0-1': 1
     }
 }

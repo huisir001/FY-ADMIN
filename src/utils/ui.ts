@@ -2,7 +2,7 @@
  * @Description:ElementUI按需引入
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2021-09-15 23:49:03
+ * @LastEditTime: 2021-09-20 14:27:18
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -51,12 +51,12 @@ const components = [
     ElDescriptionsItem
 ]
 
-interface iElementUIOption {
+interface IElementUIOption {
     size: string
     zIndex: number
 }
 
-export default (app: App<any>, option: iElementUIOption = { size: 'small', zIndex: 3000 }) => {
+export default (app: App<any>, option: IElementUIOption = { size: 'small', zIndex: 3000 }) => {
     // 配置项
     app.config.globalProperties.$ELEMENT = option
 

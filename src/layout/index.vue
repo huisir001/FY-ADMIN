@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2021-09-18 19:39:10
+ * @LastEditTime: 2021-09-20 12:27:11
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -114,7 +114,7 @@ $--transition-width: width var(--el-transition-duration);
     }
     .right {
         transition: $--transition-width;
-        width: calc(100vw - #{$--left-width-default});
+        width: calc(100% - #{$--left-width-default});
         height: 100%;
         .r-bot {
             padding: 10px;
@@ -126,7 +126,7 @@ $--transition-width: width var(--el-transition-duration);
             width: $--left-width-collapse;
         }
         .right {
-            width: calc(100vw - #{$--left-width-collapse});
+            width: calc(100% - #{$--left-width-collapse});
         }
     }
     &.collapse.sidebarHide {
@@ -137,7 +137,7 @@ $--transition-width: width var(--el-transition-duration);
             }
         }
         .right {
-            width: 100vw;
+            width: 100%;
         }
     }
     &.sidebarHide:not(.collapse) {
@@ -148,7 +148,7 @@ $--transition-width: width var(--el-transition-duration);
             left: 0;
         }
         .right {
-            width: 100vw;
+            width: 100%;
         }
     }
 }

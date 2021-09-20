@@ -2,7 +2,7 @@
  * @Description: LocalStorage临时缓存
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 17:29:01
- * @LastEditTime: 2021-09-18 17:27:07
+ * @LastEditTime: 2021-09-21 00:43:10
  */
 
 /**
@@ -16,16 +16,6 @@ interface ICatchItem {
 const typeMap = new Map([[1, 'sessionStorage'], [2, 'localStorage']])
 
 export default class LocalCache {
-    static Token: ICatchItem = {
-        key: '_token',
-        type: 2
-    }
-
-    static Theme: ICatchItem = {
-        key: '_theme',
-        type: 2
-    }
-
     /**
      * 获取缓存
      */
