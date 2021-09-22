@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-20 15:50:48
+ * @LastEditTime: 2021-09-22 17:24:08
  */
 
 /**
@@ -47,11 +47,12 @@ declare interface IObj {
 declare type IPromiseFunc = (...params: any) => Promise<any>
 
 /**
- * 用户注册-表单提交数据
+ * 用户数据
  */
 declare interface IUserInfo extends IObj {
   username: string
-  password: string
+  password?: string
   email?: string
   phone?: string
+  avatar?: string
 }

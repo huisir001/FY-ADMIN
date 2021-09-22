@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-09-21 01:48:21
+ * @LastEditTime: 2021-09-22 16:40:27
  */
 // tslint:disable-next-line:no-var-requires
 const { LocalCacheConf } = require("@/settings/common.ts")
@@ -97,25 +97,15 @@ export const user = {
         /**
          * 登出
          */
-        async logout({ commit }: ActionContext<{}, {}>, vm: any) {
+        async logout({ commit }: ActionContext<{}, {}>) {
             const { ok } = await doLogout()
-            if (ok === 1) {
+            if (ok) {
                 // 状态设置
-                commit('setStates', { loginStatus: 0, token: null, userInfo: null })
-
-                // 删token缓存
-                sessionStorage.removeCache(LocalCacheConf.Token)
+                commit('clearLoginState')
 
                 // 提示
-                ElMessage({
-                    type: 'success',
-                    message: '退出登录成功',
-                    onClose() {
-                        // 跳转到登录页
-                        // vm.$router.replace({ name: 'Startup' })
-                    }
-                })
-
+                ElMessage({ type: 'success', message: '已登出' })
+                router.replace({ name: 'Login' })
             }
         },
     },
