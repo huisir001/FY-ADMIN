@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-09-17 18:20:04
+ * @LastEditTime: 2021-09-23 17:06:18
 -->
 <template>
     <div class="sidebar">
@@ -21,7 +21,14 @@
                     </template>
                     <el-menu-item index="1-1">选项1</el-menu-item>
                     <el-menu-item index="1-2">选项2</el-menu-item>
-                    <el-menu-item index="1-3">选项3</el-menu-item>
+                    <el-sub-menu index="1-3">
+                        <template #title>
+                            <i class="el-icon-location"></i>
+                            <span>导航66</span>
+                        </template>
+                        <el-menu-item index="1-3-1">选项1</el-menu-item>
+                        <el-menu-item index="1-3-2">选项2</el-menu-item>
+                    </el-sub-menu>
                 </el-sub-menu>
                 <el-menu-item index="2">
                     <i class="el-icon-menu"></i>
@@ -80,6 +87,48 @@ export default defineComponent({
         overflow-y: auto;
         .zui-sidebar-menu {
             border: 0;
+        }
+    }
+    .zui-sidebar-menu {
+        &:deep(.el-menu-item),
+        &:deep(.el-sub-menu__title),
+        &:deep(.el-menu__title) {
+            font-size: 12px;
+            letter-spacing: 1px;
+            height: 50px;
+            line-height: 50px;
+            i {
+                color: var(--color-sidebar-font) !important;
+            }
+            &:hover {
+                background-color: var(--color-sidebar-menu-bg-hover) !important;
+                color: var(--color-sidebar-menu-font-hover) !important;
+                i {
+                    color: var(--color-sidebar-menu-font-hover) !important;
+                }
+            }
+        }
+    }
+}
+</style>
+<style lang="scss">
+.el-menu--popup {
+    .el-menu-item,
+    .el-sub-menu__title {
+        i {
+            color: var(--el-text-color-regular) !important;
+        }
+        color: var(--el-text-color-regular) !important;
+        height: 50px;
+        line-height: 50px;
+        font-size: 12px;
+        letter-spacing: 1px;
+        &:hover {
+            background-color: var(--color-sidebar-menu-bg-hover) !important;
+            color: var(--color-sidebar-menu-font-hover) !important;
+            i {
+                color: var(--color-sidebar-menu-font-hover) !important;
+            }
         }
     }
 }

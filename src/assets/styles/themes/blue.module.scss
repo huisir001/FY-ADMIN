@@ -2,14 +2,9 @@
  * @Description: 蓝色主题
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:36:58
- * @LastEditTime: 2021-09-17 16:47:00
+ * @LastEditTime: 2021-09-23 10:23:01
  */
 :export {
-  /* 自定义 */
-  --color-sidebar-bg: #2f3447;
-  --color-sidebar-font: var(--el-color-info-lighter);
-  --color-navbar-bg: var(--el-color-white);
-
   /* primary color */
   --el-color-primary: #409eff;
   --el-color-primary-light-1: #53a8ff;
@@ -21,4 +16,13 @@
   --el-color-primary-light-7: #c6e2ff;
   --el-color-primary-light-8: #d9ecff;
   --el-color-primary-light-9: #ecf5ff;
+
+  /* 自定义 */
+  --color-navbar-bg: var(--el-color-white);
+
+  /* 导航栏 */
+  --color-sidebar-bg: #2f3447;
+  --color-sidebar-font: var(--el-color-info-lighter);
+  --color-sidebar-menu-bg-hover: var(--el-color-primary);
+  --color-sidebar-menu-font-hover: var(--el-color-white);
 }

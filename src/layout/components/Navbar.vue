@@ -2,25 +2,28 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-09-22 18:53:24
+ * @LastEditTime: 2021-09-23 15:10:38
 -->
 <template>
     <div class="navbar">
         <div class="zui-nav-left">
-            <div class="sidebar-collapse-btn" :class="{reverse:sidebarCollapse}"
+            <div class="sidebar-collapse-btn nav-item" :class="{reverse:sidebarCollapse}"
                 @click="sidebarCollapseChenge">
                 <el-icon :size="22" color="var(--el-text-color-regular)">
                     <Fold />
                 </el-icon>
             </div>
-            <div class="breadCrumbs">
+            <div class="breadCrumbs nav-item">
                 <div v-for="(item,index) in breadCrumbs" :key="item.title">
                     {{index>1 ? ' / ':''}}{{item.title}}</div>
             </div>
         </div>
         <div class="zui-nav-right">
+            <div class="theme-nav nav-item" @click="showThemeDrawer = true">
+                <ThemeSvg size="24" color="var(--el-text-color-regular)" />
+            </div>
             <el-dropdown size="medium" trigger="click" @command="userNavChange">
-                <div class="user-nav el-dropdown-link">
+                <div class="user-nav el-dropdown-link nav-item">
                     <div class="name">{{userInfo.username}}</div>
                     <img class="avatar" :src="userInfo.avatar">
                 </div>
@@ -33,20 +36,25 @@
             </el-dropdown>
         </div>
     </div>
+    <ThemeSetDrawer v-model="showThemeDrawer" />
 </template>
  
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useStore } from '@/store'
 import { Fold } from '@element-plus/icons'
+import ThemeSvg from '@/components/svg/ThemeSvg.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
+import ThemeSetDrawer from '@/components/ThemeSetDrawer.vue'
 
 export default defineComponent({
     name: 'Navbar',
     components: {
         Fold,
+        ThemeSvg,
+        ThemeSetDrawer,
     },
     setup() {
         const Store = useStore()
@@ -100,6 +108,7 @@ export default defineComponent({
             sidebarCollapse,
             sidebarCollapseChenge,
             userNavChange,
+            showThemeDrawer: ref(false),
         }
     },
 })
@@ -118,15 +127,22 @@ export default defineComponent({
         height: 100%;
         display: flex;
         align-items: center;
+        .nav-item {
+            display: flex !important;
+            align-items: center;
+            cursor: pointer;
+            padding: 0 10px;
+            height: 32px;
+            color: var(--el-text-color-regular);
+            &:hover {
+                color: var(--el-color-primary);
+            }
+        }
     }
     .zui-nav-right {
         .user-nav {
-            display: flex !important;
-            align-items: center;
-            margin-right: 10px;
-            cursor: pointer;
             .name {
-                margin-right: 15px;
+                margin-right: 10px;
             }
             img.avatar {
                 height: 32px;
@@ -136,10 +152,6 @@ export default defineComponent({
         }
     }
     .sidebar-collapse-btn {
-        padding: 9px;
-        height: 40px;
-        width: 40px;
-        cursor: pointer;
         &.reverse {
             transform: rotate(180deg);
         }

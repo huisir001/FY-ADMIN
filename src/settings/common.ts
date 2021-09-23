@@ -2,7 +2,7 @@
  * @Description: 系统配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 15:06:19
- * @LastEditTime: 2021-09-20 20:41:19
+ * @LastEditTime: 2021-09-23 16:02:56
  */
 
 module.exports = {
@@ -17,18 +17,22 @@ module.exports = {
         {
             name: "blue",
             default: true,
+            color: '#409eff',
             loadStyle: () => import('~theme/blue.module.scss')
         },
         {
             name: "black",
+            color: '#000000',
             loadStyle: () => import('~theme/black.module.scss')
         },
         {
             name: "green",
+            color: '#67c23a',
             loadStyle: () => import('~theme/green.module.scss')
         },
         {
             name: "pink",
+            color: '#f0468d',
             loadStyle: () => import('~theme/pink.module.scss')
         },
     ],
@@ -36,7 +40,7 @@ module.exports = {
      * CDN Resources
      */
     CDNResources: {
-        css: ['//unpkg.zhimg.com/element-plus/dist/index.css'],
+        css: ['//cdn.jsdelivr.net/npm/element-plus/dist/index.css'],
         js: [],
     },
     /**

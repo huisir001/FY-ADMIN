@@ -2,7 +2,7 @@
  * @Description:ElementUI按需引入
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2021-09-22 15:57:35
+ * @LastEditTime: 2021-09-23 14:47:36
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -27,6 +27,7 @@ import {
     ElDivider,
     ElPopover,
     ElSwitch,
+    ElDrawer,
     ElDatePicker,
     ElPagination,
     ElDescriptions,
@@ -47,6 +48,7 @@ const components = [
     ElLoading,
     ElDivider,
     ElPopover,
+    ElDrawer,
     ElSwitch,
     ElDropdown,
     ElDropdownMenu,
