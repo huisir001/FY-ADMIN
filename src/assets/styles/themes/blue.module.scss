@@ -2,7 +2,7 @@
  * @Description: 蓝色主题
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:36:58
- * @LastEditTime: 2021-09-23 10:23:01
+ * @LastEditTime: 2021-09-23 18:48:41
  */
 :export {
   /* primary color */
@@ -17,8 +17,13 @@
   --el-color-primary-light-8: #d9ecff;
   --el-color-primary-light-9: #ecf5ff;
 
+  /* bg color */
+  --el-background-color-base: #f5f7fa;
+
   /* 自定义 */
   --color-navbar-bg: var(--el-color-white);
+  --color-tabbar-bg: var(--el-color-white);
+  --color-content-bg: var(--el-color-white);
 
   /* 导航栏 */
   --color-sidebar-bg: #2f3447;

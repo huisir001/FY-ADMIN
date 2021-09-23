@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-09-18 18:04:36
+ * @LastEditTime: 2021-09-23 18:45:48
 -->
 <template>
     <div class="tabbar"></div>
@@ -21,6 +21,6 @@ export default defineComponent({
 .tabbar {
     height: 30px;
     width: 100%;
-    background: #fff;
+    background: var(--color-tabbar-bg);
 }
 </style>
