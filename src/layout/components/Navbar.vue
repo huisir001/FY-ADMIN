@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-09-24 10:22:29
+ * @LastEditTime: 2021-09-24 17:53:35
 -->
 <template>
     <div class="navbar">
@@ -24,7 +24,7 @@
             </div>
             <el-dropdown size="medium" trigger="click" @command="userNavChange">
                 <div class="user-nav el-dropdown-link nav-item">
-                    <div class="name">{{userInfo.username}}</div>
+                    <div class="name">{{userInfo.nickname || userInfo.username}}</div>
                     <img class="avatar" :src="userInfo.avatar">
                 </div>
                 <template #dropdown>
@@ -59,6 +59,7 @@ export default defineComponent({
     setup() {
         const Store = useStore()
         const Route = useRoute()
+        const Router = useRouter()
 
         // 面包屑
         const breadCrumbs = computed(() =>
@@ -78,6 +79,7 @@ export default defineComponent({
 
         // 用户信息
         const userInfo = computed(() => ({
+            nickname: (Store.state.user.userInfo || {}).nickname,
             username: (Store.state.user.userInfo || {}).username,
             avatar: (Store.state.user.userInfo || {}).avatar || defaultAvatar,
         }))
@@ -86,7 +88,7 @@ export default defineComponent({
         const userNavChange = (e: any) => {
             switch (e) {
                 case '0':
-                    useRouter().push({ name: 'UserCenter' })
+                    Router.push({ name: 'My' })
                     break
                 case '1':
                     ElMessageBox.confirm('您即将要登出，是否继续 ?', '提示', {

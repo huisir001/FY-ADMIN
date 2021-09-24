@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-21 01:42:32
+ * @LastEditTime: 2021-09-24 15:40:21
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -34,7 +34,13 @@ const routes: RouteRecordRaw[] = [
         name: 'Home',
         component: () => import('../views/home/index.vue'),
         meta: { title: '首页', icon: 'dashboard' }
-      }
+      },
+      {
+        path: '/my',
+        name: 'My',
+        component: () => import('../views/my/index.vue'),
+        meta: { title: "个人中心", hidden: true }
+      },
     ]
   },
   {

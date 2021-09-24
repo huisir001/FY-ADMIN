@@ -2,7 +2,7 @@
  * @Description: 页面加载loading
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-08 14:29:46
- * @LastEditTime: 2021-09-20 12:42:58
+ * @LastEditTime: 2021-09-24 17:08:39
  */
 
 interface IcssOptions {
@@ -24,10 +24,8 @@ class PageLoading {
         this.styleEl = document.createElement('style')
         this.styleEl.setAttribute('type', 'text/css')
         this.styleEl.innerText = this.getCss(options)
-        const progress = document.createElement('div')
-        progress.className = 'page-loading-progress'
         this.loadingEl.className = 'page-loading-mask'
-        this.loadingEl.append(progress)
+        this.loadingEl.innerHTML = '<div class="page-loading-progress"></div><div class="page-loading-icon"><svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none"></circle></svg></div>'
     }
 
     show() {
@@ -54,6 +52,25 @@ class PageLoading {
     private getCss(options: IcssOptions): string {
         const { color, duration1, duration2 } = options
         return `
+            @keyframes=page-loading-anim{
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            @keyframes=page-loading-dash{
+                0% {
+                    stroke-dasharray: 1,200;
+                    stroke-dashoffset: 0;
+                }
+                50% {
+                    stroke-dasharray: 90,150;
+                    stroke-dashoffset: -40px;
+                }
+                100% {
+                    stroke-dasharray: 90,150;
+                    stroke-dashoffset: -120px;
+                }
+            }
             .page-loading-mask{
                 position: fixed;
                 top: 0;
@@ -70,6 +87,24 @@ class PageLoading {
                 background:${color};
                 transition-property:width;
             }
+            .page-loading-icon {
+                position: absolute;
+                right: 1px;
+                top: 1px;
+            }
+            .page-loading-icon>svg.circular {
+                height: 20px;
+                width: 20px;
+                animation: page-loading-anim=2s=linear=infinite;
+            }
+            .page-loading-icon>svg.circular>circle.path {
+                animation: page-loading-dash=1.5s=ease-in-out=infinite;
+                stroke-dasharray: 90,150;
+                stroke-dashoffset: 0;
+                stroke-width: 4px;
+                stroke: ${color};
+                stroke-linecap: round;
+            }
             .start>.page-loading-progress{
                 transition-duration: ${duration1}ms;
                 width: 80%;
@@ -78,7 +113,9 @@ class PageLoading {
                 transition-duration: ${duration2}ms;
                 width: 100%;
             }
-        `.replace(/\s/gm, '')
+        `.replace(/\s|=/g, (e) => {
+            return e === '=' ? ' ' : ''
+        })
     }
 }
 
