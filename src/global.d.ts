@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-24 17:51:41
+ * @LastEditTime: 2021-09-24 22:35:42
  */
 
 /**
@@ -56,4 +56,5 @@ declare interface IUserInfo extends IObj {
   email?: string
   phone?: string
   avatar?: string
+  sex?: 0 | 1 | 2       //0-保密 1-男 2-女
 }

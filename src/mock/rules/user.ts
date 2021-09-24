@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2021-09-24 17:50:43
+ * @LastEditTime: 2021-09-24 22:34:38
  */
 
 import { Random } from "mockjs"
@@ -15,7 +15,7 @@ const getUserInfo = {
         "nickname": '@cname',
         "email": '@email',
         "phone": /^1[3-9][0-9]{9}$/,
-        'sex|0-1': 1,
+        'sex|0-2': 1,
         'avatar': Random.image('50x50', '#2f3447', '#FFF', 'A')
     }
 }
