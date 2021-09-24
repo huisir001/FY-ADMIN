@@ -2,10 +2,10 @@
  * @Description: 主题设置抽屉
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-23 14:38:39
- * @LastEditTime: 2021-09-24 10:29:22
+ * @LastEditTime: 2021-09-24 10:35:23
 -->
 <template>
-    <el-drawer title="主题配置" custom-class="zui-theme-drawer">
+    <el-drawer title="主题配置" :size="280" custom-class="zui-theme-drawer">
         <div class="part">
             <h5>主题色</h5>
             <div class="set-box" style="display:flex">
