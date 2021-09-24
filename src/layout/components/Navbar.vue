@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-09-23 15:10:38
+ * @LastEditTime: 2021-09-24 10:22:29
 -->
 <template>
     <div class="navbar">
@@ -20,7 +20,7 @@
         </div>
         <div class="zui-nav-right">
             <div class="theme-nav nav-item" @click="showThemeDrawer = true">
-                <ThemeSvg size="24" color="var(--el-text-color-regular)" />
+                <ThemeSvg size="20" color="var(--el-text-color-regular)" />
             </div>
             <el-dropdown size="medium" trigger="click" @command="userNavChange">
                 <div class="user-nav el-dropdown-link nav-item">

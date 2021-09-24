@@ -2,27 +2,25 @@
  * @Description: 主题设置抽屉
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-23 14:38:39
- * @LastEditTime: 2021-09-23 16:39:09
+ * @LastEditTime: 2021-09-24 10:29:22
 -->
 <template>
-    <el-drawer title="主题配置">
-        <div class="content">
-            <div class="part">
-                <h6>主题色</h6>
-                <div class="set-box" style="display:flex">
-                    <div v-for="item in ThemeColorList" :key="item.name"
-                        :style="{background:item.color}" class="theme-color-radio"
-                        @click="selectColor(item.name)">
-                        <el-icon v-if="curThemeState.color==item.name" color="#fff" :size="20">
-                            <Check />
-                        </el-icon>
-                    </div>
+    <el-drawer title="主题配置" custom-class="zui-theme-drawer">
+        <div class="part">
+            <h5>主题色</h5>
+            <div class="set-box" style="display:flex">
+                <div v-for="item in ThemeColorList" :key="item.name"
+                    :style="{background:item.color}" class="theme-color-radio"
+                    @click="selectColor(item.name)">
+                    <el-icon v-if="curThemeState.color==item.name" color="#fff" :size="20">
+                        <Check />
+                    </el-icon>
                 </div>
             </div>
-            <div class="part">
-                <h6>内容区</h6>
+        </div>
+        <div class="part">
+            <h5>内容区</h5>
 
-            </div>
         </div>
     </el-drawer>
 </template>
@@ -71,24 +69,30 @@ export default defineComponent({
 </script>
  
 <style scoped lang="scss">
-.content {
-    padding: 0 20px;
-    .part {
-        margin-bottom: 30px;
-        h6 {
-            font-weight: bold;
-        }
-        .set-box {
-            margin-top: 10px;
-        }
-        .theme-color-radio {
-            width: 30px;
-            height: 30px;
-            border-radius: var(--el-border-radius-small);
-            margin-right: 10px;
-            cursor: pointer;
-            padding: 5px;
-        }
+.part {
+    margin-bottom: 40px;
+    h5 {
+        color: var(--el-text-color-regular);
+    }
+    .set-box {
+        margin-top: 20px;
+    }
+    .theme-color-radio {
+        width: 30px;
+        height: 30px;
+        border-radius: var(--el-border-radius-small);
+        margin-right: 10px;
+        cursor: pointer;
+        padding: 5px;
+    }
+}
+</style>
+<style  lang="scss">
+.zui-theme-drawer {
+    .el-drawer__header {
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-weight: bold;
     }
 }
 </style>
