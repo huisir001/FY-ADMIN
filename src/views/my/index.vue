@@ -2,7 +2,7 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-09-24 23:10:34
+ * @LastEditTime: 2021-09-24 23:26:59
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" @tab-click="tabChange" class="zui-my-tabs">
@@ -62,13 +62,13 @@ export default defineComponent({
         // const userInfo = computed(() => Store.state.user.userInfo)
 
         // 用户信息copy
-        const userInfoFormData = reactive(JSON.parse(JSON.stringify(Store.state.user.userInfo)))
+        let userInfoFormData = ref(Store.getters.copyUserInfo)
 
         // 图片选择
         const handleAvatarSuccess = (res: any, file: { raw: any }) => {
             console.log('11111111111111', res)
             //本地选择的缓存图片  URL.createObjectURL(file.raw)
-            userInfoFormData.avatar = URL.createObjectURL(file.raw)
+            userInfoFormData.value.avatar = URL.createObjectURL(file.raw)
         }
 
         // 图片上传前钩子
@@ -94,7 +94,8 @@ export default defineComponent({
 
         // 重置为原值
         const resetBaseUserinfo = () => {
-            console.log(111)
+            userInfoFormData.value = Store.getters.copyUserInfo
+            console.log(userInfoFormData)
         }
 
         return {

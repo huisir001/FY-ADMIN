@@ -2,7 +2,7 @@
  * @Description:getters-包装 state 数据
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-18 17:04:48
- * @LastEditTime: 2021-09-21 00:45:20
+ * @LastEditTime: 2021-09-24 23:27:46
  */
 import LocalCache from '@/utils/LocalCache'
 // tslint:disable-next-line:no-var-requires
@@ -27,5 +27,10 @@ export default {
         } else {
             return null
         }
-    }
+    },
+
+    /**
+     * 复制userInfo
+     */
+    copyUserInfo: (state: any) => JSON.parse(JSON.stringify(state.user.userInfo))
 }
