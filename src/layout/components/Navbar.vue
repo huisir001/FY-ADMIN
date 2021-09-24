@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-09-24 17:53:35
+ * @LastEditTime: 2021-09-24 18:44:03
 -->
 <template>
     <div class="navbar">
@@ -15,7 +15,7 @@
             </div>
             <div class="breadCrumbs nav-item">
                 <div v-for="(item,index) in breadCrumbs" :key="item.title">
-                    {{index>1 ? ' / ':''}}{{item.title}}</div>
+                    {{index>0 ? '　/　':''}}{{item.title}}</div>
             </div>
         </div>
         <div class="zui-nav-right">
@@ -63,10 +63,12 @@ export default defineComponent({
 
         // 面包屑
         const breadCrumbs = computed(() =>
-            Route.matched.map((item) => ({
-                title: item.meta.title || item.name,
-                path: item.path,
-            }))
+            Route.matched
+                .filter((item) => item.name !== 'Home')
+                .map((item) => ({
+                    title: item.meta.title || item.name,
+                    path: item.path,
+                }))
         )
 
         // 侧边栏状态
@@ -136,9 +138,6 @@ export default defineComponent({
             padding: 0 10px;
             height: 32px;
             color: var(--el-text-color-regular);
-            &:hover {
-                color: var(--el-color-primary);
-            }
         }
     }
     .zui-nav-right {
