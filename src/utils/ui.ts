@@ -2,7 +2,7 @@
  * @Description:ElementUI按需引入
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2021-09-24 22:38:44
+ * @LastEditTime: 2021-09-25 15:36:06
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -19,6 +19,7 @@ import {
     ElRadio,
     ElTabs,
     ElTabPane,
+    ElImage,
     ElUpload,
     ElDropdown,
     ElDropdownMenu,
@@ -49,6 +50,7 @@ const components = [
     ElRadio,
     ElTabs,
     ElTabPane,
+    ElImage,
     ElUpload,
     ElInput,
     ElInputNumber,

@@ -2,11 +2,11 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-09-25 15:28:20
+ * @LastEditTime: 2021-09-25 15:44:44
 -->
 <template>
     <div>
-        <slot name="" />
+        <!-- <slot name="" /> -->
     </div>
 </template>
  

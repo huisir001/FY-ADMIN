@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2021-09-24 22:34:38
+ * @LastEditTime: 2021-09-25 15:52:49
  */
 
 import { Random } from "mockjs"

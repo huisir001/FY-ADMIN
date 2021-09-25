@@ -2,20 +2,21 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-09-24 23:26:59
+ * @LastEditTime: 2021-09-25 15:52:18
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" @tab-click="tabChange" class="zui-my-tabs">
         <el-tab-pane label="基本信息" name="base">
             <el-form label-position="left" label-width="50px" :model="userInfoFormData">
                 <el-form-item label="头像">
-                    <el-upload class="avatar-uploader" action="/api/upload"
+                    <!-- <el-upload class="avatar-uploader" action="/api/upload"
                         accept="image/png, image/jpeg" :show-file-list="false"
                         :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
                         <img v-if="userInfoFormData.avatar" :src="userInfoFormData.avatar"
                             class="avatar" />
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                    </el-upload>
+                    </el-upload> -->
+                    <el-image class="avatar" :src="userInfoFormData.avatar||defaultAvatar" />
                 </el-form-item>
                 <el-form-item label="账号">
                     <el-input v-model="userInfoFormData.username"></el-input>
@@ -47,9 +48,10 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useStore } from '@/store'
 import { ElMessage } from 'element-plus'
+import defaultAvatar from '@/assets/images/avatar.svg'
 
 export default defineComponent({
     name: 'My',
@@ -106,6 +108,7 @@ export default defineComponent({
             beforeAvatarUpload,
             onSubmitBaseUserinfo,
             resetBaseUserinfo,
+            defaultAvatar,
         }
     },
 })
@@ -137,9 +140,10 @@ export default defineComponent({
         line-height: 64px;
         text-align: center;
     }
-    .avatar {
-        width: 64px;
-        height: 64px;
-    }
+}
+.avatar {
+    width: 64px;
+    height: 64px;
+    display: block;
 }
 </style>
