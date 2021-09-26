@@ -2,7 +2,7 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-09-25 15:52:18
+ * @LastEditTime: 2021-09-26 14:24:01
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" @tab-click="tabChange" class="zui-my-tabs">
@@ -16,7 +16,9 @@
                             class="avatar" />
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload> -->
-                    <el-image class="avatar" :src="userInfoFormData.avatar||defaultAvatar" />
+                    <FileLibrary type="pic">
+                        <el-image class="avatar" :src="userInfoFormData.avatar||defaultAvatar" />
+                    </FileLibrary>
                 </el-form-item>
                 <el-form-item label="账号">
                     <el-input v-model="userInfoFormData.username"></el-input>
@@ -52,9 +54,11 @@ import { defineComponent, ref } from 'vue'
 import { useStore } from '@/store'
 import { ElMessage } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
+import FileLibrary from '@/components/FileLibrary.vue'
 
 export default defineComponent({
     name: 'My',
+    components: { FileLibrary },
     setup() {
         const Store = useStore()
         const activeTabName = ref('base')

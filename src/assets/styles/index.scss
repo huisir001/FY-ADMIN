@@ -2,7 +2,7 @@
  * @Description: 基础样式
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-15 11:02:02
+ * @LastEditTime: 2021-09-26 14:43:02
  */
 
 /* 自定义变量 */
@@ -111,4 +111,10 @@ h5 {
 
 h6 {
   font-size: 12px;
+}
+
+.el-dialog__body {
+  padding: 15px var(--el-dialog-padding-primary)
+    calc(var(--el-dialog-padding-primary) + 10px)
+    var(--el-dialog-padding-primary);
 }

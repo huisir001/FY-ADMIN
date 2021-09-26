@@ -2,7 +2,7 @@
  * @Description:ElementUI按需引入
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2021-09-25 15:36:06
+ * @LastEditTime: 2021-09-26 14:16:48
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -17,6 +17,7 @@ import {
     ElFormItem,
     ElRadioGroup,
     ElRadio,
+    ElDialog,
     ElTabs,
     ElTabPane,
     ElImage,
@@ -48,6 +49,7 @@ const components = [
     ElFormItem,
     ElRadioGroup,
     ElRadio,
+    ElDialog,
     ElTabs,
     ElTabPane,
     ElImage,
