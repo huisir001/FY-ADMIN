@@ -2,7 +2,7 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-09-27 14:18:38
+ * @LastEditTime: 2021-09-27 16:43:10
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" @tab-click="tabChange" class="zui-my-tabs">
@@ -54,7 +54,7 @@ import { defineComponent, ref } from 'vue'
 import { useStore } from '@/store'
 import { ElMessage } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
-import FileLibrary from '@/components/FileLibrary.vue'
+import FileLibrary from '@/components/FileLibrary/index.vue'
 
 export default defineComponent({
     name: 'My',
