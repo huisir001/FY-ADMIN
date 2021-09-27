@@ -59,16 +59,33 @@
     border-radius: var(--el-border-radius-small);
     padding: 20px;
     overflow-y: auto;
+    margin-left: 8px;
     @include scrollBar;
     h5 {
       font-weight: bold;
+      line-height: 1;
+      margin-bottom: 20px;
     }
     .preview-img {
+      position: relative;
       width: 100%;
       height: 120px;
       padding: 3px;
       border: var(--el-border-base);
       background: var(--el-color-info-light);
+      &:hover::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 120px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: var(--el-color-info-lighter);
+        pointer-events: none;
+        background: rgba(255, 255, 255, 0.4);
+      }
     }
     .upload-inline {
       display: inline;
@@ -200,16 +217,16 @@
 @media screen and (max-width: 850px) and (min-width: 701px) {
   .file-library-dialog-cont {
     .left {
-      width: 60%;
+      width: 54%;
       .thumbnail {
-        width: 19vw;
-        height: 19vw;
-        margin-right: calc(((80vw - 40px) * 0.6 - (19vw * 2)) / 2);
-        margin-top: calc(((80vw - 40px) * 0.6 - (19vw * 2)) / 2);
-        &:nth-child(2n) {
+        width: 12vw;
+        height: 12vw;
+        margin-right: calc(((80vw - 40px) * 0.54 - (12vw * 3)) / 3);
+        margin-top: calc(((80vw - 40px) * 0.54 - (12vw * 3)) / 3);
+        &:nth-child(3n) {
           margin-right: 0;
         }
-        @for $i from 1 through 2 {
+        @for $i from 1 through 3 {
           &:nth-child(#{$i}) {
             margin-top: 0;
           }
@@ -217,7 +234,7 @@
       }
     }
     .right {
-      width: 40%;
+      width: 46%;
     }
   }
 }
@@ -244,6 +261,7 @@
       }
     }
     .right {
+      margin-left: 0;
       margin-top: 20px;
       width: 100%;
       height: 50%;
@@ -258,20 +276,22 @@
       width: 100%;
       height: 50%;
       .thumbnail {
-        width: 30vw;
-        height: 30vw;
-        margin-right: calc(((80vw - 40px) - (30vw * 2)) / 2);
-        margin-top: calc(((80vw - 40px) - (30vw * 2)) / 2);
-        &:nth-child(2n) {
+        width: 21vw;
+        height: 21vw;
+        margin-right: calc(((80vw - 40px) - (21vw * 3)) / 3);
+        margin-top: calc(((80vw - 40px) - (21vw * 3)) / 3);
+        &:nth-child(3n) {
           margin-right: 0;
         }
-        &:nth-child(1),
-        &:nth-child(2) {
-          margin-top: 0;
+        @for $i from 1 through 3 {
+          &:nth-child(#{$i}) {
+            margin-top: 0;
+          }
         }
       }
     }
     .right {
+      margin-left: 0;
       margin-top: 20px;
       width: 100%;
       height: 50%;
@@ -300,6 +320,7 @@
       }
     }
     .right {
+      margin-left: 0;
       margin-top: 20px;
       width: 100%;
       height: 50%;
@@ -328,6 +349,7 @@
       }
     }
     .right {
+      margin-left: 0;
       margin-top: 20px;
       width: 100%;
       height: 50%;

@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-09-27 16:57:31
+ * @LastEditTime: 2021-09-27 17:54:25
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true">
@@ -54,7 +54,7 @@
                             <span>{{currFile.dimensions[0]}} × {{currFile.dimensions[1]}}</span>
                         </el-form-item>
                         <el-form-item label="文件URL">
-                            <el-input disabled v-model="currFile.url"></el-input>
+                            <el-input readonly v-model="currFile.url"></el-input>
                         </el-form-item>
                         <el-form-item label="文件名称">
                             <el-input v-model="currFile.name"></el-input>
@@ -83,7 +83,8 @@
             <span class="dialog-footer">
                 <el-button @click="showFileLibraryBox = false">删除</el-button>
                 <el-button @click="showFileLibraryBox = false">保存</el-button>
-                <el-button type="primary" @click="showFileLibraryBox = false">插入</el-button>
+                <el-button type="primary"
+                    @click="showFileLibraryBox=false;$emit('on-selected',currFile);">插入</el-button>
             </span>
         </template>
     </el-dialog>
@@ -128,6 +129,7 @@ export default defineComponent({
             },
         },
     },
+    emits: ['on-selected'],
     setup() {
         const fileList = ref([
             {
