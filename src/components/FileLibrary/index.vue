@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-09-27 17:54:25
+ * @LastEditTime: 2021-09-27 18:37:16
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true">
@@ -12,29 +12,41 @@
         :destroy-on-close="true" :title="type=='zip'?'文件库':'图片库'">
         <div class="file-library-dialog-cont">
             <div class="left">
-                <el-popover v-model:visible="visible" placement="bottom" :width="170">
-                    <p style="text-align: center; margin-bottom: 10px">选择新增文件方式</p>
-                    <div>
-                        <el-button size="mini" type="text" @click="showFileUrlSetBox = true">URL插入
-                        </el-button>
-                        <el-upload style="display:inline-block;margin-left:10px;"
-                            action="/api/upload" accept="image/png, image/jpeg"
-                            :show-file-list="false" :on-success="handleAvatarSuccess"
-                            :before-upload="beforeAvatarUpload">
-                            <el-button type="primary" size="mini" @click="visible = false">直接上传
+                <!-- 图片列表 -->
+                <template v-if="type=='pic'">
+                    <el-popover v-model:visible="visible" placement="bottom" :width="170">
+                        <p style="text-align: center; margin-bottom: 10px">选择新增文件方式</p>
+                        <div>
+                            <el-button size="mini" type="text" @click="showFileUrlSetBox = true">
+                                URL插入
                             </el-button>
-                        </el-upload>
-                    </div>
-                    <template #reference>
-                        <div class="thumbnail upload">
-                            <i class="el-icon-plus avatar-uploader-icon"></i>
+                            <el-upload style="display:inline-block;margin-left:10px;"
+                                action="/api/upload" accept="image/png, image/jpeg"
+                                :show-file-list="false" :on-success="handleAvatarSuccess"
+                                :before-upload="beforeAvatarUpload">
+                                <el-button type="primary" size="mini" @click="visible = false">直接上传
+                                </el-button>
+                            </el-upload>
                         </div>
-                    </template>
-                </el-popover>
-                <div v-for="(item,index) in fileList" :key="item.id" class="thumbnail"
-                    :class="{selected:selectedIndex==index}" @click="handleSelected(index)">
-                    <el-image class="pic-item" fit="cover" :src="item.url" />
-                </div>
+                        <template #reference>
+                            <div class="thumbnail upload">
+                                <i class="el-icon-plus avatar-uploader-icon"></i>
+                            </div>
+                        </template>
+                    </el-popover>
+                    <div v-for="(item,index) in fileList" :key="item.id" class="thumbnail"
+                        :class="{selected:selectedIndex==index}" @click="handleSelected(index)">
+                        <el-image class="pic-item" fit="cover" :src="item.url" />
+                    </div>
+                </template>
+                <!-- zip列表 -->
+                <template v-else>
+                    <el-table :data="fileList" style="width: 98%">
+                        <el-table-column prop="name" label="文件名称" />
+                        <el-table-column prop="size" label="文件大小" />
+                        <el-table-column prop="createTime" label="创建时间" />
+                    </el-table>
+                </template>
             </div>
             <div class="right">
                 <template v-if="selectedIndex>=0">
@@ -44,7 +56,7 @@
                             <el-image class="preview-img" :src="currFile.url"
                                 :preview-src-list="[currFile.url]" fit="contain" />
                         </el-form-item>
-                        <el-form-item label="新增时间">
+                        <el-form-item label="创建时间">
                             <span>{{currFile.createTime}}</span>
                         </el-form-item>
                         <el-form-item label="文件大小">
