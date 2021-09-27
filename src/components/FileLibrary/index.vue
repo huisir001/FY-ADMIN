@@ -2,13 +2,13 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-09-27 16:43:33
+ * @LastEditTime: 2021-09-27 16:57:31
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true">
         <slot />
     </div>
-    <el-dialog v-model="showFileLibraryBox" width="80%" top="10vh" :append-to-body="true"
+    <el-dialog v-model="showFileLibraryBox" width="80%" top="8vh" :append-to-body="true"
         :destroy-on-close="true" :title="type=='zip'?'文件库':'图片库'">
         <div class="file-library-dialog-cont">
             <div class="left">
@@ -42,7 +42,7 @@
                     <el-form :model="currFile" label-width="75px" label-position="left">
                         <el-form-item label="图片预览">
                             <el-image class="preview-img" :src="currFile.url"
-                                :preview-src-list="[currFile.url]" />
+                                :preview-src-list="[currFile.url]" fit="contain" />
                         </el-form-item>
                         <el-form-item label="新增时间">
                             <span>{{currFile.createTime}}</span>
@@ -79,6 +79,13 @@
                 </template>
             </div>
         </div>
+        <template v-if="selectedIndex>=0" #footer>
+            <span class="dialog-footer">
+                <el-button @click="showFileLibraryBox = false">删除</el-button>
+                <el-button @click="showFileLibraryBox = false">保存</el-button>
+                <el-button type="primary" @click="showFileLibraryBox = false">插入</el-button>
+            </span>
+        </template>
     </el-dialog>
     <!-- 从URL插入 -->
     <el-dialog v-model="showFileUrlSetBox" title="从URL插入" :append-to-body="true"
