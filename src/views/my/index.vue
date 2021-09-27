@@ -2,7 +2,7 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-09-26 14:24:01
+ * @LastEditTime: 2021-09-27 14:18:38
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" @tab-click="tabChange" class="zui-my-tabs">
@@ -121,29 +121,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .zui-my-tabs:deep(.el-tabs__content) {
     padding: 20px;
-    background-color: #f4f5f7;
+    background-color: var(--el-color-info-lighter);
     border-radius: var(--el-border-radius-small);
-}
-.avatar-uploader {
-    display: inline-flex;
-    &:deep(.el-upload) {
-        border: 1px dashed #d9d9d9;
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        &:hover {
-            border-color: #409eff;
-        }
-    }
-    .avatar-uploader-icon {
-        font-size: 25px;
-        color: #8c939d;
-        width: 64px;
-        height: 64px;
-        line-height: 64px;
-        text-align: center;
-    }
 }
 .avatar {
     width: 64px;
