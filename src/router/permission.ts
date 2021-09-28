@@ -2,18 +2,20 @@
  * @Description: 跳转权限-路由前置钩子
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-17 19:28:46
- * @LastEditTime: 2021-09-22 17:39:53
+ * @LastEditTime: 2021-09-28 15:07:25
  */
 import { getUserInfo } from '@/api/user'
 import { NavigationGuardWithThis } from 'vue-router'
 import { store } from '@/store'
 import { ElMessage } from 'element-plus'
+import PageLoaing from '@/utils/PageLoaing'
 
 
 const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
-    /**
-     * 外站进入\第一次打开、刷新网页
-     */
+    // 加载loading
+    PageLoaing.show()
+
+    // 外站进入\第一次打开、刷新网页
     if (!(from.name && store.state)) {
         //获取token
         const Token: string = store.getters.getToken()

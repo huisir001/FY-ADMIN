@@ -2,12 +2,12 @@
  * @Description: axios中间件（初始化和全局配置）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2020-08-06 13:16:24
- * @LastEditTime: 2021-09-24 17:10:19
+ * @LastEditTime: 2021-09-28 15:14:49
  */
 // tslint:disable:no-console
 import { ElMessage } from 'element-plus'
 import axios from 'axios'
-import PageLoaing from './PageLoaing'
+// import PageLoaing from './PageLoaing'
 import LocalCache from './LocalCache'
 import { store } from '@/store'
 // tslint:disable-next-line:no-var-requires
@@ -27,7 +27,7 @@ let Token: string
 Axios.interceptors.request.use(
     (config: any) => {
         // 加载loading
-        PageLoaing.show()
+        // PageLoaing.show()
         // 由于执行请求时token可能已经改变，故每次请求前都要重新获取token
         Token = store.getters.getToken()
         console.log(Token)
@@ -36,7 +36,7 @@ Axios.interceptors.request.use(
         return config
     },
     (error: any) => {
-        PageLoaing.hide() // 关闭loading
+        // PageLoaing.hide() // 关闭loading
         console.error('[Request error]: ' + error)
     }
 )
@@ -46,7 +46,7 @@ Axios.interceptors.response.use(
     (response: any) => {
         console.log('response', response)
         // 关闭loading
-        PageLoaing.hide()
+        // PageLoaing.hide()
 
         // 对响应数据做些事
         if (response.status !== 200 || !response.data.ok) {
@@ -69,7 +69,7 @@ Axios.interceptors.response.use(
         return response.data
     },
     (error: any) => {
-        PageLoaing.hide() // 关闭loading
+        // PageLoaing.hide() // 关闭loading
 
         // 代码层面出错
         if (!error.response) {
@@ -87,10 +87,10 @@ Axios.interceptors.response.use(
             LocalCache.removeCache(LocalCacheConf.Token)
         }
         setTimeout(() => {
-            if (data) {
-                ElMessage.error(data.msg) //错误提示
+            if (status === 404) {
+                ElMessage.error(`${status}: ${statusText}（${error.response.config.url}）`) //错误提示
             } else {
-                ElMessage.error(`${status}: ${statusText}`) //错误提示
+                ElMessage.error(data.msg) //错误提示
             }
         }, 100)
         return data

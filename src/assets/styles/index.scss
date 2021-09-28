@@ -2,7 +2,7 @@
  * @Description: 基础样式
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-27 16:51:13
+ * @LastEditTime: 2021-09-28 10:07:11
  */
 
 /* 自定义变量 */
@@ -119,4 +119,7 @@ h6 {
 }
 .el-popconfirm__main {
   margin-bottom: 10px;
+}
+.el-table {
+  --el-table-current-row-background-color: var(--el-color-primary-light-5);
 }

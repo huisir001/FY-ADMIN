@@ -2,7 +2,7 @@
  * @Description: 页面加载loading
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-08 14:29:46
- * @LastEditTime: 2021-09-24 17:08:39
+ * @LastEditTime: 2021-09-28 15:14:10
  */
 
 interface IcssOptions {
@@ -43,8 +43,10 @@ class PageLoading {
         }
         this.loadingEl.className = 'page-loading-mask finish'
         const t = setTimeout(() => {
-            document.body.removeChild(this.loadingEl)
-            document.head.removeChild(this.styleEl)
+            try {
+                document.body.removeChild(this.loadingEl)
+                document.head.removeChild(this.styleEl)
+            } catch (e) { }
             clearTimeout(t)
         }, this.options.duration2)
     }

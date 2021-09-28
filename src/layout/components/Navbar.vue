@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-09-24 18:44:03
+ * @LastEditTime: 2021-09-28 16:51:19
 -->
 <template>
     <div class="navbar">
@@ -14,8 +14,10 @@
                 </el-icon>
             </div>
             <div class="breadCrumbs nav-item">
-                <div v-for="(item,index) in breadCrumbs" :key="item.title">
-                    {{index>0 ? '　/　':''}}{{item.title}}</div>
+                <el-breadcrumb separator="/">
+                    <el-breadcrumb-item v-for="item in breadCrumbs" :key="item.title"
+                        :to="{ path: item.path }">{{item.title}}</el-breadcrumb-item>
+                </el-breadcrumb>
             </div>
         </div>
         <div class="zui-nav-right">

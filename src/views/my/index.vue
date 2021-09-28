@@ -2,14 +2,14 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-09-27 18:35:40
+ * @LastEditTime: 2021-09-28 15:22:08
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" @tab-click="tabChange" class="zui-my-tabs">
         <el-tab-pane label="基本信息" name="base">
             <el-form label-position="left" label-width="50px" :model="userInfoFormData">
-                <el-form-item label="头像">
-                    <FileLibrary type="zip" @on-selected="avatarSelected">
+                <el-form-item label="头像" style="height:64px;">
+                    <FileLibrary type="pic" @on-selected="avatarSelected">
                         <el-image class="avatar" :src="userInfoFormData.avatar||defaultAvatar" />
                     </FileLibrary>
                 </el-form-item>
@@ -63,29 +63,6 @@ export default defineComponent({
         // 用户信息copy
         let userInfoFormData = ref(Store.getters.copyUserInfo)
 
-        // // 图片选择
-        // const handleAvatarSuccess = (res: any, file: { raw: any }) => {
-        //     console.log('11111111111111', res)
-        //     //本地选择的缓存图片  URL.createObjectURL(file.raw)
-        //     userInfoFormData.value.avatar = URL.createObjectURL(file.raw)
-        // }
-
-        // // 图片上传前钩子
-        // const beforeAvatarUpload = (file: { type: string; size: number }) => {
-        //     const allowType = file.type === 'image/jpeg' || file.type === 'image/png'
-        //     const isLt2M = file.size / 1024 / 1024 < 2
-
-        //     if (!allowType) {
-        //         ElMessage.error('图片格式有误!')
-        //         return false
-        //     }
-        //     if (!isLt2M) {
-        //         ElMessage.error('上传图片不允许超过2MB!')
-        //         return false
-        //     }
-        //     return true
-        // }
-
         // 图片选择
         const avatarSelected = (file: any) => {
             console.log(file)
@@ -107,8 +84,6 @@ export default defineComponent({
             activeTabName,
             tabChange,
             userInfoFormData,
-            // handleAvatarSuccess,
-            // beforeAvatarUpload,
             onSubmitBaseUserinfo,
             resetBaseUserinfo,
             defaultAvatar,

@@ -2,29 +2,31 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-09-27 18:37:16
+ * @LastEditTime: 2021-09-28 16:30:12
 -->
 <template>
-    <div class="file-library-btn" @click="showFileLibraryBox = true">
+    <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
         <slot />
     </div>
     <el-dialog v-model="showFileLibraryBox" width="80%" top="8vh" :append-to-body="true"
         :destroy-on-close="true" :title="type=='zip'?'文件库':'图片库'">
         <div class="file-library-dialog-cont">
-            <div class="left">
+            <div class="left" v-loading="leftLoading">
                 <!-- 图片列表 -->
                 <template v-if="type=='pic'">
-                    <el-popover v-model:visible="visible" placement="bottom" :width="170">
+                    <el-popover v-model:visible="popoverVisible" placement="bottom" :width="170">
                         <p style="text-align: center; margin-bottom: 10px">选择新增文件方式</p>
                         <div>
-                            <el-button size="mini" type="text" @click="showFileUrlSetBox = true">
+                            <el-button size="mini" type="text"
+                                @click="popoverVisible = false;showFileUrlSetBox = true">
                                 URL插入
                             </el-button>
                             <el-upload style="display:inline-block;margin-left:10px;"
-                                action="/api/upload" accept="image/png, image/jpeg"
-                                :show-file-list="false" :on-success="handleAvatarSuccess"
-                                :before-upload="beforeAvatarUpload">
-                                <el-button type="primary" size="mini" @click="visible = false">直接上传
+                                action="/api/file/upload" accept="image/png, image/jpeg"
+                                :show-file-list="false" :on-success="handlePicSuccess"
+                                :before-upload="beforePicUpload">
+                                <el-button type="primary" size="mini"
+                                    @click="popoverVisible = false">直接上传
                                 </el-button>
                             </el-upload>
                         </div>
@@ -41,7 +43,8 @@
                 </template>
                 <!-- zip列表 -->
                 <template v-else>
-                    <el-table :data="fileList" style="width: 98%">
+                    <el-table :data="fileList" highlight-current-row style="width: 98%"
+                        @current-change="handleFileListChange">
                         <el-table-column prop="name" label="文件名称" />
                         <el-table-column prop="size" label="文件大小" />
                         <el-table-column prop="createTime" label="创建时间" />
@@ -51,7 +54,7 @@
             <div class="right">
                 <template v-if="selectedIndex>=0">
                     <h5>图片详情</h5>
-                    <el-form :model="currFile" label-width="75px" label-position="left">
+                    <el-form label-width="75px" label-position="left">
                         <el-form-item label="图片预览">
                             <el-image class="preview-img" :src="currFile.url"
                                 :preview-src-list="[currFile.url]" fit="contain" />
@@ -79,9 +82,9 @@
                 <template v-else>
                     <p>请从图片库中选择图片。</p>
                     <p>也可以
-                        <el-upload class="upload-inline" action="/api/upload"
+                        <el-upload class="upload-inline" action="/api/file/upload"
                             accept="image/png, image/jpeg" :show-file-list="false"
-                            :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                            :on-success="handlePicSuccess" :before-upload="beforePicUpload">
                             <span>上传新图片</span>
                         </el-upload>
                         或
@@ -103,7 +106,7 @@
     <!-- 从URL插入 -->
     <el-dialog v-model="showFileUrlSetBox" title="从URL插入" :append-to-body="true"
         :destroy-on-close="true">
-        <el-form :model="fileUrlSetFromData" label-width="75px" label-position="left">
+        <el-form label-width="75px" label-position="left">
             <el-form-item label="文件URL">
                 <el-input v-model="fileUrlSetFromData.url"></el-input>
             </el-form-item>
@@ -124,7 +127,9 @@
 </template>
  
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from 'vue'
+import { computed, defineComponent, nextTick, reactive, ref, watch } from 'vue'
+import { getFileListByPage } from '@/api/file'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
     name: 'FileLibrary',
@@ -142,37 +147,38 @@ export default defineComponent({
         },
     },
     emits: ['on-selected'],
-    setup() {
-        const fileList = ref([
-            {
-                id: 1,
-                name: '1212121',
-                createTime: '2021-01-01 11:00:00',
-                size: 100,
-                dimensions: [100, 100],
-                desc: '32113321',
-                group: '1',
-                url: 'https://dummyimage.com/500x400/2f3447/FFF&text=1',
-            },
-            { id: 2, url: 'https://dummyimage.com/300x400/2f3447/FFF&text=2' },
-            { id: 3, url: 'https://dummyimage.com/500x700/2f3447/FFF&text=3' },
-            { id: 4, url: 'https://dummyimage.com/100x400/2f3447/FFF&text=4' },
-            { id: 5, url: 'https://dummyimage.com/500x300/2f3447/FFF&text=5' },
-            { id: 6, url: 'https://dummyimage.com/500x300/2f3447/FFF&text=6' },
-            { id: 7, url: 'https://dummyimage.com/500x300/2f3447/FFF&text=7' },
-            { id: 8, url: 'https://dummyimage.com/500x300/2f3447/FFF&text=8' },
-            { id: 9, url: 'https://dummyimage.com/500x300/2f3447/FFF&text=9' },
-            { id: 10, url: 'https://dummyimage.com/500x300/2f3447/FFF&text=10' },
-            { id: 10, url: 'https://dummyimage.com/500x300/2f3447/FFF&text=10' },
-            { id: 10, url: 'https://dummyimage.com/500x300/2f3447/FFF&text=10' },
-            { id: 10, url: 'https://dummyimage.com/500x300/2f3447/FFF&text=10' },
-        ])
+    setup(props: any) {
+        const leftLoading = ref(false)
+        const curPage = ref(1)
+        const pageTotal = ref(1)
+        const fileList = ref([])
+        const pageLimit = 10
+
+        // 查询列表
+        const getList = async (page = 1, name = '') => {
+            leftLoading.value = true
+            const res = await getFileListByPage({ page, type: props.type, limit: pageLimit, name })
+            // 有登录数据
+            if (res && res.ok) {
+                const { list, page, pageTotal: pt } = res.data
+                curPage.value = page
+                pageTotal.value = pt
+                fileList.value = list
+                await nextTick()
+                leftLoading.value = false
+            }
+        }
+
+        // 页码切换
+        // const handleCurrentChange = (val: any) => {
+        //     console.log(`current page: ${val}`)
+        // }
 
         // 当前所选
         const selectedIndex = ref(-1)
 
         // 选择
-        const handleSelected = (index: number) => {
+        const handleSelected = async (index: number) => {
             if (selectedIndex.value === index) {
                 selectedIndex.value = -1
                 return
@@ -188,6 +194,14 @@ export default defineComponent({
         // 弹窗
         const showFileLibraryBox = ref(false)
         const showFileUrlSetBox = ref(false)
+        const popoverVisible = ref(false)
+
+        // 关闭弹窗清除状态
+        watch(showFileLibraryBox, (val: boolean) => {
+            if (!val) {
+                selectedIndex.value = -1
+            }
+        })
 
         // 文件url插入from
         const fileUrlSetFromData = reactive({
@@ -196,7 +210,36 @@ export default defineComponent({
             url: '',
         })
 
+        // 切换表格
+        const handleFileListChange = (val: IFileParams) => {
+            handleSelected(fileList.value.findIndex((item: IFileParams) => item.id == val.id))
+        }
+
+        // 图片选择
+        const handlePicSuccess = (res: any, file: { raw: any }) => {
+            console.log('11111111111111', res)
+            //本地选择的缓存图片  URL.createObjectURL(file.raw)
+            // userInfoFormData.value.avatar = URL.createObjectURL(file.raw)
+        }
+
+        // 图片上传前钩子
+        const beforePicUpload = (file: { type: string; size: number }) => {
+            const allowType = file.type === 'image/jpeg' || file.type === 'image/png'
+            const isLt2M = file.size / 1024 / 1024 < 2
+
+            if (!allowType) {
+                ElMessage.error('图片格式有误!')
+                return false
+            }
+            if (!isLt2M) {
+                ElMessage.error('上传图片不允许超过2MB!')
+                return false
+            }
+            return true
+        }
+
         return {
+            getList,
             showFileLibraryBox,
             showFileUrlSetBox,
             fileList,
@@ -204,6 +247,14 @@ export default defineComponent({
             selectedIndex,
             handleSelected,
             fileUrlSetFromData,
+            handleFileListChange,
+            handlePicSuccess,
+            beforePicUpload,
+            popoverVisible,
+            leftLoading,
+            curPage,
+            pageTotal,
+            pageLimit,
         }
     },
 })

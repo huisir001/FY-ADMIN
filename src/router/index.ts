@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-24 18:39:41
+ * @LastEditTime: 2021-09-28 16:53:29
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -25,7 +25,7 @@ import rearHook from './rearHook'
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '',
+    path: '/',
     component: Layout,
     redirect: { name: 'Home' },
     meta: { title: '首页', icon: 'dashboard' },
