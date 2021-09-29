@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-09-30 00:26:22
+ * @LastEditTime: 2021-09-30 00:27:45
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -57,7 +57,7 @@ export default defineComponent({
         // 监听窗口宽度变化做些事
         watch(
             visibleAreaWidth,
-            (val) => {
+            () => {
                 showScrollBtn.value = tabbarRef.value
                     ? itemBoxRef.value.clientWidth > tabbarRef.value.clientWidth
                     : false
