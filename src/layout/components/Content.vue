@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2021-09-24 15:55:36
+ * @LastEditTime: 2021-09-30 15:04:49
 -->
 <template>
     <div class="content">
@@ -27,7 +27,9 @@ export default defineComponent({
     padding: 20px;
     overflow-y: auto;
     background: var(--color-content-bg);
-    margin-top: 10px;
     border-radius: var(--el-border-radius-small);
+    &.home {
+        height: 100%;
+    }
 }
 </style>

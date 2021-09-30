@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2021-09-28 16:40:38
+ * @LastEditTime: 2021-09-30 16:07:28
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -15,8 +15,8 @@
         <div class="right">
             <Navbar />
             <div class="r-bot">
-                <Tabbar />
-                <Content />
+                <Tabbar v-if="showTabbar" />
+                <Content :class="{home:!showTabbar}" />
             </div>
         </div>
     </div>
@@ -45,6 +45,9 @@ export default defineComponent({
         onMounted(() => {
             useWinResize()
         })
+
+        // 历史路由数
+        const showTabbar = computed(() => Store.state.temp.historyRoutes.length > 0)
 
         // 侧边栏状态
         const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)
@@ -82,6 +85,7 @@ export default defineComponent({
         return {
             sidebarCollapse,
             sidebarHide,
+            showTabbar,
             sidebarCollapseChenge,
         }
     },

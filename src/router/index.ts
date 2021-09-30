@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-28 16:53:29
+ * @LastEditTime: 2021-09-30 17:44:26
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -41,6 +41,36 @@ const routes: RouteRecordRaw[] = [
         name: 'My',
         component: () => import('../views/my/index.vue'),
         meta: { title: "个人中心", hidden: true }
+      },
+      {
+        path: '/my1',
+        name: 'My1',
+        component: () => import('../views/my/1.vue'),
+        meta: { title: "个人中心1", hidden: true }
+      },
+      {
+        path: '/my2',
+        name: 'My2',
+        component: () => import('../views/my/2.vue'),
+        meta: { title: "个人中心2", hidden: true }
+      },
+      {
+        path: '/my3',
+        name: 'My3',
+        component: () => import('../views/my/3.vue'),
+        meta: { title: "个人中心3", hidden: true }
+      },
+      {
+        path: '/my4',
+        name: 'My4',
+        component: () => import('../views/my/4.vue'),
+        meta: { title: "个人中心4", hidden: true }
+      },
+      {
+        path: '/my5',
+        name: 'My5',
+        component: () => import('../views/my/5.vue'),
+        meta: { title: "个人中心5", hidden: true }
       },
     ]
   },
