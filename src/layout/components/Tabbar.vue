@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-09-30 17:51:19
+ * @LastEditTime: 2021-09-30 17:54:53
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -40,11 +40,6 @@ import { computed, defineComponent, nextTick, ref, watch } from 'vue'
 import { Close, ArrowLeft, ArrowRight } from '@element-plus/icons'
 import { useStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
-
-interface ITag {
-    name: string
-    active: boolean
-}
 
 export default defineComponent({
     name: 'Tabbar',
