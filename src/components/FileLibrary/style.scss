@@ -95,6 +95,14 @@
         background: rgba(255, 255, 255, 0.4);
       }
     }
+    .preview-icon {
+      position: absolute;
+      bottom: 12px;
+      right: 1px;
+      pointer-events: none;
+      background: rgba(0, 0, 0, 0.1);
+      color: #fff;
+    }
     .upload-inline {
       display: inline;
       cursor: pointer;

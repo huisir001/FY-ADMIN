@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-09-28 16:30:12
+ * @LastEditTime: 2021-10-08 14:51:55
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -58,6 +58,9 @@
                         <el-form-item label="图片预览">
                             <el-image class="preview-img" :src="currFile.url"
                                 :preview-src-list="[currFile.url]" fit="contain" />
+                            <el-icon class="preview-icon">
+                                <search />
+                            </el-icon>
                         </el-form-item>
                         <el-form-item label="创建时间">
                             <span>{{currFile.createTime}}</span>
@@ -106,21 +109,22 @@
     <!-- 从URL插入 -->
     <el-dialog v-model="showFileUrlSetBox" title="从URL插入" :append-to-body="true"
         :destroy-on-close="true">
-        <el-form label-width="75px" label-position="left">
-            <el-form-item label="文件URL">
+        <el-form ref="fileUrlSetFrom" label-width="80px" label-position="right"
+            :model="fileUrlSetFromData" :rules="fileUrlSetFromRules">
+            <el-form-item label="文件URL" prop="url">
                 <el-input v-model="fileUrlSetFromData.url"></el-input>
             </el-form-item>
-            <el-form-item label="文件名称">
+            <el-form-item label="文件名称" prop="name">
                 <el-input v-model="fileUrlSetFromData.name"></el-input>
             </el-form-item>
-            <el-form-item label="文件描述">
+            <el-form-item label="文件描述" prop="desc">
                 <el-input v-model="fileUrlSetFromData.desc" type="textarea"></el-input>
             </el-form-item>
         </el-form>
         <template #footer>
             <span class="dialog-footer">
                 <el-button @click="showFileUrlSetBox = false">取消</el-button>
-                <el-button type="primary" @click="showFileUrlSetBox = false">提交</el-button>
+                <el-button type="primary" @click="fileUrlSetSubmit">提交</el-button>
             </span>
         </template>
     </el-dialog>
@@ -130,6 +134,7 @@
 import { computed, defineComponent, nextTick, reactive, ref, watch } from 'vue'
 import { getFileListByPage } from '@/api/file'
 import { ElMessage } from 'element-plus'
+import { Search } from '@element-plus/icons'
 
 export default defineComponent({
     name: 'FileLibrary',
@@ -147,12 +152,14 @@ export default defineComponent({
         },
     },
     emits: ['on-selected'],
+    components: { Search },
     setup(props: any) {
         const leftLoading = ref(false)
         const curPage = ref(1)
         const pageTotal = ref(1)
         const fileList = ref([])
         const pageLimit = 10
+        const fileUrlSetFrom = ref()
 
         // 查询列表
         const getList = async (page = 1, name = '') => {
@@ -210,6 +217,56 @@ export default defineComponent({
             url: '',
         })
 
+        // 关闭弹窗清除状态
+        watch(showFileUrlSetBox, (val: boolean) => {
+            if (!val) {
+                fileUrlSetFromData.name = ''
+                fileUrlSetFromData.desc = ''
+                fileUrlSetFromData.url = ''
+            }
+        })
+
+        // 文件URL from验证
+        const fileUrlSetFromRules = reactive({
+            url: {
+                validator: (
+                    rule: any,
+                    value: string,
+                    callback: (arg0?: Error | undefined) => void
+                ) => {
+                    if (!value || value === '') {
+                        callback(new Error('URL为必填项'))
+                    } else if (
+                        !/^https?:\/\/([\w-]+\.)+[\w-]+(:\d+)?(\/[\w-.\/?%&=]*)?$/.test(value)
+                    ) {
+                        callback(new Error('URL格式有误'))
+                    } else {
+                        callback()
+                    }
+                },
+                required: true,
+                trigger: 'blur',
+            },
+            name: {
+                required: true,
+                message: '文件名称为必填项',
+                trigger: 'blur',
+            },
+        })
+
+        // 文件URL from提交
+        const fileUrlSetSubmit = () => {
+            // 验证
+            fileUrlSetFrom.value.validate(async (valid: boolean) => {
+                if (valid) {
+                    // 登录
+                    console.log(fileUrlSetFromData)
+                    return true
+                }
+                return false
+            })
+        }
+
         // 切换表格
         const handleFileListChange = (val: IFileParams) => {
             handleSelected(fileList.value.findIndex((item: IFileParams) => item.id == val.id))
@@ -246,7 +303,10 @@ export default defineComponent({
             currFile,
             selectedIndex,
             handleSelected,
+            fileUrlSetFrom,
             fileUrlSetFromData,
+            fileUrlSetFromRules,
+            fileUrlSetSubmit,
             handleFileListChange,
             handlePicSuccess,
             beforePicUpload,
