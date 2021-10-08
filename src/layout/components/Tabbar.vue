@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-09-30 17:54:53
+ * @LastEditTime: 2021-10-08 12:36:47
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -99,6 +99,12 @@ export default defineComponent({
             visibleAreaWidth,
             (val, oldVal) => {
                 nextTick(() => {
+                    // 按钮显隐
+                    showScrollBtn.value = getOverLength() > 0
+                    // 按钮状态
+                    setBtnState(translateX.value)
+
+                    // 右侧滚到底（右侧按钮置灰时）调整路由tab位置
                     if (
                         oldVal &&
                         val &&
@@ -108,12 +114,18 @@ export default defineComponent({
                     ) {
                         translateX.value -= getOverLength() + 79 + translateX.value
                     }
-                    setBtnState(translateX.value)
-                    showScrollBtn.value = getOverLength() > 0
                 })
             },
             { immediate: true }
         )
+
+        // 监听按钮显隐做些事
+        watch(showScrollBtn, (val, oldVal) => {
+            if (oldVal && !val) {
+                // 按钮变为隐藏时，tab归位
+                translateX.value = 0
+            }
+        })
 
         // 监听侧边缩放
         watch(sidebarCollapse, () => {
@@ -170,14 +182,12 @@ export default defineComponent({
             }
 
             // 滚动差值
-            const scrollDiffLen = computed(
-                () => getOverLength() + (isTabChange ? 60 : 79) + translateX.value
-            )
+            const scrollDiffLen = getOverLength() + (isTabChange ? 60 : 79) + translateX.value
 
-            if (scrollDiffLen.value >= 140) {
+            if (scrollDiffLen >= 140) {
                 translateX.value -= 140
             } else {
-                translateX.value -= scrollDiffLen.value
+                translateX.value -= scrollDiffLen
             }
         }
 
@@ -186,8 +196,8 @@ export default defineComponent({
             // 切换tab滚动
             if (showScrollBtn.value) {
                 const offsetRight =
-                    tabbarRef.value.clientWidth - 60 - ev.target.offsetLeft - translateX.value
-                const offsetLeft = ev.target.offsetLeft + translateX.value
+                    tabbarRef.value.clientWidth - 60 - ev.offsetLeft - translateX.value
+                const offsetLeft = ev.offsetLeft + translateX.value
 
                 // 右侧
                 if (offsetRight <= 140) {

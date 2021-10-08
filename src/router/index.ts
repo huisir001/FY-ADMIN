@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-30 17:44:26
+ * @LastEditTime: 2021-10-08 12:25:36
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -14,7 +14,7 @@ import rearHook from './rearHook'
  * 配置规则：
  * name:'router-name'            // 设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题
  * meta : {
- *   cache: true                  // 如果设置为true，则会被 <keep-alive> 缓存
+ *   noCache: true                // 如果设置为true，则不会被 <keep-alive> 缓存（默认全部缓存）
  *   title: 'title'               // 设置该路由在侧边栏\面包屑\浏览器标签栏中展示的名字,当不设置时显示路由name
  *   icon: ''                     // 设置该路由的图标，不设置则会使用默认
  *   hidden:true                  // 当设置时候不在侧边栏及导航条出现 如401，login等页面，或者一些编辑页面和用户无权限访问的页面

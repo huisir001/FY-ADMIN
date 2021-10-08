@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-09-30 15:13:48
+ * @LastEditTime: 2021-10-08 10:03:17
 -->
 <template>
     <div class="navbar">
@@ -134,7 +134,7 @@ export default defineComponent({
         display: flex;
         align-items: center;
         .nav-item {
-            display: flex !important;
+            display: flex;
             align-items: center;
             cursor: pointer;
             padding: 0 10px;
@@ -158,6 +158,15 @@ export default defineComponent({
         &.reverse {
             transform: rotate(180deg);
         }
+    }
+    .breadCrumbs:deep(.el-breadcrumb) {
+        height: 14px;
+        overflow: hidden;
+    }
+}
+@media screen and (max-width: 400px) {
+    .breadCrumbs {
+        display: none !important;
     }
 }
 </style>
