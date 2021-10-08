@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-10-08 14:51:55
+ * @LastEditTime: 2021-10-08 18:52:27
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -12,8 +12,20 @@
         :destroy-on-close="true" :title="type=='zip'?'文件库':'图片库'">
         <div class="file-library-dialog-cont">
             <div class="left" v-loading="leftLoading">
+                <div class="btn-group">
+                    <el-select v-model="currGroup" placeholder="选择类目" size="mini" filterable>
+                        <el-option v-for="item in groups" :key="item.id" :label="item.name"
+                            :value="item.id">
+                        </el-option>
+                    </el-select>
+                    <el-input v-model="input2" placeholder="在当前类目中搜索" suffix-icon="el-icon-search"
+                        size="mini" />
+                    <el-button size="mini" icon="el-icon-refresh">刷新</el-button>
+                    <el-button :disabled="selectedIndex<0" size="mini" type="danger"
+                        icon="el-icon-delete" @click="showFileLibraryBox = false">删除</el-button>
+                </div>
                 <!-- 图片列表 -->
-                <template v-if="type=='pic'">
+                <div class="pic-list-box" v-if="type=='pic'">
                     <el-popover v-model:visible="popoverVisible" placement="bottom" :width="170">
                         <p style="text-align: center; margin-bottom: 10px">选择新增文件方式</p>
                         <div>
@@ -40,7 +52,7 @@
                         :class="{selected:selectedIndex==index}" @click="handleSelected(index)">
                         <el-image class="pic-item" fit="cover" :src="item.url" />
                     </div>
-                </template>
+                </div>
                 <!-- zip列表 -->
                 <template v-else>
                     <el-table :data="fileList" highlight-current-row style="width: 98%"
@@ -54,7 +66,7 @@
             <div class="right">
                 <template v-if="selectedIndex>=0">
                     <h5>图片详情</h5>
-                    <el-form label-width="75px" label-position="left">
+                    <el-form label-width="75px" label-position="left" size="mini">
                         <el-form-item label="图片预览">
                             <el-image class="preview-img" :src="currFile.url"
                                 :preview-src-list="[currFile.url]" fit="contain" />
@@ -76,6 +88,17 @@
                         </el-form-item>
                         <el-form-item label="文件名称">
                             <el-input v-model="currFile.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="选择类目">
+                            <el-select v-model="currFile.group" size="mini" filterable allow-create
+                                default-first-option style="width:100%;"
+                                @change="currFileGroupChange">
+                                <el-option v-for="item in groups" :key="item.id" :label="item.name"
+                                    :value="item.id">
+                                </el-option>
+                            </el-select>
+                            <div style="font-size:12px;color:var(--el-text-color-secondary)">
+                                Ps:可输入新类目</div>
                         </el-form-item>
                         <el-form-item label="文件描述">
                             <el-input v-model="currFile.desc" type="textarea"></el-input>
@@ -99,10 +122,11 @@
         </div>
         <template v-if="selectedIndex>=0" #footer>
             <span class="dialog-footer">
-                <el-button @click="showFileLibraryBox = false">删除</el-button>
-                <el-button @click="showFileLibraryBox = false">保存</el-button>
+                <el-button @click="showFileLibraryBox = false">保存详情
+                </el-button>
                 <el-button type="primary"
-                    @click="showFileLibraryBox=false;$emit('on-selected',currFile);">插入</el-button>
+                    @click="showFileLibraryBox=false;$emit('on-selected',currFile);">使用选中项
+                </el-button>
             </span>
         </template>
     </el-dialog>
@@ -161,11 +185,41 @@ export default defineComponent({
         const pageLimit = 10
         const fileUrlSetFrom = ref()
 
+        // 分类列表
+        const groups = ref([
+            {
+                id: 'ALL',
+                name: '全部类目',
+            },
+            {
+                id: 1,
+                name: 'Option1',
+            },
+            {
+                id: 2,
+                name: 'Option2',
+            },
+            {
+                id: 3,
+                name: 'Option3',
+            },
+            {
+                id: 4,
+                name: 'Option4',
+            },
+            {
+                id: 5,
+                name: 'Option5',
+            },
+        ])
+
+        const currGroup = ref('ALL')
+
         // 查询列表
         const getList = async (page = 1, name = '') => {
             leftLoading.value = true
             const res = await getFileListByPage({ page, type: props.type, limit: pageLimit, name })
-            // 有登录数据
+            // 有数据
             if (res && res.ok) {
                 const { list, page, pageTotal: pt } = res.data
                 curPage.value = page
@@ -267,6 +321,13 @@ export default defineComponent({
             })
         }
 
+        // 文件详情-类目切换
+        const currFileGroupChange = (e: any) => {
+            if (!groups.value.find((item) => item.id === e)) {
+                console.log('这是新创建的类目:', e)
+            }
+        }
+
         // 切换表格
         const handleFileListChange = (val: IFileParams) => {
             handleSelected(fileList.value.findIndex((item: IFileParams) => item.id == val.id))
@@ -296,6 +357,8 @@ export default defineComponent({
         }
 
         return {
+            groups,
+            currGroup,
             getList,
             showFileLibraryBox,
             showFileUrlSetBox,
@@ -307,6 +370,7 @@ export default defineComponent({
             fileUrlSetFromData,
             fileUrlSetFromRules,
             fileUrlSetSubmit,
+            currFileGroupChange,
             handleFileListChange,
             handlePicSuccess,
             beforePicUpload,
