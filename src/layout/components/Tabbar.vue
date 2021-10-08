@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-10-08 12:36:47
+ * @LastEditTime: 2021-10-08 12:47:03
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -10,7 +10,7 @@
             <div ref="itemBoxRef" class="item-box"
                 :style="{transform:`translateX(${translateX}px)`}">
                 <div v-for="(item,index) in historyRoutes" :key="item.name" class="zui-tabbar-item"
-                    :class="{act:curRouteName===item.name}" @click="tabChange(index,$event)">
+                    :class="{act:curRouteName===item.name}" @click="tabChange(index,$event.target)">
                     <span>{{item.meta.title || item.name.toUpperCase()}}</span>
                     <el-icon size="14" @click.stop="deleteRoute(index,$event)">
                         <close />
@@ -192,12 +192,12 @@ export default defineComponent({
         }
 
         // 切换tab
-        function tabChange(index: number, ev: any) {
+        function tabChange(index: number, target: HTMLElement) {
             // 切换tab滚动
             if (showScrollBtn.value) {
                 const offsetRight =
-                    tabbarRef.value.clientWidth - 60 - ev.offsetLeft - translateX.value
-                const offsetLeft = ev.offsetLeft + translateX.value
+                    tabbarRef.value.clientWidth - 60 - target.offsetLeft - translateX.value
+                const offsetLeft = target.offsetLeft + translateX.value
 
                 // 右侧
                 if (offsetRight <= 140) {
