@@ -2,12 +2,12 @@
  * @Description: 上传
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 22:56:35
- * @LastEditTime: 2021-10-08 18:24:46
+ * @LastEditTime: 2021-10-09 18:12:04
  */
 
 import { Random } from "mockjs"
 
-// 登录
+// 上传文件
 const upload = {
     data: {
         url: Random.image('64x64', Random.color(), Random.color(), Random.character('upper'))
@@ -22,12 +22,12 @@ const getFileListByPage = {
             {
                 id: '@id',
                 type: '@pick(["pic", "zip"])',
-                name: '@csentence(3, 5)',
+                name: '@ctitle(3, 5)',
                 createTime: '@datetime',
                 size: '@integer(60, 100)',
                 dimensions: ['@integer(60, 100)', '@integer(60, 100)'],
                 desc: '@cparagraph(1, 3)',
-                group: '@integer(1, 5)',
+                group: '@integer(1, 9)',
                 url: Random.image('64x64', Random.color(), Random.color(), Random.character('upper')),
             }
         ],
@@ -38,9 +38,72 @@ const getFileListByPage = {
     }
 }
 
+// 删除文件
+const removeFileById = { msg: '删除成功' }
+
+// 查询类目列表
+const getFileGroupList = {
+    data: {
+        list: [
+            {
+                "id": 1,
+                "name": "干别速"
+            },
+            {
+                "id": 2,
+                "name": "领则则活"
+            },
+            {
+                "id": 3,
+                "name": "心总走地"
+            },
+            {
+                "id": 4,
+                "name": "许际党入"
+            },
+            {
+                "id": 5,
+                "name": "起号干在"
+            },
+            {
+                "id": 6,
+                "name": "际题加能"
+            },
+            {
+                "id": 7,
+                "name": "特风切或"
+            },
+            {
+                "id": 8,
+                "name": "参世消品"
+            },
+            {
+                "id": 9,
+                "name": "农形直心南"
+            },
+        ]
+    }
+}
+
+// 新增类目
+const addFileGroup = {
+    data: {
+        id: '@id',
+        name: '@ctitle(3, 5)',
+    },
+    msg: '新增成功'
+}
+
+// 更新文件信息
+const update = { msg: '更新成功' }
+
 const File: IObj = {
     upload,
-    getFileListByPage
+    getFileListByPage,
+    removeFileById,
+    getFileGroupList,
+    addFileGroup,
+    update
 }
 
 export default File

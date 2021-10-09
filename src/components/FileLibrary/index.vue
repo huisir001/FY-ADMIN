@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-10-08 18:52:27
+ * @LastEditTime: 2021-10-09 18:13:09
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -20,9 +20,11 @@
                     </el-select>
                     <el-input v-model="input2" placeholder="在当前类目中搜索" suffix-icon="el-icon-search"
                         size="mini" />
-                    <el-button size="mini" icon="el-icon-refresh">刷新</el-button>
+                    <el-button size="mini" icon="el-icon-refresh" :loading="refreshBtnLoading">刷新
+                    </el-button>
                     <el-button :disabled="selectedIndex<0" size="mini" type="danger"
-                        icon="el-icon-delete" @click="showFileLibraryBox = false">删除</el-button>
+                        icon="el-icon-delete" :loading="delBtnLoading" @click="deleteFile">删除
+                    </el-button>
                 </div>
                 <!-- 图片列表 -->
                 <div class="pic-list-box" v-if="type=='pic'">
@@ -97,7 +99,7 @@
                                     :value="item.id">
                                 </el-option>
                             </el-select>
-                            <div style="font-size:12px;color:var(--el-text-color-secondary)">
+                            <div class="form-item-text">
                                 Ps:可输入新类目</div>
                         </el-form-item>
                         <el-form-item label="文件描述">
@@ -122,8 +124,7 @@
         </div>
         <template v-if="selectedIndex>=0" #footer>
             <span class="dialog-footer">
-                <el-button @click="showFileLibraryBox = false">保存详情
-                </el-button>
+                <el-button @click="updateFileInfo" :loading="saveDetailLoading">保存详情</el-button>
                 <el-button type="primary"
                     @click="showFileLibraryBox=false;$emit('on-selected',currFile);">使用选中项
                 </el-button>
@@ -155,8 +156,14 @@
 </template>
  
 <script lang="ts">
-import { computed, defineComponent, nextTick, reactive, ref, watch } from 'vue'
-import { getFileListByPage } from '@/api/file'
+import { computed, defineComponent, nextTick, reactive, ref, toRaw, watch } from 'vue'
+import {
+    getFileListByPage,
+    removeFileById,
+    getFileGroupList,
+    addFileGroup,
+    update as updateFile,
+} from '@/api/file'
 import { ElMessage } from 'element-plus'
 import { Search } from '@element-plus/icons'
 
@@ -179,6 +186,9 @@ export default defineComponent({
     components: { Search },
     setup(props: any) {
         const leftLoading = ref(false)
+        const saveDetailLoading = ref(false)
+        const delBtnLoading = ref(false)
+        const refreshBtnLoading = ref(false)
         const curPage = ref(1)
         const pageTotal = ref(1)
         const fileList = ref([])
@@ -186,48 +196,36 @@ export default defineComponent({
         const fileUrlSetFrom = ref()
 
         // 分类列表
-        const groups = ref([
-            {
+        const groups = ref<IFileGroup[]>([])
+        ;(async () => {
+            const res = await getFileGroupList()
+            groups.value = res.data.list
+            groups.value.unshift({
                 id: 'ALL',
                 name: '全部类目',
-            },
-            {
-                id: 1,
-                name: 'Option1',
-            },
-            {
-                id: 2,
-                name: 'Option2',
-            },
-            {
-                id: 3,
-                name: 'Option3',
-            },
-            {
-                id: 4,
-                name: 'Option4',
-            },
-            {
-                id: 5,
-                name: 'Option5',
-            },
-        ])
+            })
+        })()
 
         const currGroup = ref('ALL')
 
         // 查询列表
-        const getList = async (page = 1, name = '') => {
+        const getList = async (params: IGetFileListParams) => {
             leftLoading.value = true
-            const res = await getFileListByPage({ page, type: props.type, limit: pageLimit, name })
+            const { page = 1, name = '', group = '' } = params || {}
+            const res = await getFileListByPage({
+                page,
+                group,
+                type: props.type,
+                limit: pageLimit,
+                name,
+            })
             // 有数据
-            if (res && res.ok) {
-                const { list, page, pageTotal: pt } = res.data
-                curPage.value = page
-                pageTotal.value = pt
-                fileList.value = list
-                await nextTick()
-                leftLoading.value = false
-            }
+            const { list, pageTotal: pt } = res.data
+            curPage.value = page
+            pageTotal.value = pt
+            fileList.value = list
+            await nextTick()
+            leftLoading.value = false
         }
 
         // 页码切换
@@ -322,10 +320,48 @@ export default defineComponent({
         }
 
         // 文件详情-类目切换
-        const currFileGroupChange = (e: any) => {
-            if (!groups.value.find((item) => item.id === e)) {
-                console.log('这是新创建的类目:', e)
+        const currFileGroupChange = async (e: any) => {
+            // 选择全部类目
+            // if (e === 'ALL') {
+            //     ;(currFile.value as any).group = ''
+            // }
+            // // 新创建类目
+            // if (!groups.value.find((item) => item.id === e)) {
+            //     const { data } = await addFileGroup(e)
+            //     ;(currFile.value as any).group = data.id
+            //     console.log('这是新创建的类目:', e, data.id)
+            // }
+        }
+
+        // 文件删除
+        const deleteFile = async () => {
+            delBtnLoading.value = true
+            const { msg } = await removeFileById((currFile.value as IFileParams).id)
+            delBtnLoading.value = false
+            ElMessage.success(msg)
+        }
+
+        // 文件详情-保存详情
+        const updateFileInfo = async () => {
+            saveDetailLoading.value = true
+
+            let { id, group, name, desc } = toRaw(currFile.value) as IFileParams
+
+            // 选择全部类目
+            if (group === 'ALL') {
+                group = ''
+            } else if (!groups.value.find((item) => item.id === group)) {
+                // 新创建类目
+                console.log('这是新创建的类目:', group)
+                const { data } = await addFileGroup(group)
+                group = data.id
             }
+
+            // 更新
+            await updateFile({ id, group, name, desc })
+
+            saveDetailLoading.value = false
+            ElMessage.success('保存成功!')
         }
 
         // 切换表格
@@ -372,10 +408,15 @@ export default defineComponent({
             fileUrlSetSubmit,
             currFileGroupChange,
             handleFileListChange,
+            updateFileInfo,
+            saveDetailLoading,
             handlePicSuccess,
             beforePicUpload,
             popoverVisible,
             leftLoading,
+            delBtnLoading,
+            deleteFile,
+            refreshBtnLoading,
             curPage,
             pageTotal,
             pageLimit,

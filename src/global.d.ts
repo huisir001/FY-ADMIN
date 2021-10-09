@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-28 11:30:06
+ * @LastEditTime: 2021-10-09 15:45:31
  */
 
 /**
@@ -64,8 +64,7 @@ declare interface IUserInfo extends IObj {
  */
 declare interface IGetFileListParams {
   type?: 'pic' | 'zip'
-  year?: number // 年份
-  month?: number // 月
+  group?: string // 分组
   name?: string // 名称
   page: number // 当前页码
   limit: number // 每页条数
@@ -84,4 +83,12 @@ declare interface IFileParams {
   desc: string
   group?: string
   url: string
+}
+
+/**
+ * 文件分类
+ */
+declare interface IFileGroup {
+  id: string
+  name: string
 }
