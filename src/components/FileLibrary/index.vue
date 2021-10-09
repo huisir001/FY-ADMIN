@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-10-09 18:13:09
+ * @LastEditTime: 2021-10-09 18:43:38
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -22,9 +22,14 @@
                         size="mini" />
                     <el-button size="mini" icon="el-icon-refresh" :loading="refreshBtnLoading">刷新
                     </el-button>
-                    <el-button :disabled="selectedIndex<0" size="mini" type="danger"
-                        icon="el-icon-delete" :loading="delBtnLoading" @click="deleteFile">删除
-                    </el-button>
+                    <el-popconfirm title="你确定要删除当前文件吗?" @confirm="deleteFile">
+                        <template #reference>
+                            <el-button :disabled="selectedIndex<0" size="mini" type="danger"
+                                icon="el-icon-delete" :loading="delBtnLoading">
+                                删除
+                            </el-button>
+                        </template>
+                    </el-popconfirm>
                 </div>
                 <!-- 图片列表 -->
                 <div class="pic-list-box" v-if="type=='pic'">
