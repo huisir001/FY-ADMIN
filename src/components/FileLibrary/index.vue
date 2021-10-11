@@ -20,7 +20,7 @@
                         </el-option>
                     </el-select>
                     <el-input v-model="fileQueryParams.name" placeholder="在当前类目中搜索"
-                        suffix-icon="el-icon-search" size="mini" />
+                        suffix-icon="el-icon-search" size="mini" clearable />
                     <el-button size="mini" icon="el-icon-refresh" :loading="leftLoading"
                         @click="getList">刷新
                     </el-button>
