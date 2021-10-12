@@ -13,7 +13,7 @@
                     <Fold />
                 </el-icon>
             </div>
-            <div class="breadCrumbs nav-item">
+            <div v-if="$store.state.theme.showBreadcrumb" class="breadCrumbs nav-item">
                 <el-breadcrumb separator="/">
                     <el-breadcrumb-item v-for="item in breadCrumbs" :key="item.title"
                         :to="{ path: item.path }">{{item.title}}</el-breadcrumb-item>

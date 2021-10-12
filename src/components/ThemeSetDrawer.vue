@@ -2,17 +2,17 @@
  * @Description: 主题设置抽屉
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-23 14:38:39
- * @LastEditTime: 2021-09-24 10:35:23
+ * @LastEditTime: 2021-10-12 16:16:34
 -->
 <template>
     <el-drawer title="主题配置" :size="280" custom-class="zui-theme-drawer">
         <div class="part">
             <h5>主题色</h5>
-            <div class="set-box" style="display:flex">
+            <div class="set-box row">
                 <div v-for="item in ThemeColorList" :key="item.name"
                     :style="{background:item.color}" class="theme-color-radio"
                     @click="selectColor(item.name)">
-                    <el-icon v-if="curThemeState.color==item.name" color="#fff" :size="20">
+                    <el-icon v-if="curThemeColorState==item.name" color="#fff" :size="20">
                         <Check />
                     </el-icon>
                 </div>
@@ -20,7 +20,12 @@
         </div>
         <div class="part">
             <h5>内容区</h5>
-
+            <div class="set-box column">
+                <el-switch v-model="curPageTagNavState" inactive-text="显示标签栏">
+                </el-switch>
+                <el-switch v-model="curBreadcrumbState" inactive-text="显示面包屑">
+                </el-switch>
+            </div>
         </div>
     </el-drawer>
 </template>
@@ -40,13 +45,22 @@ export default defineComponent({
         const Store = useStore()
 
         // 主题配置
-        const curThemeState = computed(() => {
-            const { color, showPageTagNav, showBreadcrumb } = Store.state.theme
-            return {
-                color,
-                showPageTagNav,
-                showBreadcrumb,
-            }
+        const curThemeColorState = computed(() => Store.state.theme.color)
+        const curPageTagNavState = computed({
+            get: () => Store.state.theme.showPageTagNav,
+            set: (val) => {
+                Store.commit('theme/setStates', {
+                    showPageTagNav: val,
+                })
+            },
+        })
+        const curBreadcrumbState = computed({
+            get: () => Store.state.theme.showBreadcrumb,
+            set: (val) => {
+                Store.commit('theme/setStates', {
+                    showBreadcrumb: val,
+                })
+            },
         })
 
         // 主题色改变
@@ -61,7 +75,9 @@ export default defineComponent({
                 name: item.name,
                 color: item.color,
             })),
-            curThemeState,
+            curThemeColorState,
+            curPageTagNavState,
+            curBreadcrumbState,
             selectColor,
         }
     },
@@ -72,10 +88,26 @@ export default defineComponent({
 .part {
     margin-bottom: 40px;
     h5 {
-        color: var(--el-text-color-regular);
+        color: var(--el-text-color-primary);
     }
     .set-box {
         margin-top: 20px;
+        display: flex;
+        &.row {
+            flex-direction: row;
+        }
+        &.column {
+            flex-direction: column;
+            &:deep(.el-switch) {
+                justify-content: space-between;
+                & + .el-switch {
+                    margin-top: 15px;
+                }
+            }
+            &:deep(.el-switch__label, .el-switch__label.is-active) {
+                color: var(--el-text-color-regular);
+            }
+        }
     }
     .theme-color-radio {
         width: 30px;
@@ -93,6 +125,7 @@ export default defineComponent({
         margin-bottom: 20px;
         font-size: 16px;
         font-weight: bold;
+        color: var(--el-text-color-primary);
     }
 }
 </style>

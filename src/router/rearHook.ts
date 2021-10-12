@@ -7,14 +7,14 @@
 // tslint:disable-next-line:no-var-requires
 const { Title } = require('@/settings/common')
 import { NavigationHookAfter } from 'vue-router'
-import PageLoaing from '@/utils/PageLoaing'
+import PageLoading from '@/utils/PageLoading'
 import { store } from '@/store'
 
 const rearHook: NavigationHookAfter = (to) => {
     // 更改Tab标题
     document.title = (to.meta.title || (to.name as string).toUpperCase()) + ' - ' + Title
     // 关闭loading
-    PageLoaing.hide()
+    PageLoading.hide()
     // 更新历史记录
     store.commit('temp/addHistoryRoute', to)
 }

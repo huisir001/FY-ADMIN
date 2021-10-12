@@ -7,7 +7,7 @@
 // tslint:disable:no-console
 import { ElMessage } from 'element-plus'
 import axios from 'axios'
-// import PageLoaing from './PageLoaing'
+// import PageLoading from './PageLoading'
 import LocalCache from './LocalCache'
 import { store } from '@/store'
 // tslint:disable-next-line:no-var-requires
@@ -27,7 +27,7 @@ let Token: string
 Axios.interceptors.request.use(
     (config: any) => {
         // 加载loading
-        // PageLoaing.show()
+        // PageLoading.show()
         // 由于执行请求时token可能已经改变，故每次请求前都要重新获取token
         Token = store.getters.getToken()
         console.log(Token)
@@ -36,7 +36,7 @@ Axios.interceptors.request.use(
         return config
     },
     (error: any) => {
-        // PageLoaing.hide() // 关闭loading
+        // PageLoading.hide() // 关闭loading
         console.error('[Request error]: ' + error)
     }
 )
@@ -46,7 +46,7 @@ Axios.interceptors.response.use(
     (response: any) => {
         console.log('response', response)
         // 关闭loading
-        // PageLoaing.hide()
+        // PageLoading.hide()
 
         // 对响应数据做些事
         if (response.status !== 200 || !response.data.ok) {
@@ -69,7 +69,7 @@ Axios.interceptors.response.use(
         return response.data
     },
     (error: any) => {
-        // PageLoaing.hide() // 关闭loading
+        // PageLoading.hide() // 关闭loading
 
         // 代码层面出错
         if (!error.response) {

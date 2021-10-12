@@ -2,7 +2,7 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-10-08 16:28:52
+ * @LastEditTime: 2021-10-12 17:34:39
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" @tab-click="tabChange" class="zui-my-tabs">
@@ -14,7 +14,8 @@
                     </FileLibrary>
                 </el-form-item>
                 <el-form-item label="账号">
-                    <el-input v-model="userInfoFormData.username"></el-input>
+                    <el-input v-model="userInfoFormData.username" placeholder="请输入账号，用于登录">
+                    </el-input>
                 </el-form-item>
                 <el-form-item label="昵称">
                     <el-input v-model="userInfoFormData.nickname"></el-input>
@@ -38,12 +39,52 @@
                 </el-form-item>
             </el-form>
         </el-tab-pane>
-        <el-tab-pane label="其他" name="othter">其他</el-tab-pane>
+        <el-tab-pane label="其他资料" name="others">
+            <el-form label-position="left" label-width="80px">
+                <el-form-item label="所属部门">
+                    保安部
+                </el-form-item>
+                <el-form-item label="所属角色">
+                    管理员
+                </el-form-item>
+                <el-form-item label="岗位名称">
+                    保安
+                </el-form-item>
+                <el-form-item label="拥有权限">
+                    权限
+                </el-form-item>
+                <el-form-item label="创建时间">
+                    2020-12-19
+                </el-form-item>
+                <el-form-item label="备注">
+                    备注
+                </el-form-item>
+            </el-form>
+        </el-tab-pane>
+        <el-tab-pane label="修改密码" name="pass">
+            <el-form label-position="left" label-width="80px" :model="resetPassFormData">
+                <el-form-item label="旧密码">
+                    <el-input v-model="resetPassFormData.oldPass" placeholder="请输入旧密码">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="新密码">
+                    <el-input v-model="resetPassFormData.newPass" placeholder="请输入新密码">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="确认密码">
+                    <el-input v-model="resetPassFormData.surePass" placeholder="请再次输入新密码">
+                    </el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="onSubmitPassword">保存</el-button>
+                </el-form-item>
+            </el-form>
+        </el-tab-pane>
     </el-tabs>
 </template>
  
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import { useStore } from '@/store'
 // import { ElMessage } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
@@ -80,6 +121,13 @@ export default defineComponent({
             console.log(userInfoFormData)
         }
 
+        // 修改密码form
+        const resetPassFormData = reactive({
+            oldPass: '',
+            newPass: '',
+            surePass: '',
+        })
+
         return {
             activeTabName,
             tabChange,
@@ -88,6 +136,7 @@ export default defineComponent({
             resetBaseUserinfo,
             defaultAvatar,
             avatarSelected,
+            resetPassFormData,
         }
     },
 })

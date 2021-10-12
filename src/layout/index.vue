@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2021-09-30 16:07:28
+ * @LastEditTime: 2021-10-12 16:15:21
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -47,7 +47,9 @@ export default defineComponent({
         })
 
         // 历史路由数
-        const showTabbar = computed(() => Store.state.temp.historyRoutes.length > 0)
+        const showTabbar = computed(
+            () => Store.state.temp.historyRoutes.length > 0 && Store.state.theme.showPageTagNav
+        )
 
         // 侧边栏状态
         const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)
