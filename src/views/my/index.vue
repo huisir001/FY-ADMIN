@@ -2,7 +2,7 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-10-12 17:34:39
+ * @LastEditTime: 2021-10-12 17:45:45
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" @tab-click="tabChange" class="zui-my-tabs">
@@ -128,6 +128,11 @@ export default defineComponent({
             surePass: '',
         })
 
+        // 修改密码
+        const onSubmitPassword = () => {
+            console.log(resetPassFormData)
+        }
+
         return {
             activeTabName,
             tabChange,
@@ -137,6 +142,7 @@ export default defineComponent({
             defaultAvatar,
             avatarSelected,
             resetPassFormData,
+            onSubmitPassword,
         }
     },
 })
