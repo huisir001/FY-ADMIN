@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-10-08 10:03:17
+ * @LastEditTime: 2021-10-13 16:05:31
 -->
 <template>
     <div class="navbar">
@@ -16,7 +16,8 @@
             <div v-if="$store.state.theme.showBreadcrumb" class="breadCrumbs nav-item">
                 <el-breadcrumb separator="/">
                     <el-breadcrumb-item v-for="item in breadCrumbs" :key="item.title"
-                        :to="{ path: item.path }">{{item.title}}</el-breadcrumb-item>
+                        :to="{ path: item.path }" :class="{redirect:item.redirect}">{{item.title}}
+                    </el-breadcrumb-item>
                 </el-breadcrumb>
             </div>
         </div>
@@ -70,6 +71,7 @@ export default defineComponent({
                 .map((item) => ({
                     title: item.meta.title || item.name,
                     path: item.path,
+                    redirect: item.redirect,
                 }))
         )
 
@@ -159,9 +161,20 @@ export default defineComponent({
             transform: rotate(180deg);
         }
     }
-    .breadCrumbs:deep(.el-breadcrumb) {
-        height: 14px;
-        overflow: hidden;
+    .breadCrumbs {
+        cursor: unset !important;
+        &:deep(.el-breadcrumb) {
+            height: 14px;
+            overflow: hidden;
+            .redirect .is-link {
+                font-weight: normal;
+                color: var(--el-text-color-regular);
+                cursor: unset;
+                &:hover {
+                    color: var(--el-text-color-regular);
+                }
+            }
+        }
     }
 }
 @media screen and (max-width: 400px) {

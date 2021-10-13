@@ -2,12 +2,12 @@
  * @Description: vue-cli配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-08 17:34:47
- * @LastEditTime: 2021-09-17 17:27:58
+ * @LastEditTime: 2021-10-13 11:21:05
  */
 const { Title, CDNResources } = require("./src/settings/common.ts")
 
 module.exports = {
-    publicPath: '',
+    publicPath: '/',
     assetsDir: 'assets',
     productionSourceMap: false,
     // webpack-marge选项
