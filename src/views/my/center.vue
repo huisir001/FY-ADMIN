@@ -2,7 +2,7 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-10-14 11:32:56
+ * @LastEditTime: 2021-10-14 15:30:24
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" class="zui-my-tabs">
@@ -91,7 +91,7 @@ import defaultAvatar from '@/assets/images/avatar.svg'
 import FileLibrary from '@/components/FileLibrary/index.vue'
 
 export default defineComponent({
-    name: 'My',
+    name: 'Center',
     components: { FileLibrary },
     setup() {
         const Store = useStore()
