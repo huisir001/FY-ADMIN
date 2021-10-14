@@ -2,10 +2,10 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-10-12 17:45:45
+ * @LastEditTime: 2021-10-14 11:32:56
 -->
 <template>
-    <el-tabs type="card" v-model="activeTabName" @tab-click="tabChange" class="zui-my-tabs">
+    <el-tabs type="card" v-model="activeTabName" class="zui-my-tabs">
         <el-tab-pane label="基本信息" name="base">
             <el-form label-position="left" label-width="50px" :model="userInfoFormData">
                 <el-form-item label="头像" style="height:64px;">
@@ -96,9 +96,6 @@ export default defineComponent({
     setup() {
         const Store = useStore()
         const activeTabName = ref('base')
-        const tabChange = (e: any) => {
-            console.log(e)
-        }
         // const userInfo = computed(() => Store.state.user.userInfo)
 
         // 用户信息copy
@@ -135,7 +132,6 @@ export default defineComponent({
 
         return {
             activeTabName,
-            tabChange,
             userInfoFormData,
             onSubmitBaseUserinfo,
             resetBaseUserinfo,
