@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-10-13 16:05:31
+ * @LastEditTime: 2021-10-14 11:19:52
 -->
 <template>
     <div class="navbar">
@@ -65,15 +65,25 @@ export default defineComponent({
         const Router = useRouter()
 
         // 面包屑
-        const breadCrumbs = computed(() =>
-            Route.matched
+        const breadCrumbs = computed(() => {
+            let crumbs = Route.matched
                 .filter((item) => item.name !== 'Home')
                 .map((item) => ({
                     title: item.meta.title || item.name,
                     path: item.path,
                     redirect: item.redirect,
                 }))
-        )
+
+            // 面包屑中添加首页
+            if (!crumbs.find((item) => item.path === '/')) {
+                crumbs.unshift({
+                    title: '首页',
+                    path: '/',
+                    redirect: undefined,
+                })
+            }
+            return crumbs
+        })
 
         // 侧边栏状态
         const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)
@@ -94,7 +104,7 @@ export default defineComponent({
         const userNavChange = (e: any) => {
             switch (e) {
                 case '0':
-                    Router.push({ name: 'My' })
+                    Router.push({ name: 'Center' })
                     break
                 case '1':
                     ElMessageBox.confirm('您即将要登出，是否继续 ?', '提示', {

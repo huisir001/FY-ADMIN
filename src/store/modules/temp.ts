@@ -2,7 +2,7 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-09-30 17:45:40
+ * @LastEditTime: 2021-10-14 11:18:41
  */
 
 /**
@@ -32,38 +32,7 @@ export const temp = {
         /**
         * 历史路由
         */
-        historyRoutes: [
-            {
-                path: '/my',
-                name: 'My',
-                meta: { title: "个人中心", hidden: true }
-            },
-            {
-                path: '/my1',
-                name: 'My1',
-                meta: { title: "个人中心1", hidden: true }
-            },
-            {
-                path: '/my2',
-                name: 'My2',
-                meta: { title: "个人中心2", hidden: true }
-            },
-            {
-                path: '/my3',
-                name: 'My3',
-                meta: { title: "个人中心3", hidden: true }
-            },
-            {
-                path: '/my4',
-                name: 'My4',
-                meta: { title: "个人中心4", hidden: true }
-            },
-            {
-                path: '/my5',
-                name: 'My5',
-                meta: { title: "个人中心5", hidden: true }
-            },
-        ]
+        historyRoutes: []
     },
     mutations: {
         /**

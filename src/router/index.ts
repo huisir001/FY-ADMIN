@@ -2,11 +2,10 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-13 16:40:47
+ * @LastEditTime: 2021-10-14 11:21:35
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
-import Block from '../layout/Block.vue'
 import permission from './permission'
 import rearHook from './rearHook'
 
@@ -37,81 +36,81 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../views/home/index.vue'),
         meta: { hidden: true }
       },
+    ]
+  },
+  {
+    path: '/sys',
+    component: Layout,
+    redirect: { name: 'Dept' },
+    meta: { title: '系统配置', icon: 'dashboard' },
+    children: [
       {
-        path: 'sys',
-        component: Block,
-        redirect: { name: 'Dept' },
-        meta: { title: '系统配置', icon: 'dashboard' },
-        children: [
-          {
-            path: 'dept',
-            name: 'Dept',
-            component: () => import('../views/sys/dept.vue'),
-            meta: { title: "部门管理" }
-          },
-          {
-            path: 'menu',
-            name: 'Menu',
-            component: () => import('../views/sys/menu.vue'),
-            meta: { title: "菜单管理" }
-          },
-          {
-            path: 'role',
-            name: 'Role',
-            component: () => import('../views/sys/role.vue'),
-            meta: { title: "角色管理" }
-          },
-          {
-            path: 'users',
-            name: 'Users',
-            component: () => import('../views/sys/users.vue'),
-            meta: { title: "用户管理" }
-          },
-        ]
+        path: 'dept',
+        name: 'Dept',
+        component: () => import('../views/sys/dept.vue'),
+        meta: { title: "部门管理" }
       },
       {
-        path: 'user',
-        component: Block,
-        redirect: { name: 'My' },
-        meta: { title: '用户配置', icon: 'dashboard' },
-        children: [
-          {
-            path: 'my',
-            name: 'My',
-            component: () => import('../views/user/my.vue'),
-            meta: { title: "个人中心", hidden: true },
-          },
-          {
-            path: 'my1',
-            name: 'My1',
-            component: () => import('../views/user/1.vue'),
-            meta: { title: "个人中心1", hidden: true }
-          },
-          {
-            path: 'my2',
-            name: 'My2',
-            component: () => import('../views/user/2.vue'),
-            meta: { title: "个人中心2", hidden: true }
-          },
-          {
-            path: 'my3',
-            name: 'My3',
-            component: () => import('../views/user/3.vue'),
-            meta: { title: "个人中心3", hidden: true }
-          },
-          {
-            path: 'my4',
-            name: 'My4',
-            component: () => import('../views/user/4.vue'),
-            meta: { title: "个人中心4", hidden: true }
-          },
-          {
-            path: 'my5',
-            name: 'My5',
-            component: () => import('../views/user/5.vue'),
-            meta: { title: "个人中心5", hidden: true }
-          },
-        ]
+        path: 'menu',
+        name: 'Menu',
+        component: () => import('../views/sys/menu.vue'),
+        meta: { title: "菜单管理" }
+      },
+      {
+        path: 'role',
+        name: 'Role',
+        component: () => import('../views/sys/role.vue'),
+        meta: { title: "角色管理" }
+      },
+      {
+        path: 'users',
+        name: 'Users',
+        component: () => import('../views/sys/users.vue'),
+        meta: { title: "用户管理" }
+      },
+    ]
+  },
+  {
+    path: '/my',
+    component: Layout,
+    redirect: { name: 'Center' },
+    meta: { title: '用户配置', icon: 'dashboard' },
+    children: [
+      {
+        path: 'center',
+        name: 'Center',
+        component: () => import('../views/my/center.vue'),
+        meta: { title: "个人中心", hidden: true },
+      },
+      {
+        path: 'my1',
+        name: 'Center1',
+        component: () => import('../views/my/1.vue'),
+        meta: { title: "个人中心1", hidden: true }
+      },
+      {
+        path: 'my2',
+        name: 'Center2',
+        component: () => import('../views/my/2.vue'),
+        meta: { title: "个人中心2", hidden: true }
+      },
+      {
+        path: 'my3',
+        name: 'Center3',
+        component: () => import('../views/my/3.vue'),
+        meta: { title: "个人中心3", hidden: true }
+      },
+      {
+        path: 'my4',
+        name: 'Center4',
+        component: () => import('../views/my/4.vue'),
+        meta: { title: "个人中心4", hidden: true }
+      },
+      {
+        path: 'my5',
+        name: 'Center5',
+        component: () => import('../views/my/5.vue'),
+        meta: { title: "个人中心5", hidden: true }
       },
     ]
   },
