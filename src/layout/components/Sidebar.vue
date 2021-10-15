@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-09-23 17:06:18
+ * @LastEditTime: 2021-10-15 14:51:28
 -->
 <template>
     <div class="sidebar">
@@ -50,11 +50,15 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from '@/store'
+// import { useRoute } from 'vue-router'
 
 export default defineComponent({
     name: 'Sidebar',
     setup() {
         const Store = useStore()
+        // const Route = useRoute()
+
+        // console.log(Route)
 
         // 折叠
         const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)

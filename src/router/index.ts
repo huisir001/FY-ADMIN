@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-14 11:21:35
+ * @LastEditTime: 2021-10-15 14:28:24
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -40,6 +40,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/sys',
+    name: 'Sys',
     component: Layout,
     redirect: { name: 'Dept' },
     meta: { title: '系统配置', icon: 'dashboard' },
@@ -50,12 +51,12 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../views/sys/dept.vue'),
         meta: { title: "部门管理" }
       },
-      {
-        path: 'menu',
-        name: 'Menu',
-        component: () => import('../views/sys/menu.vue'),
-        meta: { title: "菜单管理" }
-      },
+      // {
+      //   path: 'menu',
+      //   name: 'Menu',
+      //   component: () => import('../views/sys/menu.vue'),
+      //   meta: { title: "菜单管理" }
+      // },
       {
         path: 'role',
         name: 'Role',
@@ -126,6 +127,8 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.addRoute('Sys', { path: 'menu', meta: { title: "菜单管理" }, component: () => import('../views/sys/menu.vue') })
 
 // 路由权限验证
 router.beforeEach(permission)
