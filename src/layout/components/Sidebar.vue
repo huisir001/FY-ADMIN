@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-10-15 14:51:28
+ * @LastEditTime: 2021-10-20 19:56:46
 -->
 <template>
     <div class="sidebar">
@@ -14,34 +14,39 @@
             <el-menu class="zui-sidebar-menu" :collapse-transition="false"
                 background-color="transparent" text-color="var(--color-sidebar-font)"
                 :collapse="sidebarCollapse">
-                <el-sub-menu index="1">
-                    <template #title>
-                        <i class="el-icon-location"></i>
-                        <span>导航一</span>
-                    </template>
-                    <el-menu-item index="1-1">选项1</el-menu-item>
-                    <el-menu-item index="1-2">选项2</el-menu-item>
-                    <el-sub-menu index="1-3">
+                <template v-for="menu in Menus" :key="menu.name">
+                    <el-menu-item v-if="!menu.children || !menu.children.length" :index="menu.name"
+                        @click="$router.push({name:menu.name})">
+                        <i v-if="menu.meta.icon" :class="menu.meta.icon"></i>
                         <template #title>
-                            <i class="el-icon-location"></i>
-                            <span>导航66</span>
+                            {{menu.meta.title}}
                         </template>
-                        <el-menu-item index="1-3-1">选项1</el-menu-item>
-                        <el-menu-item index="1-3-2">选项2</el-menu-item>
+                    </el-menu-item>
+                    <el-sub-menu v-else :index="menu.name">
+                        <template #title>
+                            <i v-if="menu.meta.icon" :class="menu.meta.icon"></i>
+                            <span>{{menu.meta.title}}</span>
+                        </template>
+                        <template v-for="sub1 in menu.children" :key="sub1.name">
+                            <el-menu-item v-if="!sub1.children || !sub1.children.length"
+                                :index="sub1.name" @click="$router.push({name:sub1.name})">
+                                <i v-if="sub1.meta.icon" :class="sub1.meta.icon"></i>
+                                {{sub1.meta.title}}
+                            </el-menu-item>
+                            <el-sub-menu v-else :index="sub1.name">
+                                <template #title>
+                                    <i v-if="sub1.meta.icon" :class="sub1.meta.icon"></i>
+                                    <span>{{sub1.meta.title}}</span>
+                                </template>
+                                <el-menu-item v-for="sub2 in sub1.children" :key="sub2.name"
+                                    :index="sub2.name" @click="$router.push({name:sub2.name})">
+                                    <i v-if="sub2.meta.icon" :class="sub2.meta.icon"></i>
+                                    <span>{{sub2.meta.title}}</span>
+                                </el-menu-item>
+                            </el-sub-menu>
+                        </template>
                     </el-sub-menu>
-                </el-sub-menu>
-                <el-menu-item index="2">
-                    <i class="el-icon-menu"></i>
-                    <template #title>导航二</template>
-                </el-menu-item>
-                <el-menu-item index="3" disabled>
-                    <i class="el-icon-document"></i>
-                    <template #title>导航三</template>
-                </el-menu-item>
-                <el-menu-item index="4">
-                    <i class="el-icon-setting"></i>
-                    <template #title>导航四</template>
-                </el-menu-item>
+                </template>
             </el-menu>
         </div>
     </div>
@@ -50,21 +55,25 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from '@/store'
-// import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
     name: 'Sidebar',
     setup() {
         const Store = useStore()
-        // const Route = useRoute()
+        const Router = useRouter()
+        const Menus = computed(() =>
+            Router.getRoutes().filter((item) => item.meta.top && !item.meta.hidden)
+        )
 
-        // console.log(Route)
+        console.log(Router.getRoutes())
 
         // 折叠
         const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)
 
         return {
             sidebarCollapse,
+            Menus,
         }
     },
 })

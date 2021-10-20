@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-15 14:28:24
+ * @LastEditTime: 2021-10-20 19:45:59
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -15,6 +15,7 @@ import rearHook from './rearHook'
  * 路由path前加“/”代表根节点
  * name:'router-name'            // 设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题
  * meta : {
+ *   top: true,                   // 如果设置为true，则为1级路由，方便菜单栏查找
  *   noCache: true                // 如果设置为true，则不会被 <keep-alive> 缓存（默认全部缓存）
  *   title: 'title'               // 设置该路由在侧边栏\面包屑\浏览器标签栏中展示的名字,当不设置时显示路由name
  *   icon: ''                     // 设置该路由的图标，不设置则会使用默认
@@ -28,7 +29,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: Layout,
-    meta: { title: '首页', icon: 'dashboard' },
+    meta: { title: '首页', hidden: true, top: true },
     children: [
       {
         path: '',
@@ -39,43 +40,10 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/sys',
-    name: 'Sys',
-    component: Layout,
-    redirect: { name: 'Dept' },
-    meta: { title: '系统配置', icon: 'dashboard' },
-    children: [
-      {
-        path: 'dept',
-        name: 'Dept',
-        component: () => import('../views/sys/dept.vue'),
-        meta: { title: "部门管理" }
-      },
-      // {
-      //   path: 'menu',
-      //   name: 'Menu',
-      //   component: () => import('../views/sys/menu.vue'),
-      //   meta: { title: "菜单管理" }
-      // },
-      {
-        path: 'role',
-        name: 'Role',
-        component: () => import('../views/sys/role.vue'),
-        meta: { title: "角色管理" }
-      },
-      {
-        path: 'users',
-        name: 'Users',
-        component: () => import('../views/sys/users.vue'),
-        meta: { title: "用户管理" }
-      },
-    ]
-  },
-  {
     path: '/my',
     component: Layout,
     redirect: { name: 'Center' },
-    meta: { title: '用户配置', icon: 'dashboard' },
+    meta: { title: '用户配置', hidden: true, top: true },
     children: [
       {
         path: 'center',
@@ -119,7 +87,7 @@ const routes: RouteRecordRaw[] = [
     path: '/login',
     name: 'Login',
     component: () => import('../views/login/index.vue'),
-    meta: { title: "登录", hidden: true, public: true, }
+    meta: { title: "登录", hidden: true, public: true, top: true }
   },
 ]
 
@@ -128,7 +96,41 @@ const router = createRouter({
   routes
 })
 
-router.addRoute('Sys', { path: 'menu', meta: { title: "菜单管理" }, component: () => import('../views/sys/menu.vue') })
+router.addRoute(
+  {
+    path: '/sys',
+    name: 'Sys',
+    component: Layout,
+    redirect: { name: 'Dept' },
+    meta: { title: '系统配置', icon: 'el-icon-setting', top: true },
+    children: [
+      {
+        path: 'dept',
+        name: 'Dept',
+        component: () => import('../views/sys/dept.vue'),
+        meta: { title: "部门管理", icon: "el-icon-s-operation" }
+      },
+      {
+        path: 'menu',
+        name: 'Menu',
+        component: () => import('../views/sys/menu.vue'),
+        meta: { title: "菜单管理", icon: "el-icon-menu" }
+      },
+      {
+        path: 'role',
+        name: 'Role',
+        component: () => import('../views/sys/role.vue'),
+        meta: { title: "角色管理", icon: "el-icon-user" }
+      },
+      {
+        path: 'users',
+        name: 'Users',
+        component: () => import('../views/sys/users.vue'),
+        meta: { title: "用户管理", icon: "el-icon-user" }
+      },
+    ]
+  }
+)
 
 // 路由权限验证
 router.beforeEach(permission)

@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-10-08 12:47:03
+ * @LastEditTime: 2021-10-20 20:00:31
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -12,7 +12,7 @@
                 <div v-for="(item,index) in historyRoutes" :key="item.name" class="zui-tabbar-item"
                     :class="{act:curRouteName===item.name}" @click="tabChange(index,$event.target)">
                     <span>{{item.meta.title || item.name.toUpperCase()}}</span>
-                    <el-icon size="14" @click.stop="deleteRoute(index,$event)">
+                    <el-icon :size="14" @click.stop="deleteRoute(index,$event)">
                         <close />
                     </el-icon>
                 </div>
