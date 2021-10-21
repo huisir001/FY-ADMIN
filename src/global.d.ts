@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-09 15:45:31
+ * @LastEditTime: 2021-10-21 16:54:37
  */
 
 /**
@@ -45,6 +45,16 @@ declare interface IObj {
  * 返回Promise对象的函数
  */
 declare type IPromiseFunc = (...params: any) => Promise<any>
+
+/**
+ * vue.config.js中定义的全局变量名称(编译时全局变量)
+ */
+declare const $GLOBAL: {
+  BASE_API?: string
+  BASE_URL?: string
+  NODE_ENV?: string
+  VIEW_PATHS: string[]
+}
 
 /**
  * 用户数据

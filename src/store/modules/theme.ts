@@ -2,12 +2,12 @@
  * @Description: 主题配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:27:56
- * @LastEditTime: 2021-09-21 00:46:50
+ * @LastEditTime: 2021-10-21 18:32:46
  */
-// tslint:disable-next-line:no-var-requires
-const { ThemeColorList, LocalCacheConf } = require("@/settings/common.ts")
+import { STORAGE_OPTIONS, THEME_OPTIONS } from '@/settings'
 import LocalCache from '@/utils/LocalCache'
 import DomCreate from '@/utils/DomCreate'
+
 /**
  * 初始化状态
  */
@@ -15,7 +15,7 @@ const {
     color: C_COLOR,
     showPageTagNav: C_SHOW_PAGE_TAG_NAV,
     showBreadcrumb: C_SHOW_BREAD_CRUMB
-} = LocalCache.getCache(LocalCacheConf.Theme) || {}
+} = LocalCache.getCache(STORAGE_OPTIONS.Theme) || {}
 
 /**
  * 用户state接口
@@ -33,7 +33,7 @@ export const theme = {
         /**
          * 主题配色
          */
-        color: C_COLOR || ThemeColorList.find((item: any) => item.default).name,
+        color: C_COLOR || THEME_OPTIONS.find((item: any) => item.default)!.name,
 
         /**
          * 页面标签栏显隐
@@ -57,7 +57,7 @@ export const theme = {
         async setStates(state: IObj, obj: IObj) {
             // 主题色更改
             if (obj.color) {
-                const themeStyle = await ThemeColorList.find((item: any) => item.name === obj.color).loadStyle()
+                const themeStyle = await THEME_OPTIONS.find((item: any) => item.name === obj.color)!.loadStyle()
                 const themeStyleStr = JSON.stringify(themeStyle.default).replace(/[",]/g, (e) => {
                     return e === '"' ? '' : ';'
                 })
@@ -75,7 +75,7 @@ export const theme = {
             })
             // 缓存
             const { color, showPageTagNav, showBreadcrumb } = state
-            LocalCache.setCache(LocalCacheConf.Theme, { color, showPageTagNav, showBreadcrumb })
+            LocalCache.setCache(STORAGE_OPTIONS.Theme, { color, showPageTagNav, showBreadcrumb })
         },
     },
 }

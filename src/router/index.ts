@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-20 19:45:59
+ * @LastEditTime: 2021-10-21 16:12:19
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -92,9 +92,10 @@ const routes: RouteRecordRaw[] = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory($GLOBAL.BASE_URL),
   routes
 })
+
 
 router.addRoute(
   {
@@ -131,6 +132,7 @@ router.addRoute(
     ]
   }
 )
+
 
 // 路由权限验证
 router.beforeEach(permission)

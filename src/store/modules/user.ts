@@ -2,10 +2,9 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-09-22 16:40:27
+ * @LastEditTime: 2021-10-21 18:32:54
  */
-// tslint:disable-next-line:no-var-requires
-const { LocalCacheConf } = require("@/settings/common.ts")
+import { STORAGE_OPTIONS } from '@/settings'
 import { ActionContext } from 'vuex'
 import { doLogin, doLogout } from '@/api/user'
 import LocalCache from '@/utils/LocalCache'
@@ -56,14 +55,14 @@ export const user = {
          */
         setToken(state: IUserState, token: string) {
             state.token = token
-            LocalCache.setCache(LocalCacheConf.Token, token)
+            LocalCache.setCache(STORAGE_OPTIONS.Token, token)
         },
         /**
          * 删除token
          */
         removeToken(state: IUserState, token: string) {
             state.token = null
-            LocalCache.removeCache(LocalCacheConf.Token)
+            LocalCache.removeCache(STORAGE_OPTIONS.Token)
         },
         /**
          * 清除登陆状态
@@ -72,7 +71,7 @@ export const user = {
             state.loginStatus = 0
             state.token = null
             state.userInfo = null
-            LocalCache.removeCache(LocalCacheConf.Token)
+            LocalCache.removeCache(STORAGE_OPTIONS.Token)
         }
     },
     actions: {
@@ -85,7 +84,7 @@ export const user = {
                 // 登录成功
                 commit('setStates', { loginStatus: 1, token, userInfo: data })
                 // 缓存token
-                LocalCache.setCache(LocalCacheConf.Token, token)
+                LocalCache.setCache(STORAGE_OPTIONS.Token, token)
                 // 若为登录页，跳转到首页或query中的历史页
                 const { name, query } = router.currentRoute.value
                 if (name === 'Login') {

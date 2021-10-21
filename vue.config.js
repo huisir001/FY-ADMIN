@@ -2,9 +2,10 @@
  * @Description: vue-cli配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-08 17:34:47
- * @LastEditTime: 2021-10-13 11:21:05
+ * @LastEditTime: 2021-10-21 18:49:03
  */
-const { Title, CDNResources } = require("./src/settings/common.ts")
+const webpack = require('webpack')
+const { TITLE, CSSCDN, JSCDN, GLOBAL } = require("./src/settings/process")
 
 module.exports = {
     publicPath: '/',
@@ -13,6 +14,7 @@ module.exports = {
     // webpack-marge选项
     configureWebpack: {
         resolve: {
+            // 路径缩写
             alias: {
                 '~theme': '/src/assets/styles/themes',
             }
@@ -49,15 +51,21 @@ module.exports = {
                     }
                 }
             }
-        }
+        },
+        plugins: [
+            // 编译时全局变量传递
+            new webpack.DefinePlugin({
+                $GLOBAL: JSON.stringify(GLOBAL)
+            })
+        ]
     },
     // webpack高级配置
     chainWebpack: (config) => {
         config.plugin('html').tap((args) => {
-            //初始化配置
-            args[0].title = Title
-            args[0].CSSCDN = CDNResources.css
-            args[0].JSCDN = CDNResources.js
+            //初始化配置(传参到html)
+            args[0].title = TITLE
+            args[0].CSSCDN = CSSCDN
+            args[0].JSCDN = JSCDN
             return args
         })
         // 配置图片文件支持

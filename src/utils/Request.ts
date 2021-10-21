@@ -2,7 +2,7 @@
  * @Description: axios中间件（初始化和全局配置）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2020-08-06 13:16:24
- * @LastEditTime: 2021-09-28 15:14:49
+ * @LastEditTime: 2021-10-21 18:32:58
  */
 // tslint:disable:no-console
 import { ElMessage } from 'element-plus'
@@ -10,12 +10,12 @@ import axios from 'axios'
 // import PageLoading from './PageLoading'
 import LocalCache from './LocalCache'
 import { store } from '@/store'
-// tslint:disable-next-line:no-var-requires
-const { ReqTokenConf, LocalCacheConf } = require("@/settings/common.ts")
+import { TOKEN_OPTIONS, STORAGE_OPTIONS } from '@/settings'
+
 
 //初始化
 const Axios: any = axios.create({
-    baseURL: process.env.VUE_APP_BASEAPI, //api路径
+    baseURL: $GLOBAL.BASE_API, //api路径
     withCredentials: true, // 跨域时允许设置cookie
     timeout: 10000,      //超时
 })
@@ -32,7 +32,7 @@ Axios.interceptors.request.use(
         Token = store.getters.getToken()
         console.log(Token)
         // 判断是否存在token，如果存在的话，则每个http header都加上token
-        Token && (config.headers[ReqTokenConf.key] = Token)
+        Token && (config.headers[TOKEN_OPTIONS.key] = Token)
         return config
     },
     (error: any) => {
@@ -61,7 +61,7 @@ Axios.interceptors.response.use(
         }
 
         // 更新token
-        const newToken = response.headers[ReqTokenConf.key]
+        const newToken = response.headers[TOKEN_OPTIONS.key]
         if (newToken && newToken !== Token) {
             store.commit('user/setToken', newToken)
         }
@@ -84,7 +84,7 @@ Axios.interceptors.response.use(
         if (status === 403) {
             store.commit('user/setStates', { loginStatus: 2, token: null, userInfo: null })
             //删除token
-            LocalCache.removeCache(LocalCacheConf.Token)
+            LocalCache.removeCache(STORAGE_OPTIONS.Token)
         }
         setTimeout(() => {
             if (status === 404) {

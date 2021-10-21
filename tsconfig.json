@@ -34,7 +34,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/settings/inc/getAllFilePath.js"  ],
   "exclude": [
     "node_modules"
   ]

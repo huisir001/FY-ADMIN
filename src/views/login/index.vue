@@ -2,13 +2,13 @@
  * @Description: 登录
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 14:52:06
- * @LastEditTime: 2021-09-21 01:33:20
+ * @LastEditTime: 2021-10-21 18:33:05
 -->
 <template>
     <div class="login">
         <el-form ref="loginForm" :rules="loginFormRules" :model="loginFormData"
             class="login-form-box">
-            <h3>{{Title}}</h3>
+            <h3>{{TITLE}}</h3>
             <h5>账号密码登录</h5>
             <el-form-item prop="username">
                 <el-input v-model="loginFormData.username" clearable placeholder="账号"
@@ -24,7 +24,7 @@
 </template>
  
 <script lang="ts">
-const { Title } = require('@/settings/common.ts')
+import { TITLE } from '@/settings'
 import { defineComponent, reactive, ref, Ref } from 'vue'
 import { useStore } from '@/store'
 import { FormRulesMap } from 'element-plus/lib/components/form/src/form.type'
@@ -72,7 +72,7 @@ export default defineComponent({
         }
 
         return {
-            Title,
+            TITLE,
             loginForm,
             loginFormData,
             loginFormRules,

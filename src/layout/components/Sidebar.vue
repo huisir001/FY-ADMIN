@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-10-20 19:56:46
+ * @LastEditTime: 2021-10-21 11:31:18
 -->
 <template>
     <div class="sidebar">
@@ -66,7 +66,7 @@ export default defineComponent({
             Router.getRoutes().filter((item) => item.meta.top && !item.meta.hidden)
         )
 
-        console.log(Router.getRoutes())
+        // console.log(Router.getRoutes())
 
         // 折叠
         const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)
