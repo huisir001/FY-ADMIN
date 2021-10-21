@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2021-10-12 16:15:21
+ * @LastEditTime: 2021-10-21 22:19:45
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -48,15 +48,15 @@ export default defineComponent({
 
         // 历史路由数
         const showTabbar = computed(
-            () => Store.state.temp.historyRoutes.length > 0 && Store.state.theme.showPageTagNav
+            () => Store.state.sys.historyRoutes.length > 0 && Store.state.theme.showPageTagNav
         )
 
         // 侧边栏状态
-        const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)
-        const sidebarHide = computed(() => Store.state.temp.sidebarHide)
+        const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
+        const sidebarHide = computed(() => Store.state.sys.sidebarHide)
 
         // 窗口宽度
-        const visibleAreaWidth = computed(() => Store.state.temp.visibleAreaWidth)
+        const visibleAreaWidth = computed(() => Store.state.sys.visibleAreaWidth)
 
         // 监听窗口宽度变化做些事
         watch(
@@ -64,16 +64,16 @@ export default defineComponent({
             (val) => {
                 // 宽度为1000时折叠侧边栏
                 if (val && val <= 1000) {
-                    Store.state.temp.sidebarCollapse ||
-                        Store.commit('temp/setStates', { sidebarCollapse: true })
+                    Store.state.sys.sidebarCollapse ||
+                        Store.commit('sys/setStates', { sidebarCollapse: true })
                 }
                 // 宽度为768是隐藏侧边栏
                 if (val && val <= 768) {
-                    Store.state.temp.sidebarHide ||
-                        Store.commit('temp/setStates', { sidebarHide: true })
+                    Store.state.sys.sidebarHide ||
+                        Store.commit('sys/setStates', { sidebarHide: true })
                 } else {
-                    Store.state.temp.sidebarHide &&
-                        Store.commit('temp/setStates', { sidebarHide: false })
+                    Store.state.sys.sidebarHide &&
+                        Store.commit('sys/setStates', { sidebarHide: false })
                 }
             },
             { immediate: true }
@@ -81,7 +81,7 @@ export default defineComponent({
 
         // 侧边栏展开收缩
         const sidebarCollapseChenge = () => {
-            Store.commit('temp/changeSidebarCollapse')
+            Store.commit('sys/changeSidebarCollapse')
         }
 
         return {

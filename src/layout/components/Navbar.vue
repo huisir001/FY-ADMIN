@@ -86,11 +86,11 @@ export default defineComponent({
         })
 
         // 侧边栏状态
-        const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)
+        const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
 
         // 侧边栏展开收缩
         const sidebarCollapseChenge = () => {
-            Store.commit('temp/changeSidebarCollapse')
+            Store.commit('sys/changeSidebarCollapse')
         }
 
         // 用户信息

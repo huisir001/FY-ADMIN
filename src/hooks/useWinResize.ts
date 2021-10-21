@@ -18,7 +18,7 @@ export default () => {
     window.onresize = debounce(() => {
 
         // 更改屏幕可视区宽度缓存
-        Store.commit('temp/setStates', {
+        Store.commit('sys/setStates', {
             visibleAreaWidth: window.innerWidth
         })
 

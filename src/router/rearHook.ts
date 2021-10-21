@@ -15,7 +15,7 @@ const rearHook: NavigationHookAfter = (to) => {
     // 关闭loading
     PageLoading.hide()
     // 更新历史记录
-    store.commit('temp/addHistoryRoute', to)
+    store.commit('sys/addHistoryRoute', to)
 }
 
 export default rearHook

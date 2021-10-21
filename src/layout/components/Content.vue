@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2021-10-08 12:26:19
+ * @LastEditTime: 2021-10-21 22:47:17
 -->
 <template>
     <div class="content">
@@ -25,7 +25,7 @@ export default defineComponent({
         // 不缓存路由
         const noCacheRouterNames = computed(() =>
             Router.getRoutes()
-                .filter((item) => item.meta.noCache)
+                .filter((item) => !item.meta.keepAlive && item.name)
                 .map((item) => item.name)
         )
 

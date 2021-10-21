@@ -2,7 +2,7 @@
  * @Description: 配置项工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-21 15:09:11
- * @LastEditTime: 2021-10-21 18:39:42
+ * @LastEditTime: 2021-10-21 21:02:59
  */
 const fs = require('fs')
 const path = require('path')
@@ -19,9 +19,9 @@ module.exports = function (dirPath) {
                 traverseDir(fullPath)
             } else {
                 // 规范化
-                tempPathArr.push(fullPath.replace(new RegExp('\\' + path.sep, 'g'), '/'))
+                tempPathArr.push(fullPath.replace(new RegExp(`\\${path.sep}`, 'g'), '/').replace('src', '@'))
             }
-        });
+        })
     }
     traverseDir(dirPath)
     return tempPathArr

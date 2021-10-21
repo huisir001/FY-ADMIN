@@ -55,15 +55,15 @@ export default defineComponent({
         const translateX = ref<number>(0)
 
         // 历史路由
-        const historyRoutes = computed(() => Store.state.temp.historyRoutes)
+        const historyRoutes = computed(() => Store.state.sys.historyRoutes)
 
         // 当前路由
         const curRouteName = computed(() => Route.name)
 
         // 窗口宽度
-        const visibleAreaWidth = computed(() => Store.state.temp.visibleAreaWidth)
+        const visibleAreaWidth = computed(() => Store.state.sys.visibleAreaWidth)
         // 窗口折叠
-        const sidebarCollapse = computed(() => Store.state.temp.sidebarCollapse)
+        const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
 
         // 计算滚动超出宽度
         const getOverLength = () => itemBoxRef.value.clientWidth - tabbarRef.value.clientWidth
@@ -129,7 +129,7 @@ export default defineComponent({
 
         // 监听侧边缩放
         watch(sidebarCollapse, () => {
-            const visibleAreaWidth = Store.state.temp.visibleAreaWidth
+            const visibleAreaWidth = Store.state.sys.visibleAreaWidth
             if (visibleAreaWidth && visibleAreaWidth > 768) {
                 nextTick(() => {
                     const timer = setTimeout(() => {
@@ -159,7 +159,7 @@ export default defineComponent({
                     Router.push({ name: 'Home' })
                 }
             }
-            Store.commit('temp/delHistoryRoute', delRoute)
+            Store.commit('sys/delHistoryRoute', delRoute)
         }
 
         // 向左滚
