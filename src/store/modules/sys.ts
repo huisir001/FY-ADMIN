@@ -2,7 +2,7 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-10-22 10:54:27
+ * @LastEditTime: 2021-10-22 14:11:07
  */
 import { RouteRecordRaw } from 'vue-router'
 import { ActionContext } from 'vuex'
@@ -65,7 +65,8 @@ export const sys = {
          * 添加新路由
          */
         addHistoryRoute(state: IObj, route: any) {
-            if (!state.historyRoutes.find((item: any) => item.name === route.name) && route.name !== 'Home') {
+            if (!state.historyRoutes.find((item: any) => item.name === route.name)
+                && route.path.split('/').length > 2) {
                 state.historyRoutes.push(route)
             }
         },

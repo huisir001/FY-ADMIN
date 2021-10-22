@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-22 00:24:13
+ * @LastEditTime: 2021-10-22 14:02:33
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -18,7 +18,7 @@ import rearHook from './rearHook'
  *   keepAlive: true              // 如果设置为true，则会被 <keep-alive> 缓存（默认全部缓存）
  *   title: 'title'               // 设置该路由在侧边栏\面包屑\浏览器标签栏中展示的名字,当不设置时显示路由name
  *   icon: ''                     // 设置该路由的图标，不设置则会使用默认
- *   visible:true                 // 默认true,当设置false时候不在侧边栏及导航条出现 如401，login等页面，或者一些编辑页面和用户无权限访问的页面
+ *   visible:true                 // 默认true,当设置false时候不在侧边栏出现 如401，login等页面，或者一些编辑页面和用户无权限访问的页面
  *   private:true                 // 默认true,当设置false时该路由无需登录就可以访问，比如登录页，注册页，404等等，否则必须登录（跳转登录页）
  * }
  */
