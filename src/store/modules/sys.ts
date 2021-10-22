@@ -2,14 +2,14 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-10-22 14:11:07
+ * @LastEditTime: 2021-10-22 15:49:46
  */
 import { RouteRecordRaw } from 'vue-router'
 import { ActionContext } from 'vuex'
 import { getUserMenus } from '@/api/sys'
 import Layout from '@/layout/index.vue'
 import router from '@/router'
-import { rawList2Tree } from '@/utils/common'
+import { rawList2Tree, menu2Route } from '@/utils/common'
 
 /**
  * 用户state接口
@@ -90,31 +90,17 @@ export const sys = {
          */
         async getMenus({ commit }: ActionContext<{}, {}>) {
             const { ok, data = [] } = await getUserMenus()
-            console.log(413123)
-
             if (ok) {
                 // parentId list => children tree
                 const menuTreeList = rawList2Tree(data, 'parentId', 'children')
 
-                // console.log('menuTreeList', menuTreeList)
-
-                // 路由配置
-                // tslint:disable-next-line:align
+                // 动态添加路由
                 data.forEach((menu: IMenu) => {
-                    const { path, name, title, icon, redirectId, parentId, keepAlive, visible,
-                        private: prvt, type, viewPath, status } = menu
+                    const { parentId, type, status } = menu
 
                     if (type !== 1 || !status) { return }
 
-                    const Route: RouteRecordRaw = {
-                        path,
-                        name,
-                        component: parentId ? () => import(`@/${viewPath}`) : Layout,
-                        ...(redirectId ? {
-                            redirect: { name: data.find((item: IMenu) => item.id === redirectId).name }
-                        } : {}),
-                        meta: { title, icon, keepAlive, visible, private: prvt },
-                    }
+                    const Route = menu2Route(menu, data, Layout)
 
                     if (parentId) {
                         router.addRoute(data.find((item: IMenu) => item.id === parentId).name, Route)
@@ -123,7 +109,7 @@ export const sys = {
                     }
                 })
 
-                // 状态设置
+                // 更新列表
                 commit('setStates', { menuTree: menuTreeList })
             }
         },

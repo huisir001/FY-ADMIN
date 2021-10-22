@@ -2,7 +2,7 @@
  * @Description:ElementUI按需引入
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2021-10-09 18:41:59
+ * @LastEditTime: 2021-10-22 16:29:52
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -15,25 +15,16 @@ import {
     ElIcon,
     ElButton,
     ElForm,
-    ElFormItem,
     ElSelect,
-    ElOption,
-    ElRadioGroup,
     ElRadio,
     ElDialog,
     ElTabs,
-    ElTabPane,
     ElImage,
     ElUpload,
     ElDropdown,
-    ElDropdownMenu,
-    ElDropdownItem,
     ElInput,
     ElInputNumber,
     ElTable,
-    ElTableColumn,
-    ElMessage,
-    ElLoading,
     ElDivider,
     ElPopover,
     ElSwitch,
@@ -42,7 +33,6 @@ import {
     ElDatePicker,
     ElPagination,
     ElDescriptions,
-    ElDescriptionsItem,
     ElPopconfirm
 } from 'element-plus'
 
@@ -52,34 +42,24 @@ const components = [
     ElIcon,
     ElButton,
     ElForm,
-    ElFormItem,
     ElSelect,
-    ElOption,
-    ElRadioGroup,
     ElRadio,
     ElDialog,
     ElTabs,
-    ElTabPane,
     ElImage,
     ElUpload,
     ElInput,
     ElInputNumber,
     ElTable,
-    ElTableColumn,
-    ElMessage,
-    ElLoading,
     ElDivider,
     ElPopover,
     ElDrawer,
     ElSwitch,
     ElTag,
     ElDropdown,
-    ElDropdownMenu,
-    ElDropdownItem,
     ElDatePicker,
     ElPagination,
     ElDescriptions,
-    ElDescriptionsItem,
     ElPopconfirm
 ]
 

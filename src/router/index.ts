@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-22 14:02:33
+ * @LastEditTime: 2021-10-22 14:43:39
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -129,7 +129,6 @@ const router = createRouter({
 //     ]
 //   }
 // )
-
 
 // 路由权限验证
 router.beforeEach(permission)

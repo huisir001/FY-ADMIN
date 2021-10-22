@@ -2,8 +2,9 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-10-22 00:03:39
+ * @LastEditTime: 2021-10-22 15:47:19
  */
+import { RouteRecordRaw } from 'vue-router'
 
 /**
  * 防抖
@@ -19,7 +20,8 @@ export const debounce = (callback: () => void, delay: number) => {
 }
 
 /**
- * parentId => children
+ * 递归转换菜单
+ * parentId list => children tree
  */
 export const rawList2Tree = (arrList: IObj[], parentIdKey: string, childKey: string, pid?: string) => {
     if (arrList.length === 0) {
@@ -37,4 +39,21 @@ export const rawList2Tree = (arrList: IObj[], parentIdKey: string, childKey: str
             item[childKey] = rawList2Tree(arrList, parentIdKey, childKey, item.id)
             return item
         })
+}
+
+/**
+ * menuItem => routeItem
+ */
+export const menu2Route = (menu: IMenu, menuList: IMenu[], Layout: any): RouteRecordRaw => {
+    const { path, name, title, icon, redirectId, parentId, keepAlive, visible,
+        private: prvt, viewPath } = menu
+    return {
+        path,
+        name,
+        component: parentId ? () => import(`@/${viewPath}`) : Layout,
+        ...(redirectId ? {
+            redirect: { name: menuList.find((item: IMenu) => item.id === redirectId)!.name }
+        } : {}),
+        meta: { title, icon, keepAlive, visible, private: prvt }
+    }
 }
