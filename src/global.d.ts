@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-21 22:36:10
+ * @LastEditTime: 2021-10-22 11:07:46
  */
 
 /**
@@ -128,4 +128,5 @@ declare interface IMenu {
   triggerMode?: 'commit' | 'dispatch' //type=3时要激活事件的方式：commit/dispatch
   triggerMethod?: string //字符串，type=3时要激活的事件
   status: 1 | 0 //1-正常；0-停用
+  children?: IMenu[]
 }
