@@ -2,7 +2,7 @@
  * @Description: 跳转权限-路由前置钩子
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-17 19:28:46
- * @LastEditTime: 2021-10-22 01:19:59
+ * @LastEditTime: 2021-10-22 10:22:40
  */
 import { getUserInfo } from '@/api/user'
 import { NavigationGuardWithThis } from 'vue-router'
@@ -20,7 +20,7 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
         //获取token
         const Token: string = store.getters.getToken()
         // 菜单状态
-        const MenusLength = store.state.sys.menuList.length
+        const MenusLength = store.state.sys.menuTree.length
         // 登录状态
         const loginStatus = store.state.user.loginStatus
         // 有token说明已登录
@@ -57,13 +57,17 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
             //     next('/')
             //     return
             // }
+
+            MenusLength && next()
+            MenusLength || next({ ...to, replace: true })
         } else if (to.meta.private) {
+            console.log(121212)
             //没有Token，直接转login
             next('/login?redirect=' + to.path)
             return
+        } else {
+            next()
         }
-        MenusLength && next()
-        MenusLength || next(to.fullPath)
         return
     }
 

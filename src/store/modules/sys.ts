@@ -2,15 +2,14 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-10-22 01:15:33
+ * @LastEditTime: 2021-10-22 10:54:27
  */
 import { RouteRecordRaw } from 'vue-router'
 import { ActionContext } from 'vuex'
 import { getUserMenus } from '@/api/sys'
 import Layout from '@/layout/index.vue'
 import router from '@/router'
-// import { rawList2Tree } from '@/utils/common'
-const AAA = () => import('@/views/sys/dept.vue')
+import { rawList2Tree } from '@/utils/common'
 
 /**
  * 用户state接口
@@ -20,7 +19,7 @@ export interface ISysState extends IObj {
     sidebarHide?: boolean
     visibleAreaWidth?: number
     historyRoutes: RouteRecordRaw[]
-    menuList: IMenu[]
+    menuTree: IMenu[]
 }
 
 export const sys = {
@@ -45,7 +44,7 @@ export const sys = {
         /**
          * 菜单列表
          */
-        menuList: []
+        menuTree: []
     },
     mutations: {
         /**
@@ -90,10 +89,11 @@ export const sys = {
          */
         async getMenus({ commit }: ActionContext<{}, {}>) {
             const { ok, data = [] } = await getUserMenus()
+            console.log(413123)
 
             if (ok) {
                 // parentId list => children tree
-                // const menuTreeList = rawList2Tree(data, 'parentId', 'children')
+                const menuTreeList = rawList2Tree(data, 'parentId', 'children')
 
                 // console.log('menuTreeList', menuTreeList)
 
@@ -108,7 +108,7 @@ export const sys = {
                     const Route: RouteRecordRaw = {
                         path,
                         name,
-                        component: parentId ? AAA : Layout,
+                        component: parentId ? () => import(`@/${viewPath}`) : Layout,
                         ...(redirectId ? {
                             redirect: { name: data.find((item: IMenu) => item.id === redirectId).name }
                         } : {}),
@@ -123,8 +123,9 @@ export const sys = {
                 })
 
                 // 状态设置
-                commit('setStates', { menuList: data })
+                commit('setStates', { menuTree: menuTreeList })
             }
         },
+
     }
 }

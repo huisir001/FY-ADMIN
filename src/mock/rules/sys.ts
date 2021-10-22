@@ -2,7 +2,7 @@
  * @Description: 系统配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-10-22 01:08:44
+ * @LastEditTime: 2021-10-22 10:53:06
  */
 const getUserMenus = {
     data: [{
@@ -45,7 +45,7 @@ const getUserMenus = {
         auth: null,
         type: 1,
         query: null,
-        viewPath: '/views/sys/dept.vue',
+        viewPath: 'views/sys/dept.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,
@@ -67,7 +67,7 @@ const getUserMenus = {
         auth: null,
         type: 1,
         query: null,
-        viewPath: '/views/sys/menu.vue',
+        viewPath: 'views/sys/menu.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,
@@ -89,7 +89,7 @@ const getUserMenus = {
         auth: null,
         type: 1,
         query: null,
-        viewPath: '/views/sys/role.vue',
+        viewPath: 'views/sys/role.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,
@@ -111,7 +111,7 @@ const getUserMenus = {
         auth: null,
         type: 1,
         query: null,
-        viewPath: '/views/sys/users.vue',
+        viewPath: 'views/sys/users.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,
