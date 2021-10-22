@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-22 14:15:47
+ * @LastEditTime: 2021-10-22 17:29:57
  */
 
 /**
@@ -117,7 +117,7 @@ declare interface IMenu {
   redirectId: string
   parentId?: string
   keepAlive: boolean //默认为true
-  visible: boolean //默认展示
+  visible: boolean //默认展示,false时不展示，但用链接能够访问
   private: boolean //默认true,必须登录才能访问，否则跳登录页
   orderNum: number //排序index
   auth?: string //权限，空字符串或null则为所有权限
@@ -127,6 +127,6 @@ declare interface IMenu {
   blank: boolean //type=2时在新页面打开链接，默认为true
   triggerMode?: 'commit' | 'dispatch' //type=3时要激活事件的方式：commit/dispatch
   triggerMethod?: string //字符串，type=3时要激活的事件
-  status: 1 | 0 //1-正常；0-停用
+  status: 1 | 0 //1-正常；0-停用（停用时用户无法查询，且访问受限），admin能查询所有菜单，侧边栏不展示
   children?: IMenu[]
 }

@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-10-22 15:47:19
+ * @LastEditTime: 2021-10-22 17:21:21
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -54,6 +54,6 @@ export const menu2Route = (menu: IMenu, menuList: IMenu[], Layout: any): RouteRe
         ...(redirectId ? {
             redirect: { name: menuList.find((item: IMenu) => item.id === redirectId)!.name }
         } : {}),
-        meta: { title, icon, keepAlive, visible, private: prvt }
+        meta: { title, icon, keepAlive, private: prvt }
     }
 }

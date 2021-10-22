@@ -2,7 +2,7 @@
  * @Description: 编译时变量(vue.config.js中所需配置)，可执行node脚本
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-21 16:30:19
- * @LastEditTime: 2021-10-21 18:49:41
+ * @LastEditTime: 2021-10-22 16:35:09
  */
 const TITLE = require('./title.ts')
 const getAllFilePath = require('./inc/getAllFilePath')
@@ -16,6 +16,7 @@ const CSSCDN = [
 
 /**
  * JS CDN Resources
+ * 后期考虑将vue/vue-router/element-plus/vuex等插件直接使用cdn引入
  */
 const JSCDN = []
 

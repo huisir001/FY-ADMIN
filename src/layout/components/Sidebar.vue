@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-10-21 20:32:04
+ * @LastEditTime: 2021-10-22 17:14:05
 -->
 <template>
     <div class="sidebar">
@@ -17,31 +17,33 @@
                 <template v-for="menu in Menus" :key="menu.name">
                     <el-menu-item v-if="!menu.children || !menu.children.length" :index="menu.name"
                         @click="$router.push({name:menu.name})">
-                        <i v-if="menu.meta.icon" :class="menu.meta.icon"></i>
+                        <i v-if="menu.icon" :class="menu.icon"></i>
                         <template #title>
-                            {{menu.meta.title}}
+                            {{menu.title}}
                         </template>
                     </el-menu-item>
                     <el-sub-menu v-else :index="menu.name">
                         <template #title>
-                            <i v-if="menu.meta.icon" :class="menu.meta.icon"></i>
-                            <span>{{menu.meta.title}}</span>
+                            <i v-if="menu.icon" :class="menu.icon"></i>
+                            <span>{{menu.title}}</span>
                         </template>
                         <template v-for="sub1 in menu.children" :key="sub1.name">
                             <el-menu-item v-if="!sub1.children || !sub1.children.length"
-                                :index="sub1.name" @click="$router.push({name:sub1.name})">
-                                <i v-if="sub1.meta.icon" :class="sub1.meta.icon"></i>
-                                {{sub1.meta.title}}
+                                :index="sub1.name" :class="{'is-active':$route.name==sub1.name}"
+                                @click="$router.push({name:sub1.name})">
+                                <i v-if="sub1.icon" :class="sub1.icon"></i>
+                                {{sub1.title}}
                             </el-menu-item>
                             <el-sub-menu v-else :index="sub1.name">
                                 <template #title>
-                                    <i v-if="sub1.meta.icon" :class="sub1.meta.icon"></i>
-                                    <span>{{sub1.meta.title}}</span>
+                                    <i v-if="sub1.icon" :class="sub1.icon"></i>
+                                    <span>{{sub1.title}}</span>
                                 </template>
                                 <el-menu-item v-for="sub2 in sub1.children" :key="sub2.name"
-                                    :index="sub2.name" @click="$router.push({name:sub2.name})">
-                                    <i v-if="sub2.meta.icon" :class="sub2.meta.icon"></i>
-                                    <span>{{sub2.meta.title}}</span>
+                                    :index="sub2.name" :class="{'is-active':$route.name==sub2.name}"
+                                    @click="$router.push({name:sub2.name})">
+                                    <i v-if="sub2.icon" :class="sub2.icon"></i>
+                                    <span>{{sub2.title}}</span>
                                 </el-menu-item>
                             </el-sub-menu>
                         </template>
@@ -55,18 +57,14 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from '@/store'
-import { useRouter } from 'vue-router'
 
 export default defineComponent({
     name: 'Sidebar',
     setup() {
         const Store = useStore()
-        const Router = useRouter()
-        const Menus = computed(() =>
-            Router.getRoutes().filter((item) => item.meta.top && !item.meta.hidden)
-        )
 
-        console.log(Router.getRoutes())
+        // 菜单
+        const Menus = computed(() => Store.state.sys.menuTree)
 
         // 折叠
         const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
@@ -113,7 +111,8 @@ export default defineComponent({
             i {
                 color: var(--color-sidebar-font) !important;
             }
-            &:hover {
+            &:hover,
+            &.is-active {
                 background-color: var(--color-sidebar-menu-bg-hover) !important;
                 color: var(--color-sidebar-menu-font-hover) !important;
                 i {
@@ -136,7 +135,8 @@ export default defineComponent({
         line-height: 50px;
         font-size: 12px;
         letter-spacing: 1px;
-        &:hover {
+        &:hover,
+        &.is-active {
             background-color: var(--color-sidebar-menu-bg-hover) !important;
             color: var(--color-sidebar-menu-font-hover) !important;
             i {
