@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-10-22 17:14:05
+ * @LastEditTime: 2021-10-22 17:53:32
 -->
 <template>
     <div class="sidebar">
@@ -13,7 +13,7 @@
         <div class="menu-box">
             <el-menu class="zui-sidebar-menu" :collapse-transition="false"
                 background-color="transparent" text-color="var(--color-sidebar-font)"
-                :collapse="sidebarCollapse">
+                active-text-color="var(--color-sidebar-font)" :collapse="sidebarCollapse">
                 <template v-for="menu in Menus" :key="menu.name">
                     <el-menu-item v-if="!menu.children || !menu.children.length" :index="menu.name"
                         @click="$router.push({name:menu.name})">
@@ -29,7 +29,7 @@
                         </template>
                         <template v-for="sub1 in menu.children" :key="sub1.name">
                             <el-menu-item v-if="!sub1.children || !sub1.children.length"
-                                :index="sub1.name" :class="{'is-active':$route.name==sub1.name}"
+                                :index="sub1.name" :class="{act:$route.name==sub1.name}"
                                 @click="$router.push({name:sub1.name})">
                                 <i v-if="sub1.icon" :class="sub1.icon"></i>
                                 {{sub1.title}}
@@ -40,7 +40,7 @@
                                     <span>{{sub1.title}}</span>
                                 </template>
                                 <el-menu-item v-for="sub2 in sub1.children" :key="sub2.name"
-                                    :index="sub2.name" :class="{'is-active':$route.name==sub2.name}"
+                                    :index="sub2.name" :class="{act:$route.name==sub2.name}"
                                     @click="$router.push({name:sub2.name})">
                                     <i v-if="sub2.icon" :class="sub2.icon"></i>
                                     <span>{{sub2.title}}</span>
@@ -111,8 +111,14 @@ export default defineComponent({
             i {
                 color: var(--color-sidebar-font) !important;
             }
-            &:hover,
-            &.is-active {
+            &.act {
+                color: var(--color-sidebar-menu-font-active) !important;
+                font-weight: 700;
+                i {
+                    color: var(--color-sidebar-menu-font-active) !important;
+                }
+            }
+            &:hover {
                 background-color: var(--color-sidebar-menu-bg-hover) !important;
                 color: var(--color-sidebar-menu-font-hover) !important;
                 i {
@@ -135,8 +141,14 @@ export default defineComponent({
         line-height: 50px;
         font-size: 12px;
         letter-spacing: 1px;
-        &:hover,
-        &.is-active {
+        &.act {
+            color: var(--color-sidebar-menu-font-active) !important;
+            font-weight: 700;
+            i {
+                color: var(--color-sidebar-menu-font-active) !important;
+            }
+        }
+        &:hover {
             background-color: var(--color-sidebar-menu-bg-hover) !important;
             color: var(--color-sidebar-menu-font-hover) !important;
             i {

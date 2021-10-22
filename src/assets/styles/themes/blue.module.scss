@@ -2,7 +2,7 @@
  * @Description: 蓝色主题
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:36:58
- * @LastEditTime: 2021-09-28 17:19:20
+ * @LastEditTime: 2021-10-22 17:42:59
  */
 :export {
   /* primary color */
@@ -30,4 +30,5 @@
   --color-sidebar-font: var(--el-color-info-lighter);
   --color-sidebar-menu-bg-hover: var(--el-color-primary);
   --color-sidebar-menu-font-hover: var(--el-color-white);
+  --color-sidebar-menu-font-active: var(--el-color-primary-light-4);
 }
