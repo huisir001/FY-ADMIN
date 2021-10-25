@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2021-10-21 22:19:45
+ * @LastEditTime: 2021-10-25 16:35:44
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -101,7 +101,6 @@ $--transition-width: width var(--el-transition-duration);
 .layout {
     width: 100vw;
     height: 100vh;
-    background: var(--el-background-color-base);
     overflow: hidden;
     display: flex;
     .layout-mask {
