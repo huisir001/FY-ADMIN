@@ -2,8 +2,11 @@
  * @Description: 蓝色主题
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:36:58
- * @LastEditTime: 2021-10-22 17:55:12
+ * @LastEditTime: 2021-10-25 09:57:17
  */
+
+//  blue.module.scss  名称包含module才能将css用export导出，在js中导入
+
 :export {
   /* primary color */
   --el-color-primary: #409eff;

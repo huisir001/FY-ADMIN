@@ -2,7 +2,7 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-10-22 15:49:46
+ * @LastEditTime: 2021-10-25 11:37:01
  */
 import { RouteRecordRaw } from 'vue-router'
 import { ActionContext } from 'vuex'
@@ -95,7 +95,8 @@ export const sys = {
                 const menuTreeList = rawList2Tree(data, 'parentId', 'children')
 
                 // 动态添加路由
-                data.forEach((menu: IMenu) => {
+                for (let index = 0; index < data.length; index++) {
+                    const menu = data[index];
                     const { parentId, type, status } = menu
 
                     if (type !== 1 || !status) { return }
@@ -107,7 +108,7 @@ export const sys = {
                     } else {
                         router.addRoute(Route)
                     }
-                })
+                }
 
                 // 更新列表
                 commit('setStates', { menuTree: menuTreeList })
