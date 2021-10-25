@@ -2,7 +2,7 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-10-25 17:23:22
+ * @LastEditTime: 2021-10-25 17:38:56
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -52,23 +52,23 @@ export const sys = {
             state.sidebarCollapse = !state.sidebarCollapse
         },
         /**
-         * 添加新路由
+         * 添加历史路由
          */
         addHistoryRoute(state: IObj, route: any) {
             if (!state.historyRoutes.find((item: any) => item.name === route.name)
-                && route.path.split('/').length > 2) {
+                && route.path.split('/').length > 2 && route.name !== '404') {
                 state.historyRoutes.push(route)
             }
         },
         /**
-         * 删除路由
+         * 删除历史路由
          */
         delHistoryRoute(state: IObj, route: any) {
             const INDEX = state.historyRoutes.findIndex((item: any) => item.name === route.name)
             state.historyRoutes.splice(INDEX, 1)
         },
         /**
-         * 清除路由
+         * 清除历史路由
          */
         clearHistoryRoute(state: IObj) {
             state.historyRoutes = []
