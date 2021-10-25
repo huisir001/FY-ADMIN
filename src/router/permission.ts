@@ -2,7 +2,7 @@
  * @Description: 跳转权限-路由前置钩子
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-17 19:28:46
- * @LastEditTime: 2021-10-25 15:55:29
+ * @LastEditTime: 2021-10-25 17:26:41
  */
 import { getUserInfo } from '@/api/user'
 import { NavigationGuardWithThis } from 'vue-router'
@@ -16,7 +16,7 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
     // 若跳登录页，则清除登陆状态，直接跳转
     if (to.name === 'Login') {
         store.commit('user/clearLoginState')
-        store.commit('sys/clearAllMenuAndRoute')
+        store.commit('user/clearAllMenuAndRoute')
         next()
         return
     }
@@ -44,7 +44,7 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
                     // 缓存用户信息
                     store.commit('user/setStates', { loginStatus: 1, userInfo: data })
                     // 登录之后查目录，处理转换为tree格式并动态添加到路由缓存
-                    await store.dispatch('sys/getMenus')
+                    await store.dispatch('user/getMenus')
                 } else {
                     // 如果这里查询完成，登录状态有问题，则直接跳转到登录页
                     next('/login?redirect=' + to.path)
@@ -68,19 +68,14 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
                     return
                 }
             }
-        }
-
-        // 没有token情况下
-        // 假如该页面必须要登录，则跳转登录页
-        if (!Token && to.meta.private) {
+        } else {
+            // 没有token情况下,跳转登录页
             next('/login?redirect=' + to.path)
             return
         }
     }
 
-    /**
-     * 路由正常跳转
-     */
+    /* 路由正常跳转 */
 
     // 如果未登录
     if (to.meta.private && !store.state.user.loginStatus) {
@@ -89,7 +84,6 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
         // 这里不跳转
         return
     }
-
 
     /* 关于权限验证 */
     // 若该用户没有访问该路由的权限，则请求回来的路由中不会包含该路由信息，则访问时会重定向到404页面

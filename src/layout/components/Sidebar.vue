@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-10-25 15:23:50
+ * @LastEditTime: 2021-10-25 17:23:35
 -->
 <template>
     <div class="sidebar">
@@ -64,7 +64,7 @@ export default defineComponent({
         const Store = useStore()
 
         // 菜单
-        const Menus = computed(() => Store.state.sys.menuTree)
+        const Menus = computed(() => Store.state.user.menuTree)
 
         // 折叠
         const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
