@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-10-25 17:30:56
+ * @LastEditTime: 2021-10-25 17:35:16
  */
 import { STORAGE_OPTIONS } from '@/settings'
 import { ActionContext } from 'vuex'
@@ -44,9 +44,10 @@ export const user = {
          * 刷新页面重新拉取
          */
         userInfo: null,
+
         /**
-        * 菜单列表
-        */
+         * 菜单列表
+         */
         menuTree: []
     },
     mutations: {
