@@ -2,7 +2,7 @@
  * @Description: 配置项工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-21 15:09:11
- * @LastEditTime: 2021-10-22 10:57:19
+ * @LastEditTime: 2021-10-25 17:58:33
  */
 const fs = require('fs')
 const path = require('path')
@@ -16,7 +16,9 @@ module.exports = function (dirPath) {
             let fullPath = path.join(dir, file)
             if (fs.lstatSync(fullPath).isDirectory()) {
                 // 递归
-                traverseDir(fullPath)
+                if (!fullPath.includes('login') && !fullPath.includes('404')) {
+                    traverseDir(fullPath)
+                }
             } else {
                 // 规范化
                 tempPathArr.push(fullPath.replace(new RegExp(`\\${path.sep}`, 'g'), '/').split('src/')[1])
