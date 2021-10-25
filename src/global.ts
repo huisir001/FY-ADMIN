@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-22 17:29:57
+ * @LastEditTime: 2021-10-25 15:18:31
  */
 
 /**
@@ -110,8 +110,7 @@ declare interface IMenu {
   id: string //主键
   createTime: string
   updateTime: string
-  path: string //唯一
-  name: string //唯一
+  path: string
   title: string
   icon: string
   redirectId: string

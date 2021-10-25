@@ -2,7 +2,7 @@
  * @Description: 系统配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-10-22 10:53:06
+ * @LastEditTime: 2021-10-25 15:25:05
  */
 const getUserMenus = {
     data: [{
@@ -10,7 +10,6 @@ const getUserMenus = {
         createTime: '@datetime',
         updateTime: '@datetime',
         path: '/sys', //唯一
-        name: 'Sys', //唯一
         title: '系统配置',
         icon: "el-icon-setting",
         redirectId: '002',
@@ -33,7 +32,6 @@ const getUserMenus = {
         createTime: '@datetime',
         updateTime: '@datetime',
         path: '/sys/dept',
-        name: 'Dept',
         title: '部门管理',
         icon: "el-icon-s-operation",
         redirectId: null,
@@ -55,7 +53,6 @@ const getUserMenus = {
         createTime: '@datetime',
         updateTime: '@datetime',
         path: '/sys/menu',
-        name: 'Menu',
         title: '菜单管理',
         icon: "el-icon-menu",
         redirectId: null,
@@ -77,7 +74,6 @@ const getUserMenus = {
         createTime: '@datetime',
         updateTime: '@datetime',
         path: '/sys/role',
-        name: 'Role',
         title: '角色管理',
         icon: "el-icon-user",
         redirectId: null,
@@ -99,7 +95,6 @@ const getUserMenus = {
         createTime: '@datetime',
         updateTime: '@datetime',
         path: '/sys/users',
-        name: 'Users',
         title: '用户管理',
         icon: "el-icon-user",
         redirectId: null,

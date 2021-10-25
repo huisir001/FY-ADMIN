@@ -2,7 +2,7 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-10-25 11:37:01
+ * @LastEditTime: 2021-10-25 15:21:26
  */
 import { RouteRecordRaw } from 'vue-router'
 import { ActionContext } from 'vuex'
@@ -83,6 +83,17 @@ export const sys = {
         clearHistoryRoute(state: IObj) {
             state.historyRoutes = []
         },
+        /**
+         * 清除菜单及路由
+         */
+        clearAllMenuAndRoute(state: IObj) {
+            // 清除路由
+            state.menuTree.forEach((menu: IMenu) => {
+                router.removeRoute(menu.id)
+            });
+            // 清除菜单
+            state.menuTree = []
+        },
     },
     actions: {
         /**
@@ -104,7 +115,8 @@ export const sys = {
                     const Route = menu2Route(menu, data, Layout)
 
                     if (parentId) {
-                        router.addRoute(data.find((item: IMenu) => item.id === parentId).name, Route)
+                        // 路由的name直接使用id，避免冲突
+                        router.addRoute(data.find((item: IMenu) => item.id === parentId).id, Route)
                     } else {
                         router.addRoute(Route)
                     }

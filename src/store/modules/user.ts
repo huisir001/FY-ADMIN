@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-10-21 18:32:54
+ * @LastEditTime: 2021-10-25 14:59:12
  */
 import { STORAGE_OPTIONS } from '@/settings'
 import { ActionContext } from 'vuex'
@@ -96,14 +96,11 @@ export const user = {
         /**
          * 登出
          */
-        async logout({ commit }: ActionContext<{}, {}>) {
+        async logout() {
             const { ok } = await doLogout()
             if (ok) {
-                // 状态设置
-                commit('clearLoginState')
-
-                // 提示
                 ElMessage({ type: 'success', message: '已登出' })
+                // 清除登录状态已在路由钩子中处理，这里不处理
                 router.replace({ name: 'Login' })
             }
         },

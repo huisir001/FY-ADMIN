@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-10-22 17:53:32
+ * @LastEditTime: 2021-10-25 15:23:50
 -->
 <template>
     <div class="sidebar">
@@ -14,34 +14,34 @@
             <el-menu class="zui-sidebar-menu" :collapse-transition="false"
                 background-color="transparent" text-color="var(--color-sidebar-font)"
                 active-text-color="var(--color-sidebar-font)" :collapse="sidebarCollapse">
-                <template v-for="menu in Menus" :key="menu.name">
-                    <el-menu-item v-if="!menu.children || !menu.children.length" :index="menu.name"
-                        @click="$router.push({name:menu.name})">
+                <template v-for="menu in Menus" :key="menu.id">
+                    <el-menu-item v-if="!menu.children || !menu.children.length" :index="menu.id"
+                        @click="$router.push({name:menu.id})">
                         <i v-if="menu.icon" :class="menu.icon"></i>
                         <template #title>
                             {{menu.title}}
                         </template>
                     </el-menu-item>
-                    <el-sub-menu v-else :index="menu.name">
+                    <el-sub-menu v-else :index="menu.id">
                         <template #title>
                             <i v-if="menu.icon" :class="menu.icon"></i>
                             <span>{{menu.title}}</span>
                         </template>
-                        <template v-for="sub1 in menu.children" :key="sub1.name">
+                        <template v-for="sub1 in menu.children" :key="sub1.id">
                             <el-menu-item v-if="!sub1.children || !sub1.children.length"
-                                :index="sub1.name" :class="{act:$route.name==sub1.name}"
-                                @click="$router.push({name:sub1.name})">
+                                :index="sub1.id" :class="{act:$route.name==sub1.id}"
+                                @click="$router.push({name:sub1.id})">
                                 <i v-if="sub1.icon" :class="sub1.icon"></i>
                                 {{sub1.title}}
                             </el-menu-item>
-                            <el-sub-menu v-else :index="sub1.name">
+                            <el-sub-menu v-else :index="sub1.id">
                                 <template #title>
                                     <i v-if="sub1.icon" :class="sub1.icon"></i>
                                     <span>{{sub1.title}}</span>
                                 </template>
-                                <el-menu-item v-for="sub2 in sub1.children" :key="sub2.name"
-                                    :index="sub2.name" :class="{act:$route.name==sub2.name}"
-                                    @click="$router.push({name:sub2.name})">
+                                <el-menu-item v-for="sub2 in sub1.children" :key="sub2.id"
+                                    :index="sub2.id" :class="{act:$route.name==sub2.id}"
+                                    @click="$router.push({name:sub2.id})">
                                     <i v-if="sub2.icon" :class="sub2.icon"></i>
                                     <span>{{sub2.title}}</span>
                                 </el-menu-item>
