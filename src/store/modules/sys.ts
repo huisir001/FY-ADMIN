@@ -2,7 +2,7 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-10-25 15:21:26
+ * @LastEditTime: 2021-10-25 16:05:56
  */
 import { RouteRecordRaw } from 'vue-router'
 import { ActionContext } from 'vuex'
@@ -121,6 +121,14 @@ export const sys = {
                         router.addRoute(Route)
                     }
                 }
+
+                // 添加404页面
+                router.addRoute({
+                    path: '/:catchAll(.*)',
+                    name: '404',
+                    meta: { title: "404", visible: false, private: false },
+                    component: () => import('@/views/404/index.vue')
+                })
 
                 // 更新列表
                 commit('setStates', { menuTree: menuTreeList })

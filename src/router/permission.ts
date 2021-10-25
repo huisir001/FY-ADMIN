@@ -2,7 +2,7 @@
  * @Description: 跳转权限-路由前置钩子
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-17 19:28:46
- * @LastEditTime: 2021-10-25 15:13:13
+ * @LastEditTime: 2021-10-25 15:55:29
  */
 import { getUserInfo } from '@/api/user'
 import { NavigationGuardWithThis } from 'vue-router'
@@ -43,7 +43,7 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
                 if (ok) {
                     // 缓存用户信息
                     store.commit('user/setStates', { loginStatus: 1, userInfo: data })
-                    // 查目录，处理转换为tree格式并动态添加到路由缓存
+                    // 登录之后查目录，处理转换为tree格式并动态添加到路由缓存
                     await store.dispatch('sys/getMenus')
                 } else {
                     // 如果这里查询完成，登录状态有问题，则直接跳转到登录页
@@ -52,8 +52,7 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
                 }
 
                 // 由于动态路由的缘故，这里重新定向
-                // next({ ...to, replace: true })
-                next(to.fullPath)
+                next({ ...to, replace: true })
                 return
 
             } else {

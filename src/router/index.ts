@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-22 17:21:26
+ * @LastEditTime: 2021-10-25 16:21:45
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -46,37 +46,7 @@ const routes: RouteRecordRaw[] = [
         name: 'Center',
         component: () => import('../views/my/center.vue'),
         meta: { title: "个人中心", visible: false, private: true, keepAlive: true },
-      },
-      {
-        path: 'my1',
-        name: 'Center1',
-        component: () => import('../views/my/1.vue'),
-        meta: { title: "个人中心1", visible: false, private: true, keepAlive: true }
-      },
-      {
-        path: 'my2',
-        name: 'Center2',
-        component: () => import('../views/my/2.vue'),
-        meta: { title: "个人中心2", visible: false, private: true, keepAlive: true }
-      },
-      {
-        path: 'my3',
-        name: 'Center3',
-        component: () => import('../views/my/3.vue'),
-        meta: { title: "个人中心3", visible: false, private: true, keepAlive: true }
-      },
-      {
-        path: 'my4',
-        name: 'Center4',
-        component: () => import('../views/my/4.vue'),
-        meta: { title: "个人中心4", visible: false, private: true, keepAlive: true }
-      },
-      {
-        path: 'my5',
-        name: 'Center5',
-        component: () => import('../views/my/5.vue'),
-        meta: { title: "个人中心5", visible: false, private: true, keepAlive: true }
-      },
+      }
     ]
   },
   {
@@ -84,50 +54,13 @@ const routes: RouteRecordRaw[] = [
     name: 'Login',
     component: () => import('../views/login/index.vue'),
     meta: { title: "登录", visible: false, private: false }
-  },
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory($GLOBAL.BASE_URL),
   routes
 })
-
-
-// router.addRoute(
-//   {
-//     path: '/sys',
-//     name: 'Sys',
-//     component: Layout,
-//     redirect: { name: 'Dept' },
-//     meta: { title: '系统配置', icon: 'el-icon-setting', keepAlive: true, visible: true, private: true },
-//     children: [
-//       {
-//         path: '/sys/dept',
-//         name: 'Dept',
-//         component: () => import('@/views/sys/dept.vue'),
-//         meta: { title: "部门管理", icon: "el-icon-s-operation", keepAlive: true, visible: true, private: true }
-//       },
-//       {
-//         path: 'menu',
-//         name: 'Menu',
-//         component: () => import('../views/sys/menu.vue'),
-//         meta: { title: "菜单管理", icon: "el-icon-menu", keepAlive: true, visible: true, private: true }
-//       },
-//       {
-//         path: 'role',
-//         name: 'Role',
-//         component: () => import('../views/sys/role.vue'),
-//         meta: { title: "角色管理", icon: "el-icon-user", keepAlive: true, visible: true, private: true }
-//       },
-//       {
-//         path: 'users',
-//         name: 'Users',
-//         component: () => import('../views/sys/users.vue'),
-//         meta: { title: "用户管理", icon: "el-icon-user", keepAlive: true, visible: true, private: true }
-//       },
-//     ]
-//   }
-// )
 
 // 路由权限验证
 router.beforeEach(permission)
