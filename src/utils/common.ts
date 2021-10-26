@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-10-25 15:21:23
+ * @LastEditTime: 2021-10-26 10:34:24
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -67,3 +67,9 @@ export const menu2Route = (menu: IMenu, menuList: IMenu[], Layout: any): RouteRe
         meta: { title, icon, keepAlive, private: prvt }
     }
 }
+
+/**
+ * 前端关键字模糊搜索
+ */
+export const fuzzySearch = (listData: any[], inputVal: string) => listData
+    .filter(item => JSON.stringify(item).includes(inputVal))

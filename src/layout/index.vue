@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2021-10-25 16:35:44
+ * @LastEditTime: 2021-10-26 14:00:45
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -14,10 +14,8 @@
         <!-- 右侧内容区 -->
         <div class="right">
             <Navbar />
-            <div class="r-bot">
-                <Tabbar v-if="showTabbar" />
-                <Content :class="{home:!showTabbar}" />
-            </div>
+            <Tabbar v-if="showTabbar" />
+            <Content :class="{home:!showTabbar}" />
         </div>
     </div>
 </template>
@@ -122,10 +120,6 @@ $--transition-width: width var(--el-transition-duration);
         transition: $--transition-width;
         width: calc(100% - #{$--left-width-default});
         height: 100%;
-        .r-bot {
-            padding: 10px;
-            height: calc(100% - 50px);
-        }
     }
     &.collapse:not(.sidebarHide) {
         .left {

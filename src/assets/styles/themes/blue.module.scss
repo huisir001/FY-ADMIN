@@ -2,7 +2,7 @@
  * @Description: 蓝色主题
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:36:58
- * @LastEditTime: 2021-10-25 09:57:17
+ * @LastEditTime: 2021-10-26 14:51:13
  */
 
 //  blue.module.scss  名称包含module才能将css用export导出，在js中导入
@@ -25,8 +25,13 @@
 
   /* 自定义 */
   --color-navbar-bg: var(--el-color-white);
-  --color-tabbar-item-bg: var(--el-color-white);
   --color-content-bg: var(--el-color-white);
+
+  /* tabbar */
+  --color-tabbar-bg: var(--el-color-white);
+  --color-tabbar-font: var(--el-text-color-secondary);
+  --color-tabbar-border: var(--color-grey-lighter);
+  --color-tabbar-circle: var(--el-border-color-base);
 
   /* 导航栏 */
   --color-sidebar-bg: #2f3447;
@@ -34,4 +39,7 @@
   --color-sidebar-menu-bg-hover: var(--el-color-primary);
   --color-sidebar-menu-font-hover: var(--el-color-white);
   --color-sidebar-menu-font-active: var(--el-color-primary-light-2);
+
+  /* 表格 */
+  --color-table-thead-bg: #fafafa;
 }

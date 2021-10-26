@@ -2,10 +2,10 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-10-14 17:58:12
+ * @LastEditTime: 2021-10-26 11:08:32
 -->
 <template>
-    <el-form :inline="true">
+    <!-- <el-form :inline="true">
         <el-form-item label="部门名称">
             <el-input v-model="searchFormParams.name" placeholder="请输入部门名称"></el-input>
         </el-form-item>
@@ -19,9 +19,9 @@
             <el-button type="primary" @click="handleSearch">搜索</el-button>
             <el-button @click="handleReset">重置</el-button>
         </el-form-item>
-    </el-form>
-    <el-table :data="tableData" style="width: 100%; margin-bottom: 20px" row-key="id" border
-        default-expand-all>
+    </el-form> -->
+    <el-table :data="fuzzySearch(tableData,fuzzySearchWord)"
+        style="width: 100%; margin-bottom: 20px" row-key="id" border default-expand-all>
         <el-table-column label="部门名称" min-width="200">
             <template #default="scope">
                 <span>{{scope.row.name}}</span>
@@ -42,7 +42,13 @@
         <el-table-column prop="leader" label="负责人" min-width="100" />
         <el-table-column prop="phone" label="联系方式" min-width="100" />
         <el-table-column prop="createTime" label="创建时间" sortable min-width="180" />
-        <el-table-column label="操作" min-width="200" fixed="right">
+        <el-table-column min-width="200" fixed="right">
+            <template #header>
+                <!-- <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="Search..." /> -->
+                <el-button icon="el-icon-search" size="mini" circle></el-button>
+                <el-button icon="el-icon-search" size="mini" circle></el-button>
+                <el-button icon="el-icon-search" size="mini" circle></el-button>
+            </template>
             <template #default="scope">
                 <el-button size="mini" type="text" icon="el-icon-edit"
                     @click="handleEdit(scope.$index, scope.row)">编辑
@@ -59,31 +65,31 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, Ref, ref } from 'vue'
+import { fuzzySearch } from '@/utils/common'
 
 export default defineComponent({
     name: 'Dept',
     setup() {
-        // 表单数据
-        const searchFormParams: IObj = reactive({
-            name: '',
-            status: '',
-        })
+        // 模糊搜索
+        const fuzzySearchWord: Ref<string> = ref('')
+
         // 搜索
         const handleSearch = () => {
-            console.log(searchFormParams)
-        }
-        // 重置
-        const handleReset = () => {
-            for (const key in searchFormParams) {
-                searchFormParams[key] = ''
-            }
+            // console.log(searchFormParams)
         }
 
+        // 重置
+        // const handleReset = () => {
+        //     for (const key in searchFormParams) {
+        //         searchFormParams[key] = ''
+        //     }
+        // }
+
         return {
-            searchFormParams,
+            fuzzySearchWord,
+            fuzzySearch,
             handleSearch,
-            handleReset,
             tableData: [
                 {
                     id: 1,

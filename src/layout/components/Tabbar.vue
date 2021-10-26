@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-10-20 20:00:31
+ * @LastEditTime: 2021-10-26 15:35:44
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -11,7 +11,8 @@
                 :style="{transform:`translateX(${translateX}px)`}">
                 <div v-for="(item,index) in historyRoutes" :key="item.name" class="zui-tabbar-item"
                     :class="{act:curRouteName===item.name}" @click="tabChange(index,$event.target)">
-                    <span>{{item.meta.title || item.name.toUpperCase()}}</span>
+                    <span class="tabbar-item-circle" />
+                    <span class="title">{{item.meta.title || item.name.toUpperCase()}}</span>
                     <el-icon :size="14" @click.stop="deleteRoute(index,$event)">
                         <close />
                     </el-icon>
@@ -238,21 +239,27 @@ export default defineComponent({
  
 <style scoped lang="scss">
 $--tab-height: 30px;
+$--tab-border: 1px solid var(--color-grey-lighter);
+@mixin zui-tabbar-item-act {
+    color: var(--el-text-color-regular);
+    &:deep(.el-icon) {
+        width: 14px;
+        margin-left: 5px;
+    }
+}
 .tabbar {
     position: relative;
-    height: $--tab-height;
     width: 100%;
+    background-color: var(--color-tabbar-bg);
+    border-top: $--tab-border;
     user-select: none;
-    margin-bottom: 10px;
     .scroll-btn {
         position: absolute;
         cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 20px;
-        border-radius: var(--el-border-radius-small);
-        background-color: var(--color-tabbar-item-bg);
+        width: $--tab-height;
         height: $--tab-height;
         top: 0;
         &:deep(.el-icon) {
@@ -263,9 +270,11 @@ $--tab-height: 30px;
         }
         &.prev {
             left: 0;
+            border-right: $--tab-border;
         }
         &.next {
             right: 0;
+            border-left: $--tab-border;
         }
         &.disabled {
             opacity: 0.6;
@@ -273,7 +282,6 @@ $--tab-height: 30px;
         }
     }
     .zui-tabbar-cont {
-        width: 100%;
         overflow: hidden;
         &.scroll {
             margin: 0 30px;
@@ -281,20 +289,26 @@ $--tab-height: 30px;
         }
         .item-box {
             transition: all 0.3s;
-            height: $--tab-height;
             display: inline-flex;
             align-items: center;
             .zui-tabbar-item {
                 display: flex;
                 align-items: center;
-                background-color: var(--color-tabbar-item-bg);
-                margin-right: 10px;
-                border-radius: var(--el-border-radius-small);
                 height: $--tab-height;
                 line-height: $--tab-height;
-                padding: 0 10px;
+                padding: 0 15px;
                 cursor: pointer;
-                & > span {
+                border-right: $--tab-border;
+                font-size: var(--el-font-size-extra-small);
+                color: var(--color-tabbar-font);
+                & > span.tabbar-item-circle {
+                    background-color: var(--color-tabbar-circle);
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    margin-right: 5px;
+                }
+                & > span.title {
                     max-width: 98px;
                     word-break: keep-all;
                     text-overflow: ellipsis;
@@ -310,20 +324,21 @@ $--tab-height: 30px;
                         transform: scale(0.76);
                     }
                     &:hover {
-                        background-color: var(--el-color-primary);
+                        background-color: var(--el-color-danger);
                         color: #fff;
                     }
                 }
-                &:hover,
-                &.act {
-                    color: var(--el-color-primary);
-                    &:deep(.el-icon) {
-                        width: 14px;
-                        margin-left: 5px;
+                &:hover {
+                    @include zui-tabbar-item-act;
+                    & > span.tabbar-item-circle {
+                        background-color: var(--el-color-primary-light-5);
                     }
                 }
-                &:last-child {
-                    margin-right: 0;
+                &.act {
+                    @include zui-tabbar-item-act;
+                    & > span.tabbar-item-circle {
+                        background-color: var(--el-color-primary);
+                    }
                 }
             }
         }

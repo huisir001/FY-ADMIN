@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2021-10-21 22:47:17
+ * @LastEditTime: 2021-10-26 14:04:32
 -->
 <template>
     <div class="content">
@@ -39,14 +39,15 @@ export default defineComponent({
 <style scoped lang="scss">
 .content {
     // @include scrollBar;
-    width: 100%;
-    height: calc(100% - 40px);
+    width: calc(100% - 20px);
+    height: calc(100% - 100px);
+    margin: 10px;
     padding: 20px;
     overflow-y: auto;
     background: var(--color-content-bg);
     border-radius: var(--el-border-radius-small);
     &.home {
-        height: 100%;
+        height: calc(100% - 70px);
     }
 }
 </style>
