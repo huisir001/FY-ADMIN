@@ -2,17 +2,17 @@
  * @Description: 标签元素创建
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 18:43:26
- * @LastEditTime: 2021-09-20 12:40:29
+ * @LastEditTime: 2021-10-26 18:02:23
  */
 class DomCreate {
     className: string
     private El: HTMLElement
 
-    constructor(tagName: string, attribute: IObj = {}) {
+    constructor(tagName: string, attribute: IObj = {}, className: string = `c-${Date.now()}`) {
         this.El = document.createElement(tagName)
 
         // 唯一标识class
-        this.className = `c-${Date.now()}`
+        this.className = className
         this.El.setAttribute('class', this.className)
 
         Object.keys(attribute).forEach((key) => {

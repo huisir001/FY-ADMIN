@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-25 15:18:31
+ * @LastEditTime: 2021-10-26 18:32:41
  */
 
 /**
@@ -129,3 +129,14 @@ declare interface IMenu {
   status: 1 | 0 //1-正常；0-停用（停用时用户无法查询，且访问受限），admin能查询所有菜单，侧边栏不展示
   children?: IMenu[]
 }
+
+/**
+ * 自定义按钮
+ */
+interface IBtnOptions {
+  name: string
+  icon?: string
+  disabled?: boolean
+  callback: (el: HTMLElement) => void
+}
+

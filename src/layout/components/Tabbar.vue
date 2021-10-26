@@ -2,11 +2,11 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-10-26 15:35:44
+ * @LastEditTime: 2021-10-26 18:32:36
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
-        <div class="zui-tabbar-cont" :class="{scroll:showScrollBtn}">
+        <div class="zui-tabbar-cont" :class="{scroll:showScrollBtn}" v-contextMenu="ctxMenuList">
             <div ref="itemBoxRef" class="item-box"
                 :style="{transform:`translateX(${translateX}px)`}">
                 <div v-for="(item,index) in historyRoutes" :key="item.name" class="zui-tabbar-item"
@@ -37,7 +37,7 @@
 </template>
  
 <script lang="ts">
-import { computed, defineComponent, nextTick, ref, watch } from 'vue'
+import { computed, defineComponent, nextTick, reactive, ref, watch } from 'vue'
 import { Close, ArrowLeft, ArrowRight } from '@element-plus/icons'
 import { useStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
@@ -220,6 +220,22 @@ export default defineComponent({
             setBtnState(val)
         })
 
+        // 右键菜单
+        const ctxMenuList: IBtnOptions[] = [
+            {
+                name: '关闭其他',
+                callback(el) {
+                    console.log(el)
+                },
+            },
+            {
+                name: '关闭所有',
+                callback(el) {
+                    console.log(el)
+                },
+            },
+        ]
+
         return {
             tabbarRef,
             itemBoxRef,
@@ -232,6 +248,7 @@ export default defineComponent({
             handlePrevBtn,
             handleNextBtn,
             translateX,
+            ctxMenuList,
         }
     },
 })
