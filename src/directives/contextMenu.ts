@@ -2,7 +2,7 @@
  * @Description: 右键菜单指令
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-26 15:59:44
- * @LastEditTime: 2021-10-26 18:31:14
+ * @LastEditTime: 2021-10-26 18:37:31
  */
 import { Directive } from '@vue/runtime-core'
 import DomCreate from '@/utils/DomCreate'
@@ -13,9 +13,9 @@ const contextMenu: Directive<any, any> = {
         el.setAttribute('data-ctx-menu-class', ctxMenuDom.className)
     },
     beforeMount(el, binding) {
-        const ctxMenuDom = document.body.querySelector(`.${el.dataset.ctxMenuClass}`)! as HTMLElement
-        initCtxMenu(ctxMenuDom, binding.value)
         el.oncontextmenu = ({ clientX, clientY }: MouseEvent) => {
+            const ctxMenuDom = document.body.querySelector(`.${el.dataset.ctxMenuClass}`)! as HTMLElement
+            initCtxMenu(ctxMenuDom, binding.value)
             ctxMenuDom.style.display = 'block'
             ctxMenuDom.style.left = clientX + 'px'
             ctxMenuDom.style.top = clientY + 'px'
