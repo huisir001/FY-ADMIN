@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-10-26 11:08:32
+ * @LastEditTime: 2021-10-27 17:45:46
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -21,7 +21,7 @@
         </el-form-item>
     </el-form> -->
     <el-table :data="fuzzySearch(tableData,fuzzySearchWord)"
-        style="width: 100%; margin-bottom: 20px" row-key="id" border default-expand-all>
+        style="width: 100%; margin-bottom: 20px" row-key="id" size="mini" border default-expand-all>
         <el-table-column label="部门名称" min-width="200">
             <template #default="scope">
                 <span>{{scope.row.name}}</span>

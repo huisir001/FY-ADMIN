@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-10-14 11:19:52
+ * @LastEditTime: 2021-10-27 18:06:57
 -->
 <template>
     <div class="navbar">
@@ -50,7 +50,7 @@ import ThemeSvg from '@/components/svg/ThemeSvg.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
-import ThemeSetDrawer from '@/components/ThemeSetDrawer.vue'
+import ThemeSetDrawer from '@/components/ThemeSetDrawer/index.vue'
 
 export default defineComponent({
     name: 'Navbar',
