@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-10-27 17:45:46
+ * @LastEditTime: 2021-10-27 18:47:17
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -20,6 +20,7 @@
             <el-button @click="handleReset">重置</el-button>
         </el-form-item>
     </el-form> -->
+    <TableTools />
     <el-table :data="fuzzySearch(tableData,fuzzySearchWord)"
         style="width: 100%; margin-bottom: 20px" row-key="id" size="mini" border default-expand-all>
         <el-table-column label="部门名称" min-width="200">
@@ -67,9 +68,13 @@
 <script lang="ts">
 import { defineComponent, reactive, Ref, ref } from 'vue'
 import { fuzzySearch } from '@/utils/common'
+import TableTools from '@/components/TableTools/index.vue'
 
 export default defineComponent({
     name: 'Dept',
+    components: {
+        TableTools,
+    },
     setup() {
         // 模糊搜索
         const fuzzySearchWord: Ref<string> = ref('')
