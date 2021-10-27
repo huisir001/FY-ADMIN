@@ -2,15 +2,16 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-10-26 18:32:36
+ * @LastEditTime: 2021-10-27 17:31:07
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
-        <div class="zui-tabbar-cont" :class="{scroll:showScrollBtn}" v-contextMenu="ctxMenuList">
+        <div class="zui-tabbar-cont" :class="{scroll:showScrollBtn}">
             <div ref="itemBoxRef" class="item-box"
                 :style="{transform:`translateX(${translateX}px)`}">
-                <div v-for="(item,index) in historyRoutes" :key="item.name" class="zui-tabbar-item"
-                    :class="{act:curRouteName===item.name}" @click="tabChange(index,$event.target)">
+                <div v-for="(item,index) in historyRoutes" :key="item.name" :data-index="index"
+                    class="zui-tabbar-item" :class="{act:curRouteName===item.name}"
+                    v-contextMenu="ctxMenuList" @click="tabChange(index,$event.target)">
                     <span class="tabbar-item-circle" />
                     <span class="title">{{item.meta.title || item.name.toUpperCase()}}</span>
                     <el-icon :size="14" @click.stop="deleteRoute(index,$event)">
@@ -142,12 +143,14 @@ export default defineComponent({
         })
 
         // 删除路由
-        const deleteRoute = (index: number, ev: any) => {
+        const deleteRoute = (index: number, ev: any, el?: HTMLElement) => {
             const delRoute = historyRoutes.value[index]
-            const curTabbarItemNode = ev.path.find(
-                (item: any) =>
-                    item.classList && Array.from(item.classList).includes('zui-tabbar-item')
-            )
+            const curTabbarItemNode = el
+                ? el
+                : ev.path.find(
+                      (item: any) =>
+                          item.classList && Array.from(item.classList).includes('zui-tabbar-item')
+                  )
 
             // 若删除当前路由
             if (delRoute.name === curRouteName.value) {
@@ -220,18 +223,28 @@ export default defineComponent({
             setBtnState(val)
         })
 
-        // 右键菜单
+        // 右键菜单-关闭标签
         const ctxMenuList: IBtnOptions[] = [
             {
-                name: '关闭其他',
+                name: '关闭该标签',
                 callback(el) {
-                    console.log(el)
+                    deleteRoute(Number(el.dataset.index), null, el)
                 },
             },
             {
-                name: '关闭所有',
+                name: '关闭其他标签',
                 callback(el) {
-                    console.log(el)
+                    const routesIndex = Number(el.dataset.index)
+                    const curRoute = historyRoutes.value[routesIndex]
+                    tabChange(routesIndex, el)
+                    Store.commit('sys/setStates', { historyRoutes: [curRoute] })
+                },
+            },
+            {
+                name: '关闭所有标签',
+                callback() {
+                    Router.push({ name: 'Home' })
+                    Store.commit('sys/clearHistoryRoute')
                 },
             },
         ]
@@ -314,7 +327,7 @@ $--tab-border: 1px solid var(--color-grey-lighter);
                 height: $--tab-height;
                 line-height: $--tab-height;
                 padding: 0 15px;
-                cursor: pointer;
+                cursor: help;
                 border-right: $--tab-border;
                 font-size: var(--el-font-size-extra-small);
                 color: var(--color-tabbar-font);

@@ -2,10 +2,11 @@
  * @Description: 标签元素创建
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 18:43:26
- * @LastEditTime: 2021-10-26 18:02:23
+ * @LastEditTime: 2021-10-27 16:02:59
  */
 class DomCreate {
     className: string
+    temp: any = null
     private El: HTMLElement
 
     constructor(tagName: string, attribute: IObj = {}, className: string = `c-${Date.now()}`) {
@@ -34,6 +35,10 @@ class DomCreate {
 
     setAttr(key: string, value: string) {
         this.El.setAttribute(key, value)
+    }
+
+    remove() {
+        this.El.remove()
     }
 }
 

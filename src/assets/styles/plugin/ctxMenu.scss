@@ -1,0 +1,38 @@
+/*
+ * @Description: 右键自定义菜单
+ * @Autor: HuiSir<273250950@qq.com>
+ * @Date: 2021-09-01 16:37:47
+ * @LastEditTime: 2021-10-27 17:03:03
+ */
+
+.zui-ctx-menu {
+  position: absolute;
+  box-shadow: 3px 3px 3px #00000063;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 4px 0;
+  z-index: 9999;
+  user-select: none;
+  .ctx-menu-btn {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    color: #000;
+    padding: 0 50px 0 15px;
+    cursor: context-menu;
+    &:hover {
+      background: #e3e3e3;
+    }
+    &.disabled {
+      color: #888;
+      &:hover {
+        background: unset;
+      }
+    }
+    i.ctx-menu-icon {
+      margin-right: 10px;
+    }
+  }
+}
