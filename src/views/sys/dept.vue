@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-10-27 18:47:17
+ * @LastEditTime: 2021-10-27 23:24:38
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -20,7 +20,7 @@
             <el-button @click="handleReset">重置</el-button>
         </el-form-item>
     </el-form> -->
-    <TableTools />
+    <table-tools />
     <el-table :data="fuzzySearch(tableData,fuzzySearchWord)"
         style="width: 100%; margin-bottom: 20px" row-key="id" size="mini" border default-expand-all>
         <el-table-column label="部门名称" min-width="200">
@@ -45,10 +45,7 @@
         <el-table-column prop="createTime" label="创建时间" sortable min-width="180" />
         <el-table-column min-width="200" fixed="right">
             <template #header>
-                <!-- <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="Search..." /> -->
-                <el-button icon="el-icon-search" size="mini" circle></el-button>
-                <el-button icon="el-icon-search" size="mini" circle></el-button>
-                <el-button icon="el-icon-search" size="mini" circle></el-button>
+                <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="Search..." />
             </template>
             <template #default="scope">
                 <el-button size="mini" type="text" icon="el-icon-edit"

@@ -2,7 +2,7 @@
  * @Description: 表格工具栏（仿layui）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-10-27 18:57:32
+ * @LastEditTime: 2021-10-27 23:17:04
 -->
 <template>
     <div class="table-tools">
@@ -42,6 +42,7 @@ export default defineComponent({
         Search,
         FolderOpened,
     },
+    props: {},
     setup() {},
 })
 </script>

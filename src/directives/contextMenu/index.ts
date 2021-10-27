@@ -2,11 +2,11 @@
  * @Description: 右键菜单指令
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-26 15:59:44
- * @LastEditTime: 2021-10-27 17:11:58
+ * @LastEditTime: 2021-10-27 23:04:34
  */
 import { Directive } from '@vue/runtime-core'
 import DomCreate from '@/utils/DomCreate'
-import '@/assets/styles/plugin/ctxMenu.scss'
+import './style.scss'
 
 const contextMenu: Directive<any, any> = {
     created(_, binding) {
@@ -66,10 +66,10 @@ function initCtxMenu(ctxMenuDom: DomCreate, btnOptionsList: IBtnOptions[]) {
  * 监听点击别处关闭菜单
  */
 function addListenerOtherClick(ctxMenuDom: DomCreate) {
-    if (ctxMenuDom.temp) return;
+    if (ctxMenuDom.temp) { return }
     const callback = (e: MouseEvent) => {
         const targetClass = (e.target as HTMLElement).className
-        const isCtxMenuDiv = typeof targetClass == 'string' && targetClass.includes('ctx-menu')
+        const isCtxMenuDiv = typeof targetClass === 'string' && targetClass.includes('ctx-menu')
         if (!isCtxMenuDiv) {
             removeCtxMenu(ctxMenuDom)
         } else {
