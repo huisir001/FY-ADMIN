@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-10-27 23:24:38
+ * @LastEditTime: 2021-10-28 18:17:53
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -20,61 +20,91 @@
             <el-button @click="handleReset">重置</el-button>
         </el-form-item>
     </el-form> -->
-    <table-tools />
-    <el-table :data="fuzzySearch(tableData,fuzzySearchWord)"
-        style="width: 100%; margin-bottom: 20px" row-key="id" size="mini" border default-expand-all>
-        <el-table-column label="部门名称" min-width="200">
-            <template #default="scope">
-                <span>{{scope.row.name}}</span>
-                <div class="sort-btn">
-                    <el-button size="mini" type="text" icon="el-icon-sort-down"
-                        @click="handleDelete(scope.$index, scope.row)" />
-                    <el-button size="mini" type="text" icon="el-icon-sort-up"
-                        @click="handleDelete(scope.$index, scope.row)" />
-                </div>
-            </template>
-        </el-table-column>
-        <el-table-column label="状态" min-width="80">
-            <template #default="scope">
-                <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
-                <el-tag v-else size="small" type="danger">停用</el-tag>
-            </template>
-        </el-table-column>
-        <el-table-column prop="leader" label="负责人" min-width="100" />
-        <el-table-column prop="phone" label="联系方式" min-width="100" />
-        <el-table-column prop="createTime" label="创建时间" sortable min-width="180" />
-        <el-table-column min-width="200" fixed="right">
-            <template #header>
-                <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="Search..." />
-            </template>
-            <template #default="scope">
-                <el-button size="mini" type="text" icon="el-icon-edit"
-                    @click="handleEdit(scope.$index, scope.row)">编辑
-                </el-button>
-                <el-button size="mini" type="text" icon="el-icon-plus"
-                    @click="handleEdit(scope.$index, scope.row)">新增
-                </el-button>
-                <el-button size="mini" type="text" icon="el-icon-delete"
-                    @click="handleDelete(scope.$index, scope.row)">删除
-                </el-button>
-            </template>
-        </el-table-column>
-    </el-table>
+
+    <my-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
+        default-expand-all>
+        <template #name="scope">
+            <span>{{scope.row.name}}</span>
+            <div class="sort-btn">
+                <el-button size="mini" type="text" icon="el-icon-sort-down"
+                    @click="handleDelete(scope.$index, scope.row)" />
+                <el-button size="mini" type="text" icon="el-icon-sort-up"
+                    @click="handleDelete(scope.$index, scope.row)" />
+            </div>
+        </template>
+        <template #status="scope">
+            <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
+            <el-tag v-else size="small" type="danger">停用</el-tag>
+        </template>
+        <template #todoThead>
+            <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="Search..." />
+        </template>
+        <template #todo="scope">
+            <el-button size="mini" type="text" icon="el-icon-edit"
+                @click="handleEdit(scope.$index, scope.row)">编辑
+            </el-button>
+            <el-button size="mini" type="text" icon="el-icon-plus"
+                @click="handleEdit(scope.$index, scope.row)">新增
+            </el-button>
+            <el-button size="mini" type="text" icon="el-icon-delete"
+                @click="handleDelete(scope.$index, scope.row)">删除
+            </el-button>
+        </template>
+    </my-table>
 </template>
  
 <script lang="ts">
 import { defineComponent, reactive, Ref, ref } from 'vue'
 import { fuzzySearch } from '@/utils/common'
-import TableTools from '@/components/TableTools/index.vue'
+import MyTable from '@/components/Table/index.vue'
 
 export default defineComponent({
     name: 'Dept',
     components: {
-        TableTools,
+        MyTable,
     },
     setup() {
         // 模糊搜索
         const fuzzySearchWord: Ref<string> = ref('')
+
+        const tableCols = [
+            {
+                label: '部门名称',
+                minWidth: '200',
+                slot: 'name',
+            },
+            {
+                label: '状态',
+                minWidth: '80',
+                filters: [
+                    { text: '111', value: 1 },
+                    { text: '222', value: 0 },
+                ],
+                slot: 'status',
+            },
+            {
+                label: '负责人',
+                prop: 'leader',
+                minWidth: '100',
+            },
+            {
+                label: '联系方式',
+                prop: 'phone',
+                minWidth: '100',
+            },
+            {
+                label: '创建时间',
+                prop: 'createTime',
+                minWidth: '180',
+                sort: true,
+            },
+            {
+                fixed: 'right',
+                minWidth: '200',
+                slotThead: 'todoThead',
+                slot: 'todo',
+            },
+        ]
 
         // 搜索
         const handleSearch = () => {
@@ -89,10 +119,23 @@ export default defineComponent({
         // }
 
         return {
+            tableCols,
             fuzzySearchWord,
             fuzzySearch,
             handleSearch,
             tableData: [
+                {
+                    id: 111,
+                    name: '分公司',
+                    status: '0',
+                    leader: '王总',
+                    email: '',
+                    phone: '',
+                    delFlag: '0',
+                    remark: '',
+                    createTime: '2021-09-09 17:25:21',
+                    updateTime: '2021-09-09 17:25:22',
+                },
                 {
                     id: 1,
                     name: '总公司',
