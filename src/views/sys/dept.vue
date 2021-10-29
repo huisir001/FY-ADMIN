@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-10-28 18:17:53
+ * @LastEditTime: 2021-10-29 18:32:48
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -22,14 +22,15 @@
     </el-form> -->
 
     <my-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
-        default-expand-all>
+        default-expand-all page :curr="currPage" :total="500" :tools="tableTools"
+        @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
         <template #name="scope">
             <span>{{scope.row.name}}</span>
             <div class="sort-btn">
                 <el-button size="mini" type="text" icon="el-icon-sort-down"
-                    @click="handleDelete(scope.$index, scope.row)" />
+                    @click="handleMoveDowm(scope.$index, scope.row)" />
                 <el-button size="mini" type="text" icon="el-icon-sort-up"
-                    @click="handleDelete(scope.$index, scope.row)" />
+                    @click="handleMoveUp(scope.$index, scope.row)" />
             </div>
         </template>
         <template #status="scope">
@@ -106,6 +107,29 @@ export default defineComponent({
             },
         ]
 
+        const tableTools: any = []
+
+        const handleMoveDowm = (index: number, row: any) => {
+            console.log(index, row)
+        }
+
+        // 当前页
+        const currPage = ref(1)
+        // 每页条数
+        const limit = ref(15)
+
+        // 当前页切换
+        const pageCurrChange = (val: number) => {
+            console.log('currPage', val)
+            currPage.value = val
+        }
+
+        // 每页条数切换
+        const pageSizeChange = (val: number) => {
+            console.log('limit', val)
+            limit.value = val
+        }
+
         // 搜索
         const handleSearch = () => {
             // console.log(searchFormParams)
@@ -120,6 +144,11 @@ export default defineComponent({
 
         return {
             tableCols,
+            tableTools,
+            currPage,
+            pageSizeChange,
+            pageCurrChange,
+            handleMoveDowm,
             fuzzySearchWord,
             fuzzySearch,
             handleSearch,
@@ -200,6 +229,106 @@ export default defineComponent({
                             id: 6,
                             name: '销售部',
                             status: '1',
+                            leader: '王总',
+                            email: '',
+                            phone: '',
+                            delFlag: '0',
+                            remark: '',
+                            createTime: '2021-09-09 17:25:21',
+                            updateTime: '2021-09-09 17:25:22',
+                        },
+                    ],
+                },
+                {
+                    id: 1,
+                    name: '总公司',
+                    status: '1',
+                    leader: '王总',
+                    email: '',
+                    phone: '18233333333',
+                    delFlag: '0',
+                    remark: '',
+                    createTime: '2021-09-09 17:25:21',
+                    updateTime: '2021-09-09 17:25:22',
+                    children: [
+                        {
+                            id: 2,
+                            name: '财务部',
+                            status: '0',
+                            leader: '王总',
+                            email: '',
+                            phone: '',
+                            delFlag: '0',
+                            remark: '',
+                            createTime: '2021-09-09 17:25:21',
+                            updateTime: '2021-09-09 17:25:22',
+                        },
+                        {
+                            id: 3,
+                            name: '研发部',
+                            status: '1',
+                            leader: '王总',
+                            email: '',
+                            phone: '',
+                            delFlag: '0',
+                            remark: '',
+                            createTime: '2021-09-09 17:25:21',
+                            updateTime: '2021-09-09 17:25:22',
+                        },
+                        {
+                            id: 4,
+                            name: '市场部',
+                            status: '1',
+                            leader: '王总',
+                            email: '',
+                            phone: '',
+                            delFlag: '0',
+                            remark: '',
+                            createTime: '2021-09-09 17:25:21',
+                            updateTime: '2021-09-09 17:25:22',
+                        },
+                        {
+                            id: 5,
+                            name: '行政部',
+                            status: '1',
+                            leader: '王总',
+                            email: '',
+                            phone: '',
+                            delFlag: '0',
+                            remark: '',
+                            createTime: '2021-09-09 17:25:21',
+                            updateTime: '2021-09-09 17:25:22',
+                        },
+                        {
+                            id: 6,
+                            name: '销售部',
+                            status: '1',
+                            leader: '王总',
+                            email: '',
+                            phone: '',
+                            delFlag: '0',
+                            remark: '',
+                            createTime: '2021-09-09 17:25:21',
+                            updateTime: '2021-09-09 17:25:22',
+                        },
+                    ],
+                },
+                {
+                    id: 1,
+                    name: '总公司',
+                    status: '1',
+                    leader: '王总',
+                    email: '',
+                    phone: '18233333333',
+                    delFlag: '0',
+                    remark: '',
+                    createTime: '2021-09-09 17:25:21',
+                    updateTime: '2021-09-09 17:25:22',
+                    children: [
+                        {
+                            id: 2,
+                            name: '财务部',
+                            status: '0',
                             leader: '王总',
                             email: '',
                             phone: '',
