@@ -2,11 +2,11 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-10-28 18:40:01
+ * @LastEditTime: 2021-10-29 18:34:46
 -->
 <template>
     <!-- 工具栏 -->
-    <table-tools />
+    <table-tools v-if="tools" :tools="tools" />
     <!-- 使用`v-bind="$attrs"`可继承组件调用是所配置的attr,这里可继承el-table组件所需要的所有属性及事件以及其他未作为props的行内属性 -->
     <!-- 继承的属性配置详见文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-attributes -->
     <!-- 继承的事件文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-events -->
@@ -20,7 +20,7 @@
                     <slot :name="col.slotThead" />
                 </template>
                 <template v-if="col.slot" #default="scope">
-                    <slot :name="col.slot" :row="props.row" :_index="scope.$index" />
+                    <slot :name="col.slot" :row="props.row" :$index="scope.$index" />
                 </template>
             </el-table-column>
             <!-- 其他情况 -->
@@ -33,22 +33,22 @@
                     <slot :name="col.slotThead" />
                 </template>
                 <template v-if="col.slot" #default="scope">
-                    <slot :name="col.slot" :row="scope.row" :_index="scope.$index" />
+                    <slot :name="col.slot" :row="scope.row" :$index="scope.$index" />
                 </template>
             </el-table-column>
         </template>
     </el-table>
-    <el-pagination class="table-page-nav" background v-model:currentPage="currPage"
-        :page-sizes="[100, 200, 300, 400]" :page-size="100"
-        layout="total, sizes, prev, pager, next, jumper" :total="400"
-        @size-change="$emit('pageSizeChange')" @current-change="$emit('pageCurrentChange')">
+    <el-pagination v-if="page" class="table-page-nav" :currentPage="curr" :page-sizes="limits"
+        :page-size="limit" layout="total, sizes, prev, pager, next, jumper" :total="total"
+        background hide-on-single-page @size-change="handleSizeChange"
+        @current-change="handleCurrChange">
     </el-pagination>
 </template>
  
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref } from 'vue'
 import TableTools from './TableTools.vue'
-import { ICols } from './types'
+import { ICols, ITableTool } from './types'
 
 export default defineComponent({
     name: 'Table',
@@ -58,18 +58,55 @@ export default defineComponent({
     // 禁用组件的根元素继承 attribute
     inheritAttrs: false,
     props: {
+        // 表格列配置
         cols: {
-            // 表格列配置
             type: Array as PropType<ICols[]>,
             required: true,
         },
-        currPage: {
-            // 页码：当前页
+        tools: {
+            type: Array as PropType<ITableTool[]>,
+        },
+        // 显示分页
+        page: {
+            type: Boolean,
+            default: false,
+        },
+        // 页码：当前页
+        curr: {
             type: Number,
             default: 1,
         },
+        // 数据总条数。一般通过服务端得到
+        total: {
+            type: Number,
+            default: 500,
+        },
+        // 每页条数的选择项，这个一般不用配置
+        limits: {
+            type: Array as PropType<number[]>,
+            // 对象或数组默认值必须从一个工厂函数获取
+            default: () => [15, 30, 50, 100, 200],
+        },
     },
-    setup() {},
+    setup({ limits }, { emit }) {
+        // 每页显示的条数。值需对应 limits 参数的选项。
+        const limit = ref(limits[0])
+
+        // 每页条数变更
+        const handleSizeChange = (val: number) => {
+            limit.value = val
+            emit('pageSizeChange', val)
+        }
+        // 当前页变更
+        const handleCurrChange = (val: number) => {
+            emit('pageCurrChange', val)
+        }
+        return {
+            limit,
+            handleSizeChange,
+            handleCurrChange,
+        }
+    },
 })
 </script>
  
@@ -85,8 +122,17 @@ export default defineComponent({
     }
 }
 </style>
-<style>
+<style lang="scss">
 .el-table {
     --el-table-current-row-background-color: var(--el-color-primary-light-5);
+}
+@media screen and (max-width: 1024px) {
+    .table-page-nav {
+        .el-pagination__total,
+        .el-pagination__sizes,
+        .el-pagination__jump {
+            display: none !important;
+        }
+    }
 }
 </style>

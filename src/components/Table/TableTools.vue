@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-10-28 10:25:51
+ * @LastEditTime: 2021-10-29 18:43:10
 -->
 <template>
     <div class="table-tools">
@@ -32,7 +32,7 @@
 </template>
  
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { Refresh, Search, FolderOpened } from '@element-plus/icons'
 
 export default defineComponent({
@@ -42,7 +42,12 @@ export default defineComponent({
         Search,
         FolderOpened,
     },
-    props: {},
+    props: {
+        tools: {
+            type: Array,
+            required: true,
+        },
+    },
     setup() {},
 })
 </script>

@@ -2,8 +2,10 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-10-28 18:13:34
+ * @LastEditTime: 2021-10-29 18:42:05
  */
+
+import { Event } from "element-plus/lib/hooks/use-events";
 
 /**
  * 表格列配置
@@ -74,4 +76,15 @@ export interface ICols {
     // 允许表头插槽，且已定义表头插槽模板
     // <template #header>...</template>
     slotThead?: boolean
+}
+
+export interface ITableTool {
+    name: string
+    icon?: string
+    disabled?: boolean
+    // 位置left-左侧默认按钮；right-右侧icon按钮，默认left
+    position?: 'left' | 'right'
+    // 类型（按钮色）：默认primary，只针对position为left位置有效
+    type?: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text'
+    callback: (ev: MouseEvent) => void
 }
