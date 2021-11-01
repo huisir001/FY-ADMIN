@@ -2,7 +2,7 @@
  * @Description: 登录
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 14:52:06
- * @LastEditTime: 2021-10-21 18:33:05
+ * @LastEditTime: 2021-11-01 22:02:02
 -->
 <template>
     <div class="login">
@@ -11,12 +11,19 @@
             <h3>{{TITLE}}</h3>
             <h5>账号密码登录</h5>
             <el-form-item prop="username">
-                <el-input v-model="loginFormData.username" clearable placeholder="账号"
-                    prefix-icon="el-icon-user"></el-input>
+                <el-input v-model="loginFormData.username" clearable placeholder="账号">
+                    <template #prefix>
+                        <icon name="user" size="14" color="var(--el-text-color-placeholder)" />
+                    </template>
+                </el-input>
             </el-form-item>
             <el-form-item prop="password">
                 <el-input type="password" v-model="loginFormData.password" clearable
-                    placeholder="密码" prefix-icon="el-icon-key"></el-input>
+                    placeholder="密码">
+                    <template #prefix>
+                        <icon name="key" size="14" color="var(--el-text-color-placeholder)" />
+                    </template>
+                </el-input>
             </el-form-item>
             <el-button type="primary" round @click="onSubmit" class="btn-go">登录</el-button>
         </el-form>

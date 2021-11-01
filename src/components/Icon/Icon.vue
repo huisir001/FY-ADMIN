@@ -2,11 +2,11 @@
  * @Description: 图标动态引用封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 16:14:25
- * @LastEditTime: 2021-11-01 19:14:40
+ * @LastEditTime: 2021-11-01 21:26:20
 -->
 <template>
     <el-icon :color="color" :size="Number(size)">
-        <component :is="`icon-${component.name}`" />
+        <component :is="`icon-${name}`" />
     </el-icon>
 </template>
  

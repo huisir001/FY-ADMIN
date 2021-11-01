@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-01 12:13:26
+ * @LastEditTime: 2021-11-01 23:58:36
 -->
 <template>
     <!-- 工具栏 -->
@@ -133,6 +133,14 @@ export default defineComponent({
 <style lang="scss">
 .el-table {
     --el-table-current-row-background-color: var(--el-color-primary-light-5);
+    .cell {
+        line-height: 24px;
+        & > button {
+            min-height: 23px;
+            padding: 0;
+            border: 0;
+        }
+    }
 }
 @media screen and (max-width: 1024px) {
     .table-page-nav {

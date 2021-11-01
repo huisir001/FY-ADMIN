@@ -2,7 +2,7 @@
  * @Description: 系统配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-10-25 15:25:05
+ * @LastEditTime: 2021-11-02 00:08:22
  */
 const getUserMenus = {
     data: [{
@@ -11,7 +11,7 @@ const getUserMenus = {
         updateTime: '@datetime',
         path: '/sys', //唯一
         title: '系统配置',
-        icon: "el-icon-setting",
+        icon: "setting",
         redirectId: '002',
         parentId: null,
         keepAlive: true, //默认为true
@@ -33,7 +33,7 @@ const getUserMenus = {
         updateTime: '@datetime',
         path: '/sys/dept',
         title: '部门管理',
-        icon: "el-icon-s-operation",
+        icon: "operation",
         redirectId: null,
         parentId: '001',
         keepAlive: true,
@@ -54,7 +54,7 @@ const getUserMenus = {
         updateTime: '@datetime',
         path: '/sys/menu',
         title: '菜单管理',
-        icon: "el-icon-menu",
+        icon: "menu",
         redirectId: null,
         parentId: '001',
         keepAlive: true,
@@ -75,7 +75,7 @@ const getUserMenus = {
         updateTime: '@datetime',
         path: '/sys/role',
         title: '角色管理',
-        icon: "el-icon-user",
+        icon: "user",
         redirectId: null,
         parentId: '001',
         keepAlive: true,
@@ -96,7 +96,7 @@ const getUserMenus = {
         updateTime: '@datetime',
         path: '/sys/users',
         title: '用户管理',
-        icon: "el-icon-user",
+        icon: "user",
         redirectId: null,
         parentId: '001',
         keepAlive: true,

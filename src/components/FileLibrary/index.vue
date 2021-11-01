@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-10-11 11:21:50
+ * @LastEditTime: 2021-11-01 20:55:10
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -79,9 +79,7 @@
                         <el-form-item label="图片预览">
                             <el-image class="preview-img" :src="currFile.url"
                                 :preview-src-list="[currFile.url]" fit="contain" />
-                            <el-icon class="preview-icon">
-                                <search />
-                            </el-icon>
+                            <icon name="search" />
                         </el-form-item>
                         <el-form-item label="创建时间">
                             <span>{{currFile.createTime}}</span>
@@ -171,7 +169,6 @@ import {
     update as updateFile,
 } from '@/api/file'
 import { ElMessage } from 'element-plus'
-import { Search } from '@element-plus/icons'
 import { debounce } from '@/utils/common'
 
 export default defineComponent({
@@ -190,7 +187,6 @@ export default defineComponent({
         },
     },
     emits: ['on-selected'],
-    components: { Search },
     setup(props: any) {
         const leftLoading = ref(false)
         const saveDetailLoading = ref(false)

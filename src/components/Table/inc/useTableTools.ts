@@ -2,7 +2,7 @@
  * @Description: 表格工具栏配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 10:50:15
- * @LastEditTime: 2021-11-01 13:49:10
+ * @LastEditTime: 2021-11-01 22:04:56
  */
 import { ITableTool, TOptionOfTools } from './types'
 
@@ -12,14 +12,14 @@ export default (options: TOptionOfTools[]) => {
         {
             title: '新增',
             name: 'add',
-            icon: 'el-icon-plus',
+            icon: 'plus',
             position: 'left',
             type: 'primary',
         },
         {
             title: '展开/折叠',
             name: 'fold',
-            icon: 'el-icon-sort',
+            icon: 'sort',
             position: 'left',
             type: 'info',
             disabled: true
@@ -27,20 +27,20 @@ export default (options: TOptionOfTools[]) => {
         {
             title: '导出',
             name: 'export',
-            icon: 'el-icon-folder-opened',
+            icon: 'folder-opened',
             position: 'right',
             disabled: true
         },
         {
             title: '展开搜索表单',
             name: 'search',
-            icon: 'el-icon-search',
+            icon: 'search',
             position: 'right',
         },
         {
             title: '刷新',
             name: 'refresh',
-            icon: 'el-icon-refresh',
+            icon: 'refresh',
             position: 'right',
         },
     ]

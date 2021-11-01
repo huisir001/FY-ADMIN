@@ -2,7 +2,7 @@
  * @Description: 主题设置抽屉
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-23 14:38:39
- * @LastEditTime: 2021-10-21 17:05:07
+ * @LastEditTime: 2021-11-01 20:55:18
 -->
 <template>
     <el-drawer title="主题配置" :size="280" custom-class="zui-theme-drawer">
@@ -11,9 +11,8 @@
             <div class="set-box row">
                 <div v-for="item in THEME_OPTIONS" :key="item.name" :style="{background:item.color}"
                     class="theme-color-radio" @click="selectColor(item.name)">
-                    <el-icon v-if="curThemeColorState==item.name" color="#fff" :size="20">
-                        <Check />
-                    </el-icon>
+                    <icon v-if="curThemeColorState==item.name" name="check" color="#fff"
+                        size="20" />
                 </div>
             </div>
         </div>
@@ -32,14 +31,10 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { THEME_OPTIONS } from '@/settings'
-import { Check } from '@element-plus/icons'
 import { useStore } from '@/store'
 
 export default defineComponent({
     name: 'ThemeSetDrawer',
-    components: {
-        Check,
-    },
     setup() {
         const Store = useStore()
 

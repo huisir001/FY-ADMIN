@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-10-25 17:23:35
+ * @LastEditTime: 2021-11-02 00:20:04
 -->
 <template>
     <div class="sidebar">
@@ -17,32 +17,37 @@
                 <template v-for="menu in Menus" :key="menu.id">
                     <el-menu-item v-if="!menu.children || !menu.children.length" :index="menu.id"
                         @click="$router.push({name:menu.id})">
-                        <i v-if="menu.icon" :class="menu.icon"></i>
+                        <icon v-if="menu.icon" :name="menu.icon"
+                            color="var(--color-sidebar-font)" />
                         <template #title>
                             {{menu.title}}
                         </template>
                     </el-menu-item>
                     <el-sub-menu v-else :index="menu.id">
                         <template #title>
-                            <i v-if="menu.icon" :class="menu.icon"></i>
+                            <icon v-if="menu.icon" :name="menu.icon"
+                                color="var(--color-sidebar-font)" />
                             <span>{{menu.title}}</span>
                         </template>
                         <template v-for="sub1 in menu.children" :key="sub1.id">
                             <el-menu-item v-if="!sub1.children || !sub1.children.length"
                                 :index="sub1.id" :class="{act:$route.name==sub1.id}"
                                 @click="$router.push({name:sub1.id})">
-                                <i v-if="sub1.icon" :class="sub1.icon"></i>
+                                <icon v-if="sub1.icon" :name="sub1.icon"
+                                    color="var(--color-sidebar-font)" />
                                 {{sub1.title}}
                             </el-menu-item>
                             <el-sub-menu v-else :index="sub1.id">
                                 <template #title>
-                                    <i v-if="sub1.icon" :class="sub1.icon"></i>
+                                    <icon v-if="sub1.icon" :name="sub1.icon"
+                                        color="var(--color-sidebar-font)" />
                                     <span>{{sub1.title}}</span>
                                 </template>
                                 <el-menu-item v-for="sub2 in sub1.children" :key="sub2.id"
                                     :index="sub2.id" :class="{act:$route.name==sub2.id}"
                                     @click="$router.push({name:sub2.id})">
-                                    <i v-if="sub2.icon" :class="sub2.icon"></i>
+                                    <icon v-if="sub2.icon" :name="sub2.icon"
+                                        color="var(--color-sidebar-font)" />
                                     <span>{{sub2.title}}</span>
                                 </el-menu-item>
                             </el-sub-menu>
@@ -108,9 +113,6 @@ export default defineComponent({
             letter-spacing: 1px;
             height: 50px;
             line-height: 50px;
-            i {
-                color: var(--color-sidebar-font) !important;
-            }
             &.act {
                 color: var(--color-sidebar-menu-font-active) !important;
                 font-weight: 700;

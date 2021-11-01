@@ -2,16 +2,14 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-11-01 19:20:55
+ * @LastEditTime: 2021-11-01 20:55:28
 -->
 <template>
     <div class="navbar">
         <div class="zui-nav-left">
             <div class="sidebar-collapse-btn nav-item" :class="{reverse:sidebarCollapse}"
                 @click="sidebarCollapseChenge">
-                <el-icon :size="22" color="var(--el-text-color-regular)">
-                    <Fold />
-                </el-icon>
+                <icon name="fold" :size="22" color="var(--el-text-color-regular)" />
             </div>
             <div v-if="$store.state.theme.showBreadcrumb" class="breadCrumbs nav-item">
                 <el-breadcrumb separator="/">
@@ -23,9 +21,7 @@
         </div>
         <div class="zui-nav-right">
             <div class="theme-nav nav-item" @click="showThemeDrawer = true">
-                <el-icon :size="20" color="var(--el-text-color-regular)">
-                    <ThemeSvg />
-                </el-icon>
+                <icon name="theme" :size="20" color="var(--el-text-color-regular)" />
             </div>
             <el-dropdown size="medium" trigger="click" @command="userNavChange">
                 <div class="user-nav el-dropdown-link nav-item">
@@ -47,8 +43,6 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { useStore } from '@/store'
-import { Fold } from '@element-plus/icons'
-import ThemeSvg from '@/components/svgs/ThemeSvg.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
@@ -57,8 +51,6 @@ import ThemeSetDrawer from '@/components/ThemeSetDrawer/index.vue'
 export default defineComponent({
     name: 'Navbar',
     components: {
-        Fold,
-        ThemeSvg,
         ThemeSetDrawer,
     },
     setup() {

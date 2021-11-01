@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-01 12:34:56
+ * @LastEditTime: 2021-11-01 23:38:37
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -28,10 +28,12 @@
         <template #name="scope">
             <span>{{scope.row.name}}</span>
             <div class="sort-btn">
-                <el-button size="mini" type="text" icon="el-icon-sort-down"
-                    @click="handleMoveDowm(scope.$index, scope.row)" />
-                <el-button size="mini" type="text" icon="el-icon-sort-up"
-                    @click="handleMoveUp(scope.$index, scope.row)" />
+                <el-button size="mini" type="text" @click="handleMoveDowm(scope.$index, scope.row)">
+                    <icon name="sort-down" size="12" color="var(--el-color-primary)" />
+                </el-button>
+                <el-button size="mini" type="text" @click="handleMoveUp(scope.$index, scope.row)">
+                    <icon name="sort-up" size="12" color="var(--el-color-primary)" />
+                </el-button>
             </div>
         </template>
         <template #status="scope">
@@ -42,14 +44,14 @@
             <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="Search..." />
         </template>
         <template #todo="scope">
-            <el-button size="mini" type="text" icon="el-icon-edit"
-                @click="handleEdit(scope.$index, scope.row)">编辑
+            <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
+                <icon name="edit" size="12" color="var(--el-color-primary)" /> 编辑
             </el-button>
-            <el-button size="mini" type="text" icon="el-icon-plus"
-                @click="handleEdit(scope.$index, scope.row)">新增
+            <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
+                <icon name="plus" size="12" color="var(--el-color-primary)" /> 新增
             </el-button>
-            <el-button size="mini" type="text" icon="el-icon-delete"
-                @click="handleDelete(scope.$index, scope.row)">删除
+            <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">
+                <icon name="delete" size="12" color="var(--el-color-primary)" /> 删除
             </el-button>
         </template>
     </my-table>
@@ -247,7 +249,7 @@ export default defineComponent({
                     ],
                 },
                 {
-                    id: 1,
+                    id: 7,
                     name: '总公司',
                     status: '1',
                     leader: '王总',
@@ -259,7 +261,7 @@ export default defineComponent({
                     updateTime: '2021-09-09 17:25:22',
                     children: [
                         {
-                            id: 2,
+                            id: 8,
                             name: '财务部',
                             status: '0',
                             leader: '王总',
@@ -271,7 +273,7 @@ export default defineComponent({
                             updateTime: '2021-09-09 17:25:22',
                         },
                         {
-                            id: 3,
+                            id: 9,
                             name: '研发部',
                             status: '1',
                             leader: '王总',
@@ -283,7 +285,7 @@ export default defineComponent({
                             updateTime: '2021-09-09 17:25:22',
                         },
                         {
-                            id: 4,
+                            id: 10,
                             name: '市场部',
                             status: '1',
                             leader: '王总',
@@ -295,7 +297,7 @@ export default defineComponent({
                             updateTime: '2021-09-09 17:25:22',
                         },
                         {
-                            id: 5,
+                            id: 11,
                             name: '行政部',
                             status: '1',
                             leader: '王总',
@@ -307,7 +309,7 @@ export default defineComponent({
                             updateTime: '2021-09-09 17:25:22',
                         },
                         {
-                            id: 6,
+                            id: 12,
                             name: '销售部',
                             status: '1',
                             leader: '王总',
@@ -321,7 +323,7 @@ export default defineComponent({
                     ],
                 },
                 {
-                    id: 1,
+                    id: 13,
                     name: '总公司',
                     status: '1',
                     leader: '王总',
@@ -333,7 +335,7 @@ export default defineComponent({
                     updateTime: '2021-09-09 17:25:22',
                     children: [
                         {
-                            id: 2,
+                            id: 14,
                             name: '财务部',
                             status: '0',
                             leader: '王总',

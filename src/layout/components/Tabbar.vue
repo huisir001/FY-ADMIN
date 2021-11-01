@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-10-27 17:31:07
+ * @LastEditTime: 2021-11-01 20:59:30
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -14,38 +14,30 @@
                     v-contextMenu="ctxMenuList" @click="tabChange(index,$event.target)">
                     <span class="tabbar-item-circle" />
                     <span class="title">{{item.meta.title || item.name.toUpperCase()}}</span>
-                    <el-icon :size="14" @click.stop="deleteRoute(index,$event)">
-                        <close />
-                    </el-icon>
+                    <icon :size="14" name="close" @click.stop="deleteRoute(index,$event)" />
                 </div>
             </div>
         </div>
         <template v-if="showScrollBtn">
             <div class="scroll-btn prev" :class="{disabled:scrollBtnDisabled[0]}"
                 @click="handlePrevBtn()">
-                <el-icon>
-                    <arrow-left />
-                </el-icon>
+                <icon name="arrow-left" />
             </div>
             <div class="scroll-btn next" :class="{disabled:scrollBtnDisabled[1]}"
                 @click="handleNextBtn()">
-                <el-icon>
-                    <arrow-right />
-                </el-icon>
+                <icon name="arrow-right" />
             </div>
         </template>
     </div>
 </template>
  
 <script lang="ts">
-import { computed, defineComponent, nextTick, reactive, ref, watch } from 'vue'
-import { Close, ArrowLeft, ArrowRight } from '@element-plus/icons'
+import { computed, defineComponent, nextTick, ref, watch } from 'vue'
 import { useStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
     name: 'Tabbar',
-    components: { Close, ArrowLeft, ArrowRight },
     setup() {
         const Store = useStore()
         const Router = useRouter()

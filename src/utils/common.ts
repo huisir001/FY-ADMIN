@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-10-26 10:34:24
+ * @LastEditTime: 2021-11-01 21:16:10
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -32,8 +32,9 @@ export const rawList2Tree = (arrList: IObj[], parentIdKey: string, childKey: str
 
     (function Recursion(pid?: string) {
         const tempArr: IObj[] = []
+        // tslint:disable-next-line:prefer-for-of
         for (let index = 0; index < arrList.length; index++) {
-            const item = arrList[index];
+            const item = arrList[index]
             // 如果没有父id（第一次递归的时候）将所有父级查询出来
             // 这里认为 !item[parentIdKey] 是最顶层
             if (pid ? item[parentIdKey] === pid : !item[parentIdKey]) {
@@ -72,4 +73,4 @@ export const menu2Route = (menu: IMenu, menuList: IMenu[], Layout: any): RouteRe
  * 前端关键字模糊搜索
  */
 export const fuzzySearch = (listData: any[], inputVal: string) => listData
-    .filter(item => JSON.stringify(item).includes(inputVal))
+    .filter((item) => JSON.stringify(item).includes(inputVal))
