@@ -2,18 +2,20 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-01 12:50:34
+ * @LastEditTime: 2021-11-01 16:01:27
 -->
 <template>
     <div class="table-tools">
         <div class="left">
             <el-button v-for="btn in leftBtns" :key="btn.name" size="mini" :type="btn.type"
-                :icon="btn.icon" @click="$emit('btnClick',btn.name)">{{btn.title}}</el-button>
+                :icon="btn.icon" :disabled="btn.disabled" @click="$emit('btnClick',btn.name)">
+                {{btn.title}}</el-button>
         </div>
         <div class="right">
             <el-tooltip v-for="btn in rightBtns" :key="btn.name" effect="light" :content="btn.title"
-                placement="bottom">
-                <div :class="btn.name" @click="$emit('btnClick',btn.name)">
+                placement="bottom" :auto-close="1000">
+                <div :class="{[btn.name]:true,disabled:btn.disabled}"
+                    @click="btn.disabled?null:$emit('btnClick',btn.name)">
                     <i :class="btn.icon"></i>
                 </div>
             </el-tooltip>
@@ -41,6 +43,7 @@ export default defineComponent({
             (btns as ITableTool[]).filter((item) => item.position === 'right')
         )
         return {
+            Check: 'check',
             leftBtns,
             rightBtns,
         }
@@ -72,11 +75,15 @@ export default defineComponent({
             & + div {
                 margin-left: 10px;
             }
-            &:active {
+            &:not(.disabled):active {
                 background: var(--el-background-color-base);
                 color: var(--el-text-color-primary);
                 outline: none;
                 border: none;
+            }
+            &.disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
             }
         }
     }

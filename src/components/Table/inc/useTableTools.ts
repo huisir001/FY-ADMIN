@@ -2,7 +2,7 @@
  * @Description: 表格工具栏配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 10:50:15
- * @LastEditTime: 2021-11-01 12:47:31
+ * @LastEditTime: 2021-11-01 13:49:10
  */
 import { ITableTool, TOptionOfTools } from './types'
 
@@ -22,12 +22,14 @@ export default (options: TOptionOfTools[]) => {
             icon: 'el-icon-sort',
             position: 'left',
             type: 'info',
+            disabled: true
         },
         {
             title: '导出',
             name: 'export',
             icon: 'el-icon-folder-opened',
             position: 'right',
+            disabled: true
         },
         {
             title: '展开搜索表单',
