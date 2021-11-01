@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-10-27 18:06:57
+ * @LastEditTime: 2021-11-01 19:20:55
 -->
 <template>
     <div class="navbar">
@@ -23,7 +23,9 @@
         </div>
         <div class="zui-nav-right">
             <div class="theme-nav nav-item" @click="showThemeDrawer = true">
-                <ThemeSvg size="20" color="var(--el-text-color-regular)" />
+                <el-icon :size="20" color="var(--el-text-color-regular)">
+                    <ThemeSvg />
+                </el-icon>
             </div>
             <el-dropdown size="medium" trigger="click" @command="userNavChange">
                 <div class="user-nav el-dropdown-link nav-item">
@@ -46,7 +48,7 @@
 import { computed, defineComponent, ref } from 'vue'
 import { useStore } from '@/store'
 import { Fold } from '@element-plus/icons'
-import ThemeSvg from '@/components/svg/ThemeSvg.vue'
+import ThemeSvg from '@/components/svgs/ThemeSvg.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
