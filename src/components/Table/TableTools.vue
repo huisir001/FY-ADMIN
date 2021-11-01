@@ -2,53 +2,49 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-10-29 18:43:10
+ * @LastEditTime: 2021-11-01 12:50:34
 -->
 <template>
     <div class="table-tools">
         <div class="left">
-            <el-button size="mini" type="primary" icon="el-icon-edit">增加</el-button>
-            <el-button size="mini" type="primary" icon="el-icon-share">删除</el-button>
-            <el-button size="mini" type="primary" icon="el-icon-delete">编辑</el-button>
+            <el-button v-for="btn in leftBtns" :key="btn.name" size="mini" :type="btn.type"
+                :icon="btn.icon" @click="$emit('btnClick',btn.name)">{{btn.title}}</el-button>
         </div>
         <div class="right">
-            <div class="export">
-                <el-icon :size="16">
-                    <FolderOpened />
-                </el-icon>
-            </div>
-            <div class="searchForm">
-                <el-icon :size="16">
-                    <search />
-                </el-icon>
-            </div>
-            <div class="refresh">
-                <el-icon :size="16">
-                    <refresh />
-                </el-icon>
-            </div>
+            <el-tooltip v-for="btn in rightBtns" :key="btn.name" effect="light" :content="btn.title"
+                placement="bottom">
+                <div :class="btn.name" @click="$emit('btnClick',btn.name)">
+                    <i :class="btn.icon"></i>
+                </div>
+            </el-tooltip>
         </div>
     </div>
 </template>
  
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { Refresh, Search, FolderOpened } from '@element-plus/icons'
+import { computed, defineComponent } from 'vue'
+import { ITableTool } from './inc/types'
 
 export default defineComponent({
     name: 'TableTools',
-    components: {
-        Refresh,
-        Search,
-        FolderOpened,
-    },
     props: {
-        tools: {
+        btns: {
             type: Array,
             required: true,
         },
     },
-    setup() {},
+    setup({ btns }) {
+        const leftBtns = computed(() =>
+            (btns as ITableTool[]).filter((item) => item.position === 'left')
+        )
+        const rightBtns = computed(() =>
+            (btns as ITableTool[]).filter((item) => item.position === 'right')
+        )
+        return {
+            leftBtns,
+            rightBtns,
+        }
+    },
 })
 </script>
  
@@ -71,8 +67,16 @@ export default defineComponent({
             border: var(--el-border-base);
             cursor: pointer;
             color: var(--el-text-color-regular);
+            transition: 0.3s all;
+            outline: none !important;
             & + div {
                 margin-left: 10px;
+            }
+            &:active {
+                background: var(--el-background-color-base);
+                color: var(--el-text-color-primary);
+                outline: none;
+                border: none;
             }
         }
     }

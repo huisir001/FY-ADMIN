@@ -2,11 +2,11 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-10-29 18:34:46
+ * @LastEditTime: 2021-11-01 12:13:26
 -->
 <template>
     <!-- 工具栏 -->
-    <table-tools v-if="tools" :tools="tools" />
+    <table-tools v-if="toolBtns.length" :btns="toolBtns" @btnClick="$emit('toolsClick', $event)" />
     <!-- 使用`v-bind="$attrs"`可继承组件调用是所配置的attr,这里可继承el-table组件所需要的所有属性及事件以及其他未作为props的行内属性 -->
     <!-- 继承的属性配置详见文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-attributes -->
     <!-- 继承的事件文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-events -->
@@ -48,7 +48,8 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue'
 import TableTools from './TableTools.vue'
-import { ICols, ITableTool } from './types'
+import { ICols, TOptionOfTools } from './inc/types'
+import useTableTools from './inc/useTableTools'
 
 export default defineComponent({
     name: 'Table',
@@ -64,7 +65,8 @@ export default defineComponent({
             required: true,
         },
         tools: {
-            type: Array as PropType<ITableTool[]>,
+            type: Array as PropType<TOptionOfTools[]>,
+            default: () => [],
         },
         // 显示分页
         page: {
@@ -88,7 +90,12 @@ export default defineComponent({
             default: () => [15, 30, 50, 100, 200],
         },
     },
-    setup({ limits }, { emit }) {
+    setup({ limits, tools }, { emit }) {
+        /* 工具栏 */
+        const toolBtns = useTableTools(tools as TOptionOfTools[])
+
+        /* 分页 */
+
         // 每页显示的条数。值需对应 limits 参数的选项。
         const limit = ref(limits[0])
 
@@ -102,6 +109,7 @@ export default defineComponent({
             emit('pageCurrChange', val)
         }
         return {
+            toolBtns,
             limit,
             handleSizeChange,
             handleCurrChange,

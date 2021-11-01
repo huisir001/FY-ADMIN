@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-10-29 18:32:48
+ * @LastEditTime: 2021-11-01 12:34:56
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -23,7 +23,8 @@
 
     <my-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
         default-expand-all page :curr="currPage" :total="500" :tools="tableTools"
-        @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
+        @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
+        @pageCurrChange="pageCurrChange">
         <template #name="scope">
             <span>{{scope.row.name}}</span>
             <div class="sort-btn">
@@ -55,9 +56,10 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, reactive, Ref, ref } from 'vue'
+import { defineComponent, Ref, ref } from 'vue'
 import { fuzzySearch } from '@/utils/common'
 import MyTable from '@/components/Table/index.vue'
+import { TOptionOfTools } from '@/components/Table/inc/types'
 
 export default defineComponent({
     name: 'Dept',
@@ -107,7 +109,11 @@ export default defineComponent({
             },
         ]
 
-        const tableTools: any = []
+        const tableTools: TOptionOfTools[] = ['add', 'fold', 'export', 'search', 'refresh']
+
+        const toolsBtnClick = (btn: TOptionOfTools) => {
+            console.log(btn)
+        }
 
         const handleMoveDowm = (index: number, row: any) => {
             console.log(index, row)
@@ -145,6 +151,7 @@ export default defineComponent({
         return {
             tableCols,
             tableTools,
+            toolsBtnClick,
             currPage,
             pageSizeChange,
             pageCurrChange,

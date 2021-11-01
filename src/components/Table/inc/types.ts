@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-10-29 18:42:05
+ * @LastEditTime: 2021-11-01 12:27:34
  */
 
 import { Event } from "element-plus/lib/hooks/use-events";
@@ -79,6 +79,7 @@ export interface ICols {
 }
 
 export interface ITableTool {
+    title: string
     name: string
     icon?: string
     disabled?: boolean
@@ -86,5 +87,6 @@ export interface ITableTool {
     position?: 'left' | 'right'
     // 类型（按钮色）：默认primary，只针对position为left位置有效
     type?: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text'
-    callback: (ev: MouseEvent) => void
 }
+
+export type TOptionOfTools = 'add' | 'fold' | 'export' | 'search' | 'refresh'
