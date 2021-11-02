@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-02 17:43:28
+ * @LastEditTime: 2021-11-02 18:24:15
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -111,7 +111,7 @@ export default defineComponent({
             },
         ]
 
-        const tableTools: TOptionOfTools[] = ['add', 'fold', 'export', 'search', 'refresh']
+        const tableTools: TOptionOfTools[] = ['add', 'fold', 'search', 'export', 'refresh']
 
         const toolsBtnClick = (btn: TOptionOfTools) => {
             console.log(btn)
