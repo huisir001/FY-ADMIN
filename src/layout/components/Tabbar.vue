@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-11-01 20:59:30
+ * @LastEditTime: 2021-11-02 16:56:32
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -14,18 +14,19 @@
                     v-contextMenu="ctxMenuList" @click="tabChange(index,$event.target)">
                     <span class="tabbar-item-circle" />
                     <span class="title">{{item.meta.title || item.name.toUpperCase()}}</span>
-                    <icon :size="14" name="close" @click.stop="deleteRoute(index,$event)" />
+                    <icon :size="14" name="close" class="icon"
+                        @click.stop="deleteRoute(index,$event)" />
                 </div>
             </div>
         </div>
         <template v-if="showScrollBtn">
             <div class="scroll-btn prev" :class="{disabled:scrollBtnDisabled[0]}"
                 @click="handlePrevBtn()">
-                <icon name="arrow-left" />
+                <icon name="arrow-left" class="icon" />
             </div>
             <div class="scroll-btn next" :class="{disabled:scrollBtnDisabled[1]}"
                 @click="handleNextBtn()">
-                <icon name="arrow-right" />
+                <icon name="arrow-right" class="icon" />
             </div>
         </template>
     </div>
@@ -264,7 +265,7 @@ $--tab-height: 30px;
 $--tab-border: 1px solid var(--color-grey-lighter);
 @mixin zui-tabbar-item-act {
     color: var(--el-text-color-regular);
-    &:deep(.el-icon) {
+    .icon {
         width: 14px;
         margin-left: 5px;
     }
@@ -284,7 +285,7 @@ $--tab-border: 1px solid var(--color-grey-lighter);
         width: $--tab-height;
         height: $--tab-height;
         top: 0;
-        &:deep(.el-icon) {
+        .icon {
             color: var(--el-text-color-regular);
             &:hover {
                 color: var(--el-color-primary);
@@ -336,7 +337,7 @@ $--tab-border: 1px solid var(--color-grey-lighter);
                     text-overflow: ellipsis;
                     overflow: hidden;
                 }
-                &:deep(.el-icon) {
+                .icon {
                     transition: 0.3s all;
                     width: 0;
                     margin-left: 0;

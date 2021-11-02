@@ -2,7 +2,7 @@
  * @Description: 表格工具栏配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 10:50:15
- * @LastEditTime: 2021-11-01 22:04:56
+ * @LastEditTime: 2021-11-02 17:59:40
  */
 import { ITableTool, TOptionOfTools } from './types'
 
@@ -27,7 +27,7 @@ export default (options: TOptionOfTools[]) => {
         {
             title: '导出',
             name: 'export',
-            icon: 'folder-opened',
+            icon: 'export',
             position: 'right',
             disabled: true
         },

@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-01 23:38:37
+ * @LastEditTime: 2021-11-02 17:43:28
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -22,17 +22,17 @@
     </el-form> -->
 
     <my-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
-        default-expand-all page :curr="currPage" :total="500" :tools="tableTools"
-        @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
-        @pageCurrChange="pageCurrChange">
+        default-expand-all page :curr="currPage" :total="500" :limits="[16, 30, 50, 100, 200]"
+        :tools="tableTools" height="calc(100% - 95px)" @toolsClick="toolsBtnClick"
+        @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
         <template #name="scope">
             <span>{{scope.row.name}}</span>
             <div class="sort-btn">
                 <el-button size="mini" type="text" @click="handleMoveDowm(scope.$index, scope.row)">
-                    <icon name="sort-down" size="12" color="var(--el-color-primary)" />
+                    <icon name="sort-down" size="13" color="var(--el-color-primary)" />
                 </el-button>
                 <el-button size="mini" type="text" @click="handleMoveUp(scope.$index, scope.row)">
-                    <icon name="sort-up" size="12" color="var(--el-color-primary)" />
+                    <icon name="sort-up" size="13" color="var(--el-color-primary)" />
                 </el-button>
             </div>
         </template>
@@ -45,13 +45,13 @@
         </template>
         <template #todo="scope">
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <icon name="edit" size="12" color="var(--el-color-primary)" /> 编辑
+                <icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
             </el-button>
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <icon name="plus" size="12" color="var(--el-color-primary)" /> 新增
+                <icon name="plus" size="13" color="var(--el-color-primary)" /> 新增
             </el-button>
             <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">
-                <icon name="delete" size="12" color="var(--el-color-primary)" /> 删除
+                <icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
             </el-button>
         </template>
     </my-table>
@@ -124,7 +124,7 @@ export default defineComponent({
         // 当前页
         const currPage = ref(1)
         // 每页条数
-        const limit = ref(15)
+        const limit = ref(16)
 
         // 当前页切换
         const pageCurrChange = (val: number) => {
@@ -336,6 +336,18 @@ export default defineComponent({
                     children: [
                         {
                             id: 14,
+                            name: '财务部',
+                            status: '0',
+                            leader: '王总',
+                            email: '',
+                            phone: '',
+                            delFlag: '0',
+                            remark: '',
+                            createTime: '2021-09-09 17:25:21',
+                            updateTime: '2021-09-09 17:25:22',
+                        },
+                        {
+                            id: 15,
                             name: '财务部',
                             status: '0',
                             leader: '王总',

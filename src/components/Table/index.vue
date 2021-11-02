@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-01 23:58:36
+ * @LastEditTime: 2021-11-02 17:38:36
 -->
 <template>
     <!-- 工具栏 -->
@@ -10,7 +10,7 @@
     <!-- 使用`v-bind="$attrs"`可继承组件调用是所配置的attr,这里可继承el-table组件所需要的所有属性及事件以及其他未作为props的行内属性 -->
     <!-- 继承的属性配置详见文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-attributes -->
     <!-- 继承的事件文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-events -->
-    <el-table v-bind="$attrs" size="mini" border>
+    <el-table v-bind="$attrs" size="small" border>
         <template v-for="(col,index) in cols" :key="index">
             <!-- 配置了type -> 多选框、引索、展开按钮 -->
             <el-table-column v-if="col.type" :type="col.type" :width="col.width"
