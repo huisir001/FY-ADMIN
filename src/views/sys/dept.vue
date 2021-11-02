@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-02 18:24:15
+ * @LastEditTime: 2021-11-02 18:28:50
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -22,9 +22,9 @@
     </el-form> -->
 
     <my-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
-        default-expand-all page :curr="currPage" :total="500" :limits="[16, 30, 50, 100, 200]"
-        :tools="tableTools" height="calc(100% - 95px)" @toolsClick="toolsBtnClick"
-        @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
+        default-expand-all page :curr="currPage" :total="500" :tools="tableTools"
+        height="calc(100% - 135px)" @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
+        @pageCurrChange="pageCurrChange">
         <template #name="scope">
             <span>{{scope.row.name}}</span>
             <div class="sort-btn">
@@ -124,7 +124,7 @@ export default defineComponent({
         // 当前页
         const currPage = ref(1)
         // 每页条数
-        const limit = ref(16)
+        const limit = ref(15)
 
         // 当前页切换
         const pageCurrChange = (val: number) => {
@@ -190,18 +190,6 @@ export default defineComponent({
                             id: 2,
                             name: '财务部',
                             status: '0',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 3,
-                            name: '研发部',
-                            status: '1',
                             leader: '王总',
                             email: '',
                             phone: '',
