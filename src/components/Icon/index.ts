@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2021-11-02 00:08:17
+ * @LastEditTime: 2021-11-02 18:00:04
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -39,7 +39,8 @@ import {
  * my-icons
  */
 import {
-    Theme
+    Theme,
+    Export
 } from '../svgs/index'
 
 const components = [
@@ -65,6 +66,7 @@ const components = [
     Menu,
     /* my-icons */
     Theme,
+    Export
 ]
 
 export default (app: App<any>) => {
