@@ -2,7 +2,7 @@
  * @Description: 基础样式
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-11-02 18:57:52
+ * @LastEditTime: 2021-11-03 13:04:13
  */
 
 /* 自定义变量 */
@@ -128,4 +128,9 @@ h6 {
   align-items: center;
   justify-content: center;
   width: 20px;
+}
+
+.el-input .el-input__icon {
+  line-height: 1 !important;
+  height: unset !important;
 }

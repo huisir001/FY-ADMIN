@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-02 18:28:50
+ * @LastEditTime: 2021-11-03 13:21:01
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -23,7 +23,7 @@
 
     <my-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
         default-expand-all page :curr="currPage" :total="500" :tools="tableTools"
-        height="calc(100% - 135px)" @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
+        height="calc(100% - 45px)" @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
         @pageCurrChange="pageCurrChange">
         <template #name="scope">
             <span>{{scope.row.name}}</span>
