@@ -2,29 +2,11 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-03 17:59:47
+ * @LastEditTime: 2021-11-03 18:19:55
 -->
 <template>
-    <!-- <el-form :inline="true">
-        <el-form-item label="部门名称">
-            <el-input v-model="searchFormParams.name" placeholder="请输入部门名称"></el-input>
-        </el-form-item>
-        <el-form-item label="状态">
-            <el-select v-model="searchFormParams.status" placeholder="选择部门状态">
-                <el-option label="正常" value="1"></el-option>
-                <el-option label="停用" value="0"></el-option>
-            </el-select>
-        </el-form-item>
-        <el-form-item>
-            <el-button type="primary" @click="handleSearch">搜索</el-button>
-            <el-button @click="handleReset">重置</el-button>
-        </el-form-item>
-    </el-form> -->
-
     <z-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
-        default-expand-all page :curr="currPage" :total="500" :tools="tableTools"
-        height="calc(100% - 45px)" @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
-        @pageCurrChange="pageCurrChange">
+        :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
         <template #name="scope">
             <span>{{scope.row.name}}</span>
             <div class="sort-btn">
@@ -41,6 +23,7 @@
             <el-tag v-else size="small" type="danger">停用</el-tag>
         </template>
         <template #todoThead>
+            <!-- 不分页情况下可以使用本地模糊搜索 -->
             <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="Search..." />
         </template>
         <template #todo="scope">
@@ -107,31 +90,16 @@ export default defineComponent({
             },
         ]
 
-        const tableTools: TOptionOfTools[] = ['add', 'fold', 'search', 'export', 'refresh']
+        // 表格工具栏
+        const tableTools: TOptionOfTools[] = ['add', 'fold', 'export', 'refresh']
 
+        // 工具栏点击
         const toolsBtnClick = (btn: TOptionOfTools) => {
             console.log(btn)
         }
 
         const handleMoveDowm = (index: number, row: any) => {
             console.log(index, row)
-        }
-
-        // 当前页
-        const currPage = ref(1)
-        // 每页条数
-        const limit = ref(15)
-
-        // 当前页切换
-        const pageCurrChange = (val: number) => {
-            console.log('currPage', val)
-            currPage.value = val
-        }
-
-        // 每页条数切换
-        const pageSizeChange = (val: number) => {
-            console.log('limit', val)
-            limit.value = val
         }
 
         // 搜索
@@ -150,9 +118,6 @@ export default defineComponent({
             tableCols,
             tableTools,
             toolsBtnClick,
-            currPage,
-            pageSizeChange,
-            pageCurrChange,
             handleMoveDowm,
             fuzzySearchWord,
             fuzzySearch,
