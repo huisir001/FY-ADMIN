@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2021-10-26 14:04:32
+ * @LastEditTime: 2021-11-03 19:26:43
 -->
 <template>
     <div class="content">
@@ -37,8 +37,9 @@ export default defineComponent({
 </script>
  
 <style scoped lang="scss">
+@import '@/assets/styles/mixin.scss';
 .content {
-    // @include scrollBar;
+    @include scrollBar;
     width: calc(100% - 20px);
     height: calc(100% - 100px);
     margin: 10px;

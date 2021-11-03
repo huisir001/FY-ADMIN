@@ -2,7 +2,7 @@
  * @Description: 混合宏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-26 18:06:07
+ * @LastEditTime: 2021-11-03 19:30:49
  */
 
 /** 
@@ -23,7 +23,7 @@
  */
 @mixin scrollBar {
   &::-webkit-scrollbar-track-piece {
-    background: #d3dce6;
+    background: transparent;
     border-radius: 20px;
   }
 
@@ -32,7 +32,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #99a9bf;
+    background: #c8c8c878;
     border-radius: 20px;
   }
 }
