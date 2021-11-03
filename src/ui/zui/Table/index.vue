@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-03 13:55:42
+ * @LastEditTime: 2021-11-03 17:59:30
 -->
 <template>
     <!-- 工具栏 -->
@@ -49,14 +49,17 @@
  
 <script lang="ts">
 import { computed, defineComponent, nextTick, PropType, Ref, ref, watch } from 'vue'
+import { ElTable, ElTableColumn } from 'element-plus'
 import TableTools from './TableTools.vue'
-import { ICols, TOptionOfTools } from './inc/types'
-import useTableTools from './inc/useTableTools'
+import { ICols, TOptionOfTools } from './types'
+import useTableTools from './useTableTools'
 import { useStore } from '@/store'
 
 export default defineComponent({
-    name: 'ZTable',
+    name: 'Table',
     components: {
+        ElTable,
+        ElTableColumn,
         TableTools,
     },
     // 禁用组件的根元素继承 attribute

@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-02 17:48:19
+ * @LastEditTime: 2021-11-03 17:59:33
 -->
 <template>
     <div class="table-tools">
@@ -26,7 +26,7 @@
  
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { ITableTool } from './inc/types'
+import { ITableTool } from './types'
 
 export default defineComponent({
     name: 'TableTools',

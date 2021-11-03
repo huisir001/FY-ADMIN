@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-03 13:56:24
+ * @LastEditTime: 2021-11-03 17:59:47
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -60,14 +60,10 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue'
 import { fuzzySearch } from '@/utils/common'
-import ZTable from '@/components/Table/index.vue'
-import { TOptionOfTools } from '@/components/Table/inc/types'
+import { TOptionOfTools } from '@/ui/zui/Table/types'
 
 export default defineComponent({
     name: 'Dept',
-    components: {
-        ZTable,
-    },
     setup() {
         // 模糊搜索
         const fuzzySearchWord: Ref<string> = ref('')

@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-11-03 13:32:30
+ * @LastEditTime: 2021-11-03 17:36:27
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -176,7 +176,7 @@ import { ElMessage } from 'element-plus'
 import { debounce } from '@/utils/common'
 
 export default defineComponent({
-    name: 'ZFileLibrary',
+    name: 'FileLibrary',
     props: {
         /**
          * 文件类型，只支持上传图片和zip压缩包
