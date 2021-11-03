@@ -2,11 +2,15 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-03 17:59:30
+ * @LastEditTime: 2021-11-03 18:54:38
 -->
 <template>
     <!-- 工具栏 -->
-    <table-tools v-if="toolBtns.length" :btns="toolBtns" @btnClick="$emit('toolsClick', $event)" />
+    <table-tools v-if="toolBtns.length" :btns="toolBtns" @btnClick="$emit('toolsClick', $event)">
+        <template #search>
+            <slot name="search" />
+        </template>
+    </table-tools>
     <!-- 使用`v-bind="$attrs"`可继承组件调用是所配置的attr,这里可继承el-table组件所需要的所有属性及事件以及其他未作为props的行内属性 -->
     <!-- 继承的属性配置详见文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-attributes -->
     <!-- 继承的事件文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-events -->

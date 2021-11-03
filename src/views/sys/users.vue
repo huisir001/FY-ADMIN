@@ -2,29 +2,31 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-03 18:21:00
+ * @LastEditTime: 2021-11-03 18:59:03
 -->
 <template>
-    <!-- <el-form :inline="true">
-        <el-form-item label="部门名称">
-            <el-input v-model="searchFormParams.name" placeholder="请输入部门名称"></el-input>
-        </el-form-item>
-        <el-form-item label="状态">
-            <el-select v-model="searchFormParams.status" placeholder="选择部门状态">
-                <el-option label="正常" value="1"></el-option>
-                <el-option label="停用" value="0"></el-option>
-            </el-select>
-        </el-form-item>
-        <el-form-item>
-            <el-button type="primary" @click="handleSearch">搜索</el-button>
-            <el-button @click="handleReset">重置</el-button>
-        </el-form-item>
-    </el-form> -->
-
     <z-table :cols="tableCols" :data="tableData" row-key="id" default-expand-all page
         :curr="currPage" :total="500" :tools="tableTools" height="calc(100% - 45px)"
         @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
         @pageCurrChange="pageCurrChange">
+        <template #search>
+            <!-- <el-form :inline="true">
+                <el-form-item label="部门名称">
+                    <el-input v-model="searchFormParams.name" placeholder="请输入部门名称"></el-input>
+                </el-form-item>
+                <el-form-item label="状态">
+                    <el-select v-model="searchFormParams.status" placeholder="选择部门状态">
+                        <el-option label="正常" value="1"></el-option>
+                        <el-option label="停用" value="0"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="handleSearch">搜索</el-button>
+                    <el-button @click="handleReset">重置</el-button>
+                </el-form-item>
+            </el-form> -->
+            <el-button type="primary">搜索</el-button>
+        </template>
         <template #name="scope">
             <span>{{scope.row.name}}</span>
             <div class="sort-btn">

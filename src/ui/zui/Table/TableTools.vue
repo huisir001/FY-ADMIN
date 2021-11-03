@@ -2,9 +2,12 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-03 17:59:33
+ * @LastEditTime: 2021-11-03 19:02:37
 -->
 <template>
+    <div v-if="showSearchForm" class="search-from-box">
+        <slot name="search" />
+    </div>
     <div class="table-tools">
         <div class="left">
             <el-button v-for="btn in leftBtns" :key="btn.name" size="mini" :type="btn.type"
@@ -16,7 +19,7 @@
             <el-tooltip v-for="btn in rightBtns" :key="btn.name" effect="light" :content="btn.title"
                 placement="top" :auto-close="1000">
                 <div :class="{[btn.name]:true,disabled:btn.disabled}"
-                    @click="btn.disabled?null:$emit('btnClick',btn.name)">
+                    @click="handleRightBtnClick(btn)">
                     <z-icon :name="btn.icon" color="var(--el-text-color-regular)" size="14" />
                 </div>
             </el-tooltip>
@@ -25,7 +28,7 @@
 </template>
  
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { ITableTool } from './types'
 
 export default defineComponent({
@@ -36,23 +39,45 @@ export default defineComponent({
             required: true,
         },
     },
-    setup({ btns }) {
+    setup({ btns }, { emit }) {
+        // 左侧按钮组
         const leftBtns = computed(() =>
             (btns as ITableTool[]).filter((item) => item.position === 'left')
         )
+
+        // 右侧按钮组
         const rightBtns = computed(() =>
             (btns as ITableTool[]).filter((item) => item.position === 'right')
         )
+
+        // 搜索表单栏状态
+        const showSearchForm = ref(false)
+
+        // 右侧按钮点击
+        const handleRightBtnClick = (btn: ITableTool) => {
+            if (!btn.disabled) {
+                if (btn.name === 'search') {
+                    showSearchForm.value = !showSearchForm.value
+                } else {
+                    emit('btnClick', btn.name)
+                }
+            }
+        }
+
         return {
-            Check: 'check',
             leftBtns,
             rightBtns,
+            showSearchForm,
+            handleRightBtnClick,
         }
     },
 })
 </script>
  
 <style scoped lang="scss">
+.search-from-box {
+    margin-bottom: 15px;
+}
 .table-tools {
     display: flex;
     justify-content: space-between;
