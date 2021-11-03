@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-11-03 09:56:04
+ * @LastEditTime: 2021-11-03 13:32:30
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -22,7 +22,7 @@
                     <el-input v-model="fileQueryParams.name" placeholder="在当前类目中搜索" size="mini"
                         clearable>
                         <template #suffix>
-                            <icon name="search" size="14"
+                            <z-icon name="search" size="14"
                                 color="var(--el-text-color-placeholder)" />
                         </template>
                     </el-input>
@@ -31,7 +31,7 @@
                         <template #reference>
                             <el-button :disabled="selectedIndex<0" size="mini" type="danger"
                                 :loading="delBtnLoading">
-                                <icon name="delete" size="13" color="white" /> 删除
+                                <z-icon name="delete" size="13" color="white" /> 删除
                             </el-button>
                         </template>
                     </el-popconfirm>
@@ -56,7 +56,7 @@
                         </div>
                         <template #reference>
                             <div class="thumbnail upload">
-                                <icon name="plus" size="30"
+                                <z-icon name="plus" size="30"
                                     color="var(--el-text-color-placeholder)" />
                             </div>
                         </template>
@@ -83,7 +83,7 @@
                         <el-form-item label="图片预览">
                             <el-image class="preview-img" :src="currFile.url"
                                 :preview-src-list="[currFile.url]" fit="contain" />
-                            <icon name="search" size="14" color="#fff" class="preview-icon" />
+                            <z-icon name="search" size="14" color="#fff" class="preview-icon" />
                         </el-form-item>
                         <el-form-item label="创建时间">
                             <span>{{currFile.createTime}}</span>
@@ -176,7 +176,7 @@ import { ElMessage } from 'element-plus'
 import { debounce } from '@/utils/common'
 
 export default defineComponent({
-    name: 'FileLibrary',
+    name: 'ZFileLibrary',
     props: {
         /**
          * 文件类型，只支持上传图片和zip压缩包

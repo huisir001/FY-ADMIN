@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-03 13:27:15
+ * @LastEditTime: 2021-11-03 13:55:42
 -->
 <template>
     <!-- 工具栏 -->
@@ -55,7 +55,7 @@ import useTableTools from './inc/useTableTools'
 import { useStore } from '@/store'
 
 export default defineComponent({
-    name: 'Table',
+    name: 'ZTable',
     components: {
         TableTools,
     },

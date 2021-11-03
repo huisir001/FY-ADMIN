@@ -14,7 +14,7 @@
                     v-contextMenu="ctxMenuList" @click="tabChange(index,$event.target)">
                     <span class="tabbar-item-circle" />
                     <span class="title">{{item.meta.title || item.name.toUpperCase()}}</span>
-                    <icon :size="14" name="close" class="icon"
+                    <z-icon :size="14" name="close" class="icon"
                         @click.stop="deleteRoute(index,$event)" />
                 </div>
             </div>
@@ -22,11 +22,11 @@
         <template v-if="showScrollBtn">
             <div class="scroll-btn prev" :class="{disabled:scrollBtnDisabled[0]}"
                 @click="handlePrevBtn()">
-                <icon name="arrow-left" class="icon" />
+                <z-icon name="arrow-left" class="icon" />
             </div>
             <div class="scroll-btn next" :class="{disabled:scrollBtnDisabled[1]}"
                 @click="handleNextBtn()">
-                <icon name="arrow-right" class="icon" />
+                <z-icon name="arrow-right" class="icon" />
             </div>
         </template>
     </div>

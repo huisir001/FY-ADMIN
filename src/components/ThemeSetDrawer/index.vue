@@ -11,7 +11,7 @@
             <div class="set-box row">
                 <div v-for="item in THEME_OPTIONS" :key="item.name" :style="{background:item.color}"
                     class="theme-color-radio" @click="selectColor(item.name)">
-                    <icon v-if="curThemeColorState==item.name" name="check" color="#fff"
+                    <z-icon v-if="curThemeColorState==item.name" name="check" color="#fff"
                         size="20" />
                 </div>
             </div>

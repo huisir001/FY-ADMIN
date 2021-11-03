@@ -2,13 +2,13 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2021-11-02 18:00:04
+ * @LastEditTime: 2021-11-03 13:52:27
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
 
 import { App } from '@vue/runtime-core'
-import Icon from './Icon.vue'
+import ZIcon from './Icon.vue'
 
 /**
  * element-plus/icons
@@ -71,7 +71,7 @@ const components = [
 
 export default (app: App<any>) => {
     // Icon封装
-    app.component('Icon', Icon)
+    app.component('ZIcon', ZIcon)
 
     // 组件注册
     components.forEach((component) => {

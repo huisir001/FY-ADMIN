@@ -9,7 +9,7 @@
         <div class="left">
             <el-button v-for="btn in leftBtns" :key="btn.name" size="mini" :type="btn.type"
                 :disabled="btn.disabled" @click="$emit('btnClick',btn.name)">
-                <icon :name="btn.icon" size="13" color="white" /> {{btn.title}}
+                <z-icon :name="btn.icon" size="13" color="white" /> {{btn.title}}
             </el-button>
         </div>
         <div class="right">
@@ -17,7 +17,7 @@
                 placement="top" :auto-close="1000">
                 <div :class="{[btn.name]:true,disabled:btn.disabled}"
                     @click="btn.disabled?null:$emit('btnClick',btn.name)">
-                    <icon :name="btn.icon" color="var(--el-text-color-regular)" size="14" />
+                    <z-icon :name="btn.icon" color="var(--el-text-color-regular)" size="14" />
                 </div>
             </el-tooltip>
         </div>

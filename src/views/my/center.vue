@@ -2,16 +2,16 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-10-14 15:30:24
+ * @LastEditTime: 2021-11-03 13:33:51
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" class="zui-my-tabs">
         <el-tab-pane label="基本信息" name="base">
             <el-form label-position="left" label-width="50px" :model="userInfoFormData">
                 <el-form-item label="头像" style="height:64px;">
-                    <FileLibrary type="pic" @on-selected="avatarSelected">
+                    <z-file-library type="pic" @on-selected="avatarSelected">
                         <el-image class="avatar" :src="userInfoFormData.avatar||defaultAvatar" />
-                    </FileLibrary>
+                    </z-file-library>
                 </el-form-item>
                 <el-form-item label="账号">
                     <el-input v-model="userInfoFormData.username" placeholder="请输入账号，用于登录">
@@ -88,11 +88,11 @@ import { defineComponent, reactive, ref } from 'vue'
 import { useStore } from '@/store'
 // import { ElMessage } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
-import FileLibrary from '@/components/FileLibrary/index.vue'
+import ZFileLibrary from '@/components/FileLibrary/index.vue'
 
 export default defineComponent({
     name: 'Center',
-    components: { FileLibrary },
+    components: { ZFileLibrary },
     setup() {
         const Store = useStore()
         const activeTabName = ref('base')

@@ -2,7 +2,7 @@
  * @Description: 图标动态引用封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 16:14:25
- * @LastEditTime: 2021-11-01 21:26:20
+ * @LastEditTime: 2021-11-03 13:49:32
 -->
 <template>
     <el-icon :color="color" :size="Number(size)">
@@ -14,7 +14,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: 'Icon',
+    name: 'ZIcon',
     props: {
         name: {
             type: String,

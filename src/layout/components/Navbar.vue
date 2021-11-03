@@ -9,7 +9,7 @@
         <div class="zui-nav-left">
             <div class="sidebar-collapse-btn nav-item" :class="{reverse:sidebarCollapse}"
                 @click="sidebarCollapseChenge">
-                <icon name="fold" :size="22" color="var(--el-text-color-regular)" />
+                <z-icon name="fold" :size="22" color="var(--el-text-color-regular)" />
             </div>
             <div v-if="$store.state.theme.showBreadcrumb" class="breadCrumbs nav-item">
                 <el-breadcrumb separator="/">
@@ -21,7 +21,7 @@
         </div>
         <div class="zui-nav-right">
             <div class="theme-nav nav-item" @click="showThemeDrawer = true">
-                <icon name="theme" :size="20" color="var(--el-text-color-regular)" />
+                <z-icon name="theme" :size="20" color="var(--el-text-color-regular)" />
             </div>
             <el-dropdown size="medium" trigger="click" @command="userNavChange">
                 <div class="user-nav el-dropdown-link nav-item">

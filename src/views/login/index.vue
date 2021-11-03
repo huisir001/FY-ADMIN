@@ -13,7 +13,7 @@
             <el-form-item prop="username">
                 <el-input v-model="loginFormData.username" clearable placeholder="账号">
                     <template #prefix>
-                        <icon name="user" size="14" color="var(--el-text-color-placeholder)" />
+                        <z-icon name="user" size="14" color="var(--el-text-color-placeholder)" />
                     </template>
                 </el-input>
             </el-form-item>
@@ -21,7 +21,7 @@
                 <el-input type="password" v-model="loginFormData.password" clearable
                     placeholder="密码">
                     <template #prefix>
-                        <icon name="key" size="14" color="var(--el-text-color-placeholder)" />
+                        <z-icon name="key" size="14" color="var(--el-text-color-placeholder)" />
                     </template>
                 </el-input>
             </el-form-item>

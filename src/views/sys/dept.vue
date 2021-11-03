@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-03 13:21:01
+ * @LastEditTime: 2021-11-03 13:56:24
 -->
 <template>
     <!-- <el-form :inline="true">
@@ -21,7 +21,7 @@
         </el-form-item>
     </el-form> -->
 
-    <my-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
+    <z-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
         default-expand-all page :curr="currPage" :total="500" :tools="tableTools"
         height="calc(100% - 45px)" @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
         @pageCurrChange="pageCurrChange">
@@ -29,10 +29,10 @@
             <span>{{scope.row.name}}</span>
             <div class="sort-btn">
                 <el-button size="mini" type="text" @click="handleMoveDowm(scope.$index, scope.row)">
-                    <icon name="sort-down" size="13" color="var(--el-color-primary)" />
+                    <z-icon name="sort-down" size="13" color="var(--el-color-primary)" />
                 </el-button>
                 <el-button size="mini" type="text" @click="handleMoveUp(scope.$index, scope.row)">
-                    <icon name="sort-up" size="13" color="var(--el-color-primary)" />
+                    <z-icon name="sort-up" size="13" color="var(--el-color-primary)" />
                 </el-button>
             </div>
         </template>
@@ -45,28 +45,28 @@
         </template>
         <template #todo="scope">
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
+                <z-icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
             </el-button>
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <icon name="plus" size="13" color="var(--el-color-primary)" /> 新增
+                <z-icon name="plus" size="13" color="var(--el-color-primary)" /> 新增
             </el-button>
             <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">
-                <icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
+                <z-icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
             </el-button>
         </template>
-    </my-table>
+    </z-table>
 </template>
  
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue'
 import { fuzzySearch } from '@/utils/common'
-import MyTable from '@/components/Table/index.vue'
+import ZTable from '@/components/Table/index.vue'
 import { TOptionOfTools } from '@/components/Table/inc/types'
 
 export default defineComponent({
     name: 'Dept',
     components: {
-        MyTable,
+        ZTable,
     },
     setup() {
         // 模糊搜索
