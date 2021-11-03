@@ -2,7 +2,7 @@
  * @Description: 入口模板
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-09-13 17:20:52
+ * @LastEditTime: 2021-11-03 11:42:38
 -->
 <template>
     <router-view />
@@ -11,6 +11,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
+import useWinResize from '@/hooks/useWinResize'
 
 export default defineComponent({
     name: 'App',
@@ -20,6 +21,8 @@ export default defineComponent({
         store.commit('theme/setStates', {
             color: store.state.theme.color,
         })
+        // 执行监听窗口resize
+        useWinResize()
     },
 })
 </script>

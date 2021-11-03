@@ -2,7 +2,7 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-10-25 17:38:56
+ * @LastEditTime: 2021-11-03 11:41:27
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -31,6 +31,10 @@ export const sys = {
          * 屏幕可视区宽度
          */
         visibleAreaWidth: window.innerWidth,
+        /**
+         * 屏幕可视区高度
+         */
+        visibleAreaHeight: window.innerHeight,
         /**
          * 历史路由
          */

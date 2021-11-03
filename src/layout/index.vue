@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2021-10-26 14:00:45
+ * @LastEditTime: 2021-11-03 11:42:24
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -27,7 +27,6 @@ import Sidebar from './components/Sidebar.vue'
 import Navbar from './components/Navbar.vue'
 import Tabbar from './components/Tabbar.vue'
 import Content from './components/Content.vue'
-import useWinResize from '../hooks/useWinResize'
 export default defineComponent({
     name: '',
     components: {
@@ -38,11 +37,6 @@ export default defineComponent({
     },
     setup() {
         const Store = useStore()
-
-        // 执行监听窗口resize
-        onMounted(() => {
-            useWinResize()
-        })
 
         // 历史路由数
         const showTabbar = computed(
