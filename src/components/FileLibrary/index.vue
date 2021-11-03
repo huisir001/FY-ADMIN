@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-11-02 18:52:24
+ * @LastEditTime: 2021-11-03 09:56:04
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -83,7 +83,7 @@
                         <el-form-item label="图片预览">
                             <el-image class="preview-img" :src="currFile.url"
                                 :preview-src-list="[currFile.url]" fit="contain" />
-                            <icon name="search" />
+                            <icon name="search" size="14" color="#fff" class="preview-icon" />
                         </el-form-item>
                         <el-form-item label="创建时间">
                             <span>{{currFile.createTime}}</span>
