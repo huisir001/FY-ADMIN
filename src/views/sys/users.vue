@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-03 18:59:03
+ * @LastEditTime: 2021-11-04 15:47:00
 -->
 <template>
     <z-table :cols="tableCols" :data="tableData" row-key="id" default-expand-all page
@@ -10,33 +10,47 @@
         @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
         @pageCurrChange="pageCurrChange">
         <template #search>
-            <!-- <el-form :inline="true">
-                <el-form-item label="部门名称">
-                    <el-input v-model="searchFormParams.name" placeholder="请输入部门名称"></el-input>
+            <el-form :inline="true">
+                <el-form-item label="账号">
+                    <el-input v-model="searchParams.username" placeholder="请输入账号"></el-input>
+                </el-form-item>
+                <el-form-item label="昵称">
+                    <el-input v-model="searchParams.nickname" placeholder="请输入昵称"></el-input>
+                </el-form-item>
+                <el-form-item label="手机号码">
+                    <el-input v-model="searchParams.phone" placeholder="请输入手机号码"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱">
+                    <el-input v-model="searchParams.email" placeholder="请输入邮箱"></el-input>
+                </el-form-item>
+                <el-form-item label="用户ID">
+                    <el-input v-model="searchParams.id" placeholder="请输入用户ID"></el-input>
+                </el-form-item>
+                <el-form-item label="性别">
+                    <el-select v-model="searchParams.sex" placeholder="选择用户性别">
+                        <el-option label="全部" value=""></el-option>
+                        <el-option label="保密" value="0"></el-option>
+                        <el-option label="男" value="1"></el-option>
+                        <el-option label="女" value="2"></el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="状态">
-                    <el-select v-model="searchFormParams.status" placeholder="选择部门状态">
+                    <el-select v-model="searchParams.status" placeholder="选择用户状态">
+                        <el-option label="全部" value=""></el-option>
                         <el-option label="正常" value="1"></el-option>
-                        <el-option label="停用" value="0"></el-option>
+                        <el-option label="冻结" value="0"></el-option>
                     </el-select>
+                </el-form-item>
+                <el-form-item label="创建时间">
+                    <el-date-picker v-model="searchParams.dateRange" type="daterange"
+                        range-separator="-" start-placeholder="开始" end-placeholder="结束">
+                    </el-date-picker>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="handleSearch">搜索</el-button>
                     <el-button @click="handleReset">重置</el-button>
                 </el-form-item>
-            </el-form> -->
-            <el-button type="primary">搜索</el-button>
-        </template>
-        <template #name="scope">
-            <span>{{scope.row.name}}</span>
-            <div class="sort-btn">
-                <el-button size="mini" type="text" @click="handleMoveDowm(scope.$index, scope.row)">
-                    <z-icon name="sort-down" size="13" color="var(--el-color-primary)" />
-                </el-button>
-                <el-button size="mini" type="text" @click="handleMoveUp(scope.$index, scope.row)">
-                    <z-icon name="sort-up" size="13" color="var(--el-color-primary)" />
-                </el-button>
-            </div>
+            </el-form>
         </template>
         <template #status="scope">
             <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
@@ -57,7 +71,7 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, Ref, ref } from 'vue'
+import { defineComponent, reactive, Ref, ref } from 'vue'
 import { TOptionOfTools } from '@/ui/zui/Table/types'
 
 export default defineComponent({
@@ -67,7 +81,7 @@ export default defineComponent({
             {
                 label: '部门名称',
                 minWidth: '200',
-                slot: 'name',
+                prop: 'name',
             },
             {
                 label: '状态',
@@ -102,14 +116,10 @@ export default defineComponent({
             },
         ]
 
-        const tableTools: TOptionOfTools[] = ['add', 'fold', 'search', 'export', 'refresh']
+        const tableTools: TOptionOfTools[] = ['add', 'fold', 'search', 'export', 'refresh', 'cols']
 
         const toolsBtnClick = (btn: TOptionOfTools) => {
             console.log(btn)
-        }
-
-        const handleMoveDowm = (index: number, row: any) => {
-            console.log(index, row)
         }
 
         // 当前页
@@ -129,17 +139,28 @@ export default defineComponent({
             limit.value = val
         }
 
+        // 搜索表单数据
+        const searchParams: IUserInfo = reactive({
+            id: '',
+            username: '',
+            nickname: '',
+            email: '',
+            phone: '',
+            sex: '',
+            status: '',
+        })
+
         // 搜索
         const handleSearch = () => {
-            // console.log(searchFormParams)
+            console.log(searchParams)
         }
 
         // 重置
-        // const handleReset = () => {
-        //     for (const key in searchFormParams) {
-        //         searchFormParams[key] = ''
-        //     }
-        // }
+        const handleReset = () => {
+            for (const key in searchParams) {
+                searchParams[key] = ''
+            }
+        }
 
         return {
             tableCols,
@@ -148,8 +169,9 @@ export default defineComponent({
             currPage,
             pageSizeChange,
             pageCurrChange,
-            handleMoveDowm,
+            searchParams,
             handleSearch,
+            handleReset,
             tableData: [
                 {
                     id: 111,
