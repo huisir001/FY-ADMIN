@@ -2,11 +2,11 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-03 18:54:38
+ * @LastEditTime: 2021-11-04 15:07:56
 -->
 <template>
     <!-- 工具栏 -->
-    <table-tools v-if="toolBtns.length" :btns="toolBtns" @btnClick="$emit('toolsClick', $event)">
+    <table-tools v-if="tools.length" :tools="tools" @btnClick="$emit('toolsClick', $event)">
         <template #search>
             <slot name="search" />
         </template>
@@ -56,7 +56,6 @@ import { computed, defineComponent, nextTick, PropType, Ref, ref, watch } from '
 import { ElTable, ElTableColumn } from 'element-plus'
 import TableTools from './TableTools.vue'
 import { ICols, TOptionOfTools } from './types'
-import useTableTools from './useTableTools'
 import { useStore } from '@/store'
 
 export default defineComponent({
@@ -103,10 +102,7 @@ export default defineComponent({
             default: () => [15, 30, 50, 100, 200],
         },
     },
-    setup({ limits, tools, height, page }, { emit }) {
-        /* 工具栏 */
-        const toolBtns = useTableTools(tools as TOptionOfTools[])
-
+    setup({ limits, height, page }, { emit }) {
         /* 表格高度计算 */
         const Store = useStore()
         const tableBox = ref()
@@ -137,7 +133,6 @@ export default defineComponent({
             emit('pageCurrChange', val)
         }
         return {
-            toolBtns,
             tableBox,
             tableCalcHeight,
             limit,

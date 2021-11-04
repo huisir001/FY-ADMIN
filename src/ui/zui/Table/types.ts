@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-11-01 12:27:34
+ * @LastEditTime: 2021-11-04 15:17:57
  */
 
 import { Event } from "element-plus/lib/hooks/use-events";
@@ -83,10 +83,10 @@ export interface ITableTool {
     name: string
     icon?: string
     disabled?: boolean
-    // 位置left-左侧默认按钮；right-右侧icon按钮，默认left
-    position?: 'left' | 'right'
     // 类型（按钮色）：默认primary，只针对position为left位置有效
     type?: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text'
 }
 
-export type TOptionOfTools = 'add' | 'fold' | 'export' | 'search' | 'refresh'
+export type TUseTableTools = () => { left: ITableTool[], right: ITableTool[] }
+
+export type TOptionOfTools = 'add' | 'fold' | 'export' | 'search' | 'refresh' | 'cols'

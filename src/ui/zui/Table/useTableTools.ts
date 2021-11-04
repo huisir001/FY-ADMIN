@@ -2,27 +2,32 @@
  * @Description: 表格工具栏配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 10:50:15
- * @LastEditTime: 2021-11-02 17:59:40
+ * @LastEditTime: 2021-11-04 15:17:37
  */
-import { ITableTool, TOptionOfTools } from './types'
+import { TUseTableTools } from './types'
 
-export default (options: TOptionOfTools[]) => {
-
-    const tableTools: ITableTool[] = [
+const tableTools: TUseTableTools = () => ({
+    left: [
         {
             title: '新增',
             name: 'add',
             icon: 'plus',
-            position: 'left',
             type: 'primary',
         },
         {
             title: '展开/折叠',
             name: 'fold',
             icon: 'sort',
-            position: 'left',
             type: 'info',
             disabled: true
+        },
+    ],
+    right: [
+        {
+            title: '列展示',
+            name: 'cols',
+            icon: 'operation',
+            position: 'right',
         },
         {
             title: '导出',
@@ -32,7 +37,7 @@ export default (options: TOptionOfTools[]) => {
             disabled: true
         },
         {
-            title: '展开搜索表单',
+            title: '搜索表单显隐',
             name: 'search',
             icon: 'search',
             position: 'right',
@@ -42,8 +47,7 @@ export default (options: TOptionOfTools[]) => {
             name: 'refresh',
             icon: 'refresh',
             position: 'right',
-        },
+        }
     ]
-
-    return tableTools.filter((item: any) => options.includes(item.name))
-}
+})
+export default tableTools

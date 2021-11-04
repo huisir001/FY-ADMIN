@@ -2,10 +2,10 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-03 19:02:37
+ * @LastEditTime: 2021-11-04 15:26:50
 -->
 <template>
-    <div v-if="showSearchForm" class="search-from-box">
+    <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
         <slot name="search" />
     </div>
     <div class="table-tools">
@@ -28,27 +28,30 @@
 </template>
  
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
-import { ITableTool } from './types'
+import { computed, defineComponent, ref, PropType } from 'vue'
+import useTableTools from './useTableTools'
+import { ITableTool, TOptionOfTools } from './types'
 
 export default defineComponent({
     name: 'TableTools',
     props: {
-        btns: {
-            type: Array,
-            required: true,
+        tools: {
+            type: Array as PropType<TOptionOfTools[]>,
+            default: () => [],
         },
     },
-    setup({ btns }, { emit }) {
+    setup({ tools }, { emit }) {
+        // 所有按钮
+        const { left, right } = useTableTools()
+
+        // 是否有搜索表单
+        const hasSearchTool = tools.includes('search')
+
         // 左侧按钮组
-        const leftBtns = computed(() =>
-            (btns as ITableTool[]).filter((item) => item.position === 'left')
-        )
+        const leftBtns = left.filter((item: any) => tools.includes(item.name))
 
         // 右侧按钮组
-        const rightBtns = computed(() =>
-            (btns as ITableTool[]).filter((item) => item.position === 'right')
-        )
+        const rightBtns = right.filter((item: any) => tools.includes(item.name))
 
         // 搜索表单栏状态
         const showSearchForm = ref(false)
@@ -67,6 +70,7 @@ export default defineComponent({
         return {
             leftBtns,
             rightBtns,
+            hasSearchTool,
             showSearchForm,
             handleRightBtnClick,
         }
@@ -75,9 +79,6 @@ export default defineComponent({
 </script>
  
 <style scoped lang="scss">
-.search-from-box {
-    margin-bottom: 15px;
-}
 .table-tools {
     display: flex;
     justify-content: space-between;
