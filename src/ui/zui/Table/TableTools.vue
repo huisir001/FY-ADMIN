@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-04 15:26:50
+ * @LastEditTime: 2021-11-04 18:04:51
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -28,9 +28,9 @@
 </template>
  
 <script lang="ts">
-import { computed, defineComponent, ref, PropType } from 'vue'
+import { defineComponent, ref, PropType } from 'vue'
 import useTableTools from './useTableTools'
-import { ITableTool, TOptionOfTools } from './types'
+import { ITableTool, TOptionOfTools } from '../types'
 
 export default defineComponent({
     name: 'TableTools',

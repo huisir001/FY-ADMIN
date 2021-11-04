@@ -2,10 +2,8 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-11-04 15:17:57
+ * @LastEditTime: 2021-11-04 18:08:47
  */
-
-import { Event } from "element-plus/lib/hooks/use-events";
 
 /**
  * 表格列配置
@@ -78,6 +76,9 @@ export interface ICols {
     slotThead?: boolean
 }
 
+/**
+ * 表格工具栏
+ */
 export interface ITableTool {
     title: string
     name: string
@@ -87,6 +88,29 @@ export interface ITableTool {
     type?: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text'
 }
 
+/**
+ * 表格工具左右按钮组
+ */
 export type TUseTableTools = () => { left: ITableTool[], right: ITableTool[] }
 
+/**
+ * 表格工具配置传参
+ */
 export type TOptionOfTools = 'add' | 'fold' | 'export' | 'search' | 'refresh' | 'cols'
+
+/**
+ * 表单项配置
+ */
+export interface IFormOption {
+    label: string
+    component: string
+    key: string
+    options?: Array<{ label: string, value: string }>
+    props?: {
+        placeholder?: string
+        type?: string
+        rangeSeparator?: string
+        startPlaceholder?: string
+        endPlaceholder?: string
+    }
+}

@@ -2,9 +2,9 @@
  * @Description: 表格工具栏配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 10:50:15
- * @LastEditTime: 2021-11-04 15:17:37
+ * @LastEditTime: 2021-11-04 18:04:33
  */
-import { TUseTableTools } from './types'
+import { TUseTableTools } from '../types'
 
 const tableTools: TUseTableTools = () => ({
     left: [

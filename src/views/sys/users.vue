@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-04 15:47:00
+ * @LastEditTime: 2021-11-04 18:04:56
 -->
 <template>
     <z-table :cols="tableCols" :data="tableData" row-key="id" default-expand-all page
@@ -42,8 +42,7 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="创建时间">
-                    <el-date-picker v-model="searchParams.dateRange" type="daterange"
-                        range-separator="-" start-placeholder="开始" end-placeholder="结束">
+                    <el-date-picker v-model="searchParams.dateRange" type="daterange">
                     </el-date-picker>
                 </el-form-item>
                 <el-form-item>
@@ -72,7 +71,7 @@
  
 <script lang="ts">
 import { defineComponent, reactive, Ref, ref } from 'vue'
-import { TOptionOfTools } from '@/ui/zui/Table/types'
+import { TOptionOfTools } from '@/ui/zui/types'
 
 export default defineComponent({
     name: 'Users',

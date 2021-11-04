@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-04 15:07:56
+ * @LastEditTime: 2021-11-04 18:04:39
 -->
 <template>
     <!-- 工具栏 -->
@@ -55,7 +55,7 @@
 import { computed, defineComponent, nextTick, PropType, Ref, ref, watch } from 'vue'
 import { ElTable, ElTableColumn } from 'element-plus'
 import TableTools from './TableTools.vue'
-import { ICols, TOptionOfTools } from './types'
+import { ICols, TOptionOfTools } from '../types'
 import { useStore } from '@/store'
 
 export default defineComponent({

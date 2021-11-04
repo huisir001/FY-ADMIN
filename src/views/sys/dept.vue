@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-03 18:19:55
+ * @LastEditTime: 2021-11-04 18:04:47
 -->
 <template>
     <z-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
@@ -43,7 +43,7 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue'
 import { fuzzySearch } from '@/utils/common'
-import { TOptionOfTools } from '@/ui/zui/Table/types'
+import { TOptionOfTools } from '@/ui/zui/types'
 
 export default defineComponent({
     name: 'Dept',
