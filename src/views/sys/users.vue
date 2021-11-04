@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-04 18:04:56
+ * @LastEditTime: 2021-11-04 18:50:28
 -->
 <template>
     <z-table :cols="tableCols" :data="tableData" row-key="id" default-expand-all page
@@ -10,46 +10,7 @@
         @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
         @pageCurrChange="pageCurrChange">
         <template #search>
-            <el-form :inline="true">
-                <el-form-item label="账号">
-                    <el-input v-model="searchParams.username" placeholder="请输入账号"></el-input>
-                </el-form-item>
-                <el-form-item label="昵称">
-                    <el-input v-model="searchParams.nickname" placeholder="请输入昵称"></el-input>
-                </el-form-item>
-                <el-form-item label="手机号码">
-                    <el-input v-model="searchParams.phone" placeholder="请输入手机号码"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱">
-                    <el-input v-model="searchParams.email" placeholder="请输入邮箱"></el-input>
-                </el-form-item>
-                <el-form-item label="用户ID">
-                    <el-input v-model="searchParams.id" placeholder="请输入用户ID"></el-input>
-                </el-form-item>
-                <el-form-item label="性别">
-                    <el-select v-model="searchParams.sex" placeholder="选择用户性别">
-                        <el-option label="全部" value=""></el-option>
-                        <el-option label="保密" value="0"></el-option>
-                        <el-option label="男" value="1"></el-option>
-                        <el-option label="女" value="2"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="状态">
-                    <el-select v-model="searchParams.status" placeholder="选择用户状态">
-                        <el-option label="全部" value=""></el-option>
-                        <el-option label="正常" value="1"></el-option>
-                        <el-option label="冻结" value="0"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="创建时间">
-                    <el-date-picker v-model="searchParams.dateRange" type="daterange">
-                    </el-date-picker>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="handleSearch">搜索</el-button>
-                    <el-button @click="handleReset">重置</el-button>
-                </el-form-item>
-            </el-form>
+            <z-search-form v-model="searchParams" :options="searchOptions" />
         </template>
         <template #status="scope">
             <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
@@ -147,6 +108,7 @@ export default defineComponent({
             phone: '',
             sex: '',
             status: '',
+            dateRange: '',
         })
 
         // 搜索
@@ -171,6 +133,107 @@ export default defineComponent({
             searchParams,
             handleSearch,
             handleReset,
+            searchOptions: [
+                {
+                    label: '账号',
+                    component: 'input',
+                    key: 'username',
+                    props: {
+                        placeholder: '请输入账号',
+                    },
+                },
+                {
+                    label: '昵称',
+                    component: 'input',
+                    key: 'nickname',
+                    props: {
+                        placeholder: '请输入昵称',
+                    },
+                },
+                {
+                    label: '手机号码',
+                    component: 'input',
+                    key: 'phone',
+                    props: {
+                        placeholder: '请输入手机号码',
+                    },
+                },
+                {
+                    label: '邮箱',
+                    component: 'input',
+                    key: 'email',
+                    props: {
+                        placeholder: '请输入邮箱',
+                    },
+                },
+                {
+                    label: '用户ID',
+                    component: 'input',
+                    key: 'id',
+                    props: {
+                        placeholder: '请输入用户ID',
+                    },
+                },
+                {
+                    label: '性别',
+                    component: 'select',
+                    key: 'sex',
+                    props: {
+                        placeholder: '选择用户性别',
+                    },
+                    options: [
+                        {
+                            label: '全部',
+                            value: '',
+                        },
+                        {
+                            label: '保密',
+                            value: '0',
+                        },
+                        {
+                            label: '男',
+                            value: '1',
+                        },
+                        {
+                            label: '女',
+                            value: '2',
+                        },
+                    ],
+                },
+                {
+                    label: '状态',
+                    component: 'select',
+                    key: 'status',
+                    props: {
+                        placeholder: '选择用户状态',
+                    },
+                    options: [
+                        {
+                            label: '全部',
+                            value: '',
+                        },
+                        {
+                            label: '冻结',
+                            value: '0',
+                        },
+                        {
+                            label: '正常',
+                            value: '1',
+                        },
+                    ],
+                },
+                {
+                    label: '创建时间',
+                    component: 'date-picker',
+                    key: 'dateRange',
+                    props: {
+                        type: 'daterange',
+                        rangeSeparator: '-',
+                        startPlaceholder: '开始时间',
+                        endPlaceholder: '结束时间',
+                    },
+                },
+            ],
             tableData: [
                 {
                     id: 111,
