@@ -2,10 +2,10 @@
  * @Description: 搜索表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-04 16:39:23
- * @LastEditTime: 2021-11-04 18:49:26
+ * @LastEditTime: 2021-11-04 19:11:54
 -->
 <template>
-    <el-form :inline="true">
+    <el-form class="z-search-form" :inline="true">
         <el-form-item v-for="item in options" :key="item.key" :label="item.label">
             <component :is="`el-${item.component}`" v-model="params[item.key]" v-bind="item.props">
                 <!-- 下拉框 -->
@@ -61,4 +61,10 @@ export default defineComponent({
 </script>
  
 <style scoped lang="scss">
+.z-search-form:deep(.el-input__inner) {
+    width: 200px;
+    &.el-date-editor--daterange {
+        width: 260px;
+    }
+}
 </style>
