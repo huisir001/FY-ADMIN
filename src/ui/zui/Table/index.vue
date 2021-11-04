@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-04 18:04:39
+ * @LastEditTime: 2021-11-04 18:56:23
 -->
 <template>
     <!-- 工具栏 -->
@@ -102,6 +102,7 @@ export default defineComponent({
             default: () => [15, 30, 50, 100, 200],
         },
     },
+    emits: ['toolsClick', 'pageSizeChange', 'pageCurrChange'],
     setup({ limits, height, page }, { emit }) {
         /* 表格高度计算 */
         const Store = useStore()

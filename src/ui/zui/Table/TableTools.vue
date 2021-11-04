@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-04 18:04:51
+ * @LastEditTime: 2021-11-04 18:57:05
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -40,6 +40,7 @@ export default defineComponent({
             default: () => [],
         },
     },
+    emits: ['btnClick'],
     setup({ tools }, { emit }) {
         // 所有按钮
         const { left, right } = useTableTools()

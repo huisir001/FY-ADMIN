@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-11-03 17:36:27
+ * @LastEditTime: 2021-11-04 18:55:12
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -134,7 +134,7 @@
             <span class="dialog-footer">
                 <el-button @click="updateFileInfo" :loading="saveDetailLoading">保存详情</el-button>
                 <el-button type="primary"
-                    @click="showFileLibraryBox=false;$emit('on-selected',currFile);">使用选中项
+                    @click="showFileLibraryBox=false;$emit('selected',currFile);">使用选中项
                 </el-button>
             </span>
         </template>
@@ -190,7 +190,7 @@ export default defineComponent({
             },
         },
     },
-    emits: ['on-selected'],
+    emits: ['selected'],
     setup(props: any) {
         const leftLoading = ref(false)
         const saveDetailLoading = ref(false)

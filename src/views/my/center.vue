@@ -2,14 +2,14 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-11-03 13:33:51
+ * @LastEditTime: 2021-11-04 18:54:59
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" class="zui-my-tabs">
         <el-tab-pane label="基本信息" name="base">
             <el-form label-position="left" label-width="50px" :model="userInfoFormData">
                 <el-form-item label="头像" style="height:64px;">
-                    <z-file-library type="pic" @on-selected="avatarSelected">
+                    <z-file-library type="pic" @selected="avatarSelected">
                         <el-image class="avatar" :src="userInfoFormData.avatar||defaultAvatar" />
                     </z-file-library>
                 </el-form-item>
