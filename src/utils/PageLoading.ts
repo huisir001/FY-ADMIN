@@ -2,7 +2,7 @@
  * @Description: 页面加载loading
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-08 14:29:46
- * @LastEditTime: 2021-09-28 15:14:10
+ * @LastEditTime: 2021-11-04 20:34:20
  */
 
 interface IcssOptions {
@@ -46,6 +46,7 @@ class PageLoading {
             try {
                 document.body.removeChild(this.loadingEl)
                 document.head.removeChild(this.styleEl)
+                // tslint:disable-next-line:no-empty
             } catch (e) { }
             clearTimeout(t)
         }, this.options.duration2)
