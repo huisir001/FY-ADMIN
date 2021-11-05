@@ -15,3 +15,8 @@
 ## 重构/优化
 - 可将组件或插件能单独提取的尽量提取，将样式、依赖、类型接口等放到一起便于复用
 - 页面样式微调
+
+# BUG
+## 嵌套slot报警告：Non-function value encountered for default slot. Prefer function slots for better performance. 
+    - https://www.jianshu.com/p/18383c1c1484
+    - https://zhuanlan.zhihu.com/p/398355743
