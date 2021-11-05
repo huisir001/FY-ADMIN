@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-05 15:38:25
+ * @LastEditTime: 2021-11-05 15:51:18
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -27,7 +27,7 @@
                         </div>
                     </el-tooltip>
                     <template #dropdown>
-                        <el-dropdown-menu>
+                        <el-dropdown-menu class="table-tool-dropmenu">
                             <el-checkbox-group v-model="showCols">
                                 <el-dropdown-item v-for="label in colLabels" :key="label">
                                     <el-checkbox :label="label" />
@@ -49,7 +49,7 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, ref, PropType, computed, watch } from 'vue'
+import { defineComponent, ref, PropType, watch } from 'vue'
 import useTableTools from './useTableTools'
 import { ITableTool, TOptionOfTools } from '../types'
 
@@ -118,6 +118,7 @@ export default defineComponent({
 </script>
  
 <style scoped lang="scss">
+@import '@/assets/styles/mixin.scss';
 .table-tools {
     display: flex;
     justify-content: space-between;
@@ -150,5 +151,10 @@ export default defineComponent({
             }
         }
     }
+}
+.table-tool-dropmenu {
+    @include scrollBar;
+    max-height: 300px;
+    overflow-y: auto;
 }
 </style>
