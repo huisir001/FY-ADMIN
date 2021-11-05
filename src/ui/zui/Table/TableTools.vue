@@ -2,11 +2,11 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-05 15:51:18
+ * @LastEditTime: 2021-11-05 16:32:01
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
-        <slot name="search" />
+        <slot />
     </div>
     <div class="table-tools">
         <div class="left">
@@ -156,5 +156,8 @@ export default defineComponent({
     @include scrollBar;
     max-height: 300px;
     overflow-y: auto;
+    :deep(.el-checkbox__label) {
+        color: unset !important;
+    }
 }
 </style>

@@ -2,15 +2,14 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-05 15:24:46
+ * @LastEditTime: 2021-11-05 16:27:19
 -->
 <template>
     <!-- 工具栏 -->
+    <!-- 插槽search（搜索栏）必须在tools工具栏存在情况下才能显示 -->
     <table-tools v-if="tools.length" :colLabels="colLabels" :tools="tools"
         @showCols="handleShowCols" @btnClick="$emit('toolsClick', $event)">
-        <template #search>
-            <slot name="search" />
-        </template>
+        <slot name="search" />
     </table-tools>
     <!-- 使用`v-bind="$attrs"`可继承组件调用是所配置的attr,这里可继承el-table组件所需要的所有属性及事件以及其他未作为props的行内属性 -->
     <!-- 继承的属性配置详见文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-attributes -->
@@ -54,7 +53,6 @@
  
 <script lang="ts">
 import { computed, defineComponent, nextTick, PropType, Ref, ref, watch } from 'vue'
-import { ElTable, ElTableColumn } from 'element-plus'
 import TableTools from './TableTools.vue'
 import { ICols, TOptionOfTools } from '../types'
 import { useStore } from '@/store'
@@ -62,8 +60,6 @@ import { useStore } from '@/store'
 export default defineComponent({
     name: 'Table',
     components: {
-        ElTable,
-        ElTableColumn,
         TableTools,
     },
     // 禁用组件的根元素继承 attribute
