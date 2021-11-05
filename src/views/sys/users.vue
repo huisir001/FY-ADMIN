@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-05 13:13:01
+ * @LastEditTime: 2021-11-05 18:40:41
 -->
 <template>
     <z-table :cols="tableCols" :data="tableData" row-key="id" default-expand-all page
@@ -13,11 +13,15 @@
             <z-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
                 @reset="handleReset" />
         </template>
-        <template #status="scope">
-            <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
-            <el-tag v-else size="small" type="danger">停用</el-tag>
+        <template #status>
+            <el-table-column>
+                <template #default="scope">
+                    <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
+                    <el-tag v-else size="small" type="danger">停用</el-tag>
+                </template>
+            </el-table-column>
         </template>
-        <template #todo="scope">
+        <!-- <template #todo="scope">
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
                 <z-icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
             </el-button>
@@ -27,7 +31,7 @@
             <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">
                 <z-icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
             </el-button>
-        </template>
+        </template> -->
     </z-table>
 </template>
  
