@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-04 18:50:28
+ * @LastEditTime: 2021-11-05 11:07:00
 -->
 <template>
     <z-table :cols="tableCols" :data="tableData" row-key="id" default-expand-all page
@@ -10,7 +10,8 @@
         @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
         @pageCurrChange="pageCurrChange">
         <template #search>
-            <z-search-form v-model="searchParams" :options="searchOptions" />
+            <z-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
+                @reset="handleReset" />
         </template>
         <template #status="scope">
             <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
@@ -31,7 +32,7 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, reactive, Ref, ref } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import { TOptionOfTools } from '@/ui/zui/types'
 
 export default defineComponent({

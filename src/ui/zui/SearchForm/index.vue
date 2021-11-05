@@ -2,12 +2,18 @@
  * @Description: 搜索表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-04 16:39:23
- * @LastEditTime: 2021-11-04 19:11:54
+ * @LastEditTime: 2021-11-05 11:06:26
 -->
 <template>
     <el-form class="z-search-form" :inline="true">
         <el-form-item v-for="item in options" :key="item.key" :label="item.label">
-            <component :is="`el-${item.component}`" v-model="params[item.key]" v-bind="item.props">
+            <!-- 日期，这里单独拎出来是因为使用动态组件的话会导致日期弹框BUG -->
+            <el-date-picker v-if="item.component=='date-picker'" v-model="params[item.key]"
+                v-bind="item.props" clearable>
+            </el-date-picker>
+            <!-- 其他 -->
+            <component v-else :is="`el-${item.component}`" v-model="params[item.key]"
+                v-bind="item.props" clearable>
                 <!-- 下拉框 -->
                 <template v-if="item.options">
                     <el-option v-for="option in item.options" :key="option.value"
@@ -62,9 +68,9 @@ export default defineComponent({
  
 <style scoped lang="scss">
 .z-search-form:deep(.el-input__inner) {
-    width: 200px;
-    &.el-date-editor--daterange {
-        width: 260px;
+    width: 220px;
+    &.el-date-editor--datetimerange {
+        width: 350px !important;
     }
 }
 </style>
