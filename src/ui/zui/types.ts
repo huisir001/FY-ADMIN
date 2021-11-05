@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-11-04 18:08:47
+ * @LastEditTime: 2021-11-05 11:50:18
  */
 
 /**
@@ -69,7 +69,7 @@ export interface ICols {
 
     // 允许默认插槽，且已定义插槽模板
     // <template #default="scope">...</template>
-    slot?: boolean
+    slot?: string
 
     // 允许表头插槽，且已定义表头插槽模板
     // <template #header>...</template>
