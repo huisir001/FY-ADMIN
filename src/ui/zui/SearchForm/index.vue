@@ -2,24 +2,27 @@
  * @Description: 搜索表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-04 16:39:23
- * @LastEditTime: 2021-11-05 11:06:26
+ * @LastEditTime: 2021-11-05 12:57:07
 -->
 <template>
     <el-form class="z-search-form" :inline="true">
         <el-form-item v-for="item in options" :key="item.key" :label="item.label">
-            <!-- 日期，这里单独拎出来是因为使用动态组件的话会导致日期弹框BUG -->
-            <el-date-picker v-if="item.component=='date-picker'" v-model="params[item.key]"
-                v-bind="item.props" clearable>
-            </el-date-picker>
-            <!-- 其他 -->
-            <component v-else :is="`el-${item.component}`" v-model="params[item.key]"
-                v-bind="item.props" clearable>
-                <!-- 下拉框 -->
-                <template v-if="item.options">
-                    <el-option v-for="option in item.options" :key="option.value"
-                        :label="option.label" :value="option.value"></el-option>
-                </template>
-            </component>
+            <slot v-if="item.slot" :name="item.slot" />
+            <template v-else>
+                <!-- 日期，这里单独拎出来是因为使用动态组件的话会导致日期弹框BUG -->
+                <el-date-picker v-if="item.component=='date-picker'" v-model="params[item.key]"
+                    v-bind="item.props" clearable>
+                </el-date-picker>
+                <!-- 其他 -->
+                <component v-else :is="`el-${item.component}`" v-model="params[item.key]"
+                    v-bind="item.props" clearable>
+                    <!-- 下拉框 -->
+                    <template v-if="item.options">
+                        <el-option v-for="option in item.options" :key="option.value"
+                            :label="option.label" :value="option.value"></el-option>
+                    </template>
+                </component>
+            </template>
         </el-form-item>
         <el-form-item>
             <el-button type="primary" @click="$emit('submit')">搜索</el-button>

@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-11-05 11:50:18
+ * @LastEditTime: 2021-11-05 13:09:20
  */
 
 /**
@@ -102,15 +102,33 @@ export type TOptionOfTools = 'add' | 'fold' | 'export' | 'search' | 'refresh' | 
  * 表单项配置
  */
 export interface IFormOption {
+    // 表单项名称
     label: string
+    // 表单项类型
     component: string
+    // 字段
     key: string
+    // 下拉框选项
     options?: Array<{ label: string, value: string }>
+    // 表单项其他属性
     props?: {
         placeholder?: string
+        //year/month/date/dates/datetime/week/datetimerange/daterange/monthrange
         type?: string
         rangeSeparator?: string
         startPlaceholder?: string
         endPlaceholder?: string
-    }
+        readonly?: boolean
+        disabled?: boolean
+        //显示在输入框中的格式
+        format?: string
+        defaultValue?: typeof Date
+        defaultTime?: (typeof Date)[]
+        //绑定值的格式。不指定则绑定值为 Date 对象: (YYYY-MM-DD|x),x为毫秒数
+        valueFormat?: string
+        //设置快捷选项，需要传入数组对象
+        shortcuts?: Array<{ text: string, value: typeof Date | typeof Function }>
+    },
+    // 插槽-自定义表单项
+    slot?: string
 }

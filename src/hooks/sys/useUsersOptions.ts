@@ -2,7 +2,7 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2021-11-05 11:47:47
+ * @LastEditTime: 2021-11-05 13:12:42
  */
 import { IFormOption, ICols } from '@/ui/zui/types'
 export default () => {
