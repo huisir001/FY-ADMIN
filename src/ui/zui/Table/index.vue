@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-05 18:05:11
+ * @LastEditTime: 2021-11-05 16:27:19
 -->
 <template>
     <!-- 工具栏 -->
@@ -18,24 +18,29 @@
         <el-table v-bind="$attrs" size="small" border :max-height="tableCalcHeight">
             <template v-for="(col,index) in showCols" :key="index">
                 <!-- 配置了type -> 多选框、引索、展开按钮 -->
-                <template v-if="col.type">
-                    <slot v-if="col.slot" :name="col.slot" />
-                    <el-table-column v-else :type="col.type" :width="col.width"
-                        :min-width="col.minWidth" :selectable="col.selectable" :align="col.align"
-                        :class-name="col.className" :fixed="col.fixed">
-                    </el-table-column>
-                </template>
+                <el-table-column v-if="col.type" :type="col.type" :width="col.width"
+                    :min-width="col.minWidth" :selectable="col.selectable" :align="col.align"
+                    :class-name="col.className" :fixed="col.fixed">
+                    <template v-if="col.slotThead" #header>
+                        <slot :name="col.slotThead" />
+                    </template>
+                    <template v-if="col.slot" #default="scope">
+                        <slot :name="col.slot" :row="props.row" :$index="scope.$index" />
+                    </template>
+                </el-table-column>
                 <!-- 其他情况 -->
-                <template v-else>
-                    <slot v-if="col.slot" :name="col.slot" />
-                    <el-table-column v-else :label="col.label" :width="col.width"
-                        :min-width="col.minWidth" :align="col.align" :class-name="col.className"
-                        :label-class-name="col.labelClassName" :fixed="col.fixed" :prop="col.prop"
-                        :formatter="col.formatter" :sortable="col.sort"
-                        :sort-method="col.sortMethod" :sort-by="col.sortBy" :filters="col.filters"
-                        :showTooltip="col.showTooltip">
-                    </el-table-column>
-                </template>
+                <el-table-column v-else :label="col.label" :width="col.width"
+                    :min-width="col.minWidth" :align="col.align" :class-name="col.className"
+                    :label-class-name="col.labelClassName" :fixed="col.fixed" :prop="col.prop"
+                    :formatter="col.formatter" :sortable="col.sort" :sort-method="col.sortMethod"
+                    :sort-by="col.sortBy" :filters="col.filters" :showTooltip="col.showTooltip">
+                    <template v-if="col.slotThead" #header>
+                        <slot :name="col.slotThead" />
+                    </template>
+                    <template v-if="col.slot" #default="scope">
+                        <slot :name="col.slot" :row="scope.row" :$index="scope.$index" />
+                    </template>
+                </el-table-column>
             </template>
         </el-table>
         <el-pagination v-if="page" class="table-page-nav" :currentPage="curr" :page-sizes="limits"
