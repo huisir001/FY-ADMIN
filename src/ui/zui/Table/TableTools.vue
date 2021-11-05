@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-04 18:57:05
+ * @LastEditTime: 2021-11-05 15:38:25
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -16,32 +16,57 @@
             </el-button>
         </div>
         <div class="right">
-            <el-tooltip v-for="btn in rightBtns" :key="btn.name" effect="light" :content="btn.title"
-                placement="top" :auto-close="1000">
-                <div :class="{[btn.name]:true,disabled:btn.disabled}"
-                    @click="handleRightBtnClick(btn)">
-                    <z-icon :name="btn.icon" color="var(--el-text-color-regular)" size="14" />
-                </div>
-            </el-tooltip>
+            <template v-for="btn in rightBtns" :key="btn.name">
+                <el-dropdown v-if="btn.name=='cols'" trigger="click" :hide-on-click="false">
+                    <el-tooltip effect="light" :content="btn.title" placement="top"
+                        :auto-close="1000">
+                        <div class="tool-item el-dropdown-link"
+                            :class="{[btn.name]:true,disabled:btn.disabled}">
+                            <z-icon :name="btn.icon" color="var(--el-text-color-regular)"
+                                size="16" />
+                        </div>
+                    </el-tooltip>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-checkbox-group v-model="showCols">
+                                <el-dropdown-item v-for="label in colLabels" :key="label">
+                                    <el-checkbox :label="label" />
+                                </el-dropdown-item>
+                            </el-checkbox-group>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+                <el-tooltip v-else effect="light" :content="btn.title" placement="top"
+                    :auto-close="1000">
+                    <div class="tool-item" :class="{[btn.name]:true,disabled:btn.disabled}"
+                        @click="handleRightBtnClick(btn)">
+                        <z-icon :name="btn.icon" color="var(--el-text-color-regular)" size="16" />
+                    </div>
+                </el-tooltip>
+            </template>
         </div>
     </div>
 </template>
  
 <script lang="ts">
-import { defineComponent, ref, PropType } from 'vue'
+import { defineComponent, ref, PropType, computed, watch } from 'vue'
 import useTableTools from './useTableTools'
 import { ITableTool, TOptionOfTools } from '../types'
 
 export default defineComponent({
     name: 'TableTools',
     props: {
+        colLabels: {
+            type: Array as PropType<string[]>,
+            required: true,
+        },
         tools: {
             type: Array as PropType<TOptionOfTools[]>,
             default: () => [],
         },
     },
-    emits: ['btnClick'],
-    setup({ tools }, { emit }) {
+    emits: ['btnClick', 'showCols'],
+    setup({ colLabels, tools }, { emit }) {
         // 所有按钮
         const { left, right } = useTableTools()
 
@@ -68,9 +93,22 @@ export default defineComponent({
             }
         }
 
+        // 列筛选
+        const showCols = ref(colLabels)
+
+        // 反馈给父组件
+        watch(
+            showCols,
+            (val) => {
+                emit('showCols', val)
+            },
+            { immediate: true }
+        )
+
         return {
             leftBtns,
             rightBtns,
+            showCols,
             hasSearchTool,
             showSearchForm,
             handleRightBtnClick,
@@ -89,7 +127,7 @@ export default defineComponent({
         display: flex;
     }
     .right {
-        & > div {
+        .tool-item {
             width: 30px;
             height: 30px;
             display: flex;
@@ -99,9 +137,7 @@ export default defineComponent({
             cursor: pointer;
             transition: 0.3s all;
             outline: none !important;
-            & + div {
-                margin-left: 10px;
-            }
+            margin-left: 10px;
             &:not(.disabled):active {
                 background: var(--el-background-color-base);
                 --el-text-color-regular: var(--el-color-primary);
