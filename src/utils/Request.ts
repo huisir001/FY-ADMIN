@@ -2,7 +2,7 @@
  * @Description: axios中间件（初始化和全局配置）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2020-08-06 13:16:24
- * @LastEditTime: 2021-10-21 18:32:58
+ * @LastEditTime: 2021-11-05 15:44:42
  */
 // tslint:disable:no-console
 import { ElMessage } from 'element-plus'
@@ -30,7 +30,6 @@ Axios.interceptors.request.use(
         // PageLoading.show()
         // 由于执行请求时token可能已经改变，故每次请求前都要重新获取token
         Token = store.getters.getToken()
-        console.log(Token)
         // 判断是否存在token，如果存在的话，则每个http header都加上token
         Token && (config.headers[TOKEN_OPTIONS.key] = Token)
         return config
@@ -44,7 +43,7 @@ Axios.interceptors.request.use(
 //响应后钩子
 Axios.interceptors.response.use(
     (response: any) => {
-        console.log('response', response)
+        // console.log('response', response)
         // 关闭loading
         // PageLoading.hide()
 
