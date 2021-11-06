@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-11-05 13:09:20
+ * @LastEditTime: 2021-11-06 23:06:33
  */
 
 /**
@@ -51,7 +51,7 @@ export interface ICols {
     // 对应列是否可以排序
     // 'custom'：代表用户希望远程排序，需要监听 Table 的 sort-change 事件
     // 相关事件文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-events
-    sort?: true | false | 'custom'
+    sortable?: true | false | 'custom'
 
     // 指定数据排序方案，与数组sort方法类似
     sortMethod?: (a: any, b: any) => number
@@ -62,7 +62,7 @@ export interface ICols {
 
     // 数据过滤的选项， 数组格式，数组中的元素需要有 text 和 value 属性。
     // 需要监听 Table 的 filter-change 事件
-    filters?: { text: string, value: any }[]
+    filters?: Array<{ text: string, value: any }>
 
     // 当内容过长被隐藏时显示 tooltip
     showTooltip?: boolean
@@ -73,7 +73,7 @@ export interface ICols {
 
     // 允许表头插槽，且已定义表头插槽模板
     // <template #header>...</template>
-    slotThead?: boolean
+    slotHead?: string
 }
 
 /**
@@ -123,7 +123,7 @@ export interface IFormOption {
         //显示在输入框中的格式
         format?: string
         defaultValue?: typeof Date
-        defaultTime?: (typeof Date)[]
+        defaultTime?: Array<typeof Date>
         //绑定值的格式。不指定则绑定值为 Date 对象: (YYYY-MM-DD|x),x为毫秒数
         valueFormat?: string
         //设置快捷选项，需要传入数组对象

@@ -2,7 +2,7 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2021-11-05 15:39:17
+ * @LastEditTime: 2021-11-06 23:07:36
  */
 import { IFormOption, ICols } from '@/ui/zui/types'
 import { ref } from "vue"
@@ -144,7 +144,7 @@ export default () => {
             label: '创建时间',
             prop: 'createTime',
             minWidth: '180',
-            sort: true,
+            sortable: true,
         },
         {
             label: '操作',

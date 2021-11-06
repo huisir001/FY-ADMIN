@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-04 18:04:47
+ * @LastEditTime: 2021-11-06 23:18:20
 -->
 <template>
     <z-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
@@ -22,7 +22,7 @@
             <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
             <el-tag v-else size="small" type="danger">停用</el-tag>
         </template>
-        <template #todoThead>
+        <template #todoHead>
             <!-- 不分页情况下可以使用本地模糊搜索 -->
             <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="Search..." />
         </template>
@@ -70,6 +70,10 @@ export default defineComponent({
                 label: '负责人',
                 prop: 'leader',
                 minWidth: '100',
+                formatter: (row: { leader: string }, column: any, cellValue: any, index: any) => {
+                    console.log(column, cellValue, index)
+                    return cellValue + '111'
+                },
             },
             {
                 label: '联系方式',
@@ -80,12 +84,12 @@ export default defineComponent({
                 label: '创建时间',
                 prop: 'createTime',
                 minWidth: '180',
-                sort: true,
+                sortable: true,
             },
             {
                 fixed: 'right',
                 minWidth: '200',
-                slotThead: 'todoThead',
+                slotHead: 'todoHead',
                 slot: 'todo',
             },
         ]
