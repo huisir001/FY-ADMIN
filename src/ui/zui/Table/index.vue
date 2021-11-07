@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-06 23:13:08
+ * @LastEditTime: 2021-11-07 12:14:12
 -->
 <template>
     <!-- 工具栏 -->
@@ -15,7 +15,7 @@
     <!-- 继承的属性配置详见文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-attributes -->
     <!-- 继承的事件文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-events -->
     <div ref="tableBox" :style="{height:height}">
-        <el-table v-bind="$attrs" size="small" border :max-height="tableCalcHeight">
+        <el-table ref="elTable" v-bind="$attrs" size="small" border :max-height="tableCalcHeight">
             <el-table-column v-for="(col,index) in showCols" :key="index" v-bind="col">
                 <template v-if="col.slotHead" #header>
                     <slot :name="col.slotHead" />
@@ -82,7 +82,7 @@ export default defineComponent({
         },
     },
     emits: ['toolsClick', 'pageSizeChange', 'pageCurrChange'],
-    setup({ cols, limits, height, page }, { emit }) {
+    setup({ cols, limits, height, page }, { emit, attrs }) {
         /* 表格列筛选 */
         const showCols = ref(cols)
         const colLabels = cols.map((item) => item.label).filter((item) => item)
