@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-05 16:32:01
+ * @LastEditTime: 2021-11-08 13:56:02
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -97,13 +97,9 @@ export default defineComponent({
         const showCols = ref(colLabels)
 
         // 反馈给父组件
-        watch(
-            showCols,
-            (val) => {
-                emit('showCols', val)
-            },
-            { immediate: true }
-        )
+        watch(showCols, (val) => {
+            emit('showCols', val)
+        })
 
         return {
             leftBtns,
