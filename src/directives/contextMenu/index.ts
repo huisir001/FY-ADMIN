@@ -2,9 +2,9 @@
  * @Description: 右键菜单指令
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-26 15:59:44
- * @LastEditTime: 2021-10-27 23:04:34
+ * @LastEditTime: 2021-11-08 12:47:00
  */
-import { Directive } from '@vue/runtime-core'
+import { Directive } from 'vue'
 import DomCreate from '@/utils/DomCreate'
 import './style.scss'
 

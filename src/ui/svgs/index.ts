@@ -2,12 +2,12 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2021-11-03 18:02:44
+ * @LastEditTime: 2021-11-08 12:47:10
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
 
-import { App } from '@vue/runtime-core'
+import { App } from 'vue'
 
 /**
  * element-plus/icons

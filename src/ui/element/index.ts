@@ -2,12 +2,12 @@
  * @Description:ElementUI按需引入
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2021-11-05 16:27:46
+ * @LastEditTime: 2021-11-08 12:46:18
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
 
-import { App, Plugin } from '@vue/runtime-core'
+import { App, Plugin } from 'vue'
 
 import {
     ElBreadcrumb,
