@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-11-06 23:06:33
+ * @LastEditTime: 2021-11-11 16:07:06
  */
 
 /**
@@ -26,7 +26,7 @@ export interface ICols {
     prop?: string
 
     // 用来格式化内容，返回值为当前行的展示内容
-    formatter?: (row: any, column: any, cellValue: any, index: number) => any
+    formatter?: (row: IObj, column: IObj, cellValue: any, index: number) => any
 
     // 对应列的宽度
     width?: string | number

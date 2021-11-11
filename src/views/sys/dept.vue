@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-06 23:18:20
+ * @LastEditTime: 2021-11-11 16:26:11
 -->
 <template>
     <z-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
@@ -70,8 +70,7 @@ export default defineComponent({
                 label: '负责人',
                 prop: 'leader',
                 minWidth: '100',
-                formatter: (row: { leader: string }, column: any, cellValue: any, index: any) => {
-                    console.log(column, cellValue, index)
+                formatter: (row: IObj, column: IObj, cellValue: any) => {
                     return cellValue + '111'
                 },
             },

@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-05 23:00:02
+ * @LastEditTime: 2021-11-11 16:37:07
 -->
 <template>
     <z-table :cols="tableCols" :data="tableData" row-key="id" default-expand-all page
@@ -34,7 +34,7 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import { TOptionOfTools } from '@/ui/zui/types'
-import useUsersOptions from '@/hooks/sys/useUsersOptions'
+import useUsersOptions from './hooks/useUsersOptions'
 
 export default defineComponent({
     name: 'Users',
