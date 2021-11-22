@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-11-01 21:16:10
+ * @LastEditTime: 2021-11-22 14:16:50
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -23,14 +23,14 @@ export const debounce = (callback: () => void, delay: number) => {
  * 递归转换菜单
  * parentId list => children tree
  */
-export const rawList2Tree = (arrList: IObj[], parentIdKey: string, childKey: string) => {
+export const rawList2Tree = (arrList: IObj[], parentIdKey: string = 'parentId', childKey: string = 'children') => {
     if (arrList.length === 0) {
         return []
     }
 
-    let menuTree: IObj[] = [];
+    let menuTree: IObj[] = []
 
-    (function Recursion(pid?: string) {
+    !function Recursion(pid?: string) {
         const tempArr: IObj[] = []
         // tslint:disable-next-line:prefer-for-of
         for (let index = 0; index < arrList.length; index++) {
@@ -47,7 +47,7 @@ export const rawList2Tree = (arrList: IObj[], parentIdKey: string, childKey: str
             menuTree = tempArr
         }
         return tempArr
-    })()
+    }()
 
     return menuTree
 }

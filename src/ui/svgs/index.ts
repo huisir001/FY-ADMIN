@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2021-11-08 12:47:10
+ * @LastEditTime: 2021-11-22 15:10:01
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -32,6 +32,7 @@ import {
     Setting,
     Operation,
     Menu,
+    QuestionFilled
 } from '@element-plus/icons'
 
 /**
@@ -62,6 +63,7 @@ const components = [
     Setting,
     Operation,
     Menu,
+    QuestionFilled,
     /* my-icons */
     Theme,
     Export

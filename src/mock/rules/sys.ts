@@ -2,9 +2,11 @@
  * @Description: 系统配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-11-02 00:08:22
+ * @LastEditTime: 2021-11-22 13:53:47
  */
-const getUserMenus = {
+
+// 查询所有菜单，用于菜单管理（唯总管理员才有权限）
+const getAllMenus = {
     data: [{
         id: '001', //主键
         createTime: '@datetime',
@@ -115,7 +117,7 @@ const getUserMenus = {
 }
 
 const Sys: IObj = {
-    getUserMenus
+    getAllMenus
 }
 
 export default Sys

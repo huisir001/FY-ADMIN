@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-11 16:26:11
+ * @LastEditTime: 2021-11-22 14:51:27
 -->
 <template>
     <z-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
@@ -43,7 +43,7 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue'
 import { fuzzySearch } from '@/utils/common'
-import { TOptionOfTools } from '@/ui/zui/types'
+import { ICols, TOptionOfTools } from '@/ui/zui/types'
 
 export default defineComponent({
     name: 'Dept',
@@ -51,7 +51,7 @@ export default defineComponent({
         // 模糊搜索
         const fuzzySearchWord: Ref<string> = ref('')
 
-        const tableCols = [
+        const tableCols: ICols[] = [
             {
                 label: '部门名称',
                 minWidth: '200',
@@ -105,11 +105,6 @@ export default defineComponent({
             console.log(index, row)
         }
 
-        // 搜索
-        const handleSearch = () => {
-            // console.log(searchFormParams)
-        }
-
         // 重置
         // const handleReset = () => {
         //     for (const key in searchFormParams) {
@@ -124,7 +119,6 @@ export default defineComponent({
             handleMoveDowm,
             fuzzySearchWord,
             fuzzySearch,
-            handleSearch,
             tableData: [
                 {
                     id: 111,

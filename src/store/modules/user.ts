@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-10-25 17:35:16
+ * @LastEditTime: 2021-11-22 14:16:59
  */
 import { STORAGE_OPTIONS } from '@/settings'
 import { ActionContext } from 'vuex'
@@ -12,7 +12,7 @@ import { ElMessage } from 'element-plus'
 import router from '@/router'
 import Layout from '@/layout/index.vue'
 import { rawList2Tree, menu2Route } from '@/utils/common'
-import { getUserMenus } from '@/api/sys'
+import { getUserMenus } from '@/api/user'
 
 /**
  * 用户state接口
@@ -132,12 +132,15 @@ export const user = {
 
         /**
          * 查询菜单列表
+         * 后端通过登录用户查询所属的菜单
+         * 此处查出的并非所有菜单，而是用户有权限的菜单列表
+         * 菜单管理功能页只有总管理员有权限
          */
         async getMenus({ commit }: ActionContext<{}, {}>) {
             const { ok, data = [] } = await getUserMenus()
             if (ok) {
                 // parentId list => children tree
-                const menuTreeList = rawList2Tree(data, 'parentId', 'children')
+                const menuTreeList = rawList2Tree(data)
 
                 // 动态添加路由
                 // 重新登录后这里无需考虑路由会重复。相同name的路由会覆盖先前路由
