@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-11-11 16:07:06
+ * @LastEditTime: 2021-11-22 17:11:52
  */
 
 /**
@@ -74,6 +74,9 @@ export interface ICols {
     // 允许表头插槽，且已定义表头插槽模板
     // <template #header>...</template>
     slotHead?: string
+
+    // 表头标题带帮助提示
+    helpTip?: string
 }
 
 /**

@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-22 14:51:27
+ * @LastEditTime: 2021-11-22 15:27:54
 -->
 <template>
     <z-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
@@ -24,7 +24,7 @@
         </template>
         <template #todoHead>
             <!-- 不分页情况下可以使用本地模糊搜索 -->
-            <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="Search..." />
+            <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="输入名称或负责人搜索..." />
         </template>
         <template #todo="scope">
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">

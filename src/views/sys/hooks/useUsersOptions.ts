@@ -2,9 +2,9 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2021-11-06 23:07:36
+ * @LastEditTime: 2021-11-22 17:02:59
  */
-import { IFormOption, ICols } from '@/ui/zui/types'
+import { IFormOption, ICols, TOptionOfTools } from '@/ui/zui/types'
 import { ref } from "vue"
 export default () => {
     /**
@@ -154,8 +154,11 @@ export default () => {
         },
     ]
 
+    const tableTools: TOptionOfTools[] = ['add', 'fold', 'search', 'export', 'refresh', 'cols']
+
     return {
         searchOptions,
-        tableCols: ref(tableCols)
+        tableCols: ref(tableCols),
+        tableTools
     }
 }

@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-11 16:37:07
+ * @LastEditTime: 2021-11-22 17:04:58
 -->
 <template>
     <z-table :cols="tableCols" :data="tableData" row-key="id" default-expand-all page
@@ -39,9 +39,8 @@ import useUsersOptions from './hooks/useUsersOptions'
 export default defineComponent({
     name: 'Users',
     setup() {
-        const { searchOptions, tableCols } = useUsersOptions()
-
-        const tableTools: TOptionOfTools[] = ['add', 'fold', 'search', 'export', 'refresh', 'cols']
+        // 表格配置
+        const { searchOptions, tableCols, tableTools } = useUsersOptions()
 
         const toolsBtnClick = (btn: TOptionOfTools) => {
             console.log(btn)

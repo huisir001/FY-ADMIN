@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-07 12:14:12
+ * @LastEditTime: 2021-11-22 17:16:07
 -->
 <template>
     <!-- 工具栏 -->
@@ -17,9 +17,19 @@
     <div ref="tableBox" :style="{height:height}">
         <el-table ref="elTable" v-bind="$attrs" size="small" border :max-height="tableCalcHeight">
             <el-table-column v-for="(col,index) in showCols" :key="index" v-bind="col">
+                <!-- 表头插槽 -->
                 <template v-if="col.slotHead" #header>
                     <slot :name="col.slotHead" />
                 </template>
+                <!-- 表头-带提示插槽 -->
+                <template v-else-if="col.helpTip" #header>
+                    <span>{{col.label}}</span>
+                    <el-tooltip effect="light" :content="col.helpTip" placement="top">
+                        <z-icon name="question-filled" size="14" color="var(--el-color-info)"
+                            style="margin-left:2px" :height="18" />
+                    </el-tooltip>
+                </template>
+                <!-- 单元格插槽 -->
                 <template v-if="col.slot" #default="scope">
                     <slot :name="col.slot" v-bind="scope" />
                 </template>
