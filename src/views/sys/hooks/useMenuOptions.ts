@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2021-11-22 17:18:09
+ * @LastEditTime: 2021-11-22 17:21:21
  */
 import { ICols, TOptionOfTools } from '@/ui/zui/types'
 import { ref } from "vue"
@@ -105,7 +105,7 @@ export default () => {
     ]
 
     // 表格工具栏
-    const tableTools: TOptionOfTools[] = ['add', 'fold', 'export', 'refresh']
+    const tableTools: TOptionOfTools[] = ['add', 'fold', 'export', 'refresh', 'cols']
 
     return {
         tableCols: ref(tableCols),
