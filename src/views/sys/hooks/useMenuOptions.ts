@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2021-11-22 17:21:21
+ * @LastEditTime: 2021-11-22 17:26:10
  */
 import { ICols, TOptionOfTools } from '@/ui/zui/types'
 import { ref } from "vue"
@@ -57,7 +57,7 @@ export default () => {
         },
         {
             label: '文件路径',
-            helpTip: 'Vue组件文件路径',
+            helpTip: '路由类型的菜单可配置Vue文件路径',
             minWidth: 130,
             prop: 'viewPath',
         },
