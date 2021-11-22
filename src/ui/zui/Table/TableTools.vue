@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-08 13:56:02
+ * @LastEditTime: 2021-11-22 18:25:53
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -85,11 +85,12 @@ export default defineComponent({
         // 右侧按钮点击
         const handleRightBtnClick = (btn: ITableTool) => {
             if (!btn.disabled) {
+                // 搜索按钮：显隐表单
                 if (btn.name === 'search') {
                     showSearchForm.value = !showSearchForm.value
-                } else {
-                    emit('btnClick', btn.name)
                 }
+                // 通知父组件
+                emit('btnClick', btn.name)
             }
         }
 
