@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-10-25 16:21:45
+ * @LastEditTime: 2021-11-22 11:38:08
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -54,6 +54,11 @@ const routes: RouteRecordRaw[] = [
     name: 'Login',
     component: () => import('../views/login/index.vue'),
     meta: { title: "登录", visible: false, private: false }
+  },
+  // 由于动态路由的缘故，这里添加假路由，解决动态路由会报警告的问题
+  {
+    path: '/:pathMatch(.*)',
+    component: { template: '' },
   }
 ]
 
