@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2021-11-22 13:45:37
+ * @LastEditTime: 2021-11-22 18:14:51
  */
 
 import { Random } from "mockjs"
@@ -39,7 +39,7 @@ const logout = { msg: '注销登陆成功' }
 // 重设密码
 const resetPass = { msg: '修改密码成功' }
 
-// 查询菜单列表
+// 查询用户菜单列表
 const getUserMenus = {
     data: [{
         id: '001', //主键
@@ -150,12 +150,24 @@ const getUserMenus = {
     }]
 }
 
+// 查询所有用户列表（用于用户管理）
+const getUsersByPage = {
+    data: {
+        'list|15': [getUserInfo.data],
+        page: 1,
+        limit: 10,
+        total: 100,
+        pageTotal: 10
+    }
+}
+
 const User: IObj = {
     signup,
     login,
     getUserInfo,
     logout,
     resetPass,
+    getUsersByPage,
     getUserMenus
 }
 

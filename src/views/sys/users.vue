@@ -2,13 +2,12 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-22 17:04:58
+ * @LastEditTime: 2021-11-22 18:22:56
 -->
 <template>
-    <z-table :cols="tableCols" :data="tableData" row-key="id" default-expand-all page
-        :curr="currPage" :total="500" :tools="tableTools" height="calc(100% - 45px)"
-        @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
-        @pageCurrChange="pageCurrChange">
+    <z-table :cols="tableCols" :data="tableData" page :curr="currPage" :total="total"
+        :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick"
+        @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
         <template #search>
             <z-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
                 @reset="handleReset" />
@@ -35,6 +34,7 @@
 import { defineComponent, reactive, ref } from 'vue'
 import { TOptionOfTools } from '@/ui/zui/types'
 import useUsersOptions from './hooks/useUsersOptions'
+import { getUsersByPage } from '@/api/user'
 
 export default defineComponent({
     name: 'Users',
@@ -42,27 +42,19 @@ export default defineComponent({
         // 表格配置
         const { searchOptions, tableCols, tableTools } = useUsersOptions()
 
+        // 表格工具栏点选
         const toolsBtnClick = (btn: TOptionOfTools) => {
             console.log(btn)
         }
 
+        // 用户列表数据
+        const tableData = ref([])
         // 当前页
         const currPage = ref(1)
         // 每页条数
         const limit = ref(15)
-
-        // 当前页切换
-        const pageCurrChange = (val: number) => {
-            console.log('currPage', val)
-            currPage.value = val
-        }
-
-        // 每页条数切换
-        const pageSizeChange = (val: number) => {
-            console.log('limit', val)
-            limit.value = val
-        }
-
+        // 总条数
+        const total = ref(0)
         // 搜索表单数据
         const searchParams: IUserInfo = reactive({
             id: '',
@@ -75,9 +67,33 @@ export default defineComponent({
             dateRange: '',
         })
 
+        // 请求用户列表
+        const getUserList = (function getUsers(search = null) {
+            getUsersByPage({ page: currPage.value, limit: limit.value, search }).then((res) => {
+                const { ok, data } = res
+                if (ok) {
+                    tableData.value = data.list
+                    total.value = data.total
+                }
+            })
+            return getUsers
+        })()
+
+        // 当前页切换
+        const pageCurrChange = (val: number) => {
+            currPage.value = val
+            getUserList()
+        }
+
+        // 每页条数切换
+        const pageSizeChange = (val: number) => {
+            limit.value = val
+            getUserList()
+        }
+
         // 搜索
         const handleSearch = () => {
-            console.log(searchParams)
+            getUserList()
         }
 
         // 重置
@@ -85,6 +101,7 @@ export default defineComponent({
             for (const key in searchParams) {
                 searchParams[key] = ''
             }
+            getUserList()
         }
 
         return {
@@ -92,200 +109,14 @@ export default defineComponent({
             tableTools,
             toolsBtnClick,
             currPage,
+            total,
             pageSizeChange,
             pageCurrChange,
             searchOptions,
             searchParams,
             handleSearch,
             handleReset,
-            tableData: [
-                {
-                    id: 111,
-                    name: '分公司',
-                    status: '0',
-                    leader: '王总',
-                    email: '',
-                    phone: '',
-                    delFlag: '0',
-                    remark: '',
-                    createTime: '2021-09-09 17:25:21',
-                    updateTime: '2021-09-09 17:25:22',
-                },
-                {
-                    id: 1,
-                    name: '总公司',
-                    status: '1',
-                    leader: '王总',
-                    email: '',
-                    phone: '18233333333',
-                    delFlag: '0',
-                    remark: '',
-                    createTime: '2021-09-09 17:25:21',
-                    updateTime: '2021-09-09 17:25:22',
-                    children: [
-                        {
-                            id: 2,
-                            name: '财务部',
-                            status: '0',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 4,
-                            name: '市场部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 5,
-                            name: '行政部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 6,
-                            name: '销售部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                    ],
-                },
-                {
-                    id: 7,
-                    name: '总公司',
-                    status: '1',
-                    leader: '王总',
-                    email: '',
-                    phone: '18233333333',
-                    delFlag: '0',
-                    remark: '',
-                    createTime: '2021-09-09 17:25:21',
-                    updateTime: '2021-09-09 17:25:22',
-                    children: [
-                        {
-                            id: 8,
-                            name: '财务部',
-                            status: '0',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 9,
-                            name: '研发部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 10,
-                            name: '市场部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 11,
-                            name: '行政部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 12,
-                            name: '销售部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                    ],
-                },
-                {
-                    id: 13,
-                    name: '总公司',
-                    status: '1',
-                    leader: '王总',
-                    email: '',
-                    phone: '18233333333',
-                    delFlag: '0',
-                    remark: '',
-                    createTime: '2021-09-09 17:25:21',
-                    updateTime: '2021-09-09 17:25:22',
-                    children: [
-                        {
-                            id: 14,
-                            name: '财务部',
-                            status: '0',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 15,
-                            name: '财务部',
-                            status: '0',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                    ],
-                },
-            ],
+            tableData,
         }
     },
 })

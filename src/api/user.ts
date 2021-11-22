@@ -2,7 +2,7 @@
  * @Description: 用户相关接口
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 18:06:40
- * @LastEditTime: 2021-11-22 13:55:04
+ * @LastEditTime: 2021-11-22 18:16:49
  */
 import Req from "../utils/Request"
 const Prefix = '/api/user'
@@ -26,6 +26,10 @@ export const doLogout: IPromiseFunc = () =>
 // 重置密码
 export const resetPass: IPromiseFunc = (oldPass: string, newPass: string) =>
     Req.post(`${Prefix}/resetPass`, { oldPass, newPass })
+
+// 用戶列表
+export const getUsersByPage: IPromiseFunc = (params: IGetUsersParams) =>
+    Req.get(`${Prefix}/getUsersByPage`, { params })
 
 // 用戶菜单查询
 export const getUserMenus: IPromiseFunc = () =>
