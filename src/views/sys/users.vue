@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-22 18:22:56
+ * @LastEditTime: 2021-11-22 18:29:40
 -->
 <template>
     <z-table :cols="tableCols" :data="tableData" page :curr="currPage" :total="total"
@@ -43,8 +43,8 @@ export default defineComponent({
         const { searchOptions, tableCols, tableTools } = useUsersOptions()
 
         // 表格工具栏点选
-        const toolsBtnClick = (btn: TOptionOfTools) => {
-            console.log(btn)
+        const toolsBtnClick = (btn: TOptionOfTools, flag: any) => {
+            console.log(btn, flag)
         }
 
         // 用户列表数据

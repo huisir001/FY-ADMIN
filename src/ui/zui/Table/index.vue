@@ -2,13 +2,13 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-22 17:16:07
+ * @LastEditTime: 2021-11-23 09:53:49
 -->
 <template>
     <!-- 工具栏 -->
     <!-- 插槽search（搜索栏）必须在tools工具栏存在情况下才能显示 -->
     <table-tools v-if="tools.length" :colLabels="colLabels" :tools="tools"
-        @showCols="handleShowCols" @btnClick="$emit('toolsClick', $event)">
+        @showCols="handleShowCols" @btnClick="handleBtnClick">
         <slot name="search" />
     </table-tools>
     <!-- 使用`v-bind="$attrs"`可继承组件调用是所配置的attr,这里可继承el-table组件所需要的所有属性及事件以及其他未作为props的行内属性 -->
@@ -99,6 +99,10 @@ export default defineComponent({
         const handleShowCols = (val: string[]) => {
             showCols.value = cols.filter((item) => !item.label || val.includes(item.label))
         }
+        /* 工具栏点击 */
+        const handleBtnClick = (arg1: string, arg2: any) => {
+            emit('toolsClick', arg1, arg2)
+        }
 
         /* 表格高度计算 */
         const Store = useStore()
@@ -133,6 +137,7 @@ export default defineComponent({
             colLabels,
             showCols,
             handleShowCols,
+            handleBtnClick,
             tableBox,
             tableCalcHeight,
             limit,
