@@ -2,11 +2,11 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-24 16:02:49
+ * @LastEditTime: 2021-11-24 16:50:48
 -->
 <template>
-    <z-table :cols="tableCols" :data="tableData" page :curr="currPage" :total="total"
-        :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick"
+    <z-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
+        :total="total" :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick"
         @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
         <template #search>
             <z-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
@@ -42,6 +42,8 @@ export default defineComponent({
     setup() {
         // 表格配置
         const { searchOptions, tableCols, tableTools } = useUsersOptions()
+        // loading
+        const loading = ref(false)
         // 用户列表数据
         const tableData = ref([])
         // 当前页
@@ -64,12 +66,14 @@ export default defineComponent({
 
         // 请求用户列表
         const getUserList = (function getUsers(search = null) {
+            loading.value = true
             getUsersByPage({ page: currPage.value, limit: limit.value, search }).then((res) => {
                 const { ok, data } = res
                 if (ok) {
                     tableData.value = data.list
                     total.value = data.total
                 }
+                loading.value = false
             })
             return getUsers
         })()
@@ -108,6 +112,7 @@ export default defineComponent({
         }
 
         return {
+            loading,
             tableCols,
             tableTools,
             toolsBtnClick,

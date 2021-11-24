@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-24 16:31:06
+ * @LastEditTime: 2021-11-24 16:56:33
 -->
 <template>
     <!-- 工具栏 -->
@@ -15,7 +15,8 @@
     <!-- 继承的属性配置详见文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-attributes -->
     <!-- 继承的事件文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-events -->
     <div ref="tableBox" :style="{height:height}">
-        <el-table ref="elTable" v-bind="$attrs" size="small" border :max-height="tableCalcHeight">
+        <el-table ref="elTable" v-bind="$attrs" v-loading="loading" size="small" border
+            :max-height="tableCalcHeight">
             <el-table-column v-for="(col,index) in showCols" :key="index" v-bind="col">
                 <!-- 表头插槽 -->
                 <template v-if="col.slotHead" #header>
@@ -89,6 +90,10 @@ export default defineComponent({
             type: Array as PropType<number[]>,
             // 对象或数组默认值必须从一个工厂函数获取
             default: () => [15, 30, 50, 100, 200],
+        },
+        loading: {
+            type: Boolean,
+            default: false,
         },
     },
     emits: ['toolsClick', 'pageSizeChange', 'pageCurrChange'],
