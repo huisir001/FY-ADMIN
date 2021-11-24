@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-24 16:27:18
+ * @LastEditTime: 2021-11-24 16:31:06
 -->
 <template>
     <!-- 工具栏 -->
@@ -172,7 +172,7 @@ export default defineComponent({
         }
         .el-checkbox {
             height: 14px;
-            transform: translateY(3px);
+            transform: translate(-1px, 3px);
         }
     }
     tr:last-child > td {
