@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-23 09:53:49
+ * @LastEditTime: 2021-11-24 16:27:18
 -->
 <template>
     <!-- 工具栏 -->
@@ -169,6 +169,10 @@ export default defineComponent({
             min-height: 23px;
             padding: 0;
             border: 0;
+        }
+        .el-checkbox {
+            height: 14px;
+            transform: translateY(3px);
         }
     }
     tr:last-child > td {

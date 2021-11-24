@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-22 18:29:40
+ * @LastEditTime: 2021-11-24 16:02:49
 -->
 <template>
     <z-table :cols="tableCols" :data="tableData" page :curr="currPage" :total="total"
@@ -14,7 +14,8 @@
         </template>
         <template #status="scope">
             <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
-            <el-tag v-else size="small" type="danger">停用</el-tag>
+            <el-tag v-else-if="scope.row.status==0" size="small" type="danger">冻结</el-tag>
+            <el-tag v-else size="small" type="danger">暂无</el-tag>
         </template>
         <template #todo="scope">
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
@@ -41,12 +42,6 @@ export default defineComponent({
     setup() {
         // 表格配置
         const { searchOptions, tableCols, tableTools } = useUsersOptions()
-
-        // 表格工具栏点选
-        const toolsBtnClick = (btn: TOptionOfTools, flag: any) => {
-            console.log(btn, flag)
-        }
-
         // 用户列表数据
         const tableData = ref([])
         // 当前页
@@ -102,6 +97,14 @@ export default defineComponent({
                 searchParams[key] = ''
             }
             getUserList()
+        }
+
+        // 表格工具栏点选
+        const toolsBtnClick = (btn: TOptionOfTools, flag: any) => {
+            console.log(btn, flag)
+            if (btn == 'search' && !flag) {
+                handleReset()
+            }
         }
 
         return {

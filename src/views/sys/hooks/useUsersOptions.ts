@@ -2,7 +2,7 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2021-11-22 17:02:59
+ * @LastEditTime: 2021-11-24 16:18:36
  */
 import { IFormOption, ICols, TOptionOfTools } from '@/ui/zui/types'
 import { ref } from "vue"
@@ -117,13 +117,47 @@ export default () => {
      */
     const tableCols: ICols[] = [
         {
-            label: '部门名称',
+            minWidth: 50,
+            type: "selection"
+        },
+        {
+            label: '登录账号',
+            minWidth: 100,
+            prop: 'username',
+        },
+        {
+            label: '昵称',
+            minWidth: 60,
+            prop: 'nickname',
+        },
+        {
+            label: '性别',
+            minWidth: 60,
+            align: "center",
+            prop: 'sex',
+            formatter: (row: IObj, column: IObj, cellValue: number) => {
+                const sex = ["保密", "男", "女"]
+                return sex[cellValue && Number(cellValue)]
+            },
+        },
+        {
+            label: '邮箱',
             minWidth: '200',
-            prop: 'name',
+            prop: 'email',
+        },
+        {
+            label: '手机号',
+            minWidth: 100,
+            prop: 'phone',
+        },
+        {
+            label: '角色',
+            minWidth: 80,
+            prop: 'role',
         },
         {
             label: '状态',
-            minWidth: '80',
+            minWidth: 80,
             filters: [
                 { text: '111', value: 1 },
                 { text: '222', value: 0 },
@@ -131,30 +165,20 @@ export default () => {
             slot: 'status',
         },
         {
-            label: '负责人',
-            prop: 'leader',
-            minWidth: '100',
-        },
-        {
-            label: '联系方式',
-            prop: 'phone',
-            minWidth: '100',
-        },
-        {
             label: '创建时间',
             prop: 'createTime',
-            minWidth: '180',
+            minWidth: 160,
             sortable: true,
         },
         {
             label: '操作',
             fixed: 'right',
-            minWidth: '200',
+            minWidth: 180,
             slot: 'todo',
         },
     ]
 
-    const tableTools: TOptionOfTools[] = ['add', 'fold', 'search', 'export', 'refresh', 'cols']
+    const tableTools: TOptionOfTools[] = ['add', 'search', 'export', 'refresh', 'cols']
 
     return {
         searchOptions,

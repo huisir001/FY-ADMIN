@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2021-11-22 17:26:10
+ * @LastEditTime: 2021-11-24 15:28:17
  */
 import { ICols, TOptionOfTools } from '@/ui/zui/types'
 import { ref } from "vue"
@@ -13,12 +13,13 @@ export default () => {
     const tableCols: ICols[] = [
         {
             label: '菜单名称',
-            minWidth: 200,
+            minWidth: 180,
             slot: 'title',
         },
         {
             label: '图标',
-            minWidth: 60,
+            minWidth: 50,
+            align: 'center',
             slot: 'icon',
         },
         {
@@ -98,7 +99,7 @@ export default () => {
         },
         {
             fixed: 'right',
-            minWidth: 200,
+            minWidth: 180,
             slotHead: 'todoHead',
             slot: 'todo',
         },

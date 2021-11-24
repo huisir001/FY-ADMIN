@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-11-22 18:15:30
+ * @LastEditTime: 2021-11-24 16:16:55
  */
 
 /**
@@ -69,6 +69,9 @@ declare interface IUserInfo extends IObj {
   avatar?: string
   sex?: 0 | 1 | 2 | '' | '0' | '1' | '2'     //0-保密 1-男 2-女 ''-全部
   status?: 0 | 1 | '' | '0' | '1'    //0-冻结 1-正常  ''-全部
+  createTime?: string
+  updateTime?: string
+  role?: string  //角色，逗号分割角色ID号
 }
 
 /**
