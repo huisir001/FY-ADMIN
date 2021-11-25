@@ -2,7 +2,7 @@
  * @Description: 表格工具栏配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 10:50:15
- * @LastEditTime: 2021-11-04 18:04:33
+ * @LastEditTime: 2021-11-25 17:12:37
  */
 import { TUseTableTools } from '../types'
 
@@ -19,7 +19,7 @@ const tableTools: TUseTableTools = () => ({
             name: 'fold',
             icon: 'sort',
             type: 'info',
-            disabled: true
+            // disabled: true
         },
     ],
     right: [
@@ -28,13 +28,14 @@ const tableTools: TUseTableTools = () => ({
             name: 'cols',
             icon: 'operation',
             position: 'right',
+            dropdown: true
         },
         {
-            title: '导出',
+            title: '导出当前页',
             name: 'export',
             icon: 'export',
             position: 'right',
-            disabled: true
+            dropdown: true
         },
         {
             title: '搜索表单显隐',

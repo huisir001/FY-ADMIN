@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-11-22 17:11:52
+ * @LastEditTime: 2021-11-25 17:08:41
  */
 
 /**
@@ -77,6 +77,9 @@ export interface ICols {
 
     // 表头标题带帮助提示
     helpTip?: string
+
+    // 隐藏
+    hide?: boolean
 }
 
 /**
@@ -89,6 +92,7 @@ export interface ITableTool {
     disabled?: boolean
     // 类型（按钮色）：默认primary，只针对position为left位置有效
     type?: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text'
+    dropdown?: boolean // 是否为下拉菜单
 }
 
 /**

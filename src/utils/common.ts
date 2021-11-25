@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-11-22 14:16:50
+ * @LastEditTime: 2021-11-25 17:33:21
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -74,3 +74,23 @@ export const menu2Route = (menu: IMenu, menuList: IMenu[], Layout: any): RouteRe
  */
 export const fuzzySearch = (listData: any[], inputVal: string) => listData
     .filter((item) => JSON.stringify(item).includes(inputVal))
+
+/**
+ * 将字符串转为文档下载
+ */
+export const exportRaw = (name: string, data: string) => {	//将字符串转存为文件
+    //定义文件内容，类型必须为Blob 否则createObjectURL会报错
+    let content = new Blob([data]);
+    //生成url对象
+    let urlObject = window.URL || window.webkitURL || window;
+    let url = urlObject.createObjectURL(content);
+    //生成<a></a>DOM元素
+    let el = document.createElement("a");
+    //链接赋值
+    el.href = url;
+    el.download = name;
+    //必须点击否则不会下载
+    el.click();
+    //移除链接释放资源
+    urlObject.revokeObjectURL(url);
+}

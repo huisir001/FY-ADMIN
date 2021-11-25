@@ -2,7 +2,7 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2021-11-24 16:29:46
+ * @LastEditTime: 2021-11-25 15:07:20
  */
 import { IFormOption, ICols, TOptionOfTools } from '@/ui/zui/types'
 import { ref } from "vue"
@@ -124,7 +124,7 @@ export default () => {
         {
             label: '登录账号',
             minWidth: 100,
-            prop: 'username',
+            prop: 'username'
         },
         {
             label: '昵称',

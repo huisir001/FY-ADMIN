@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-22 18:28:50
+ * @LastEditTime: 2021-11-25 17:23:07
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -11,35 +11,44 @@
     <div class="table-tools">
         <div class="left">
             <el-button v-for="btn in leftBtns" :key="btn.name" size="mini" :type="btn.type"
-                :disabled="btn.disabled" @click="$emit('btnClick',btn.name)">
+                :disabled="btn.disabled" @click="handleBtnClick(btn)">
                 <z-icon :name="btn.icon" size="13" color="white" /> {{btn.title}}
             </el-button>
         </div>
         <div class="right">
             <template v-for="btn in rightBtns" :key="btn.name">
-                <el-dropdown v-if="btn.name=='cols'" trigger="click" :hide-on-click="false">
+                <el-dropdown v-if="btn.dropdown" :class="{disabled:btn.disabled}" trigger="click"
+                    :hide-on-click="btn.name==='export'"
+                    @visibleChange="$emit('btnClick',btn.name,$event)">
                     <el-tooltip effect="light" :content="btn.title" placement="top"
                         :auto-close="1000">
-                        <div class="tool-item el-dropdown-link"
-                            :class="{[btn.name]:true,disabled:btn.disabled}">
+                        <div class="tool-item el-dropdown-link" :class="{[btn.name]:true}">
                             <z-icon :name="btn.icon" color="var(--el-text-color-regular)"
                                 size="16" />
                         </div>
                     </el-tooltip>
                     <template #dropdown>
                         <el-dropdown-menu class="table-tool-dropmenu">
-                            <el-checkbox-group v-model="showCols">
-                                <el-dropdown-item v-for="label in colLabels" :key="label">
-                                    <el-checkbox :label="label" />
+                            <template v-if="btn.name==='cols'">
+                                <el-checkbox-group v-model="showCols">
+                                    <el-dropdown-item v-for="label in colLables" :key="label">
+                                        <el-checkbox :label="label" />
+                                    </el-dropdown-item>
+                                </el-checkbox-group>
+                            </template>
+                            <template v-if="btn.name==='export'">
+                                <el-dropdown-item @click="exportCurrPage(1)">导出csv
                                 </el-dropdown-item>
-                            </el-checkbox-group>
+                                <el-dropdown-item @click="exportCurrPage(2)">导出excel
+                                </el-dropdown-item>
+                            </template>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
                 <el-tooltip v-else effect="light" :content="btn.title" placement="top"
                     :auto-close="1000">
                     <div class="tool-item" :class="{[btn.name]:true,disabled:btn.disabled}"
-                        @click="handleRightBtnClick(btn)">
+                        @click="handleBtnClick(btn)">
                         <z-icon :name="btn.icon" color="var(--el-text-color-regular)" size="16" />
                     </div>
                 </el-tooltip>
@@ -49,15 +58,19 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, ref, PropType, watch } from 'vue'
+import { defineComponent, ref, PropType, watch, computed } from 'vue'
 import useTableTools from './useTableTools'
-import { ITableTool, TOptionOfTools } from '../types'
+import { ICols, ITableTool, TOptionOfTools } from '../types'
+import useTableToolsAction from './useTableToolsAction'
 
 export default defineComponent({
     name: 'TableTools',
     props: {
-        colLabels: {
-            type: Array as PropType<string[]>,
+        elTable: {
+            required: true,
+        },
+        cols: {
+            type: Array as PropType<ICols[]>,
             required: true,
         },
         tools: {
@@ -66,7 +79,7 @@ export default defineComponent({
         },
     },
     emits: ['btnClick', 'showCols'],
-    setup({ colLabels, tools }, { emit }) {
+    setup({ elTable, cols, tools }, { emit }) {
         // 所有按钮
         const { left, right } = useTableTools()
 
@@ -82,14 +95,27 @@ export default defineComponent({
         // 搜索表单栏状态
         const showSearchForm = ref(false)
 
+        // 表格折叠状态
+        const treeTableExpanded = ref(false)
+
+        // 部分工具栏固定方法
+        const { selectShowCols, toggleTreeTableAll, exportCurrPage } = useTableToolsAction(
+            elTable,
+            cols
+        )
+
         // 右侧按钮点击
-        const handleRightBtnClick = (btn: ITableTool) => {
+        const handleBtnClick = (btn: ITableTool) => {
             if (!btn.disabled) {
-                // 搜索按钮：显隐表单
                 if (btn.name === 'search') {
+                    // 搜索按钮：显隐表单
                     showSearchForm.value = !showSearchForm.value
-                    // 通知父组件
                     emit('btnClick', btn.name, showSearchForm.value)
+                } else if (btn.name === 'fold') {
+                    // 展开折叠
+                    treeTableExpanded.value = !treeTableExpanded.value
+                    toggleTreeTableAll(treeTableExpanded.value)
+                    emit('btnClick', btn.name, treeTableExpanded.value)
                 } else {
                     // 通知父组件
                     emit('btnClick', btn.name)
@@ -97,21 +123,14 @@ export default defineComponent({
             }
         }
 
-        // 列筛选
-        const showCols = ref(colLabels)
-
-        // 反馈给父组件
-        watch(showCols, (val) => {
-            emit('showCols', val)
-        })
-
         return {
             leftBtns,
             rightBtns,
-            showCols,
             hasSearchTool,
             showSearchForm,
-            handleRightBtnClick,
+            handleBtnClick,
+            exportCurrPage,
+            ...selectShowCols(),
         }
     },
 })
@@ -145,10 +164,10 @@ export default defineComponent({
                 outline: none;
                 border: none;
             }
-            &.disabled {
-                opacity: 0.5;
-                cursor: not-allowed;
-            }
+        }
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
         }
     }
 }

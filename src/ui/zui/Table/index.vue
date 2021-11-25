@@ -2,13 +2,13 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-24 16:56:33
+ * @LastEditTime: 2021-11-25 16:28:56
 -->
 <template>
     <!-- 工具栏 -->
     <!-- 插槽search（搜索栏）必须在tools工具栏存在情况下才能显示 -->
-    <table-tools v-if="tools.length" :colLabels="colLabels" :tools="tools"
-        @showCols="handleShowCols" @btnClick="handleBtnClick">
+    <table-tools v-if="tools.length" :cols="cols" :tools="tools" :el-table="tableRef"
+        @btnClick="handleBtnClick">
         <slot name="search" />
     </table-tools>
     <!-- 使用`v-bind="$attrs"`可继承组件调用是所配置的attr,这里可继承el-table组件所需要的所有属性及事件以及其他未作为props的行内属性 -->
@@ -17,7 +17,8 @@
     <div ref="tableBox" :style="{height:height}">
         <el-table ref="elTable" v-bind="$attrs" v-loading="loading" size="small" border
             :max-height="tableCalcHeight">
-            <el-table-column v-for="(col,index) in showCols" :key="index" v-bind="col">
+            <el-table-column v-for="(col,index) in cols.filter((col) => !col.hide)" :key="index"
+                v-bind="col">
                 <!-- 表头插槽 -->
                 <template v-if="col.slotHead" #header>
                     <slot :name="col.slotHead" />
@@ -97,13 +98,10 @@ export default defineComponent({
         },
     },
     emits: ['toolsClick', 'pageSizeChange', 'pageCurrChange'],
-    setup({ cols, limits, height, page }, { emit, attrs }) {
-        /* 表格列筛选 */
-        const showCols = ref(cols)
-        const colLabels = cols.map((item) => item.label).filter((item) => item)
-        const handleShowCols = (val: string[]) => {
-            showCols.value = cols.filter((item) => !item.label || val.includes(item.label))
-        }
+    setup({ limits, height, page }, { emit }) {
+        /* 表格对象 */
+        const elTable = ref()
+
         /* 工具栏点击 */
         const handleBtnClick = (arg1: string, arg2: any) => {
             emit('toolsClick', arg1, arg2)
@@ -139,15 +137,14 @@ export default defineComponent({
             emit('pageCurrChange', val)
         }
         return {
-            colLabels,
-            showCols,
-            handleShowCols,
             handleBtnClick,
             tableBox,
             tableCalcHeight,
             limit,
             handleSizeChange,
             handleCurrChange,
+            elTable,
+            tableRef: computed(() => elTable), // 这里使用computed对elTable进行跟踪，传递到tools子组件
         }
     },
 })
