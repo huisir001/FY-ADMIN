@@ -2,11 +2,11 @@
  * @Description: 工具栏方法（固定写死）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-25 10:54:54
- * @LastEditTime: 2021-11-25 19:32:20
+ * @LastEditTime: 2021-11-26 10:57:44
  */
 
 import { ref, watch } from 'vue'
-import { exportRaw } from '@/utils/common'
+import { exportRaw, tree2RawList } from '@/utils/common'
 import { ICols } from '../types'
 import writeXlsxFile from 'write-excel-file'
 
@@ -49,7 +49,8 @@ export default (tableRef: any, cols: ICols[]) => ({
      * 导出当前页
      */
     exportCurrPage(n: number) {
-        const data: any[] = tableRef.value.data
+        // 树结构解构，标志tableRef.value.rowKey
+        const data: any[] = tableRef.value.rowKey ? tree2RawList(tableRef.value.data) : tableRef.value.data
         const keys = Object.keys(data[0])
         if (n === 1) {
             const csvData = data.reduce((prev: string, curr: { [x: string]: any }, index: number) => {
@@ -58,9 +59,9 @@ export default (tableRef: any, cols: ICols[]) => ({
             })
             exportRaw(`${Date.now()}.csv`, csvData)
         } else {
-            const row1 = keys.map(key => ({ value: key, fontWeight: "bold" }))
-            const row = tableRef.value.data.map((item: any) => {
-                return keys.map(key => ({ value: item[key], type: item[key].constructor }))
+            const row1 = keys.map(key => ({ value: key, fontWeight: "bold", type: String }))
+            const row = data.map((item: any) => {
+                return keys.map(key => ({ value: item[key], type: item[key] && item[key].constructor }))
             })
             row.unshift(row1)
             writeXlsxFile(row, { fileName: `${Date.now()}.xlsx` })
@@ -75,11 +76,15 @@ export default (tableRef: any, cols: ICols[]) => ({
  * 字段中包含有换行符，该字段必须用双引号括起来
  * 字段前后包含有空格，该字段必须用双引号括起来
  * 字段中如果有双引号，该字段必须用双引号括起来
+ * 字段中如果有長字符串且为数字字符串，则添加\t制表符，防止预览时被表格转义为科学计数
  */
 function handleCsvWord(value: string) {
     const Characters = [',', ' ', '\r\n', '"']
-    if (value.toString().split("").find(word => Characters.includes(word))) {
+    if (value && value.toString().split("").find(word => Characters.includes(word))) {
         return `"${value}"`
+    } else if (typeof value === "string" && value.length > 5 && !isNaN(Number(value))) {
+        // 防止预览时被表格转义为科学计数
+        return value + "\t"
     } else {
         return value
     }

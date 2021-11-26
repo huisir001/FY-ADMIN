@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-11-25 17:33:21
+ * @LastEditTime: 2021-11-26 10:35:42
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -50,6 +50,34 @@ export const rawList2Tree = (arrList: IObj[], parentIdKey: string = 'parentId', 
     }()
 
     return menuTree
+}
+
+/**
+ * 递归转换
+ * children tree =>  parentId list
+ */
+export const tree2RawList = (treeData: IObj[], idKey: string = 'id', parentIdKey: string = 'parentId', childKey: string = 'children') => {
+    if (treeData.length === 0) {
+        return []
+    }
+    let copyTreeData = JSON.parse(JSON.stringify(treeData))
+    let rawList: IObj[] = [];
+
+    (function Recursion(prevList: IObj[], pid: any = null) {
+
+        const concatList = prevList.map((item: IObj) => {
+            if (item[childKey] && item[childKey].length) {
+                Recursion(item[childKey], item[idKey])
+                delete item[childKey]
+            }
+            item[parentIdKey] = pid
+            return item
+        })
+
+        rawList = rawList.concat(concatList)
+    })(copyTreeData)
+
+    return rawList
 }
 
 /**
