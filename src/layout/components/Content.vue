@@ -2,12 +2,13 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2021-11-03 19:26:43
+ * @LastEditTime: 2021-11-26 11:49:49
 -->
 <template>
     <div class="content">
         <router-view v-slot="{ Component }">
-            <keep-alive :exclude="noCacheRouterNames">
+            <!-- 由於vue3中不知如何銷毀被緩存的組件，所以這裏設置max最大緩存數，達到max時最先緩存的組件會被銷毀 -->
+            <keep-alive :exclude="noCacheRouterNames" :max="10">
                 <component :is="Component" />
             </keep-alive>
         </router-view>
