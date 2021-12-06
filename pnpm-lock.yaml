@@ -9,7 +9,7 @@ specifiers:
   '@vue/cli-service': ^4.5.15
   '@vue/compiler-sfc': ^3.2.20
   axios: ^0.21.4
-  element-plus: ^1.2.0-beta.2
+  element-plus: 1.2.0-beta.5
   mockjs: ^1.1.0
   sass: ^1.43.4
   sass-loader: ^8.0.2
@@ -23,7 +23,7 @@ specifiers:
 dependencies:
   '@element-plus/icons': 0.0.11
   axios: 0.21.4
-  element-plus: 1.2.0-beta.2_vue@3.2.21
+  element-plus: 1.2.0-beta.5_vue@3.2.21
   mockjs: 1.1.0
   vue: 3.2.21
   vue-router: 4.0.12_vue@3.2.21
@@ -79,6 +79,7 @@ packages:
 
   /@element-plus/icons/0.0.11:
     resolution: {integrity: sha1-mxh8ACd0VIuRGFDRf6X8L5pRX1c=, tarball: '@element-plus/icons/download/@element-plus/icons-0.0.11.tgz'}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     dev: false
 
   /@hapi/address/2.1.4:
@@ -518,7 +519,7 @@ packages:
       source-map: 0.6.1
       vue-template-es2015-compiler: 1.9.1
     optionalDependencies:
-      prettier: 2.4.1
+      prettier: 2.5.1
     dev: true
 
   /@vue/devtools-api/6.0.0-beta.20:
@@ -583,8 +584,8 @@ packages:
     resolution: {integrity: sha1-trQKdiVCnSvXwigd26YB7QXcfxo=, tarball: '@vue/web-component-wrapper/download/@vue/web-component-wrapper-1.3.0.tgz'}
     dev: true
 
-  /@vueuse/core/6.8.0_vue@3.2.21:
-    resolution: {integrity: sha1-3ABLwwAx4FPp71ARIDxKgPAJhu0=, tarball: '@vueuse/core/download/@vueuse/core-6.8.0.tgz'}
+  /@vueuse/core/7.1.2_vue@3.2.21:
+    resolution: {integrity: sha512-SLoOPfhZdNRNUkZfx+wrHj6WycWdSw2RmNS8E4ngQ2kmBoJjRarGy51/GkGdjqHQqmhuwuFoNO2WaU0yBn3ffg==, tarball: '@vueuse/core/download/@vueuse/core-7.1.2.tgz'}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
       vue: ^2.6.0 || ^3.2.0
@@ -594,13 +595,13 @@ packages:
       vue:
         optional: true
     dependencies:
-      '@vueuse/shared': 6.8.0_vue@3.2.21
+      '@vueuse/shared': 7.1.2_vue@3.2.21
       vue: 3.2.21
       vue-demi: 0.12.1_vue@3.2.21
     dev: false
 
-  /@vueuse/shared/6.8.0_vue@3.2.21:
-    resolution: {integrity: sha1-UHE7dwlBKT5Vek6ulCTK0qrUSoU=, tarball: '@vueuse/shared/download/@vueuse/shared-6.8.0.tgz'}
+  /@vueuse/shared/7.1.2_vue@3.2.21:
+    resolution: {integrity: sha512-AjYh4y9S5FMOoHDsysqcXY/1mpqNTrnWUD50yaaiyf+5kGWQVIpAkkjKZlYSC/NHKxxCRn0cLR4nWMzceUWewQ==, tarball: '@vueuse/shared/download/@vueuse/shared-7.1.2.tgz'}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
       vue: ^2.6.0 || ^3.2.0
@@ -1469,7 +1470,7 @@ packages:
     dev: true
 
   /chalk/2.4.2:
-    resolution: {integrity: sha1-zUJUFnelQzPPVBpJEIwUMrRMlCQ=, tarball: chalk/download/chalk-2.4.2.tgz?cache=0&sync_timestamp=1633098481980&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fchalk%2Fdownload%2Fchalk-2.4.2.tgz}
+    resolution: {integrity: sha1-zUJUFnelQzPPVBpJEIwUMrRMlCQ=, tarball: chalk/download/chalk-2.4.2.tgz}
     engines: {node: '>=4'}
     dependencies:
       ansi-styles: 3.2.1
@@ -1845,7 +1846,7 @@ packages:
     resolution: {integrity: sha1-pgQtNjTCsn6TKPg3uWX6yDgI24U=, tarball: core-util-is/download/core-util-is-1.0.3.tgz}
 
   /cosmiconfig/5.2.1:
-    resolution: {integrity: sha1-BA9yaAnFked6F8CjYmykW08Wixo=, tarball: cosmiconfig/download/cosmiconfig-5.2.1.tgz?cache=0&sync_timestamp=1634019712109&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcosmiconfig%2Fdownload%2Fcosmiconfig-5.2.1.tgz}
+    resolution: {integrity: sha1-BA9yaAnFked6F8CjYmykW08Wixo=, tarball: cosmiconfig/download/cosmiconfig-5.2.1.tgz}
     engines: {node: '>=4'}
     dependencies:
       import-fresh: 2.0.0
@@ -2447,14 +2448,14 @@ packages:
     resolution: {integrity: sha1-5xQ7ZZ9z3E0FEtGuS66w+557yDU=, tarball: electron-to-chromium/download/electron-to-chromium-1.3.890.tgz}
     dev: true
 
-  /element-plus/1.2.0-beta.2_vue@3.2.21:
-    resolution: {integrity: sha1-9sYJNAXM5V+tRfCNFbipLfpy6cM=, tarball: element-plus/download/element-plus-1.2.0-beta.2.tgz}
+  /element-plus/1.2.0-beta.5_vue@3.2.21:
+    resolution: {integrity: sha512-8KNGsNZ6RjVJ7kmxq/WLeTBMhVxSjfaGdW2QdcdXz4km1MgxbyBfdiNGVQG4XH/n+hbtLFldCPw0mVT4vkncuA==, tarball: element-plus/download/element-plus-1.2.0-beta.5.tgz}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
       '@element-plus/icons': 0.0.11
       '@popperjs/core': 2.10.2
-      '@vueuse/core': 6.8.0_vue@3.2.21
+      '@vueuse/core': 7.1.2_vue@3.2.21
       async-validator: 4.0.7
       dayjs: 1.10.7
       lodash: 4.17.21
@@ -2962,7 +2963,7 @@ packages:
       cosmiconfig: 6.0.0
       deepmerge: 4.2.2
       fs-extra: 9.1.0
-      memfs: 3.3.0
+      memfs: 3.4.0
       minimatch: 3.0.4
       schema-utils: 2.7.0
       semver: 7.3.5
@@ -4144,8 +4145,8 @@ packages:
       immediate: 3.0.6
     dev: false
 
-  /lines-and-columns/1.1.6:
-    resolution: {integrity: sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=, tarball: lines-and-columns/download/lines-and-columns-1.1.6.tgz}
+  /lines-and-columns/1.2.4:
+    resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==, tarball: lines-and-columns/download/lines-and-columns-1.2.4.tgz}
     dev: true
 
   /loader-runner/2.4.0:
@@ -4237,7 +4238,7 @@ packages:
     dev: true
 
   /lodash/4.17.21:
-    resolution: {integrity: sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=, tarball: lodash/download/lodash-4.17.21.tgz?cache=0&sync_timestamp=1634004296003&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Flodash%2Fdownload%2Flodash-4.17.21.tgz}
+    resolution: {integrity: sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=, tarball: lodash/download/lodash-4.17.21.tgz}
 
   /log-symbols/2.2.0:
     resolution: {integrity: sha1-V0Dhxdbw39pK2TI7UzIQfva0xAo=, tarball: log-symbols/download/log-symbols-2.2.0.tgz}
@@ -4329,8 +4330,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /memfs/3.3.0:
-    resolution: {integrity: sha1-TaLR/ECgSxcKVmIscWTGvixMvvI=, tarball: memfs/download/memfs-3.3.0.tgz}
+  /memfs/3.4.0:
+    resolution: {integrity: sha512-o/RfP0J1d03YwsAxyHxAYs2kyJp55AFkMazlFAZFR2I2IXkxiUTXRabJ6RmNNCQ83LAD2jy52Khj0m3OffpNdA==, tarball: memfs/download/memfs-3.4.0.tgz}
     engines: {node: '>= 4.0.0'}
     dependencies:
       fs-monkey: 1.0.3
@@ -4998,7 +4999,7 @@ packages:
       '@babel/code-frame': 7.16.0
       error-ex: 1.3.2
       json-parse-even-better-errors: 2.3.1
-      lines-and-columns: 1.1.6
+      lines-and-columns: 1.2.4
     dev: true
 
   /parse5-htmlparser2-tree-adapter/6.0.1:
@@ -5514,8 +5515,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /prettier/2.4.1:
-    resolution: {integrity: sha1-Zx4RyJwUpM/Ids5WQQbEpnJsn1w=, tarball: prettier/download/prettier-2.4.1.tgz}
+  /prettier/2.5.1:
+    resolution: {integrity: sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==, tarball: prettier/download/prettier-2.5.1.tgz}
     engines: {node: '>=10.13.0'}
     hasBin: true
     requiresBuild: true
@@ -5991,7 +5992,7 @@ packages:
     dev: true
 
   /semver/6.3.0:
-    resolution: {integrity: sha1-7gpkyK9ejO6mdoexM3YeG+y9HT0=, tarball: semver/download/semver-6.3.0.tgz?cache=0&sync_timestamp=1634019726791&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsemver%2Fdownload%2Fsemver-6.3.0.tgz}
+    resolution: {integrity: sha1-7gpkyK9ejO6mdoexM3YeG+y9HT0=, tarball: semver/download/semver-6.3.0.tgz}
     hasBin: true
     dev: true
 
