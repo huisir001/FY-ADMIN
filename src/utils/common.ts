@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-11-26 10:35:42
+ * @LastEditTime: 2021-12-06 10:12:45
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -10,7 +10,7 @@ import { RouteRecordRaw } from 'vue-router'
  * 防抖
  */
 export const debounce = (callback: () => void, delay: number) => {
-    let timeout: NodeJS.Timeout
+    let timeout: any
     return (...args: []) => {
         clearTimeout(timeout)	//所有频繁的操作都会被清空，只有最后一次的不会清空
         timeout = setTimeout(() => {

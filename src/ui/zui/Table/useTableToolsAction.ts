@@ -2,7 +2,7 @@
  * @Description: 工具栏方法（固定写死）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-25 10:54:54
- * @LastEditTime: 2021-12-06 10:02:22
+ * @LastEditTime: 2021-12-06 10:44:49
  */
 
 import { ref, watch } from 'vue'
@@ -61,9 +61,13 @@ export default (tableRef: any, cols: ICols[]) => ({
         } else {
             const row1 = keys.map(key => ({ value: key, fontWeight: "bold", type: String }))
             const row = data.map((item: any) => {
-                return keys.map(key => ({ value: item[key], type: item[key] && item[key].constructor }))
+                return keys.map(key => {
+                    const errTypeflags = ['object', 'undefined']
+                    const value = errTypeflags.includes(typeof item[key]) ? JSON.stringify(item[key]) : item[key]
+                    const type = errTypeflags.includes(typeof item[key]) ? String : item[key].constructor
+                    return { value, type }
+                })
             })
-            row.unshift(row1)
             writeXlsxFile(row, { fileName: `${Date.now()}.xlsx` })
         }
     },
