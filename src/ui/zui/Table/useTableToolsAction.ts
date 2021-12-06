@@ -2,7 +2,7 @@
  * @Description: 工具栏方法（固定写死）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-25 10:54:54
- * @LastEditTime: 2021-11-26 10:57:44
+ * @LastEditTime: 2021-12-06 10:02:22
  */
 
 import { ref, watch } from 'vue'
@@ -54,7 +54,7 @@ export default (tableRef: any, cols: ICols[]) => ({
         const keys = Object.keys(data[0])
         if (n === 1) {
             const csvData = data.reduce((prev: string, curr: { [x: string]: any }, index: number) => {
-                index === 1 && (prev = keys.join(","))
+                index === 1 && (prev = `${keys.join(",")}\r\n${keys.map(key => handleCsvWord(data[0][key])).join(',')}`)
                 return `${prev}\r\n${keys.map(key => handleCsvWord(curr[key])).join(',')}`
             })
             exportRaw(`${Date.now()}.csv`, csvData)
