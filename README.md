@@ -1,6 +1,6 @@
 #  FY-ADMIN 后台管理系统
 （vue3+TS+ElementUI后管脚手架）
-> by Huisir @2021 Email<273250950@qq.com>
+> by Huisir @2021 Email<admin@zuifengyun.com>
 
 ## 兼容性
 - Edge ≥ 79
