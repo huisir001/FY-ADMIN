@@ -5,7 +5,7 @@
  * @LastEditTime: 2021-11-05 12:57:07
 -->
 <template>
-    <el-form class="z-search-form" :inline="true">
+    <el-form class="fy-search-form" :inline="true">
         <el-form-item v-for="item in options" :key="item.key" :label="item.label">
             <slot v-if="item.slot" :name="item.slot" />
             <template v-else>
@@ -70,7 +70,7 @@ export default defineComponent({
 </script>
  
 <style scoped lang="scss">
-.z-search-form:deep(.el-input__inner) {
+.fy-search-form:deep(.el-input__inner) {
     width: 220px;
     &.el-date-editor--datetimerange {
         width: 350px !important;

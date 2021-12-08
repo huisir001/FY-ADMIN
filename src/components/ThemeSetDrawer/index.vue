@@ -5,13 +5,13 @@
  * @LastEditTime: 2021-11-01 20:55:18
 -->
 <template>
-    <el-drawer title="主题配置" :size="280" custom-class="zui-theme-drawer">
+    <el-drawer title="主题配置" :size="280" custom-class="fy-theme-drawer">
         <div class="part">
             <h5>主题色</h5>
             <div class="set-box row">
                 <div v-for="item in THEME_OPTIONS" :key="item.name" :style="{background:item.color}"
                     class="theme-color-radio" @click="selectColor(item.name)">
-                    <z-icon v-if="curThemeColorState==item.name" name="check" color="#fff"
+                    <fy-icon v-if="curThemeColorState==item.name" name="check" color="#fff"
                         size="20" />
                 </div>
             </div>
@@ -114,7 +114,7 @@ export default defineComponent({
 }
 </style>
 <style  lang="scss">
-.zui-theme-drawer {
+.fy-theme-drawer {
     .el-drawer__header {
         margin-bottom: 20px;
         font-size: 16px;

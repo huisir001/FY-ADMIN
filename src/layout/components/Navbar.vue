@@ -6,10 +6,10 @@
 -->
 <template>
     <div class="navbar">
-        <div class="zui-nav-left">
+        <div class="fy-nav-left">
             <div class="sidebar-collapse-btn nav-item" :class="{reverse:sidebarCollapse}"
                 @click="sidebarCollapseChenge">
-                <z-icon name="fold" :size="22" color="var(--el-text-color-regular)" />
+                <fy-icon name="fold" :size="22" color="var(--el-text-color-regular)" />
             </div>
             <div v-if="$store.state.theme.showBreadcrumb" class="breadCrumbs nav-item">
                 <el-breadcrumb separator="/">
@@ -19,9 +19,9 @@
                 </el-breadcrumb>
             </div>
         </div>
-        <div class="zui-nav-right">
+        <div class="fy-nav-right">
             <div class="theme-nav nav-item" @click="showThemeDrawer = true">
-                <z-icon name="theme" :size="20" color="var(--el-text-color-regular)" />
+                <fy-icon name="theme" :size="20" color="var(--el-text-color-regular)" />
             </div>
             <el-dropdown size="medium" trigger="click" @command="userNavChange">
                 <div class="user-nav el-dropdown-link nav-item">
@@ -134,8 +134,8 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
-    .zui-nav-left,
-    .zui-nav-right {
+    .fy-nav-left,
+    .fy-nav-right {
         height: 100%;
         display: flex;
         align-items: center;
@@ -148,7 +148,7 @@ export default defineComponent({
             color: var(--el-text-color-regular);
         }
     }
-    .zui-nav-right {
+    .fy-nav-right {
         .user-nav {
             .name {
                 margin-right: 10px;

@@ -4,7 +4,7 @@
  * @Date: 2021-11-22 16:57:50
  * @LastEditTime: 2021-11-24 15:28:17
  */
-import { ICols, TOptionOfTools } from '@/ui/zui/types'
+import { ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
 export default () => {
     /**

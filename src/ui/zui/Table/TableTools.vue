@@ -12,7 +12,7 @@
         <div class="left">
             <el-button v-for="btn in leftBtns" :key="btn.name" size="mini" :type="btn.type"
                 :disabled="btn.disabled" @click="handleBtnClick(btn)">
-                <z-icon :name="btn.icon" size="13" color="white" /> {{btn.title}}
+                <fy-icon :name="btn.icon" size="13" color="white" /> {{btn.title}}
             </el-button>
         </div>
         <div class="right">
@@ -23,7 +23,7 @@
                     <el-tooltip effect="light" :content="btn.title" placement="top"
                         :auto-close="1000">
                         <div class="tool-item el-dropdown-link" :class="{[btn.name]:true}">
-                            <z-icon :name="btn.icon" color="var(--el-text-color-regular)"
+                            <fy-icon :name="btn.icon" color="var(--el-text-color-regular)"
                                 size="16" />
                         </div>
                     </el-tooltip>
@@ -49,7 +49,7 @@
                     :auto-close="1000">
                     <div class="tool-item" :class="{[btn.name]:true,disabled:btn.disabled}"
                         @click="handleBtnClick(btn)">
-                        <z-icon :name="btn.icon" color="var(--el-text-color-regular)" size="16" />
+                        <fy-icon :name="btn.icon" color="var(--el-text-color-regular)" size="16" />
                     </div>
                 </el-tooltip>
             </template>

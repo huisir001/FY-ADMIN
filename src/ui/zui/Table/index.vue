@@ -27,7 +27,7 @@
                 <template v-else-if="col.helpTip" #header>
                     <span>{{col.label}}</span>
                     <el-tooltip effect="light" :content="col.helpTip" placement="top">
-                        <z-icon name="question-filled" size="14" color="var(--el-color-info)"
+                        <fy-icon name="question-filled" size="14" color="var(--el-color-info)"
                             style="margin-left:2px" :height="18" />
                     </el-tooltip>
                 </template>

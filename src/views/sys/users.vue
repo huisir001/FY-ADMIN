@@ -5,11 +5,11 @@
  * @LastEditTime: 2021-11-24 16:50:48
 -->
 <template>
-    <z-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
+    <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
         :total="total" :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick"
         @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
         <template #search>
-            <z-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
+            <fy-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
                 @reset="handleReset" />
         </template>
         <template #status="scope">
@@ -19,21 +19,21 @@
         </template>
         <template #todo="scope">
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <z-icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
+                <fy-icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
             </el-button>
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <z-icon name="plus" size="13" color="var(--el-color-primary)" /> 新增
+                <fy-icon name="plus" size="13" color="var(--el-color-primary)" /> 新增
             </el-button>
             <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">
-                <z-icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
+                <fy-icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
             </el-button>
         </template>
-    </z-table>
+    </fy-table>
 </template>
  
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
-import { TOptionOfTools } from '@/ui/zui/types'
+import { TOptionOfTools } from '@/ui/fy/types'
 import useUsersOptions from './hooks/useUsersOptions'
 import { getUsersByPage } from '@/api/user'
 

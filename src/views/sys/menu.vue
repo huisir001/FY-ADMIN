@@ -5,21 +5,21 @@
  * @LastEditTime: 2021-11-22 17:13:50
 -->
 <template>
-    <z-table :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)" row-key="id"
+    <fy-table :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)" row-key="id"
         :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
         <template #title="scope">
             <span>{{scope.row.title}}</span>
             <div class="sort-btn">
                 <el-button size="mini" type="text" @click="handleMoveDowm(scope.$index, scope.row)">
-                    <z-icon name="sort-down" size="13" color="var(--el-color-primary)" />
+                    <fy-icon name="sort-down" size="13" color="var(--el-color-primary)" />
                 </el-button>
                 <el-button size="mini" type="text" @click="handleMoveUp(scope.$index, scope.row)">
-                    <z-icon name="sort-up" size="13" color="var(--el-color-primary)" />
+                    <fy-icon name="sort-up" size="13" color="var(--el-color-primary)" />
                 </el-button>
             </div>
         </template>
         <template #icon="scope">
-            <z-icon v-if="scope.row.icon" :name="scope.row.icon" size="14" :height="16" />
+            <fy-icon v-if="scope.row.icon" :name="scope.row.icon" size="14" :height="16" />
         </template>
         <template #status="scope">
             <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
@@ -31,16 +31,16 @@
         </template>
         <template #todo="scope">
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <z-icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
+                <fy-icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
             </el-button>
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <z-icon name="plus" size="13" color="var(--el-color-primary)" /> 新增
+                <fy-icon name="plus" size="13" color="var(--el-color-primary)" /> 新增
             </el-button>
             <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">
-                <z-icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
+                <fy-icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
             </el-button>
         </template>
-    </z-table>
+    </fy-table>
 </template>
  
 <script lang="ts">
@@ -48,7 +48,7 @@ import { defineComponent, Ref, ref } from 'vue'
 import { getAllMenus } from '@/api/sys'
 import { rawList2Tree } from '@/utils/common'
 import { fuzzySearch } from '@/utils/common'
-import { TOptionOfTools } from '@/ui/zui/types'
+import { TOptionOfTools } from '@/ui/fy/types'
 import useMenuOptions from './hooks/useMenuOptions'
 
 export default defineComponent({

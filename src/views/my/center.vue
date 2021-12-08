@@ -2,16 +2,16 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-11-04 18:54:59
+ * @LastEditTime: 2021-12-08 10:42:49
 -->
 <template>
-    <el-tabs type="card" v-model="activeTabName" class="zui-my-tabs">
+    <el-tabs type="card" v-model="activeTabName" class="fy-my-tabs">
         <el-tab-pane label="基本信息" name="base">
             <el-form label-position="left" label-width="50px" :model="userInfoFormData">
                 <el-form-item label="头像" style="height:64px;">
-                    <z-file-library type="pic" @selected="avatarSelected">
+                    <fy-file-library type="pic" @selected="avatarSelected">
                         <el-image class="avatar" :src="userInfoFormData.avatar||defaultAvatar" />
-                    </z-file-library>
+                    </fy-file-library>
                 </el-form-item>
                 <el-form-item label="账号">
                     <el-input v-model="userInfoFormData.username" placeholder="请输入账号，用于登录">
@@ -145,7 +145,7 @@ export default defineComponent({
 </script>
  
 <style scoped lang="scss">
-.zui-my-tabs:deep(.el-tabs__content) {
+.fy-my-tabs:deep(.el-tabs__content) {
     padding: 20px;
     background-color: var(--el-color-info-lighter);
     border-radius: var(--el-border-radius-small);

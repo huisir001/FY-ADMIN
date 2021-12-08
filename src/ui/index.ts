@@ -7,6 +7,6 @@
 import { App } from 'vue'
 import element from './element'
 import svgs from './svgs'
-import zui from './zui'
+import fy from './fy'
 
-export default (app: App<any>) => app.use(element).use(svgs).use(zui)
+export default (app: App<any>) => app.use(element).use(svgs).use(fy)

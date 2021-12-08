@@ -6,15 +6,15 @@
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
-        <div class="zui-tabbar-cont" :class="{scroll:showScrollBtn}">
+        <div class="fy-tabbar-cont" :class="{scroll:showScrollBtn}">
             <div ref="itemBoxRef" class="item-box"
                 :style="{transform:`translateX(${translateX}px)`}">
                 <div v-for="(item,index) in historyRoutes" :key="item.name" :data-index="index"
-                    class="zui-tabbar-item" :class="{act:curRouteName===item.name}"
+                    class="fy-tabbar-item" :class="{act:curRouteName===item.name}"
                     v-contextMenu="ctxMenuList" @click="tabChange(index,$event.target)">
                     <span class="tabbar-item-circle" />
                     <span class="title">{{item.meta.title || item.name.toUpperCase()}}</span>
-                    <z-icon :size="14" name="close" class="icon"
+                    <fy-icon :size="14" name="close" class="icon"
                         @click.stop="deleteRoute(index,$event)" />
                 </div>
             </div>
@@ -22,11 +22,11 @@
         <template v-if="showScrollBtn">
             <div class="scroll-btn prev" :class="{disabled:scrollBtnDisabled[0]}"
                 @click="handlePrevBtn()">
-                <z-icon name="arrow-left" class="icon" />
+                <fy-icon name="arrow-left" class="icon" />
             </div>
             <div class="scroll-btn next" :class="{disabled:scrollBtnDisabled[1]}"
                 @click="handleNextBtn()">
-                <z-icon name="arrow-right" class="icon" />
+                <fy-icon name="arrow-right" class="icon" />
             </div>
         </template>
     </div>
@@ -142,7 +142,7 @@ export default defineComponent({
                 ? el
                 : ev.path.find(
                       (item: any) =>
-                          item.classList && Array.from(item.classList).includes('zui-tabbar-item')
+                          item.classList && Array.from(item.classList).includes('fy-tabbar-item')
                   )
 
             // 若删除当前路由
@@ -263,7 +263,7 @@ export default defineComponent({
 <style scoped lang="scss">
 $--tab-height: 30px;
 $--tab-border: 1px solid var(--color-grey-lighter);
-@mixin zui-tabbar-item-act {
+@mixin fy-tabbar-item-act {
     color: var(--el-text-color-regular);
     .icon {
         width: 14px;
@@ -304,7 +304,7 @@ $--tab-border: 1px solid var(--color-grey-lighter);
             pointer-events: none;
         }
     }
-    .zui-tabbar-cont {
+    .fy-tabbar-cont {
         overflow: hidden;
         &.scroll {
             margin: 0 30px;
@@ -314,7 +314,7 @@ $--tab-border: 1px solid var(--color-grey-lighter);
             transition: all 0.3s;
             display: inline-flex;
             align-items: center;
-            .zui-tabbar-item {
+            .fy-tabbar-item {
                 display: flex;
                 align-items: center;
                 height: $--tab-height;
@@ -352,13 +352,13 @@ $--tab-border: 1px solid var(--color-grey-lighter);
                     }
                 }
                 &:hover {
-                    @include zui-tabbar-item-act;
+                    @include fy-tabbar-item-act;
                     & > span.tabbar-item-circle {
                         background-color: var(--el-color-primary-light-5);
                     }
                 }
                 &.act {
-                    @include zui-tabbar-item-act;
+                    @include fy-tabbar-item-act;
                     & > span.tabbar-item-circle {
                         background-color: var(--el-color-primary);
                     }

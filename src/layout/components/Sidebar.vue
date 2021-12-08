@@ -11,13 +11,13 @@
             <img v-show="!sidebarCollapse" src="../../assets/images/logo.svg">
         </div>
         <div class="menu-box">
-            <el-menu class="zui-sidebar-menu" :collapse-transition="false"
+            <el-menu class="fy-sidebar-menu" :collapse-transition="false"
                 background-color="transparent" text-color="var(--color-sidebar-font)"
                 active-text-color="var(--color-sidebar-font)" :collapse="sidebarCollapse">
                 <template v-for="menu in Menus" :key="menu.id">
                     <el-menu-item v-if="!menu.children || !menu.children.length" :index="menu.id"
                         @click="$router.push({name:menu.id})">
-                        <z-icon v-if="menu.icon" :name="menu.icon"
+                        <fy-icon v-if="menu.icon" :name="menu.icon"
                             color="var(--color-sidebar-font)" />
                         <template #title>
                             {{menu.title}}
@@ -25,7 +25,7 @@
                     </el-menu-item>
                     <el-sub-menu v-else :index="menu.id">
                         <template #title>
-                            <z-icon v-if="menu.icon" :name="menu.icon"
+                            <fy-icon v-if="menu.icon" :name="menu.icon"
                                 color="var(--color-sidebar-font)" />
                             <span>{{menu.title}}</span>
                         </template>
@@ -33,20 +33,20 @@
                             <el-menu-item v-if="!sub1.children || !sub1.children.length"
                                 :index="sub1.id" :class="{act:$route.name==sub1.id}"
                                 @click="$router.push({name:sub1.id})">
-                                <z-icon v-if="sub1.icon" :name="sub1.icon"
+                                <fy-icon v-if="sub1.icon" :name="sub1.icon"
                                     color="var(--color-sidebar-font)" />
                                 {{sub1.title}}
                             </el-menu-item>
                             <el-sub-menu v-else :index="sub1.id">
                                 <template #title>
-                                    <z-icon v-if="sub1.icon" :name="sub1.icon"
+                                    <fy-icon v-if="sub1.icon" :name="sub1.icon"
                                         color="var(--color-sidebar-font)" />
                                     <span>{{sub1.title}}</span>
                                 </template>
                                 <el-menu-item v-for="sub2 in sub1.children" :key="sub2.id"
                                     :index="sub2.id" :class="{act:$route.name==sub2.id}"
                                     @click="$router.push({name:sub2.id})">
-                                    <z-icon v-if="sub2.icon" :name="sub2.icon"
+                                    <fy-icon v-if="sub2.icon" :name="sub2.icon"
                                         color="var(--color-sidebar-font)" />
                                     <span>{{sub2.title}}</span>
                                 </el-menu-item>
@@ -101,11 +101,11 @@ export default defineComponent({
         @include hideScrollBar;
         height: calc(100% - 80px);
         overflow-y: auto;
-        .zui-sidebar-menu {
+        .fy-sidebar-menu {
             border: 0;
         }
     }
-    .zui-sidebar-menu {
+    .fy-sidebar-menu {
         &:deep(.el-menu-item),
         &:deep(.el-sub-menu__title),
         &:deep(.el-menu__title) {

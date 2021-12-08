@@ -22,7 +22,7 @@
                     <el-input v-model="fileQueryParams.name" placeholder="在当前类目中搜索" size="mini"
                         clearable>
                         <template #suffix>
-                            <z-icon name="search" size="14"
+                            <fy-icon name="search" size="14"
                                 color="var(--el-text-color-placeholder)" />
                         </template>
                     </el-input>
@@ -31,7 +31,7 @@
                         <template #reference>
                             <el-button :disabled="selectedIndex<0" size="mini" type="danger"
                                 :loading="delBtnLoading">
-                                <z-icon name="delete" size="13" color="white" /> 删除
+                                <fy-icon name="delete" size="13" color="white" /> 删除
                             </el-button>
                         </template>
                     </el-popconfirm>
@@ -56,7 +56,7 @@
                         </div>
                         <template #reference>
                             <div class="thumbnail upload">
-                                <z-icon name="plus" size="30"
+                                <fy-icon name="plus" size="30"
                                     color="var(--el-text-color-placeholder)" />
                             </div>
                         </template>
@@ -83,7 +83,7 @@
                         <el-form-item label="图片预览">
                             <el-image class="preview-img" :src="currFile.url"
                                 :preview-src-list="[currFile.url]" fit="contain" />
-                            <z-icon name="search" size="14" color="#fff" class="preview-icon" />
+                            <fy-icon name="search" size="14" color="#fff" class="preview-icon" />
                         </el-form-item>
                         <el-form-item label="创建时间">
                             <span>{{currFile.createTime}}</span>

@@ -5,16 +5,16 @@
  * @LastEditTime: 2021-11-22 15:27:54
 -->
 <template>
-    <z-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
+    <fy-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
         :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
         <template #name="scope">
             <span>{{scope.row.name}}</span>
             <div class="sort-btn">
                 <el-button size="mini" type="text" @click="handleMoveDowm(scope.$index, scope.row)">
-                    <z-icon name="sort-down" size="13" color="var(--el-color-primary)" />
+                    <fy-icon name="sort-down" size="13" color="var(--el-color-primary)" />
                 </el-button>
                 <el-button size="mini" type="text" @click="handleMoveUp(scope.$index, scope.row)">
-                    <z-icon name="sort-up" size="13" color="var(--el-color-primary)" />
+                    <fy-icon name="sort-up" size="13" color="var(--el-color-primary)" />
                 </el-button>
             </div>
         </template>
@@ -28,22 +28,22 @@
         </template>
         <template #todo="scope">
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <z-icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
+                <fy-icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
             </el-button>
             <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <z-icon name="plus" size="13" color="var(--el-color-primary)" /> 新增
+                <fy-icon name="plus" size="13" color="var(--el-color-primary)" /> 新增
             </el-button>
             <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">
-                <z-icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
+                <fy-icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
             </el-button>
         </template>
-    </z-table>
+    </fy-table>
 </template>
  
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue'
 import { fuzzySearch } from '@/utils/common'
-import { ICols, TOptionOfTools } from '@/ui/zui/types'
+import { ICols, TOptionOfTools } from '@/ui/fy/types'
 
 export default defineComponent({
     name: 'Dept',

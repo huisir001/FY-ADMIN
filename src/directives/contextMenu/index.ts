@@ -11,7 +11,7 @@ import './style.scss'
 const contextMenu: Directive<any, any> = {
     created(_, binding) {
         const vm: any = binding.instance
-        vm.ctxMenuDom = new DomCreate('div', {}, 'zui-ctx-menu')
+        vm.ctxMenuDom = new DomCreate('div', {}, 'fy-ctx-menu')
     },
     beforeMount(el, binding) {
         const vm: any = binding.instance

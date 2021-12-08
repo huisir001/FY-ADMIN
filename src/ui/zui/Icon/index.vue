@@ -5,7 +5,7 @@
  * @LastEditTime: 2021-11-22 16:52:41
 -->
 <template>
-    <el-icon :color="color" :size="Number(size)" :class="{'z-icon':height}"
+    <el-icon :color="color" :size="Number(size)" :class="{'fy-icon':height}"
         :style="{height:height?height+'px':false}">
         <component :is="`icon-${name}`" />
     </el-icon>
@@ -38,7 +38,7 @@ export default defineComponent({
 })
 </script>
 <style scoped lang="scss">
-.z-icon {
+.fy-icon {
     display: inline-table;
     vertical-align: middle;
 }

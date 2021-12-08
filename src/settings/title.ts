@@ -10,4 +10,4 @@
  * 这里单独一个文件，避免commonjs模块导入时带有其他不需要的变量
  */
 
-module.exports = "ZUI-ADMIN 后台管理系统"
+module.exports = "FY-ADMIN 后台管理系统"
