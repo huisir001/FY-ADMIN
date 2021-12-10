@@ -1,5 +1,6 @@
 #  FY-ADMIN 后台管理系统（风云ADMIN）
 （vue3+TS+ElementUI后管脚手架）
+> 状态：开发中，未完成   
 > by Huisir @2021   
 > Email admin@zuifengyun.com
 
