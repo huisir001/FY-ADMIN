@@ -1,7 +1,7 @@
 #  FY-ADMIN 后台管理系统（风云ADMIN）
 （vue3+TS+ElementUI后管脚手架）
 > by Huisir @2021   
-> Email<admin@zuifengyun.com>
+> Email admin@zuifengyun.com
 
 ## 兼容性
 - Edge ≥ 79
