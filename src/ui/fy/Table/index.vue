@@ -2,13 +2,13 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-11-25 16:28:56
+ * @LastEditTime: 2021-12-14 14:24:23
 -->
 <template>
     <!-- 工具栏 -->
     <!-- 插槽search（搜索栏）必须在tools工具栏存在情况下才能显示 -->
     <table-tools v-if="tools.length" :cols="cols" :tools="tools" :el-table="tableRef"
-        @btnClick="handleBtnClick">
+        @btnClick="handleBtnClick" @bindRefresh="$emit('bindRefresh')">
         <slot name="search" />
     </table-tools>
     <!-- 使用`v-bind="$attrs"`可继承组件调用是所配置的attr,这里可继承el-table组件所需要的所有属性及事件以及其他未作为props的行内属性 -->
@@ -97,7 +97,7 @@ export default defineComponent({
             default: false,
         },
     },
-    emits: ['toolsClick', 'pageSizeChange', 'pageCurrChange'],
+    emits: ['toolsClick','bindRefresh', 'pageSizeChange', 'pageCurrChange'],
     setup({ limits, height, page }, { emit }) {
         /* 表格对象 */
         const elTable = ref()

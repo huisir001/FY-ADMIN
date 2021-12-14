@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-22 15:27:54
+ * @LastEditTime: 2021-12-14 14:31:18
 -->
 <template>
     <fy-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
@@ -104,13 +104,6 @@ export default defineComponent({
         const handleMoveDowm = (index: number, row: any) => {
             console.log(index, row)
         }
-
-        // 重置
-        // const handleReset = () => {
-        //     for (const key in searchFormParams) {
-        //         searchFormParams[key] = ''
-        //     }
-        // }
 
         return {
             tableCols,

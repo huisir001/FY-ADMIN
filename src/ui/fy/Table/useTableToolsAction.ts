@@ -2,7 +2,7 @@
  * @Description: 工具栏方法（固定写死）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-25 10:54:54
- * @LastEditTime: 2021-12-06 10:44:49
+ * @LastEditTime: 2021-12-14 10:48:55
  */
 
 import { ref, watch } from 'vue'
@@ -68,6 +68,7 @@ export default (tableRef: any, cols: ICols[]) => ({
                     return { value, type }
                 })
             })
+            row.unshift(row1)
             writeXlsxFile(row, { fileName: `${Date.now()}.xlsx` })
         }
     },

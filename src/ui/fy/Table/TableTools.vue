@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-11-25 17:23:07
+ * @LastEditTime: 2021-12-14 14:25:57
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -78,7 +78,7 @@ export default defineComponent({
             default: () => [],
         },
     },
-    emits: ['btnClick', 'showCols'],
+    emits: ['btnClick', 'showCols','bindRefresh'],
     setup({ elTable, cols, tools }, { emit }) {
         // 所有按钮
         const { left, right } = useTableTools()
@@ -116,6 +116,10 @@ export default defineComponent({
                     treeTableExpanded.value = !treeTableExpanded.value
                     toggleTreeTableAll(treeTableExpanded.value)
                     emit('btnClick', btn.name, treeTableExpanded.value)
+                }else if(btn.name==='refresh'){
+                    // 刷新
+                    emit('bindRefresh')
+                    emit('btnClick', btn.name)
                 } else {
                     // 通知父组件
                     emit('btnClick', btn.name)

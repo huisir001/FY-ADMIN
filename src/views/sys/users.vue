@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-24 16:50:48
+ * @LastEditTime: 2021-12-14 14:27:57
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -100,13 +100,13 @@ export default defineComponent({
             for (const key in searchParams) {
                 searchParams[key] = ''
             }
+            currPage.value = 1
             getUserList()
         }
 
         // 表格工具栏点选
         const toolsBtnClick = (btn: TOptionOfTools, flag: any) => {
-            console.log(btn, flag)
-            if (btn == 'search' && !flag) {
+            if (btn === 'refresh' ||( btn === 'search' && !flag) ) {
                 handleReset()
             }
         }

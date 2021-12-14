@@ -2,10 +2,8 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-11-03 11:41:27
+ * @LastEditTime: 2021-12-14 14:17:14
  */
-import { RouteRecordRaw } from 'vue-router'
-
 /**
  * 用户state接口
  */
@@ -13,7 +11,7 @@ export interface ISysState extends IObj {
     sidebarCollapse?: boolean
     sidebarHide?: boolean
     visibleAreaWidth?: number
-    historyRoutes: RouteRecordRaw[]
+    historyRoutes: { name: string, path: string, meta: object }[]
 }
 
 export const sys = {
@@ -61,7 +59,8 @@ export const sys = {
         addHistoryRoute(state: IObj, route: any) {
             if (!state.historyRoutes.find((item: any) => item.name === route.name)
                 && route.path.split('/').length > 2 && route.name !== '404') {
-                state.historyRoutes.push(route)
+                const { name, path, meta } = route
+                state.historyRoutes.push({ name, path, meta })
             }
         },
         /**

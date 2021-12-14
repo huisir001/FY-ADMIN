@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2021-11-02 16:56:32
+ * @LastEditTime: 2021-12-14 14:01:30
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -208,7 +208,8 @@ export default defineComponent({
             }
 
             // 切换路由
-            Router.push(historyRoutes.value[index])
+            const { name, path } = historyRoutes.value[index]
+            Router.push({name, path})
         }
 
         // 监听滚动
