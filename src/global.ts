@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-11-24 16:16:55
+ * @LastEditTime: 2021-12-14 15:11:38
  */
 
 /**
@@ -153,4 +153,15 @@ interface IBtnOptions {
   disabled?: boolean
   callback: (el: HTMLElement) => void
 }
+
+/**
+ * 路由meta
+ */
+interface IRouteMeta {
+  keepAlive?: boolean
+  title: string
+  icon?: string
+  private?: boolean
+}
+
 

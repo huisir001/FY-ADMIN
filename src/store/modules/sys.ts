@@ -2,7 +2,7 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-12-14 14:17:14
+ * @LastEditTime: 2021-12-14 15:34:16
  */
 /**
  * 用户state接口
@@ -11,7 +11,7 @@ export interface ISysState extends IObj {
     sidebarCollapse?: boolean
     sidebarHide?: boolean
     visibleAreaWidth?: number
-    historyRoutes: { name: string, path: string, meta: object }[]
+    historyRoutes: { name: string, path: string, meta: IRouteMeta }[]
 }
 
 export const sys = {
