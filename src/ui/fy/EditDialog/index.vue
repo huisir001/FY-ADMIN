@@ -2,7 +2,7 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2021-12-15 19:05:41
+ * @LastEditTime: 2021-12-15 19:07:10
 -->
 <template>
     <div class="fy-edit-dialog">
@@ -20,7 +20,7 @@
 </template>
  
 <script lang="ts">
-import { computed, defineComponent, PropType, ref, watch } from 'vue'
+import { defineComponent, PropType, ref, watch } from 'vue'
 import { IFormOption } from '../types'
 
 export default defineComponent({
