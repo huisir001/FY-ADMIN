@@ -2,10 +2,10 @@
  * @Description: 搜索表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-04 16:39:23
- * @LastEditTime: 2021-11-05 12:57:07
+ * @LastEditTime: 2021-12-15 14:33:48
 -->
 <template>
-    <el-form class="fy-search-form" :inline="true">
+    <el-form class="fy-search-form" :inline="inline" label-width="auto">
         <el-form-item v-for="item in options" :key="item.key" :label="item.label">
             <slot v-if="item.slot" :name="item.slot" />
             <template v-else>
@@ -24,7 +24,7 @@
                 </component>
             </template>
         </el-form-item>
-        <el-form-item>
+        <el-form-item v-if="showSearchBtn">
             <el-button type="primary" @click="$emit('submit')">搜索</el-button>
             <el-button @click="$emit('reset')">重置</el-button>
         </el-form-item>
@@ -38,6 +38,18 @@ import { IFormOption } from '../types'
 export default defineComponent({
     name: 'SearchForm',
     props: {
+        // 是否行内
+        inline: {
+            type: Boolean,
+            require: false,
+            default: true,
+        },
+        // 是否显示搜索按钮
+        showSearchBtn: {
+            type: Boolean,
+            require: false,
+            default: true,
+        },
         // 表单项配置选项
         options: {
             type: Array as PropType<IFormOption[]>,
@@ -70,10 +82,18 @@ export default defineComponent({
 </script>
  
 <style scoped lang="scss">
-.fy-search-form:deep(.el-input__inner) {
+.fy-search-form:deep(.el-input__inner),
+.fy-search-form:deep(.el-input) {
     width: 220px;
+    max-width: 100%;
     &.el-date-editor--datetimerange {
         width: 350px !important;
+    }
+}
+@media all and (max-width: 375px) {
+    .fy-search-form:deep(.el-input__inner),
+    .fy-search-form:deep(.el-input) {
+        width: 100%;
     }
 }
 </style>

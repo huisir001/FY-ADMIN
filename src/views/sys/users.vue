@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-14 14:27:57
+ * @LastEditTime: 2021-12-15 16:22:25
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -29,6 +29,8 @@
             </el-button>
         </template>
     </fy-table>
+    <fy-edit-dialog v-model="showUserEditDialog" :params="searchParams" title="用户编辑"
+        :options="searchOptions" @submit="bindEditSubmit" />
 </template>
  
 <script lang="ts">
@@ -106,9 +108,22 @@ export default defineComponent({
 
         // 表格工具栏点选
         const toolsBtnClick = (btn: TOptionOfTools, flag: any) => {
-            if (btn === 'refresh' ||( btn === 'search' && !flag) ) {
+            if (btn === 'refresh' || (btn === 'search' && !flag)) {
                 handleReset()
             }
+        }
+
+        // 显隐编辑用户
+        const showUserEditDialog = ref(false)
+
+        // 编辑用户触发
+        const handleEdit = (index: number, row: IObj) => {
+            showUserEditDialog.value = true
+        }
+
+        // 编辑完成确认
+        const bindEditSubmit = (formData: IObj) => {
+            console.log(formData)
         }
 
         return {
@@ -125,6 +140,9 @@ export default defineComponent({
             handleSearch,
             handleReset,
             tableData,
+            showUserEditDialog,
+            handleEdit,
+            bindEditSubmit,
         }
     },
 })
