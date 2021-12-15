@@ -2,12 +2,12 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2021-12-15 18:17:35
+ * @LastEditTime: 2021-12-15 19:05:41
 -->
 <template>
     <div class="fy-edit-dialog">
         <el-dialog :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)"
-            :title="title" @closed="bindClose">
+            :title="title">
             <fy-search-form v-model="formParams" :options="options" :showSearchBtn="false" />
             <template #footer>
                 <span class="dialog-footer">
@@ -20,7 +20,7 @@
 </template>
  
 <script lang="ts">
-import { computed, defineComponent, PropType, reactive, ref, toRaw } from 'vue'
+import { computed, defineComponent, PropType, ref, watch } from 'vue'
 import { IFormOption } from '../types'
 
 export default defineComponent({
@@ -44,45 +44,34 @@ export default defineComponent({
             default: () => [],
         },
         // 表单数据
-        // params: {
-        //     type: Object as PropType<IObj>,
-        //     require: true,
-        //     default: () => ({}),
-        // },
         params: {
-            type: String,
+            type: Object as PropType<IObj>,
             require: true,
-            default: '',
+            default: () => ({}),
         },
     },
     // `update:modelValue`为`v-model`传参固定事件写法
     emits: ['update:modelValue', 'submit'],
-    setup({ params }, { emit }) {
+    setup(props, { emit }) {
         // 中转表单数据
-        // 由于表单数据不会出现函数、对象引用等，这里直接用JSON序列化进行深拷贝
-        let formParams = reactive(JSON.parse(params))
-
-        computed(() => {
-            console.log('params', params)
-            return reactive(JSON.parse(params))
-        })
+        const formParams = ref({})
+        watch(
+            () => props.params,
+            (val) => {
+                // 由于表单数据不会出现函数、对象引用等，这里直接用JSON序列化进行深拷贝
+                formParams.value = JSON.parse(JSON.stringify(val))
+            }
+        )
 
         // 确认
         const sure = () => {
-            emit('submit', formParams)
+            emit('submit', formParams.value)
             emit('update:modelValue', false)
-        }
-        // 关闭表单后清理数据
-        const bindClose = () => {
-            for (const key in formParams) {
-                formParams[key] = ''
-            }
         }
 
         return {
             formParams,
             sure,
-            bindClose,
         }
     },
 })

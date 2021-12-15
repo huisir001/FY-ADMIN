@@ -2,7 +2,7 @@
  * @Description: 搜索表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-04 16:39:23
- * @LastEditTime: 2021-12-15 14:33:48
+ * @LastEditTime: 2021-12-15 18:49:13
 -->
 <template>
     <el-form class="fy-search-form" :inline="inline" label-width="auto">
@@ -65,11 +65,11 @@ export default defineComponent({
     },
     // `update:modelValue`为`v-model`传参固定事件写法
     emits: ['update:modelValue', 'submit', 'reset'],
-    setup({ modelValue }, { emit }) {
+    setup(props, { emit }) {
         // 操作父级数据
         const params = computed({
             get() {
-                return modelValue
+                return props.modelValue
             },
             set(value: any) {
                 emit('update:modelValue', value)

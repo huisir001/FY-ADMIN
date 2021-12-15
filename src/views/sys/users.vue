@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-15 18:09:19
+ * @LastEditTime: 2021-12-15 18:34:57
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -116,12 +116,12 @@ export default defineComponent({
         // 显隐编辑用户弹窗
         const showUserEditDialog = ref(false)
         // 当前编辑用户数据
-        const currEditUserData = ref('{}')
+        const currEditUserData = ref({})
 
         // 编辑用户触发
         const handleEdit = (index: number, row: IObj) => {
             showUserEditDialog.value = true
-            currEditUserData.value = JSON.stringify(row)
+            currEditUserData.value = row
         }
 
         // 编辑完成确认
