@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-15 16:22:25
+ * @LastEditTime: 2021-12-15 18:09:19
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -29,8 +29,8 @@
             </el-button>
         </template>
     </fy-table>
-    <fy-edit-dialog v-model="showUserEditDialog" :params="searchParams" title="用户编辑"
-        :options="searchOptions" @submit="bindEditSubmit" />
+    <fy-edit-dialog v-model="showUserEditDialog" :params="currEditUserData" title="用户编辑"
+        :options="editOptions" @submit="bindEditSubmit" />
 </template>
  
 <script lang="ts">
@@ -43,7 +43,7 @@ export default defineComponent({
     name: 'Users',
     setup() {
         // 表格配置
-        const { searchOptions, tableCols, tableTools } = useUsersOptions()
+        const { searchOptions, tableCols, tableTools, editOptions } = useUsersOptions()
         // loading
         const loading = ref(false)
         // 用户列表数据
@@ -113,12 +113,15 @@ export default defineComponent({
             }
         }
 
-        // 显隐编辑用户
+        // 显隐编辑用户弹窗
         const showUserEditDialog = ref(false)
+        // 当前编辑用户数据
+        const currEditUserData = ref('{}')
 
         // 编辑用户触发
         const handleEdit = (index: number, row: IObj) => {
             showUserEditDialog.value = true
+            currEditUserData.value = JSON.stringify(row)
         }
 
         // 编辑完成确认
@@ -141,8 +144,10 @@ export default defineComponent({
             handleReset,
             tableData,
             showUserEditDialog,
+            editOptions,
             handleEdit,
             bindEditSubmit,
+            currEditUserData,
         }
     },
 })

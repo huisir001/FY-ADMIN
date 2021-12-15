@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-11-25 17:08:41
+ * @LastEditTime: 2021-12-15 17:14:13
  */
 
 /**
@@ -135,6 +135,10 @@ export interface IFormOption {
         valueFormat?: string
         //设置快捷选项，需要传入数组对象
         shortcuts?: Array<{ text: string, value: typeof Date | typeof Function }>
+        // 是否多选（select类型）
+        multiple?: boolean
+        // 是否折叠多选（select类型）
+        collapseTags?: boolean
     },
     // 插槽-自定义表单项
     slot?: string

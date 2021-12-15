@@ -2,7 +2,7 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2021-12-15 16:57:37
+ * @LastEditTime: 2021-12-15 18:17:35
 -->
 <template>
     <div class="fy-edit-dialog">
@@ -12,8 +12,7 @@
             <template #footer>
                 <span class="dialog-footer">
                     <el-button plain @click="$emit('update:modelValue', false)">取消</el-button>
-                    <el-button plain type="primary" @click="sure">确认
-                    </el-button>
+                    <el-button plain type="primary" @click="sure">确认</el-button>
                 </span>
             </template>
         </el-dialog>
@@ -21,7 +20,7 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, PropType, reactive, toRaw } from 'vue'
+import { computed, defineComponent, PropType, reactive, ref, toRaw } from 'vue'
 import { IFormOption } from '../types'
 
 export default defineComponent({
@@ -45,10 +44,15 @@ export default defineComponent({
             default: () => [],
         },
         // 表单数据
+        // params: {
+        //     type: Object as PropType<IObj>,
+        //     require: true,
+        //     default: () => ({}),
+        // },
         params: {
-            type: Object as PropType<IObj>,
+            type: String,
             require: true,
-            default: () => ({}),
+            default: '',
         },
     },
     // `update:modelValue`为`v-model`传参固定事件写法
@@ -56,10 +60,16 @@ export default defineComponent({
     setup({ params }, { emit }) {
         // 中转表单数据
         // 由于表单数据不会出现函数、对象引用等，这里直接用JSON序列化进行深拷贝
-        let formParams = reactive(JSON.parse(JSON.stringify(params)))
+        let formParams = reactive(JSON.parse(params))
+
+        computed(() => {
+            console.log('params', params)
+            return reactive(JSON.parse(params))
+        })
+
         // 确认
         const sure = () => {
-            emit('submit', JSON.parse(JSON.stringify(formParams)))
+            emit('submit', formParams)
             emit('update:modelValue', false)
         }
         // 关闭表单后清理数据

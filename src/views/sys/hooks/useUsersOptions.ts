@@ -2,7 +2,7 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2021-11-25 15:07:20
+ * @LastEditTime: 2021-12-15 17:15:17
  */
 import { IFormOption, ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -179,11 +179,125 @@ export default () => {
         },
     ]
 
+    /**
+     * 表格工具欄
+     */
     const tableTools: TOptionOfTools[] = ['add', 'search', 'export', 'refresh', 'cols']
+
+    /**
+     * 编辑弹窗配置
+     */
+    const editOptions: IFormOption[] = [
+        {
+            label: '账号',
+            component: 'input',
+            key: 'username',
+            props: {
+                placeholder: '请输入账号',
+            },
+        },
+        {
+            label: '昵称',
+            component: 'input',
+            key: 'nickname',
+            props: {
+                placeholder: '请输入昵称',
+            },
+        },
+        {
+            label: '手机号码',
+            component: 'input',
+            key: 'phone',
+            props: {
+                placeholder: '请输入手机号码',
+            },
+        },
+        {
+            label: '邮箱',
+            component: 'input',
+            key: 'email',
+            props: {
+                placeholder: '请输入邮箱',
+            },
+        },
+        {
+            label: '性别',
+            component: 'select',
+            key: 'sex',
+            props: {
+                placeholder: '选择用户性别',
+            },
+            options: [
+                {
+                    label: '全部',
+                    value: '',
+                },
+                {
+                    label: '保密',
+                    value: '0',
+                },
+                {
+                    label: '男',
+                    value: '1',
+                },
+                {
+                    label: '女',
+                    value: '2',
+                },
+            ],
+        },
+        {
+            label: '状态',
+            component: 'select',
+            key: 'status',
+            props: {
+                placeholder: '选择用户状态',
+            },
+            options: [
+                {
+                    label: '全部',
+                    value: '',
+                },
+                {
+                    label: '冻结',
+                    value: '0',
+                },
+                {
+                    label: '正常',
+                    value: '1',
+                },
+            ],
+        },
+        {
+            label: '角色',
+            component: 'select',
+            key: 'role',
+            props: {
+                placeholder: '选择用户角色',
+                multiple: true,
+                collapseTags: true
+            },
+            options: [
+                {
+                    label: '角色1',
+                    value: '1',
+                },
+                {
+                    label: '角色2',
+                    value: '2',
+                },
+                {
+                    label: '角色3',
+                    value: '3',
+                },
+            ],
+        },
+    ]
 
     return {
         searchOptions,
         tableCols: ref(tableCols),
-        tableTools
+        tableTools,
+        editOptions
     }
 }
