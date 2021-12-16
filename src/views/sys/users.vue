@@ -2,12 +2,13 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-15 18:34:57
+ * @LastEditTime: 2021-12-16 11:31:48
 -->
 <template>
-    <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
-        :total="total" :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick"
-        @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
+    <fy-table ref="usersTable" :loading="loading" :cols="tableCols" :data="tableData" page
+        :curr="currPage" :total="total" :tools="tableTools" height="calc(100% - 45px)"
+        @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
+        @pageCurrChange="pageCurrChange">
         <template #search>
             <fy-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
                 @reset="handleReset" />
@@ -18,18 +19,12 @@
             <el-tag v-else size="small" type="danger">暂无</el-tag>
         </template>
         <template #todo="scope">
-            <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <fy-icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
-            </el-button>
-            <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <fy-icon name="plus" size="13" color="var(--el-color-primary)" /> 新增
-            </el-button>
-            <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">
-                <fy-icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
-            </el-button>
+            <fy-row-edit @click="handleEdit(scope.$index, scope.row)" />
+            <fy-row-delete @confirm="handleRowDelete(scope.$index, scope.row)" />
         </template>
     </fy-table>
-    <fy-edit-dialog v-model="showUserEditDialog" :params="currEditUserData" title="用户编辑"
+    <!-- 编辑弹窗 -->
+    <fy-edit-dialog v-model="showUserEditDialog" :params="currEditUserData" :title="editDialogTitle"
         :options="editOptions" @submit="bindEditSubmit" />
 </template>
  
@@ -42,6 +37,8 @@ import { getUsersByPage } from '@/api/user'
 export default defineComponent({
     name: 'Users',
     setup() {
+        // 表格ref
+        const usersTable = ref()
         // 表格配置
         const { searchOptions, tableCols, tableTools, editOptions } = useUsersOptions()
         // loading
@@ -108,20 +105,40 @@ export default defineComponent({
 
         // 表格工具栏点选
         const toolsBtnClick = (btn: TOptionOfTools, flag: any) => {
+            // 刷新、搜索隐藏
             if (btn === 'refresh' || (btn === 'search' && !flag)) {
                 handleReset()
+            }
+            // 新增
+            if (btn === 'add') {
+                editDialogTitle.value = '新增用户'
+                showUserEditDialog.value = true
+                currEditUserData.value = {}
+            }
+            // 删除选定行
+            if (btn === 'delete') {
+                console.log(
+                    '删除：',
+                    usersTable.value.selection.map((item: any) => item.id)
+                )
             }
         }
 
         // 显隐编辑用户弹窗
         const showUserEditDialog = ref(false)
+        // 编辑弹窗标题
+        const editDialogTitle = ref('')
         // 当前编辑用户数据
         const currEditUserData = ref({})
 
         // 编辑用户触发
         const handleEdit = (index: number, row: IObj) => {
+            editDialogTitle.value = '编辑用户'
             showUserEditDialog.value = true
-            currEditUserData.value = row
+            currEditUserData.value = {
+                ...row,
+                role: row.role.split(','),
+            }
         }
 
         // 编辑完成确认
@@ -129,7 +146,13 @@ export default defineComponent({
             console.log(formData)
         }
 
+        // 删除行
+        const handleRowDelete = (index: number, row: IObj) => {
+            console.log('123', row)
+        }
+
         return {
+            usersTable,
             loading,
             tableCols,
             tableTools,
@@ -143,11 +166,13 @@ export default defineComponent({
             handleSearch,
             handleReset,
             tableData,
+            editDialogTitle,
             showUserEditDialog,
             editOptions,
             handleEdit,
             bindEditSubmit,
             currEditUserData,
+            handleRowDelete,
         }
     },
 })

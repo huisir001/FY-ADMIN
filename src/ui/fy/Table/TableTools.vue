@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-12-14 14:25:57
+ * @LastEditTime: 2021-12-16 10:57:16
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -58,7 +58,7 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, ref, PropType, watch, computed } from 'vue'
+import { defineComponent, ref, PropType } from 'vue'
 import useTableTools from './useTableTools'
 import { ICols, ITableTool, TOptionOfTools } from '../types'
 import useTableToolsAction from './useTableToolsAction'
@@ -78,7 +78,7 @@ export default defineComponent({
             default: () => [],
         },
     },
-    emits: ['btnClick', 'showCols','bindRefresh'],
+    emits: ['btnClick', 'showCols', 'bindRefresh'],
     setup({ elTable, cols, tools }, { emit }) {
         // 所有按钮
         const { left, right } = useTableTools()
@@ -116,7 +116,7 @@ export default defineComponent({
                     treeTableExpanded.value = !treeTableExpanded.value
                     toggleTreeTableAll(treeTableExpanded.value)
                     emit('btnClick', btn.name, treeTableExpanded.value)
-                }else if(btn.name==='refresh'){
+                } else if (btn.name === 'refresh') {
                     // 刷新
                     emit('bindRefresh')
                     emit('btnClick', btn.name)

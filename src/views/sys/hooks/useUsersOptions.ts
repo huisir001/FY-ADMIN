@@ -2,7 +2,7 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2021-12-15 17:15:17
+ * @LastEditTime: 2021-12-16 10:43:33
  */
 import { IFormOption, ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -174,7 +174,7 @@ export default () => {
         {
             label: '操作',
             fixed: 'right',
-            minWidth: 180,
+            minWidth: 120,
             slot: 'todo',
         },
     ]
@@ -182,7 +182,7 @@ export default () => {
     /**
      * 表格工具欄
      */
-    const tableTools: TOptionOfTools[] = ['add', 'search', 'export', 'refresh', 'cols']
+    const tableTools: TOptionOfTools[] = ['add', 'delete', 'search', 'export', 'refresh', 'cols']
 
     /**
      * 编辑弹窗配置
@@ -229,44 +229,29 @@ export default () => {
             },
             options: [
                 {
-                    label: '全部',
-                    value: '',
-                },
-                {
                     label: '保密',
-                    value: '0',
+                    value: 0,
                 },
                 {
                     label: '男',
-                    value: '1',
+                    value: 1,
                 },
                 {
                     label: '女',
-                    value: '2',
+                    value: 2,
                 },
             ],
         },
         {
             label: '状态',
-            component: 'select',
+            component: 'switch',
             key: 'status',
             props: {
-                placeholder: '选择用户状态',
+                activeText: "正常",
+                inactiveText: "冻结",
+                activeValue: 1,
+                inactiveValue: 0
             },
-            options: [
-                {
-                    label: '全部',
-                    value: '',
-                },
-                {
-                    label: '冻结',
-                    value: '0',
-                },
-                {
-                    label: '正常',
-                    value: '1',
-                },
-            ],
         },
         {
             label: '角色',

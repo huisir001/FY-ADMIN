@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-12-15 17:14:13
+ * @LastEditTime: 2021-12-16 10:43:45
  */
 
 /**
@@ -103,7 +103,7 @@ export type TUseTableTools = () => { left: ITableTool[], right: ITableTool[] }
 /**
  * 表格工具配置传参
  */
-export type TOptionOfTools = 'add' | 'fold' | 'export' | 'search' | 'refresh' | 'cols'
+export type TOptionOfTools = 'add' | 'delete' | 'fold' | 'export' | 'search' | 'refresh' | 'cols'
 
 /**
  * 表单项配置
@@ -116,7 +116,7 @@ export interface IFormOption {
     // 字段
     key: string
     // 下拉框选项
-    options?: Array<{ label: string, value: string }>
+    options?: Array<{ label: string, value: string | number }>
     // 表单项其他属性
     props?: {
         placeholder?: string
@@ -139,6 +139,11 @@ export interface IFormOption {
         multiple?: boolean
         // 是否折叠多选（select类型）
         collapseTags?: boolean
+        // 开关属性
+        activeText?: string
+        inactiveText?: string
+        activeValue?: string | number
+        inactiveValue?: string | number
     },
     // 插槽-自定义表单项
     slot?: string
