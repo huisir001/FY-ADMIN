@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-12-16 11:27:38
+ * @LastEditTime: 2021-12-16 14:23:00
 -->
 <template>
     <!-- 工具栏 -->
@@ -100,7 +100,7 @@ export default defineComponent({
     emits: ['toolsClick', 'bindRefresh', 'pageSizeChange', 'pageCurrChange'],
     setup({ limits, height, page }, { emit }) {
         /* 表格对象 */
-        const elTable = ref()
+        const elTable: Ref<IObj> = ref({})
 
         /* 工具栏点击 */
         const handleBtnClick = (arg1: string, arg2: any) => {
@@ -138,9 +138,8 @@ export default defineComponent({
         }
 
         // 监听多选
-        const selection = ref([])
         const handleSelectionChange = (val: any) => {
-            selection.value = val
+            elTable.value.selection = val
         }
         return {
             handleBtnClick,
@@ -152,7 +151,6 @@ export default defineComponent({
             elTable,
             tableRef: computed(() => elTable), // 这里使用computed对elTable进行跟踪，传递到tools子组件
             handleSelectionChange,
-            selection,
         }
     },
 })

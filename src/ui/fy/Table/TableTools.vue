@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-12-16 10:57:16
+ * @LastEditTime: 2021-12-16 14:34:31
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -62,11 +62,13 @@ import { defineComponent, ref, PropType } from 'vue'
 import useTableTools from './useTableTools'
 import { ICols, ITableTool, TOptionOfTools } from '../types'
 import useTableToolsAction from './useTableToolsAction'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
     name: 'TableTools',
     props: {
         elTable: {
+            type: Object,
             required: true,
         },
         cols: {
@@ -107,7 +109,15 @@ export default defineComponent({
         // 右侧按钮点击
         const handleBtnClick = (btn: ITableTool) => {
             if (!btn.disabled) {
-                if (btn.name === 'search') {
+                if (btn.name === 'delete') {
+                    // 删除
+                    const selection = elTable.value.selection
+                    if (!(selection && selection.length)) {
+                        ElMessage.warning('请勾选一行！')
+                    } else {
+                        emit('btnClick', btn.name, selection)
+                    }
+                } else if (btn.name === 'search') {
                     // 搜索按钮：显隐表单
                     showSearchForm.value = !showSearchForm.value
                     emit('btnClick', btn.name, showSearchForm.value)

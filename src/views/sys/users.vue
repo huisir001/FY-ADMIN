@@ -2,13 +2,12 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-16 11:31:48
+ * @LastEditTime: 2021-12-16 14:17:52
 -->
 <template>
-    <fy-table ref="usersTable" :loading="loading" :cols="tableCols" :data="tableData" page
-        :curr="currPage" :total="total" :tools="tableTools" height="calc(100% - 45px)"
-        @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
-        @pageCurrChange="pageCurrChange">
+    <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
+        :total="total" :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick"
+        @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
         <template #search>
             <fy-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
                 @reset="handleReset" />
@@ -37,8 +36,6 @@ import { getUsersByPage } from '@/api/user'
 export default defineComponent({
     name: 'Users',
     setup() {
-        // 表格ref
-        const usersTable = ref()
         // 表格配置
         const { searchOptions, tableCols, tableTools, editOptions } = useUsersOptions()
         // loading
@@ -117,10 +114,7 @@ export default defineComponent({
             }
             // 删除选定行
             if (btn === 'delete') {
-                console.log(
-                    '删除：',
-                    usersTable.value.selection.map((item: any) => item.id)
-                )
+                console.log('删除：', flag)
             }
         }
 
@@ -152,7 +146,6 @@ export default defineComponent({
         }
 
         return {
-            usersTable,
             loading,
             tableCols,
             tableTools,
