@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-11-22 17:13:50
+ * @LastEditTime: 2021-12-16 17:20:34
 -->
 <template>
     <fy-table :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)" row-key="id"
@@ -30,15 +30,7 @@
             <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="输入名称或路径搜索..." />
         </template>
         <template #todo="scope">
-            <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <fy-icon name="edit" size="13" color="var(--el-color-primary)" /> 编辑
-            </el-button>
-            <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">
-                <fy-icon name="plus" size="13" color="var(--el-color-primary)" /> 新增
-            </el-button>
-            <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">
-                <fy-icon name="delete" size="13" color="var(--el-color-primary)" /> 删除
-            </el-button>
+            <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
         </template>
     </fy-table>
 </template>
@@ -81,6 +73,24 @@ export default defineComponent({
             console.log(index, row)
         }
 
+        // 行按钮
+        const handleTodo = (btn: string, index: number, row: IObj) => {
+            switch (btn) {
+                // 编辑按钮
+                case 'edit':
+                    console.log('编辑', row)
+                    break
+                // 新增按钮
+                case 'add':
+                    console.log('新增', row)
+                    break
+                // 删除按钮
+                case 'del':
+                    console.log('删除：', row)
+                    break
+            }
+        }
+
         return {
             menuList,
             fuzzySearch,
@@ -89,6 +99,7 @@ export default defineComponent({
             tableTools,
             toolsBtnClick,
             handleMoveDowm,
+            handleTodo,
         }
     },
 })

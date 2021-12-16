@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-16 14:17:52
+ * @LastEditTime: 2021-12-16 17:19:02
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -18,8 +18,8 @@
             <el-tag v-else size="small" type="danger">暂无</el-tag>
         </template>
         <template #todo="scope">
-            <fy-row-edit @click="handleEdit(scope.$index, scope.row)" />
-            <fy-row-delete @confirm="handleRowDelete(scope.$index, scope.row)" />
+            <fy-row-btns :contains="['edit','del']"
+                @todo="handleTodo($event,scope.$index,scope.row)" />
         </template>
     </fy-table>
     <!-- 编辑弹窗 -->
@@ -125,24 +125,28 @@ export default defineComponent({
         // 当前编辑用户数据
         const currEditUserData = ref({})
 
-        // 编辑用户触发
-        const handleEdit = (index: number, row: IObj) => {
-            editDialogTitle.value = '编辑用户'
-            showUserEditDialog.value = true
-            currEditUserData.value = {
-                ...row,
-                role: row.role.split(','),
+        // 行按钮
+        const handleTodo = (btn: string, index: number, row: IObj) => {
+            switch (btn) {
+                // 编辑按钮
+                case 'edit':
+                    editDialogTitle.value = '编辑用户'
+                    showUserEditDialog.value = true
+                    currEditUserData.value = {
+                        ...row,
+                        role: row.role.split(','),
+                    }
+                    break
+                // 删除按钮
+                case 'del':
+                    console.log('删除：', row)
+                    break
             }
         }
 
         // 编辑完成确认
         const bindEditSubmit = (formData: IObj) => {
             console.log(formData)
-        }
-
-        // 删除行
-        const handleRowDelete = (index: number, row: IObj) => {
-            console.log('123', row)
         }
 
         return {
@@ -162,10 +166,9 @@ export default defineComponent({
             editDialogTitle,
             showUserEditDialog,
             editOptions,
-            handleEdit,
+            handleTodo,
             bindEditSubmit,
             currEditUserData,
-            handleRowDelete,
         }
     },
 })
