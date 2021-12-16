@@ -2,11 +2,13 @@
  * @Description: 搜索表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-04 16:39:23
- * @LastEditTime: 2021-12-16 10:24:22
+ * @LastEditTime: 2021-12-16 16:20:31
 -->
 <template>
-    <el-form class="fy-search-form" :inline="inline" label-width="auto">
-        <el-form-item v-for="item in options" :key="item.key" :label="item.label">
+    <el-form ref="elForm" :model="params" class="fy-search-form" :inline="inline"
+        label-width="auto">
+        <el-form-item v-for="item in options" :key="item.key" :label="item.label" :prop="item.key"
+            :rules="item.rules">
             <slot v-if="item.slot" :name="item.slot" />
             <template v-else>
                 <!-- 日期，这里单独拎出来是因为使用动态组件的话会导致日期弹框BUG -->
@@ -32,7 +34,7 @@
 </template>
  
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { computed, defineComponent, PropType, ref } from 'vue'
 import { IFormOption } from '../types'
 
 export default defineComponent({
@@ -66,6 +68,9 @@ export default defineComponent({
     // `update:modelValue`为`v-model`传参固定事件写法
     emits: ['update:modelValue', 'submit', 'reset'],
     setup(props, { emit }) {
+        // 表单对象
+        const elForm = ref()
+
         // 操作父级数据
         const params = computed({
             get() {
@@ -76,7 +81,7 @@ export default defineComponent({
             },
         })
 
-        return { params }
+        return { elForm, params }
     },
 })
 </script>

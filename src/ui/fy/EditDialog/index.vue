@@ -2,13 +2,14 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2021-12-15 19:07:10
+ * @LastEditTime: 2021-12-16 16:40:15
 -->
 <template>
     <div class="fy-edit-dialog">
         <el-dialog :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)"
-            :title="title">
-            <fy-search-form v-model="formParams" :options="options" :showSearchBtn="false" />
+            :title="title" @closed="closed">
+            <fy-search-form ref="fyForm" v-model="formParams" :options="options"
+                :showSearchBtn="false" />
             <template #footer>
                 <span class="dialog-footer">
                     <el-button plain @click="$emit('update:modelValue', false)">取消</el-button>
@@ -53,6 +54,8 @@ export default defineComponent({
     // `update:modelValue`为`v-model`传参固定事件写法
     emits: ['update:modelValue', 'submit'],
     setup(props, { emit }) {
+        // 表单对象
+        const fyForm = ref()
         // 中转表单数据
         const formParams = ref({})
         watch(
@@ -69,9 +72,16 @@ export default defineComponent({
             emit('update:modelValue', false)
         }
 
+        const closed = () => {
+            // 清除验证提示
+            fyForm.value.elForm.resetFields()
+        }
+
         return {
+            fyForm,
             formParams,
             sure,
+            closed,
         }
     },
 })
@@ -103,17 +113,17 @@ export default defineComponent({
         text-align: center;
     }
 }
-@media all and (min-width: 981px) {
+@media all and (min-width: 1001px) {
     .fy-edit-dialog:deep(.el-dialog) {
-        width: 960px;
+        width: 980px;
     }
 }
-@media all and (min-width: 671px) and (max-width: 980px) {
+@media all and (min-width: 691px) and (max-width: 1000px) {
     .fy-edit-dialog:deep(.el-dialog) {
-        width: 650px;
+        width: 670px;
     }
 }
-@media all and (min-width: 376px) and (max-width: 670px) {
+@media all and (min-width: 376px) and (max-width: 690px) {
     .fy-edit-dialog:deep(.el-dialog) {
         width: 375px;
         .el-dialog__body {

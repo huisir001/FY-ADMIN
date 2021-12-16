@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-12-16 10:43:45
+ * @LastEditTime: 2021-12-16 16:34:13
  */
 
 /**
@@ -106,6 +106,20 @@ export type TUseTableTools = () => { left: ITableTool[], right: ITableTool[] }
 export type TOptionOfTools = 'add' | 'delete' | 'fold' | 'export' | 'search' | 'refresh' | 'cols'
 
 /**
+ * 表单验证
+ */
+export interface IFormRule {
+    required?: boolean
+    message?: string
+    trigger: 'blur' | 'change'
+    type?: 'date' | 'array' | 'string'
+    min?: number
+    max?: number
+    validator?: (rule: any, value: any, callback: () => any) => any
+    pattern?: RegExp
+}
+
+/**
  * 表单项配置
  */
 export interface IFormOption {
@@ -115,6 +129,8 @@ export interface IFormOption {
     component: string
     // 字段
     key: string
+    // 验证
+    rules?: IFormRule | IFormRule[]
     // 下拉框选项
     options?: Array<{ label: string, value: string | number }>
     // 表单项其他属性
