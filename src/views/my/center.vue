@@ -2,7 +2,7 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-12-08 10:42:49
+ * @LastEditTime: 2021-12-16 17:37:31
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" class="fy-my-tabs">
@@ -88,11 +88,9 @@ import { defineComponent, reactive, ref } from 'vue'
 import { useStore } from '@/store'
 // import { ElMessage } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
-import ZFileLibrary from '@/components/FileLibrary/index.vue'
 
 export default defineComponent({
     name: 'Center',
-    components: { ZFileLibrary },
     setup() {
         const Store = useStore()
         const activeTabName = ref('base')
