@@ -66,6 +66,13 @@
     overflow-y: auto;
     margin-left: 8px;
     @include scrollBar;
+
+    &:deep(.el-form-item) {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
     h5 {
       font-weight: bold;
       line-height: 1;

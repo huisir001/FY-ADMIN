@@ -2,7 +2,7 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2021-12-16 16:40:15
+ * @LastEditTime: 2021-12-17 09:59:59
 -->
 <template>
     <div class="fy-edit-dialog">
@@ -89,27 +89,7 @@ export default defineComponent({
  
 <style scoped lang="scss">
 .fy-edit-dialog:deep(.el-dialog) {
-    .el-dialog__header {
-        padding: 12px 20px;
-        line-height: 1;
-        background: var(--color-sidebar-bg);
-        .el-dialog__title {
-            color: var(--color-sidebar-font);
-            font-size: var(--el-font-size-medium);
-        }
-        .el-dialog__headerbtn {
-            top: 16px;
-            .el-dialog__close {
-                color: var(--color-sidebar-font);
-            }
-        }
-    }
-    .el-dialog__body {
-        padding: 20px;
-    }
     .el-dialog__footer {
-        background: #ecf0f1;
-        padding: 10px 20px 14px;
         text-align: center;
     }
 }
