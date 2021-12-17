@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-17 14:47:41
+ * @LastEditTime: 2021-12-17 17:03:38
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -23,7 +23,7 @@
         </template>
     </fy-table>
     <!-- 编辑弹窗 -->
-    <fy-edit-dialog v-model="showUserEditDialog" :params="currEditUserData" :title="editDialogTitle"
+    <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
         :options="editOptions" top="15%" @submit="bindEditSubmit" />
 </template>
  
@@ -109,8 +109,8 @@ export default defineComponent({
             // 新增
             if (btn === 'add') {
                 editDialogTitle.value = '新增用户'
-                showUserEditDialog.value = true
-                currEditUserData.value = {}
+                showEditDialog.value = true
+                currEditData.value = {}
             }
             // 删除选定行
             if (btn === 'delete') {
@@ -119,11 +119,11 @@ export default defineComponent({
         }
 
         // 显隐编辑用户弹窗
-        const showUserEditDialog = ref(false)
+        const showEditDialog = ref(false)
         // 编辑弹窗标题
         const editDialogTitle = ref('')
         // 当前编辑用户数据
-        const currEditUserData = ref({})
+        const currEditData = ref({})
 
         // 行按钮
         const handleTodo = (btn: string, index: number, row: IObj) => {
@@ -131,8 +131,8 @@ export default defineComponent({
                 // 编辑按钮
                 case 'edit':
                     editDialogTitle.value = '编辑用户'
-                    showUserEditDialog.value = true
-                    currEditUserData.value = {
+                    showEditDialog.value = true
+                    currEditData.value = {
                         ...row,
                         role: row.role.split(','),
                     }
@@ -164,11 +164,11 @@ export default defineComponent({
             handleReset,
             tableData,
             editDialogTitle,
-            showUserEditDialog,
+            showEditDialog,
             editOptions,
             handleTodo,
             bindEditSubmit,
-            currEditUserData,
+            currEditData,
         }
     },
 })

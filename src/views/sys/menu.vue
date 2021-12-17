@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-16 17:20:34
+ * @LastEditTime: 2021-12-17 17:10:09
 -->
 <template>
     <fy-table :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)" row-key="id"
@@ -33,6 +33,9 @@
             <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
         </template>
     </fy-table>
+    <!-- 编辑弹窗 -->
+    <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
+        :options="editOptions" top="15%" @submit="bindEditSubmit" />
 </template>
  
 <script lang="ts">
@@ -51,6 +54,12 @@ export default defineComponent({
         const menuList: Ref<any> = ref([])
         // 模糊搜索
         const fuzzySearchWord: Ref<string> = ref('')
+        // 编辑弹窗显隐
+        const showEditDialog = ref(false)
+        // 编辑弹窗标题
+        const editDialogTitle = ref('编辑菜单')
+        // 当前编辑数据
+        const currEditData = ref({})
 
         // 请求所有菜单
         !(async function () {
@@ -61,7 +70,7 @@ export default defineComponent({
         })()
 
         // 表格配置
-        const { tableCols, tableTools } = useMenuOptions()
+        const { tableCols, tableTools,editOptions } = useMenuOptions()
 
         // 工具栏点击
         const toolsBtnClick = (btn: TOptionOfTools) => {
@@ -79,6 +88,8 @@ export default defineComponent({
                 // 编辑按钮
                 case 'edit':
                     console.log('编辑', row)
+                    currEditData.value = row
+                    showEditDialog.value = true
                     break
                 // 新增按钮
                 case 'add':
@@ -100,6 +111,10 @@ export default defineComponent({
             toolsBtnClick,
             handleMoveDowm,
             handleTodo,
+            editDialogTitle,
+            showEditDialog,
+            currEditData,
+            editOptions
         }
     },
 })

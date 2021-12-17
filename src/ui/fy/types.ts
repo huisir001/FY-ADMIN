@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-12-16 16:34:13
+ * @LastEditTime: 2021-12-17 18:00:29
  */
 
 /**
@@ -126,7 +126,7 @@ export interface IFormOption {
     // 表单项名称
     label: string
     // 表单项类型
-    component: string
+    component?: string
     // 字段
     key: string
     // 验证
@@ -160,6 +160,8 @@ export interface IFormOption {
         inactiveText?: string
         activeValue?: string | number
         inactiveValue?: string | number
+        // 数字输入框
+        controlsPosition?: 'right'
     },
     // 插槽-自定义表单项
     slot?: string

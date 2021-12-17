@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-16 17:22:15
+ * @LastEditTime: 2021-12-17 18:23:32
 -->
 <template>
     <fy-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
@@ -30,6 +30,9 @@
             <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
         </template>
     </fy-table>
+    <!-- 编辑弹窗 -->
+    <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
+        :options="editOptions" top="15%" @submit="bindEditSubmit" />
 </template>
  
 <script lang="ts">
@@ -42,6 +45,12 @@ export default defineComponent({
     setup() {
         // 模糊搜索
         const fuzzySearchWord: Ref<string> = ref('')
+        // 编辑弹窗显隐
+        const showEditDialog = ref(false)
+        // 编辑弹窗标题
+        const editDialogTitle = ref('编辑部门')
+        // 当前编辑数据
+        const currEditData = ref({})
 
         const tableCols: ICols[] = [
             {
@@ -88,6 +97,48 @@ export default defineComponent({
         // 表格工具栏
         const tableTools: TOptionOfTools[] = ['add', 'fold', 'export', 'refresh']
 
+        // 编辑表单配置
+        const editOptions: any = [
+            {
+                label: '部门名称',
+                component: 'input',
+                key: 'name',
+                props: {
+                    placeholder: '请输入部门名称',
+                },
+                rules: {
+                    required: true,
+                    trigger: 'blur',
+                    message: '名称不能为空',
+                },
+            },
+            {
+                label: '负责人',
+                component: 'input',
+                key: 'leader',
+                props: {
+                    placeholder: '请输入负责人',
+                },
+                rules: {
+                    required: true,
+                    trigger: 'blur',
+                    message: '负责人不能为空',
+                },
+            },
+            {
+                label: '联系方式',
+                component: 'input',
+                key: 'phone',
+                props: {
+                    placeholder: '请输入手机号',
+                },
+                rules: {
+                    trigger: 'blur',
+                    message: '手机号填写错误',
+                },
+            },
+        ]
+
         // 工具栏点击
         const toolsBtnClick = (btn: TOptionOfTools) => {
             console.log(btn)
@@ -103,6 +154,8 @@ export default defineComponent({
                 // 编辑按钮
                 case 'edit':
                     console.log('编辑', row)
+                    currEditData.value = row
+                    showEditDialog.value = true
                     break
                 // 新增按钮
                 case 'add':
@@ -123,6 +176,10 @@ export default defineComponent({
             fuzzySearchWord,
             fuzzySearch,
             handleTodo,
+            editDialogTitle,
+            showEditDialog,
+            currEditData,
+            editOptions,
             tableData: [
                 {
                     id: 111,

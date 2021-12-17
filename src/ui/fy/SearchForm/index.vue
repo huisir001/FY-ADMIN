@@ -2,7 +2,7 @@
  * @Description: 搜索表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-04 16:39:23
- * @LastEditTime: 2021-12-16 16:20:31
+ * @LastEditTime: 2021-12-17 18:02:39
 -->
 <template>
     <el-form ref="elForm" :model="params" class="fy-search-form" :inline="inline"
@@ -87,8 +87,14 @@ export default defineComponent({
 </script>
  
 <style scoped lang="scss">
+.fy-search-form:deep(.el-form-item__content) {
+    display: flex;
+    align-items: center;
+    width: 220px;
+}
 .fy-search-form:deep(.el-input__inner),
 .fy-search-form:deep(.el-input),
+.fy-search-form:deep(.el-input-number),
 .fy-search-form:deep(.el-switch) {
     width: 220px;
     max-width: 100%;
@@ -96,15 +102,15 @@ export default defineComponent({
         width: 350px !important;
     }
 }
-.fy-search-form:deep(.el-form-item__content) {
-    display: flex;
-    align-items: center;
-}
 @media all and (max-width: 375px) {
     .fy-search-form:deep(.el-input__inner),
     .fy-search-form:deep(.el-input),
+    .fy-search-form:deep(.el-input-number),
     .fy-search-form:deep(.el-switch) {
         width: 100%;
+    }
+    .fy-search-form:deep(.el-form-item__content){
+         width: auto;
     }
 }
 </style>
