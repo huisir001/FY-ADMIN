@@ -2,7 +2,7 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2021-12-17 14:46:26
+ * @LastEditTime: 2021-12-17 15:04:50
 -->
 <template>
     <el-dialog custom-class="fy-edit-dialog" :modelValue="modelValue"
@@ -146,6 +146,7 @@ export default defineComponent({
 @media all and (max-width: 375px) {
     .fy-edit-dialog.el-dialog {
         width: calc(100% - 20px);
+        left: 10px;
         min-width: auto;
     }
 }
