@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-16 17:19:02
+ * @LastEditTime: 2021-12-17 14:47:41
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -24,7 +24,7 @@
     </fy-table>
     <!-- 编辑弹窗 -->
     <fy-edit-dialog v-model="showUserEditDialog" :params="currEditUserData" :title="editDialogTitle"
-        :options="editOptions" @submit="bindEditSubmit" />
+        :options="editOptions" top="15%" @submit="bindEditSubmit" />
 </template>
  
 <script lang="ts">
