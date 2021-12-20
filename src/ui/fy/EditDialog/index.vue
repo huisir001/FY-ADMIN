@@ -2,7 +2,7 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2021-12-20 10:39:22
+ * @LastEditTime: 2021-12-20 18:17:34
 -->
 <template>
     <el-dialog custom-class="fy-edit-dialog" :modelValue="modelValue"
@@ -24,7 +24,7 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, onMounted, PropType, ref, watch } from 'vue'
+import { defineComponent, onMounted, PropType, ref, toRaw, watch } from 'vue'
 import { IFormOption } from '../types'
 import { boxMove } from '../helpers'
 
@@ -90,7 +90,7 @@ export default defineComponent({
 
         // 确认
         const sure = () => {
-            emit('submit', formParams.value)
+            emit('submit', JSON.parse(JSON.stringify(formParams.value)))
             emit('update:modelValue', false)
         }
 

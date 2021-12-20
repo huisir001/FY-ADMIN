@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-20 15:18:21
+ * @LastEditTime: 2021-12-20 18:13:33
 -->
 <template>
     <fy-table :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)" row-key="id"
@@ -52,11 +52,11 @@
             </el-select>
         </template>
         <template #viewPath="editParams">
-    <el-select v-model="editParams.val.viewPath" @change="viewPathChange"
-        placeholder="选择路由所指向的文件路径">
-        <el-option v-for="path in viewPaths" :key="path" :label="path" :value="path" />
-    </el-select>
-</template>
+            <el-select v-model="editParams.val.viewPath"
+                placeholder="选择路由所指向的文件路径">
+                <el-option v-for="path in viewPaths" :key="path" :label="path" :value="path" />
+            </el-select>
+        </template>
     </fy-edit-dialog>
 </template>
  
@@ -129,6 +129,11 @@ export default defineComponent({
             }
         }
 
+         // 编辑完成回调
+        const bindEditSubmit = (formData: IObj) => {
+            console.log(formData)
+        }
+
         return {
             viewPaths,
             fyIcons,
@@ -145,6 +150,7 @@ export default defineComponent({
             currEditData,
             editOptions,
             menuTypeChange,
+            bindEditSubmit
         }
     },
 })
