@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-17 17:10:09
+ * @LastEditTime: 2021-12-20 15:18:21
 -->
 <template>
     <fy-table :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)" row-key="id"
@@ -35,11 +35,33 @@
     </fy-table>
     <!-- 编辑弹窗 -->
     <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
-        :options="editOptions" top="15%" @submit="bindEditSubmit" />
+        :options="editOptions" top="13%" @submit="bindEditSubmit">
+        <template #icon="editParams">
+            <el-select v-model="editParams.val.icon" filterable placeholder="选择菜单图标">
+                <el-option v-for="item in fyIcons" :key="item" :label="item" :value="item">
+                    <fy-icon :name="item" />
+                    <span style="float:right;opacity:.8;">{{ item }}</span>
+                </el-option>
+            </el-select>
+        </template>
+        <template #type="editParams">
+            <el-select v-model="editParams.val.type" @change="menuTypeChange">
+                <el-option label="路由" :value="1" />
+                <el-option label="链接" :value="2" />
+                <el-option label="按钮" :value="3" />
+            </el-select>
+        </template>
+        <template #viewPath="editParams">
+    <el-select v-model="editParams.val.viewPath" @change="viewPathChange"
+        placeholder="选择路由所指向的文件路径">
+        <el-option v-for="path in viewPaths" :key="path" :label="path" :value="path" />
+    </el-select>
+</template>
+    </fy-edit-dialog>
 </template>
  
 <script lang="ts">
-import { defineComponent, Ref, ref } from 'vue'
+import { defineComponent, Ref, ref, getCurrentInstance } from 'vue'
 import { getAllMenus } from '@/api/sys'
 import { rawList2Tree } from '@/utils/common'
 import { fuzzySearch } from '@/utils/common'
@@ -49,7 +71,11 @@ import useMenuOptions from './hooks/useMenuOptions'
 export default defineComponent({
     name: 'Menu',
     setup() {
-        console.log('VIEW_PATHS', $GLOBAL.VIEW_PATHS)
+        // 获取缓存的图标列表
+        const currInstance: any = getCurrentInstance()
+        const fyIcons = currInstance.proxy.$getIcons()
+        // 文件路径
+        const viewPaths = $GLOBAL.VIEW_PATHS
         // 菜单列表tree
         const menuList: Ref<any> = ref([])
         // 模糊搜索
@@ -70,7 +96,7 @@ export default defineComponent({
         })()
 
         // 表格配置
-        const { tableCols, tableTools,editOptions } = useMenuOptions()
+        const { tableCols, tableTools, editOptions, menuTypeChange } = useMenuOptions()
 
         // 工具栏点击
         const toolsBtnClick = (btn: TOptionOfTools) => {
@@ -88,6 +114,7 @@ export default defineComponent({
                 // 编辑按钮
                 case 'edit':
                     console.log('编辑', row)
+                    menuTypeChange(row.type)
                     currEditData.value = row
                     showEditDialog.value = true
                     break
@@ -103,6 +130,8 @@ export default defineComponent({
         }
 
         return {
+            viewPaths,
+            fyIcons,
             menuList,
             fuzzySearch,
             fuzzySearchWord,
@@ -114,7 +143,8 @@ export default defineComponent({
             editDialogTitle,
             showEditDialog,
             currEditData,
-            editOptions
+            editOptions,
+            menuTypeChange,
         }
     },
 })

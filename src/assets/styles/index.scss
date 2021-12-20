@@ -2,11 +2,12 @@
  * @Description: 基础样式
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-12-17 09:59:42
+ * @LastEditTime: 2021-12-20 15:21:47
  */
 
 /* 自定义变量 */
 @import "./variables.scss";
+@import "./mixin.scss";
 
 /* base css */
 html {
@@ -131,6 +132,9 @@ h6 {
   }
   .el-dialog__body {
     padding: var(--el-dialog-padding-primary);
+    max-height: 60vh;
+    overflow-y: auto;
+    @include scrollBar;
   }
   .el-dialog__footer {
     background: #ecf0f1;
@@ -157,4 +161,8 @@ h6 {
 }
 .el-input .el-input__icon.el-input__validateIcon {
   display: none;
+}
+
+.el-select-dropdown__item.selected > * {
+  color: var(--el-color-primary);
 }

@@ -2,30 +2,31 @@
  * @Description: 搜索表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-04 16:39:23
- * @LastEditTime: 2021-12-17 18:02:39
+ * @LastEditTime: 2021-12-20 11:30:05
 -->
 <template>
     <el-form ref="elForm" :model="params" class="fy-search-form" :inline="inline"
         label-width="auto">
-        <el-form-item v-for="item in options" :key="item.key" :label="item.label" :prop="item.key"
-            :rules="item.rules">
-            <slot v-if="item.slot" :name="item.slot" />
-            <template v-else>
-                <!-- 日期，这里单独拎出来是因为使用动态组件的话会导致日期弹框BUG -->
-                <el-date-picker v-if="item.component=='date-picker'" v-model="params[item.key]"
-                    v-bind="item.props" clearable>
-                </el-date-picker>
-                <!-- 其他 -->
-                <component v-else :is="`el-${item.component}`" v-model="params[item.key]"
-                    v-bind="item.props" clearable>
-                    <!-- 下拉框 -->
-                    <template v-if="item.options">
-                        <el-option v-for="option in item.options" :key="option.value"
-                            :label="option.label" :value="option.value"></el-option>
-                    </template>
-                </component>
-            </template>
-        </el-form-item>
+        <template v-for="item in options" :key="item.key">
+            <el-form-item v-if="!item.hide" :label="item.label" :prop="item.key" :rules="item.rules">
+                <slot v-if="item.slot" :name="item.slot" />
+                <template v-else>
+                    <!-- 日期，这里单独拎出来是因为使用动态组件的话会导致日期弹框BUG -->
+                    <el-date-picker v-if="item.component=='date-picker'" v-model="params[item.key]"
+                        v-bind="item.props" clearable>
+                    </el-date-picker>
+                    <!-- 其他 -->
+                    <component v-else :is="`el-${item.component}`" v-model="params[item.key]"
+                        v-bind="item.props" clearable>
+                        <!-- 下拉框 -->
+                        <template v-if="item.options">
+                            <el-option v-for="option in item.options" :key="option.value"
+                                :label="option.label" :value="option.value"></el-option>
+                        </template>
+                    </component>
+                </template>
+            </el-form-item>
+        </template>
         <el-form-item v-if="showSearchBtn">
             <el-button type="primary" @click="$emit('submit')">搜索</el-button>
             <el-button @click="$emit('reset')">重置</el-button>

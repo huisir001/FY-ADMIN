@@ -2,14 +2,18 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2021-12-17 15:04:50
+ * @LastEditTime: 2021-12-20 10:39:22
 -->
 <template>
     <el-dialog custom-class="fy-edit-dialog" :modelValue="modelValue"
         @update:modelValue="$emit('update:modelValue', $event)" :title="title" @open="open"
         @closed="closed">
         <fy-search-form ref="fyForm" v-model="formParams" :options="options"
-            :showSearchBtn="false" />
+            :showSearchBtn="false" >
+            <template v-for="item in options.filter(o=>o.slot)" :key="item.key" v-slot:[item.slot]>
+                <slot :name="item.slot" :val="formParams" />
+            </template>
+        </fy-search-form>
         <template #footer>
             <span class="dialog-footer">
                 <el-button plain @click="$emit('update:modelValue', false)">取消</el-button>

@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-12-17 18:00:29
+ * @LastEditTime: 2021-12-20 11:27:45
  */
 
 /**
@@ -165,4 +165,6 @@ export interface IFormOption {
     },
     // 插槽-自定义表单项
     slot?: string
+    // 显隐,默认显示
+    hide?: boolean
 }

@@ -2,10 +2,10 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2021-12-17 18:10:55
+ * @LastEditTime: 2021-12-20 13:55:32
  */
 import { ICols, IFormOption, TOptionOfTools } from '@/ui/fy/types'
-import { ref } from "vue"
+import { Ref, ref } from "vue"
 export default () => {
     /**
      * 表格列配置
@@ -111,7 +111,7 @@ export default () => {
     /**
      * 编辑弹窗配置
      */
-    const editOptions: IFormOption[] = [
+    const editOptions = ref([
         {
             label: '菜单名称',
             component: 'input',
@@ -126,42 +126,12 @@ export default () => {
             }
         },
         {
-            label: '路径',
-            component: 'input',
-            key: 'path',
-            props: {
-                placeholder: '请输入路径',
-            },
-        },
-        {
             label: '排序',
             component: 'input-number',
             key: 'orderNum',
             props: {
                 controlsPosition: 'right'
             }
-        },
-        {
-            label: '状态',
-            component: 'select',
-            key: 'status',
-            props: {
-                placeholder: '选择状态',
-            },
-            options: [
-                {
-                    label: '正常',
-                    value: 1,
-                },
-                {
-                    label: '冻结',
-                    value: 2,
-                },
-                {
-                    label: '备用',
-                    value: 3,
-                },
-            ],
         },
         {
             label: '图标',
@@ -172,6 +142,17 @@ export default () => {
             label: '权限',
             key: 'auth',
             slot: 'auth'
+        },
+        {
+            label: '状态',
+            component: 'switch',
+            key: 'status',
+            props: {
+                activeText: "正常",
+                inactiveText: "停用",
+                activeValue: 1,
+                inactiveValue: 0
+            },
         },
         {
             label: '显隐',
@@ -185,6 +166,24 @@ export default () => {
             },
         },
         {
+            label: '类型',
+            key: 'type',
+            slot: 'type'
+        },
+        {
+            label: '路径',
+            component: 'input',
+            key: 'path',
+            props: {
+                placeholder: '请输入路径',
+            },
+        },
+        {
+            label: '路由文件',
+            key: 'viewPath',
+            slot: 'viewPath'
+        },
+        {
             label: '需要登录',
             component: 'switch',
             key: 'private',
@@ -194,11 +193,6 @@ export default () => {
                 // activeValue: 1,
                 // inactiveValue: 0
             },
-        },
-        {
-            label: '类型',
-            key: 'type',
-            slot: 'type'
         },
         {
             label: '缓存',
@@ -212,15 +206,63 @@ export default () => {
             },
         },
         {
-            label: '文件路径',
-            key: 'viewPath',
-            slot: 'viewPath'
+            label: '打开方式',
+            component: 'switch',
+            key: 'blank',
+            props: {
+                activeText: "新标签",
+                inactiveText: "当前标签",
+                // activeValue: 1,
+                // inactiveValue: 0
+            },
         },
-    ]
+        {
+            label: '触发方式',
+            component: 'select',
+            key: 'triggerMode',
+            props: {
+                placeholder: '选择事件触发方式',
+            },
+            options: [
+                {
+                    label: 'vuex:commit',
+                    value: "commit",
+                },
+                {
+                    label: 'vuex:dispatch',
+                    value: 'dispatch',
+                },
+            ],
+        },
+        {
+            label: '事件名',
+            component: 'input',
+            key: 'triggerMethod',
+            props: {
+                placeholder: '输入按钮要触发的事件名',
+            },
+        },
+    ] as IFormOption[])
+
+    /**
+     * 菜单类型切换，显隐表单项
+     */
+    const menuTypeChange = (type: any) => {
+        // hide options
+        const hideOptions: IObj = {
+            1: ['blank', 'triggerMode', 'triggerMethod'],
+            2: ['viewPath', 'private', 'keepAlive', 'triggerMode', 'triggerMethod'],
+            3: ['path', 'viewPath', 'private', 'keepAlive', 'blank']
+        }
+        editOptions.value.forEach(opt => {
+            opt.hide = hideOptions[type].includes(opt.key) ? true : false
+        })
+    }
 
     return {
         tableCols: ref(tableCols),
         tableTools,
-        editOptions
+        editOptions,
+        menuTypeChange
     }
 }
