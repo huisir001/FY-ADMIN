@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-21 17:47:13
+ * @LastEditTime: 2021-12-21 17:48:52
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -34,7 +34,7 @@
     <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
         :options="editOptions" top="15%" @submit="bindEditSubmit">
         <template #parent="editParams">
-            <el-select v-model="editParams.val.parentId" filterable placeholder="Select">
+            <el-select v-model="editParams.val.parentId" filterable>
                 <el-option label="无" :value="null" />
                 <el-option v-for="item in tableParentOptions" :key="item.value" :label="item.label"
                     :value="item.value">
