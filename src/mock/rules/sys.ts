@@ -1,11 +1,11 @@
 /*
- * @Description: 系统配置
+ * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-12-20 15:08:11
+ * @LastEditTime: 2021-12-21 10:17:50
  */
 
-// 查询所有菜单，用于菜单管理（唯总管理员才有权限）
+// 查询所有菜单，用于菜单管理
 const getAllMenus = {
     data: [{
         id: '001', //主键
@@ -116,8 +116,132 @@ const getAllMenus = {
     }]
 }
 
+// 查询所有部门，用于部门管理
+const getAllDept = {
+    data: [
+        {
+            id: '001',
+            name: '一分公司',
+            status: '@integer(0, 1)',
+            leader: '@cname',
+            email: '@email',
+            phone: /^1[3-9][0-9]{9}$/,
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            parentId: null,
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '002',
+            name: '行政部',
+            status: '@integer(0, 1)',
+            leader: '@cname',
+            email: '@email',
+            phone: /^1[3-9][0-9]{9}$/,
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            parentId: '001',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '003',
+            name: '人力资源部',
+            status: '@integer(0, 1)',
+            leader: '@cname',
+            email: '@email',
+            phone: /^1[3-9][0-9]{9}$/,
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            parentId: '001',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '004',
+            name: '销售部',
+            status: '@integer(0, 1)',
+            leader: '@cname',
+            email: '@email',
+            phone: /^1[3-9][0-9]{9}$/,
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            parentId: '001',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '005',
+            name: '技术部',
+            status: '@integer(0, 1)',
+            leader: '@cname',
+            email: '@email',
+            phone: /^1[3-9][0-9]{9}$/,
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            parentId: '001',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '006',
+            name: '财务部',
+            status: '@integer(0, 1)',
+            leader: '@cname',
+            email: '@email',
+            phone: /^1[3-9][0-9]{9}$/,
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            parentId: '001',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '007',
+            name: '网络部',
+            status: '@integer(0, 1)',
+            leader: '@cname',
+            email: '@email',
+            phone: /^1[3-9][0-9]{9}$/,
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            parentId: '005',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '008',
+            name: '测试部',
+            status: '@integer(0, 1)',
+            leader: '@cname',
+            email: '@email',
+            phone: /^1[3-9][0-9]{9}$/,
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            parentId: '005',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '009',
+            name: '开发部',
+            status: '@integer(0, 1)',
+            leader: '@cname',
+            email: '@email',
+            phone: /^1[3-9][0-9]{9}$/,
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            parentId: '005',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+    ]
+}
+
 const Sys: IObj = {
-    getAllMenus
+    getAllMenus,
+    getAllDept
 }
 
 export default Sys

@@ -2,10 +2,10 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-17 18:23:32
+ * @LastEditTime: 2021-12-21 14:41:25
 -->
 <template>
-    <fy-table :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
+    <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
         :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
         <template #name="scope">
             <span>{{scope.row.name}}</span>
@@ -32,13 +32,19 @@
     </fy-table>
     <!-- 编辑弹窗 -->
     <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
-        :options="editOptions" top="15%" @submit="bindEditSubmit" />
+        :options="editOptions" top="15%" @submit="bindEditSubmit" >
+        <template #parent="editParams">
+            <el-cascader v-model="editParams.val.parentId" :options="tableData" :props="editParentProps" clearable />
+        </template>    
+    </fy-edit-dialog>
 </template>
  
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue'
-import { fuzzySearch } from '@/utils/common'
-import { ICols, TOptionOfTools } from '@/ui/fy/types'
+import { fuzzySearch, rawList2Tree } from '@/utils/common'
+import { TOptionOfTools } from '@/ui/fy/types'
+import {getAllDept} from '@/api/sys'
+import useDeptOptions from './hooks/useDeptOptions'
 
 export default defineComponent({
     name: 'Dept',
@@ -51,97 +57,36 @@ export default defineComponent({
         const editDialogTitle = ref('编辑部门')
         // 当前编辑数据
         const currEditData = ref({})
+        // 表格树形數據
+        const tableData: Ref<any> = ref([])
+        // 表格原数据
+        const tableRawData = ref([])
+        // loading
+        const loading = ref(false)
 
-        const tableCols: ICols[] = [
-            {
-                label: '部门名称',
-                minWidth: '200',
-                slot: 'name',
-            },
-            {
-                label: '状态',
-                minWidth: '80',
-                filters: [
-                    { text: '111', value: 1 },
-                    { text: '222', value: 0 },
-                ],
-                slot: 'status',
-            },
-            {
-                label: '负责人',
-                prop: 'leader',
-                minWidth: '100',
-                formatter: (row: IObj, column: IObj, cellValue: any) => {
-                    return cellValue + '111'
-                },
-            },
-            {
-                label: '联系方式',
-                prop: 'phone',
-                minWidth: '100',
-            },
-            {
-                label: '创建时间',
-                prop: 'createTime',
-                minWidth: '180',
-                sortable: true,
-            },
-            {
-                fixed: 'right',
-                minWidth: '200',
-                slotHead: 'todoHead',
-                slot: 'todo',
-            },
-        ]
+         // 请求部門列表
+        const getDeptList = (function getDept() {
+            loading.value = true
+            getAllDept().then((res) => {
+                const { ok, data } = res
+                if (ok) {
+                    tableRawData.value = data
+                    tableData.value = rawList2Tree(data) //2tree
+                }
+                loading.value = false
+            })
+            return getDept
+        })()
 
-        // 表格工具栏
-        const tableTools: TOptionOfTools[] = ['add', 'fold', 'export', 'refresh']
-
-        // 编辑表单配置
-        const editOptions: any = [
-            {
-                label: '部门名称',
-                component: 'input',
-                key: 'name',
-                props: {
-                    placeholder: '请输入部门名称',
-                },
-                rules: {
-                    required: true,
-                    trigger: 'blur',
-                    message: '名称不能为空',
-                },
-            },
-            {
-                label: '负责人',
-                component: 'input',
-                key: 'leader',
-                props: {
-                    placeholder: '请输入负责人',
-                },
-                rules: {
-                    required: true,
-                    trigger: 'blur',
-                    message: '负责人不能为空',
-                },
-            },
-            {
-                label: '联系方式',
-                component: 'input',
-                key: 'phone',
-                props: {
-                    placeholder: '请输入手机号',
-                },
-                rules: {
-                    trigger: 'blur',
-                    message: '手机号填写错误',
-                },
-            },
-        ]
+        // 表单配置项
+        const {tableCols, tableTools, editOptions} = useDeptOptions()
 
         // 工具栏点击
         const toolsBtnClick = (btn: TOptionOfTools) => {
-            console.log(btn)
+            // 刷新、搜索隐藏
+            if (btn === 'refresh') {
+                getDeptList()
+            }
         }
 
         const handleMoveDowm = (index: number, row: any) => {
@@ -168,7 +113,20 @@ export default defineComponent({
             }
         }
 
+        const editParentProps = {
+            checkStrictly: true,
+            value:'id',
+            label:'name',
+        }
+
+        const bindEditSubmit = (val:any)=>{
+            console.log(val)
+        }
+
         return {
+            loading,
+            tableData,
+            tableRawData,
             tableCols,
             tableTools,
             toolsBtnClick,
@@ -180,194 +138,8 @@ export default defineComponent({
             showEditDialog,
             currEditData,
             editOptions,
-            tableData: [
-                {
-                    id: 111,
-                    name: '分公司',
-                    status: '0',
-                    leader: '王总',
-                    email: '',
-                    phone: '',
-                    delFlag: '0',
-                    remark: '',
-                    createTime: '2021-09-09 17:25:21',
-                    updateTime: '2021-09-09 17:25:22',
-                },
-                {
-                    id: 1,
-                    name: '总公司',
-                    status: '1',
-                    leader: '王总',
-                    email: '',
-                    phone: '18233333333',
-                    delFlag: '0',
-                    remark: '',
-                    createTime: '2021-09-09 17:25:21',
-                    updateTime: '2021-09-09 17:25:22',
-                    children: [
-                        {
-                            id: 2,
-                            name: '财务部',
-                            status: '0',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 4,
-                            name: '市场部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 5,
-                            name: '行政部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 6,
-                            name: '销售部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                    ],
-                },
-                {
-                    id: 7,
-                    name: '总公司',
-                    status: '1',
-                    leader: '王总',
-                    email: '',
-                    phone: '18233333333',
-                    delFlag: '0',
-                    remark: '',
-                    createTime: '2021-09-09 17:25:21',
-                    updateTime: '2021-09-09 17:25:22',
-                    children: [
-                        {
-                            id: 8,
-                            name: '财务部',
-                            status: '0',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 9,
-                            name: '研发部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 10,
-                            name: '市场部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 11,
-                            name: '行政部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 12,
-                            name: '销售部',
-                            status: '1',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                    ],
-                },
-                {
-                    id: 13,
-                    name: '总公司',
-                    status: '1',
-                    leader: '王总',
-                    email: '',
-                    phone: '18233333333',
-                    delFlag: '0',
-                    remark: '',
-                    createTime: '2021-09-09 17:25:21',
-                    updateTime: '2021-09-09 17:25:22',
-                    children: [
-                        {
-                            id: 14,
-                            name: '财务部',
-                            status: '0',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                        {
-                            id: 15,
-                            name: '财务部',
-                            status: '0',
-                            leader: '王总',
-                            email: '',
-                            phone: '',
-                            delFlag: '0',
-                            remark: '',
-                            createTime: '2021-09-09 17:25:21',
-                            updateTime: '2021-09-09 17:25:22',
-                        },
-                    ],
-                },
-            ],
+            editParentProps,
+            bindEditSubmit
         }
     },
 })

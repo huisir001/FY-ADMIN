@@ -2,10 +2,10 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2021-12-20 13:55:32
+ * @LastEditTime: 2021-12-21 10:54:16
  */
 import { ICols, IFormOption, TOptionOfTools } from '@/ui/fy/types'
-import { Ref, ref } from "vue"
+import { ref } from "vue"
 export default () => {
     /**
      * 表格列配置
