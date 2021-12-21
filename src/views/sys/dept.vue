@@ -2,11 +2,11 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-21 14:41:25
+ * @LastEditTime: 2021-12-21 17:47:13
 -->
 <template>
-    <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)" row-key="id"
-        :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
+    <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
+        row-key="id" :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
         <template #name="scope">
             <span>{{scope.row.name}}</span>
             <div class="sort-btn">
@@ -32,18 +32,23 @@
     </fy-table>
     <!-- 编辑弹窗 -->
     <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
-        :options="editOptions" top="15%" @submit="bindEditSubmit" >
+        :options="editOptions" top="15%" @submit="bindEditSubmit">
         <template #parent="editParams">
-            <el-cascader v-model="editParams.val.parentId" :options="tableData" :props="editParentProps" clearable />
-        </template>    
+            <el-select v-model="editParams.val.parentId" filterable placeholder="Select">
+                <el-option label="无" :value="null" />
+                <el-option v-for="item in tableParentOptions" :key="item.value" :label="item.label"
+                    :value="item.value">
+                </el-option>
+            </el-select>
+        </template>
     </fy-edit-dialog>
 </template>
  
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue'
-import { fuzzySearch, rawList2Tree } from '@/utils/common'
+import { fuzzySearch, pidList2SelectOptions, rawList2Tree } from '@/utils/common'
 import { TOptionOfTools } from '@/ui/fy/types'
-import {getAllDept} from '@/api/sys'
+import { getAllDept } from '@/api/sys'
 import useDeptOptions from './hooks/useDeptOptions'
 
 export default defineComponent({
@@ -59,18 +64,18 @@ export default defineComponent({
         const currEditData = ref({})
         // 表格树形數據
         const tableData: Ref<any> = ref([])
-        // 表格原数据
-        const tableRawData = ref([])
+        // 父级部门选择
+        const tableParentOptions: Ref<any> = ref([])
         // loading
         const loading = ref(false)
 
-         // 请求部門列表
+        // 请求部門列表
         const getDeptList = (function getDept() {
             loading.value = true
             getAllDept().then((res) => {
                 const { ok, data } = res
                 if (ok) {
-                    tableRawData.value = data
+                    tableParentOptions.value = pidList2SelectOptions(data, 'name', 'id')
                     tableData.value = rawList2Tree(data) //2tree
                 }
                 loading.value = false
@@ -79,7 +84,7 @@ export default defineComponent({
         })()
 
         // 表单配置项
-        const {tableCols, tableTools, editOptions} = useDeptOptions()
+        const { tableCols, tableTools, editOptions } = useDeptOptions()
 
         // 工具栏点击
         const toolsBtnClick = (btn: TOptionOfTools) => {
@@ -115,18 +120,18 @@ export default defineComponent({
 
         const editParentProps = {
             checkStrictly: true,
-            value:'id',
-            label:'name',
+            value: 'id',
+            label: 'name',
         }
 
-        const bindEditSubmit = (val:any)=>{
+        const bindEditSubmit = (val: any) => {
             console.log(val)
         }
 
         return {
             loading,
             tableData,
-            tableRawData,
+            tableParentOptions,
             tableCols,
             tableTools,
             toolsBtnClick,
@@ -139,7 +144,7 @@ export default defineComponent({
             currEditData,
             editOptions,
             editParentProps,
-            bindEditSubmit
+            bindEditSubmit,
         }
     },
 })
