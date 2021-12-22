@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-22 11:05:56
+ * @LastEditTime: 2021-12-22 17:50:50
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -32,7 +32,7 @@
     </fy-table>
     <!-- 编辑弹窗 -->
     <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
-        :options="editOptions" top="15%" @submit="bindEditSubmit">
+        :options="editOptions" top="15%" @submit="bindEditSubmit" @closed="closed">
         <template #parent="editParams">
             <el-select v-model="editParams.val.parentId" filterable>
                 <el-option label="无" :value="null" />
@@ -61,7 +61,7 @@ export default defineComponent({
         // 编辑弹窗标题
         const editDialogTitle = ref('编辑部门')
         // 当前编辑数据
-        const currEditData = ref({})
+        const currEditData:Ref<IObj> = ref({})
         // 表格树形數據
         const tableData: Ref<any> = ref([])
         // 父级部门选择
@@ -92,6 +92,9 @@ export default defineComponent({
             if (btn === 'refresh') {
                 getDeptList()
             }
+            if(btn==='add'){
+                showEditDialog.value = true
+            }
         }
 
         const handleMoveDowm = (index: number, row: any) => {
@@ -108,7 +111,10 @@ export default defineComponent({
                     break
                 // 新增按钮
                 case 'add':
-                    console.log('新增', row)
+                    currEditData.value = {
+                        parentId:row.id
+                    }
+                    showEditDialog.value = true
                     break
                 // 删除按钮
                 case 'del':
@@ -125,6 +131,11 @@ export default defineComponent({
 
         const bindEditSubmit = (val: any) => {
             console.log(val)
+        }
+
+         // 弹窗关闭完成
+        const closed = () => {
+           currEditData.value = {}
         }
 
         return {
@@ -144,6 +155,7 @@ export default defineComponent({
             editOptions,
             editParentProps,
             bindEditSubmit,
+            closed
         }
     },
 })

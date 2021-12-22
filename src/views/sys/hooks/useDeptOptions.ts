@@ -2,7 +2,7 @@
  * @Description: 部门管理配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-21 10:44:51
- * @LastEditTime: 2021-12-21 11:22:14
+ * @LastEditTime: 2021-12-22 16:52:41
  */
 import { ICols, IFormOption, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -78,11 +78,7 @@ export default () => {
             component: 'select',
             key: 'parentId',
             slot: 'parent',
-            rules: {
-                required: true,
-                trigger: 'blur',
-                message: '上级部门不能为空',
-            },
+            default: null,
         },
         {
             label: '负责人',

@@ -2,14 +2,15 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2021-12-22 14:17:41
+ * @LastEditTime: 2021-12-22 17:48:39
 -->
 <template>
     <el-dialog custom-class="fy-edit-dialog" :modelValue="modelValue"
         @update:modelValue="$emit('update:modelValue', $event)" :title="title" @open="open"
         @closed="closed">
         <fy-search-form ref="fyForm" v-model="formParams" :options="options" :showSearchBtn="false">
-            <template v-for="item in options.filter(o=>o.slot)" :key="item.key" v-slot:[item.slot]>
+            <template v-for="item in options.filter((o) => o.slot)" :key="item.key"
+                v-slot:[item.slot]>
                 <slot :name="item.slot" :val="formParams" />
             </template>
         </fy-search-form>
@@ -21,9 +22,9 @@
         </template>
     </el-dialog>
 </template>
- 
+
 <script lang="ts">
-import { defineComponent, onMounted, PropType, ref, toRaw, watch } from 'vue'
+import { computed, defineComponent, onMounted, PropType, ref, toRaw, watch } from 'vue'
 import { IFormOption } from '../types'
 import { boxMove } from '../helpers'
 
@@ -78,14 +79,7 @@ export default defineComponent({
         // 表单对象
         const fyForm = ref()
         // 中转表单数据
-        const formParams = ref({})
-        watch(
-            () => props.params,
-            (val) => {
-                // 由于表单数据不会出现函数、对象引用等，这里直接用JSON序列化进行深拷贝
-                formParams.value = JSON.parse(JSON.stringify(val))
-            }
-        )
+        const formParams = ref({} as IObj)
 
         // 确认
         const sure = () => {
@@ -104,10 +98,18 @@ export default defineComponent({
         const closed = () => {
             // 清除验证提示
             fyForm.value.elForm.resetFields()
+            // 清空表单信息
+            formParams.value = {}
         }
 
         // 弹窗触发open
         const open = () => {
+            // 初始化值
+            props.options.forEach((item) => {
+                formParams.value[item.key] = item.default ? item.default : null
+            })
+            // 合并
+            Object.assign(formParams.value, props.params)
             // 将弹窗位置还原默认
             dialogEl.value.style =
                 typeof props.top === 'number' ? 'top:' + props.top + 'px' : 'top:' + props.top
@@ -123,7 +125,7 @@ export default defineComponent({
     },
 })
 </script>
- 
+
 <style lang="scss">
 .fy-edit-dialog.el-dialog {
     position: absolute;

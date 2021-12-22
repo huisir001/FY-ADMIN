@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-12-20 11:27:45
+ * @LastEditTime: 2021-12-22 16:50:58
  */
 
 /**
@@ -133,6 +133,8 @@ export interface IFormOption {
     rules?: IFormRule | IFormRule[]
     // 下拉框选项
     options?: Array<{ label: string, value: string | number }>
+    // 默认值
+    default?: any
     // 表单项其他属性
     props?: {
         placeholder?: string
