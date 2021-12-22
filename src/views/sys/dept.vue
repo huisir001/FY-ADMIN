@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-22 17:50:50
+ * @LastEditTime: 2021-12-22 17:54:58
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -32,7 +32,7 @@
     </fy-table>
     <!-- 编辑弹窗 -->
     <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
-        :options="editOptions" top="15%" @submit="bindEditSubmit" @closed="closed">
+        :options="editOptions" top="15%" @submit="bindEditSubmit">
         <template #parent="editParams">
             <el-select v-model="editParams.val.parentId" filterable>
                 <el-option label="无" :value="null" />
@@ -93,6 +93,7 @@ export default defineComponent({
                 getDeptList()
             }
             if(btn==='add'){
+                currEditData.value = {}
                 showEditDialog.value = true
             }
         }
@@ -131,11 +132,6 @@ export default defineComponent({
 
         const bindEditSubmit = (val: any) => {
             console.log(val)
-        }
-
-         // 弹窗关闭完成
-        const closed = () => {
-           currEditData.value = {}
         }
 
         return {
