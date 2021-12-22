@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-21 17:48:52
+ * @LastEditTime: 2021-12-22 11:05:56
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -103,7 +103,6 @@ export default defineComponent({
             switch (btn) {
                 // 编辑按钮
                 case 'edit':
-                    console.log('编辑', row)
                     currEditData.value = row
                     showEditDialog.value = true
                     break

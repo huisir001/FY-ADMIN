@@ -2,14 +2,13 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2021-12-20 18:17:34
+ * @LastEditTime: 2021-12-22 14:17:41
 -->
 <template>
     <el-dialog custom-class="fy-edit-dialog" :modelValue="modelValue"
         @update:modelValue="$emit('update:modelValue', $event)" :title="title" @open="open"
         @closed="closed">
-        <fy-search-form ref="fyForm" v-model="formParams" :options="options"
-            :showSearchBtn="false" >
+        <fy-search-form ref="fyForm" v-model="formParams" :options="options" :showSearchBtn="false">
             <template v-for="item in options.filter(o=>o.slot)" :key="item.key" v-slot:[item.slot]>
                 <slot :name="item.slot" :val="formParams" />
             </template>
@@ -90,8 +89,15 @@ export default defineComponent({
 
         // 确认
         const sure = () => {
-            emit('submit', JSON.parse(JSON.stringify(formParams.value)))
-            emit('update:modelValue', false)
+            // 验证
+            fyForm.value.elForm.validate((valid: any) => {
+                if (valid) {
+                    emit('submit', JSON.parse(JSON.stringify(formParams.value)))
+                    emit('update:modelValue', false)
+                } else {
+                    return false
+                }
+            })
         }
 
         // 弹窗关闭完成
