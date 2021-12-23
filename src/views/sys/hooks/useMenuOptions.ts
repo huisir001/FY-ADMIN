@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2021-12-21 10:54:16
+ * @LastEditTime: 2021-12-23 18:46:03
  */
 import { ICols, IFormOption, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -126,6 +126,12 @@ export default () => {
             }
         },
         {
+            label: '类型',
+            key: 'type',
+            slot: 'type',
+            default: 1,
+        },
+        {
             label: '排序',
             component: 'input-number',
             key: 'orderNum',
@@ -164,11 +170,6 @@ export default () => {
                 // activeValue: 1,
                 // inactiveValue: 0
             },
-        },
-        {
-            label: '类型',
-            key: 'type',
-            slot: 'type'
         },
         {
             label: '路径',
@@ -245,14 +246,25 @@ export default () => {
     ] as IFormOption[])
 
     /**
+     * 菜单类型 
+     */
+    enum MenuType {
+        cat, // 目录
+        route, // 路由
+        link, // 链接
+        button, // 按钮
+    }
+
+    /**
      * 菜单类型切换，显隐表单项
      */
     const menuTypeChange = (type: any) => {
         // hide options
         const hideOptions: IObj = {
-            1: ['blank', 'triggerMode', 'triggerMethod'],
-            2: ['viewPath', 'private', 'keepAlive', 'triggerMode', 'triggerMethod'],
-            3: ['path', 'viewPath', 'private', 'keepAlive', 'blank']
+            [MenuType.cat]: ['path', 'viewPath', 'private', 'keepAlive', 'blank', 'auth', 'triggerMode', 'triggerMethod'],
+            [MenuType.route]: ['blank', 'triggerMode', 'triggerMethod'],
+            [MenuType.link]: ['viewPath', 'private', 'keepAlive', 'triggerMode', 'triggerMethod'],
+            [MenuType.button]: ['path', 'viewPath', 'private', 'keepAlive', 'blank']
         }
         editOptions.value.forEach(opt => {
             opt.hide = hideOptions[type].includes(opt.key) ? true : false
@@ -263,6 +275,7 @@ export default () => {
         tableCols: ref(tableCols),
         tableTools,
         editOptions,
+        MenuType,
         menuTypeChange
     }
 }

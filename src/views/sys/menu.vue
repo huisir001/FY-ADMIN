@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-20 18:13:33
+ * @LastEditTime: 2021-12-23 18:42:34
 -->
 <template>
     <fy-table :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)" row-key="id"
@@ -46,9 +46,10 @@
         </template>
         <template #type="editParams">
             <el-select v-model="editParams.val.type" @change="menuTypeChange">
-                <el-option label="路由" :value="1" />
-                <el-option label="链接" :value="2" />
-                <el-option label="按钮" :value="3" />
+                <el-option label="目录" :value="MenuType.cat" />
+                <el-option label="路由" :value="MenuType.route" />
+                <el-option label="链接" :value="MenuType.link" />
+                <el-option label="按钮" :value="MenuType.button" />
             </el-select>
         </template>
         <template #viewPath="editParams">
@@ -96,7 +97,7 @@ export default defineComponent({
         })()
 
         // 表格配置
-        const { tableCols, tableTools, editOptions, menuTypeChange } = useMenuOptions()
+        const { tableCols, tableTools, editOptions,MenuType, menuTypeChange } = useMenuOptions()
 
         // 工具栏点击
         const toolsBtnClick = (btn: TOptionOfTools) => {
@@ -149,6 +150,7 @@ export default defineComponent({
             showEditDialog,
             currEditData,
             editOptions,
+            MenuType,
             menuTypeChange,
             bindEditSubmit
         }
