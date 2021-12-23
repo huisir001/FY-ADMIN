@@ -2,7 +2,7 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-12-23 11:24:39
+ * @LastEditTime: 2021-12-23 14:01:23
  */
 
 // 查询所有菜单，用于菜单管理
@@ -77,7 +77,7 @@ const getAllMenus = {
         updateTime: '@datetime',
         path: '/sys/role',
         title: '角色管理',
-        icon: "Key",
+        icon: "Role",
         redirectId: null,
         parentId: '001',
         keepAlive: true,

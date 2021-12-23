@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2021-12-20 15:01:46
+ * @LastEditTime: 2021-12-23 14:03:22
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -40,6 +40,7 @@ import {
  */
 import Theme from './inc/Theme.vue'
 import Export from './inc/Export.vue'
+import Role from './inc/Role.vue'
 
 
 const components = [
@@ -66,7 +67,8 @@ const components = [
     QuestionFilled,
     /* my-icons */
     Theme,
-    Export
+    Export,
+    Role
 ]
 
 export default (app: App<any>) => {
