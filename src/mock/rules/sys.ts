@@ -2,7 +2,7 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-12-21 10:17:50
+ * @LastEditTime: 2021-12-23 11:24:39
  */
 
 // 查询所有菜单，用于菜单管理
@@ -120,19 +120,6 @@ const getAllMenus = {
 const getAllDept = {
     data: [
         {
-            id: '001',
-            name: '一分公司',
-            status: '@integer(0, 1)',
-            leader: '@cname',
-            email: '@email',
-            phone: /^1[3-9][0-9]{9}$/,
-            delFlag: '@integer(0, 1)',
-            remark: '',
-            parentId: null,
-            createTime: '@datetime',
-            updateTime: '@datetime',
-        },
-        {
             id: '002',
             name: '行政部',
             status: '@integer(0, 1)',
@@ -141,7 +128,7 @@ const getAllDept = {
             phone: /^1[3-9][0-9]{9}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
-            parentId: '001',
+            parentId: null,
             createTime: '@datetime',
             updateTime: '@datetime',
         },
@@ -154,7 +141,7 @@ const getAllDept = {
             phone: /^1[3-9][0-9]{9}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
-            parentId: '001',
+            parentId: null,
             createTime: '@datetime',
             updateTime: '@datetime',
         },
@@ -167,7 +154,7 @@ const getAllDept = {
             phone: /^1[3-9][0-9]{9}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
-            parentId: '001',
+            parentId: null,
             createTime: '@datetime',
             updateTime: '@datetime',
         },
@@ -180,7 +167,7 @@ const getAllDept = {
             phone: /^1[3-9][0-9]{9}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
-            parentId: '001',
+            parentId: null,
             createTime: '@datetime',
             updateTime: '@datetime',
         },
@@ -193,7 +180,7 @@ const getAllDept = {
             phone: /^1[3-9][0-9]{9}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
-            parentId: '001',
+            parentId: null,
             createTime: '@datetime',
             updateTime: '@datetime',
         },
@@ -239,9 +226,66 @@ const getAllDept = {
     ]
 }
 
+// 查询所有角色
+const getAllRole = {
+    data: [
+        {
+            id: '@id',
+            name: '超级管理员',
+            key: "admin",
+            status: '@integer(0, 1)',
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '@id',
+            name: '游客',
+            key: "visitor",
+            status: '@integer(0, 1)',
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '@id',
+            name: '测试',
+            key: "test",
+            status: '@integer(0, 1)',
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '@id',
+            name: '运营',
+            key: "op",
+            status: '@integer(0, 1)',
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+        {
+            id: '@id',
+            name: '开发',
+            key: "dev",
+            status: '@integer(0, 1)',
+            delFlag: '@integer(0, 1)',
+            remark: '',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        },
+    ]
+}
+
 const Sys: IObj = {
     getAllMenus,
-    getAllDept
+    getAllDept,
+    getAllRole
 }
 
 export default Sys

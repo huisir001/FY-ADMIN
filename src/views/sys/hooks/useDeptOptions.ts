@@ -2,7 +2,7 @@
  * @Description: 部门管理配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-21 10:44:51
- * @LastEditTime: 2021-12-22 16:52:41
+ * @LastEditTime: 2021-12-23 10:24:23
  */
 import { ICols, IFormOption, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -15,7 +15,7 @@ export default () => {
         {
             label: '部门名称',
             minWidth: '200',
-            slot: 'name',
+            prop: 'name',
         },
         {
             label: '状态',
@@ -61,6 +61,13 @@ export default () => {
      */
     const editOptions: IFormOption[] = [
         {
+            label: '上级部门',
+            component: 'select',
+            key: 'parentId',
+            slot: 'parent',
+            default: null,
+        },
+        {
             label: '名称',
             component: 'input',
             key: 'name',
@@ -72,13 +79,6 @@ export default () => {
                 trigger: 'blur',
                 message: '名称不能为空',
             },
-        },
-        {
-            label: '上级部门',
-            component: 'select',
-            key: 'parentId',
-            slot: 'parent',
-            default: null,
         },
         {
             label: '负责人',

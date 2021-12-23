@@ -2,29 +2,18 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-22 17:54:58
+ * @LastEditTime: 2021-12-23 10:29:37
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
         row-key="id" :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
-        <template #name="scope">
-            <span>{{scope.row.name}}</span>
-            <div class="sort-btn">
-                <el-button size="mini" type="text" @click="handleMoveDowm(scope.$index, scope.row)">
-                    <fy-icon name="sort-down" size="13" color="var(--el-color-primary)" />
-                </el-button>
-                <el-button size="mini" type="text" @click="handleMoveUp(scope.$index, scope.row)">
-                    <fy-icon name="sort-up" size="13" color="var(--el-color-primary)" />
-                </el-button>
-            </div>
-        </template>
         <template #status="scope">
             <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
             <el-tag v-else size="small" type="danger">停用</el-tag>
         </template>
         <template #todoHead>
             <!-- 不分页情况下可以使用本地模糊搜索 -->
-            <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="输入名称或负责人搜索..." />
+            <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="输入关键字搜索..." />
         </template>
         <template #todo="scope">
             <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
@@ -98,10 +87,6 @@ export default defineComponent({
             }
         }
 
-        const handleMoveDowm = (index: number, row: any) => {
-            console.log(index, row)
-        }
-
         // 行按钮
         const handleTodo = (btn: string, index: number, row: IObj) => {
             switch (btn) {
@@ -141,7 +126,6 @@ export default defineComponent({
             tableCols,
             tableTools,
             toolsBtnClick,
-            handleMoveDowm,
             fuzzySearchWord,
             fuzzySearch,
             handleTodo,
