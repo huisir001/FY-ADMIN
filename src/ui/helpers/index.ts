@@ -2,7 +2,7 @@
  * @Description: UI组件依赖工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-17 11:03:27
- * @LastEditTime: 2021-12-24 15:24:09
+ * @LastEditTime: 2021-12-24 16:36:35
  */
 
 /**
@@ -10,6 +10,31 @@
  */
 export const fuzzySearch = (listData: any[], inputVal: string) => listData
     .filter((item) => JSON.stringify(item).toLowerCase().includes(inputVal.toLowerCase()))
+
+/**
+ * 点击其他位置进行操作（如关闭弹窗）
+ */
+export const clickOtherPosToClose = (
+    targetEl: HTMLElement[] | HTMLElement | NodeList,
+    callback: () => void
+) => {
+    const listener = (e: Event) => {
+        const isNodeList = targetEl.constructor.name === 'NodeList'
+        if (Array.isArray(targetEl) || isNodeList) {
+            const contains = (isNodeList ? Array.from(targetEl as NodeList) : targetEl as HTMLElement[]).find(
+                (boxEl) => boxEl!.contains(e.target as HTMLElement)
+            )
+            if (!contains) {
+                callback()
+                document.removeEventListener('click', listener, true)
+            }
+        } else if (!(targetEl as HTMLElement).contains(e.target as HTMLElement)) {
+            callback()
+            document.removeEventListener('click', listener, true)
+        }
+    }
+    document.addEventListener('click', listener, true)
+}
 
 /**
  * box跟随鼠标移动

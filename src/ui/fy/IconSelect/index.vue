@@ -2,13 +2,14 @@
  * @Description: 图标选择
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-24 10:51:13
- * @LastEditTime: 2021-12-24 15:46:32
+ * @LastEditTime: 2021-12-24 16:36:11
 -->
 <template>
     <el-popover :visible="visible" popper-class="icon-select" placement="bottom-start" :width="220"
-        @show="show" @hide="hide">
+        @show="show">
         <template #reference>
-            <el-input class="icon-select-input" v-model="modelValue" readonly placeholder="请选择图标" @click="visible = !visible" />
+            <el-input class="icon-select-input" v-model="modelValue" readonly placeholder="请选择图标"
+                @click="visible = !visible" />
         </template>
         <el-input class="search-input" v-model="fuzzySearchWord" clearable size="mini"
             placeholder="搜索..." />
@@ -23,7 +24,7 @@
  
 <script lang="ts">
 import { defineComponent, getCurrentInstance, ref } from 'vue'
-import { fuzzySearch } from '@/ui/helpers'
+import { fuzzySearch, clickOtherPosToClose } from '@/ui/helpers'
 
 export default defineComponent({
     name: 'IconSelect',
@@ -51,19 +52,12 @@ export default defineComponent({
         const fuzzySearchWord = ref('')
 
         // 显隐事件
-        let eventListener: (e: Event) => any
         const show = () => {
-            eventListener = (e) => {
-                const inputEl = document.querySelector('.icon-select-input')
-                const popEl = document.querySelector('.el-popover.icon-select')
-                if (!popEl!.contains(e.target as HTMLElement) && !inputEl!.contains(e.target as HTMLElement)) {
-                    visible.value = false
-                }
-            }
-            document.addEventListener('click', eventListener, true)
-        }
-        const hide = () => {
-            document.removeEventListener('click', eventListener, true)
+            const inputEl = document.querySelector('.icon-select-input')
+            const popEl = document.querySelector('.el-popover.icon-select')
+            clickOtherPosToClose([inputEl as HTMLElement, popEl as HTMLElement], () => {
+                visible.value = false
+            })
         }
 
         return {
@@ -73,7 +67,6 @@ export default defineComponent({
             fuzzySearch,
             fuzzySearchWord,
             show,
-            hide,
         }
     },
 })
@@ -109,7 +102,7 @@ export default defineComponent({
         margin-bottom: 5px;
     }
 }
-.icon-select-input .el-input__inner{
-    cursor:pointer;
+.icon-select-input .el-input__inner {
+    cursor: pointer;
 }
 </style>
