@@ -1,9 +1,15 @@
 /*
- * @Description: 依赖工具
+ * @Description: UI组件依赖工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-17 11:03:27
- * @LastEditTime: 2021-12-17 13:54:44
+ * @LastEditTime: 2021-12-24 15:24:09
  */
+
+/**
+ * 前端关键字模糊搜索
+ */
+export const fuzzySearch = (listData: any[], inputVal: string) => listData
+    .filter((item) => JSON.stringify(item).toLowerCase().includes(inputVal.toLowerCase()))
 
 /**
  * box跟随鼠标移动
