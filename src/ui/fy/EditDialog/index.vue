@@ -2,7 +2,7 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2021-12-22 17:48:39
+ * @LastEditTime: 2021-12-24 15:33:26
 -->
 <template>
     <el-dialog custom-class="fy-edit-dialog" :modelValue="modelValue"
@@ -24,9 +24,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, PropType, ref, toRaw, watch } from 'vue'
+import { defineComponent, onMounted, PropType, ref } from 'vue'
 import { IFormOption } from '../types'
-import { boxMove } from '../helpers'
+import { boxMove } from '@/ui/helpers'
 
 export default defineComponent({
     name: 'EditDialog',
