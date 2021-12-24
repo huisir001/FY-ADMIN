@@ -2,13 +2,13 @@
  * @Description: 图标选择
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-24 10:51:13
- * @LastEditTime: 2021-12-24 15:32:50
+ * @LastEditTime: 2021-12-24 15:46:32
 -->
 <template>
     <el-popover :visible="visible" popper-class="icon-select" placement="bottom-start" :width="220"
         @show="show" @hide="hide">
         <template #reference>
-            <el-input v-model="modelValue" readonly placeholder="请选择图标" @click="visible = true" />
+            <el-input class="icon-select-input" v-model="modelValue" readonly placeholder="请选择图标" @click="visible = !visible" />
         </template>
         <el-input class="search-input" v-model="fuzzySearchWord" clearable size="mini"
             placeholder="搜索..." />
@@ -54,8 +54,9 @@ export default defineComponent({
         let eventListener: (e: Event) => any
         const show = () => {
             eventListener = (e) => {
+                const inputEl = document.querySelector('.icon-select-input')
                 const popEl = document.querySelector('.el-popover.icon-select')
-                if (!popEl!.contains(e.target as HTMLElement)) {
+                if (!popEl!.contains(e.target as HTMLElement) && !inputEl!.contains(e.target as HTMLElement)) {
                     visible.value = false
                 }
             }
@@ -107,5 +108,8 @@ export default defineComponent({
         width: calc(100% - 2px);
         margin-bottom: 5px;
     }
+}
+.icon-select-input .el-input__inner{
+    cursor:pointer;
 }
 </style>
