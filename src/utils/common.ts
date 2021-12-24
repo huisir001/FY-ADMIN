@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-12-21 17:43:57
+ * @LastEditTime: 2021-12-24 14:57:14
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -101,7 +101,7 @@ export const menu2Route = (menu: IMenu, menuList: IMenu[], Layout: any): RouteRe
  * 前端关键字模糊搜索
  */
 export const fuzzySearch = (listData: any[], inputVal: string) => listData
-    .filter((item) => JSON.stringify(item).includes(inputVal))
+    .filter((item) => JSON.stringify(item).toLowerCase().includes(inputVal.toLowerCase()))
 
 /**
  * 将字符串转为文档下载
