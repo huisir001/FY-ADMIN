@@ -2,7 +2,7 @@
  * @Description: 个人组件封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2021-12-16 17:37:03
+ * @LastEditTime: 2021-12-24 11:03:37
  */
 import { App } from 'vue'
 import Icon from './Icon/index.vue'
@@ -11,6 +11,7 @@ import RowBtns from './Table/RowBtns.vue'
 import SearchForm from './SearchForm/index.vue'
 import EditDialog from './EditDialog/index.vue'
 import FileLibrary from './FileLibrary/index.vue'
+import IconSelect from './IconSelect/index.vue'
 
 
 const components = [
@@ -19,7 +20,8 @@ const components = [
     RowBtns,
     SearchForm,
     EditDialog,
-    FileLibrary
+    FileLibrary,
+    IconSelect
 ]
 
 export default (app: App<any>) => {

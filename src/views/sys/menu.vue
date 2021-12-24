@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-23 18:42:34
+ * @LastEditTime: 2021-12-24 15:36:46
 -->
 <template>
     <fy-table :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)" row-key="id"
@@ -37,12 +37,7 @@
     <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
         :options="editOptions" top="13%" @submit="bindEditSubmit">
         <template #icon="editParams">
-            <el-select v-model="editParams.val.icon" filterable placeholder="选择菜单图标">
-                <el-option v-for="item in fyIcons" :key="item" :label="item" :value="item">
-                    <fy-icon :name="item" />
-                    <span style="float:right;opacity:.8;">{{ item }}</span>
-                </el-option>
-            </el-select>
+            <fy-icon-select v-model="editParams.val.icon"/>
         </template>
         <template #type="editParams">
             <el-select v-model="editParams.val.type" @change="menuTypeChange">
@@ -62,7 +57,7 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, Ref, ref, getCurrentInstance } from 'vue'
+import { defineComponent, Ref, ref } from 'vue'
 import { getAllMenus } from '@/api/sys'
 import { rawList2Tree } from '@/utils/common'
 import { fuzzySearch } from '@/utils/common'
@@ -72,9 +67,6 @@ import useMenuOptions from './hooks/useMenuOptions'
 export default defineComponent({
     name: 'Menu',
     setup() {
-        // 获取缓存的图标列表
-        const currInstance: any = getCurrentInstance()
-        const fyIcons = currInstance.proxy.$getIcons()
         // 文件路径
         const viewPaths = $GLOBAL.VIEW_PATHS
         // 菜单列表tree
@@ -137,7 +129,6 @@ export default defineComponent({
 
         return {
             viewPaths,
-            fyIcons,
             menuList,
             fuzzySearch,
             fuzzySearchWord,
