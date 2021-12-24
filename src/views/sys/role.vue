@@ -2,7 +2,7 @@
  * @Description: 角色管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-23 13:48:39
+ * @LastEditTime: 2021-12-24 17:10:17
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -29,7 +29,7 @@
 <script lang="ts">
 import { defineComponent, ref, Ref } from 'vue'
 import { getAllRole } from '@/api/sys'
-import { fuzzySearch } from '@/utils/common'
+import { fuzzySearch } from '@/ui/helpers'
 import useRoleOptions from './hooks/useRoleOptions'
 import { TOptionOfTools } from '@/ui/fy/types'
 

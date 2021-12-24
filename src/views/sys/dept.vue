@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-23 10:29:37
+ * @LastEditTime: 2021-12-24 17:09:50
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -35,7 +35,8 @@
  
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue'
-import { fuzzySearch, pidList2SelectOptions, rawList2Tree } from '@/utils/common'
+import { pidList2SelectOptions, rawList2Tree } from '@/utils/common'
+import { fuzzySearch } from '@/ui/helpers'
 import { TOptionOfTools } from '@/ui/fy/types'
 import { getAllDept } from '@/api/sys'
 import useDeptOptions from './hooks/useDeptOptions'

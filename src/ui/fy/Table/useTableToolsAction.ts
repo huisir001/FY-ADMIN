@@ -2,11 +2,11 @@
  * @Description: 工具栏方法（固定写死）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-25 10:54:54
- * @LastEditTime: 2021-12-14 10:48:55
+ * @LastEditTime: 2021-12-24 17:06:09
  */
 
 import { ref, watch } from 'vue'
-import { exportRaw, tree2RawList } from '@/utils/common'
+import { exportRaw, tree2RawList } from '@/ui/helpers'
 import { ICols } from '../types'
 import writeXlsxFile from 'write-excel-file'
 

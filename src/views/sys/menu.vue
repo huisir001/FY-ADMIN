@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-24 15:36:46
+ * @LastEditTime: 2021-12-24 17:10:03
 -->
 <template>
     <fy-table :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)" row-key="id"
@@ -60,7 +60,7 @@
 import { defineComponent, Ref, ref } from 'vue'
 import { getAllMenus } from '@/api/sys'
 import { rawList2Tree } from '@/utils/common'
-import { fuzzySearch } from '@/utils/common'
+import { fuzzySearch } from '@/ui/helpers'
 import { TOptionOfTools } from '@/ui/fy/types'
 import useMenuOptions from './hooks/useMenuOptions'
 
