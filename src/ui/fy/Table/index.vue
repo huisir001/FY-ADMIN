@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-12-16 14:23:00
+ * @LastEditTime: 2021-12-24 18:09:40
 -->
 <template>
     <!-- 工具栏 -->
@@ -171,6 +171,7 @@ export default defineComponent({
 <style lang="scss">
 .el-table {
     --el-table-current-row-background-color: var(--el-color-primary-light-5);
+    max-height: 100%!important;
     .cell {
         line-height: 24px;
         & > button {
