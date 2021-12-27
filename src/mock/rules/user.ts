@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2021-12-27 11:06:41
+ * @LastEditTime: 2021-12-27 16:12:18
  */
 
 import { Random } from "mockjs"
@@ -10,15 +10,19 @@ import { Random } from "mockjs"
 // 用户信息
 const getUserInfo = {
     data: {
-        "id": '@id',
-        "username": 'admin',
-        "nickname": '@cname',
-        "email": '@email',
-        "phone": /^1[3-9][0-9]{9}$/,
+        id: '@id',
+        username: 'admin',
+        nickname: '@cname',
         'sex|0-2': 1,
-        "status": 1, //1-正常；0-停用
-        'avatar': Random.image('50x50', '#2f3447', '#FFF', 'A'),
-        "role": "1,2,3"
+        email: '@email',
+        phone: /^1[3-9][0-9]{9}$/,
+        status: 1, //1-正常；0-停用
+        avatar: Random.image('50x50', '#2f3447', '#FFF', 'A'),
+        role: "1,2,3",
+        dept: { // 所属部门
+            id: '002',
+            name: '行政部',
+        }
     }
 }
 
