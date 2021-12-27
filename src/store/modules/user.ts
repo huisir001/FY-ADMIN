@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-11-22 14:16:59
+ * @LastEditTime: 2021-12-27 15:47:50
  */
 import { STORAGE_OPTIONS } from '@/settings'
 import { ActionContext } from 'vuex'
@@ -159,14 +159,6 @@ export const user = {
                         router.addRoute(Route)
                     }
                 }
-
-                // 添加404页面
-                router.addRoute({
-                    path: '/:catchAll(.*)',
-                    name: '404',
-                    meta: { title: "404", visible: false, private: false },
-                    component: () => import('@/views/404/index.vue')
-                })
 
                 // 更新列表
                 commit('setStates', { menuTree: menuTreeList })

@@ -2,7 +2,7 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2021-12-14 15:34:16
+ * @LastEditTime: 2021-12-27 15:47:33
  */
 /**
  * 用户state接口
@@ -58,7 +58,7 @@ export const sys = {
          */
         addHistoryRoute(state: IObj, route: any) {
             if (!state.historyRoutes.find((item: any) => item.name === route.name)
-                && route.path.split('/').length > 2 && route.name !== '404') {
+                && route.path.split('/').length > 2 && route.name && route.meta.title !== '404') {
                 const { name, path, meta } = route
                 state.historyRoutes.push({ name, path, meta })
             }

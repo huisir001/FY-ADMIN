@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-11-22 11:38:08
+ * @LastEditTime: 2021-12-27 15:42:23
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -56,9 +56,11 @@ const routes: RouteRecordRaw[] = [
     meta: { title: "登录", visible: false, private: false }
   },
   // 由于动态路由的缘故，这里添加假路由，解决动态路由会报警告的问题
+  // 同时添加404页面
   {
     path: '/:pathMatch(.*)',
-    component: { template: '' },
+    meta: { title: "404", visible: false, private: false },
+    component: () => import('@/views/404/index.vue')
   }
 ]
 
