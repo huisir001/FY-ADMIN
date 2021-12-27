@@ -2,7 +2,7 @@
  * @Description: 系統配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-21 09:57:09
- * @LastEditTime: 2021-12-27 11:13:16
+ * @LastEditTime: 2021-12-27 11:39:47
  */
 import Req from "../utils/Request"
 const Prefix = '/api/sys'
@@ -16,3 +16,15 @@ export const getAllRole: IPromiseFunc = () => Req.get(`${Prefix}/getAllRole`)
 // 用戶列表
 export const getUsersByPage: IPromiseFunc = (params: IGetUsersParams) =>
     Req.get(`${Prefix}/getUsersByPage`, { params })
+// 保存账号(新增、编辑)
+export const saveUserInfo = (userInfo: IUserInfo) => Req.post(`${Prefix}/saveUserInfo`, userInfo)
+// 保存菜单(新增、编辑)
+export const saveMenu = (menuInfo: IMenu) => Req.post(`${Prefix}/saveMenu`, menuInfo)
+// 保存角色(新增、编辑)
+// export const saveRole =  (roleInfo: IUserInfo) => Req.post(`${Prefix}/saveRole`, roleInfo)
+// 删除账号(删除单个、多个)
+export const delUsers = (id: string) => Req.post(`${Prefix}/delUsers`, { id })
+// 删除菜单
+export const delMenu = (id: string) => Req.post(`${Prefix}/delMenu`, { id })
+// 删除角色
+export const delRole = (id: string) => Req.post(`${Prefix}/delRole`, { id })

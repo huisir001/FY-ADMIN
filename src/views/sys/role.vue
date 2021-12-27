@@ -2,7 +2,7 @@
  * @Description: 角色管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-24 17:10:17
+ * @LastEditTime: 2021-12-27 11:36:11
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -49,7 +49,7 @@ export default defineComponent({
         // loading
         const loading = ref(false)
 
-        // 请求部門列表
+        // 请求角色列表
         const getRoleList = (function getRole() {
             loading.value = true
             getAllRole().then((res) => {
