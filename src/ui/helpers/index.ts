@@ -2,8 +2,21 @@
  * @Description: UI组件依赖工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-17 11:03:27
- * @LastEditTime: 2021-12-24 17:04:53
+ * @LastEditTime: 2021-12-27 10:48:53
  */
+
+/**
+ * 防抖
+ */
+export const debounce = (callback: () => void, delay: number) => {
+    let timeout: any
+    return (...args: []) => {
+        clearTimeout(timeout)	//所有频繁的操作都会被清空，只有最后一次的不会清空
+        timeout = setTimeout(() => {
+            callback.apply(this, args)
+        }, delay)
+    }
+}
 
 /**
  * 前端关键字模糊搜索

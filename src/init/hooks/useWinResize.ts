@@ -2,11 +2,11 @@
  * @Description: 浏览器缩放处理，用于layout
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 17:00:21
- * @LastEditTime: 2021-11-03 11:46:37
+ * @LastEditTime: 2021-12-27 10:49:28
  */
 
-import { debounce } from "@/utils/common"
-import { useStore } from "@/store"
+import { debounce } from '@/ui/helpers'
+import { useStore } from '@/store'
 
 /**
  * 浏览器缩放事件,防抖
