@@ -2,7 +2,7 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-12-27 11:40:13
+ * @LastEditTime: 2021-12-27 13:54:39
  */
 import user from './user'
 
@@ -305,12 +305,16 @@ const saveUserInfo = { msg: '保存成功' }
 const saveMenu = saveUserInfo
 // 保存角色(新增、编辑)
 const saveRole = saveUserInfo
+// 保存部门(新增、编辑)
+const saveDept = saveUserInfo
 // 删除账号(删除单个、多个)
 const delUsers = { msg: '删除成功' }
 // 删除菜单
 const delMenu = delUsers
 // 删除角色
 const delRole = delUsers
+// 删除部门
+const delDept = delUsers
 
 const Sys: IObj = {
     getAllMenus,
@@ -320,9 +324,11 @@ const Sys: IObj = {
     saveUserInfo,
     saveMenu,
     saveRole,
+    saveDept,
     delUsers,
     delMenu,
-    delRole
+    delRole,
+    delDept
 }
 
 export default Sys

@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-24 17:09:50
+ * @LastEditTime: 2021-12-27 14:14:50
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -38,8 +38,9 @@ import { defineComponent, Ref, ref } from 'vue'
 import { pidList2SelectOptions, rawList2Tree } from '@/utils/common'
 import { fuzzySearch } from '@/ui/helpers'
 import { TOptionOfTools } from '@/ui/fy/types'
-import { getAllDept } from '@/api/sys'
+import { getAllDept, delDept } from '@/api/sys'
 import useDeptOptions from './hooks/useDeptOptions'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
     name: 'Dept',
@@ -51,7 +52,7 @@ export default defineComponent({
         // 编辑弹窗标题
         const editDialogTitle = ref('编辑部门')
         // 当前编辑数据
-        const currEditData:Ref<IObj> = ref({})
+        const currEditData: Ref<IObj> = ref({})
         // 表格树形數據
         const tableData: Ref<any> = ref([])
         // 父级部门选择
@@ -82,14 +83,14 @@ export default defineComponent({
             if (btn === 'refresh') {
                 getDeptList()
             }
-            if(btn==='add'){
+            if (btn === 'add') {
                 currEditData.value = {}
                 showEditDialog.value = true
             }
         }
 
         // 行按钮
-        const handleTodo = (btn: string, index: number, row: IObj) => {
+        const handleTodo = async (btn: string, index: number, row: IObj) => {
             switch (btn) {
                 // 编辑按钮
                 case 'edit':
@@ -99,25 +100,24 @@ export default defineComponent({
                 // 新增按钮
                 case 'add':
                     currEditData.value = {
-                        parentId:row.id
+                        parentId: row.id,
                     }
                     showEditDialog.value = true
                     break
                 // 删除按钮
                 case 'del':
-                    console.log('删除：', row)
+                    const { ok, msg } = await delDept(row.id)
+                    if (ok) {
+                        ElMessage.success(msg)
+                        getDeptList()
+                    }
                     break
             }
         }
 
-        const editParentProps = {
-            checkStrictly: true,
-            value: 'id',
-            label: 'name',
-        }
-
+        // 編輯确认
         const bindEditSubmit = (val: any) => {
-            console.log(val)
+            console.log(val, 31213)
         }
 
         return {
@@ -134,9 +134,8 @@ export default defineComponent({
             showEditDialog,
             currEditData,
             editOptions,
-            editParentProps,
             bindEditSubmit,
-            closed
+            closed,
         }
     },
 })

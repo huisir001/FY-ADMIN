@@ -2,11 +2,11 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-24 17:10:03
+ * @LastEditTime: 2021-12-27 14:39:17
 -->
 <template>
-    <fy-table :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)" row-key="id"
-        :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
+    <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)"
+        row-key="id" :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
         <template #title="scope">
             <span>{{scope.row.title}}</span>
             <div class="sort-btn">
@@ -37,7 +37,7 @@
     <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
         :options="editOptions" top="13%" @submit="bindEditSubmit">
         <template #icon="editParams">
-            <fy-icon-select v-model="editParams.val.icon"/>
+            <fy-icon-select v-model="editParams.val.icon" />
         </template>
         <template #type="editParams">
             <el-select v-model="editParams.val.type" @change="menuTypeChange">
@@ -48,8 +48,7 @@
             </el-select>
         </template>
         <template #viewPath="editParams">
-            <el-select v-model="editParams.val.viewPath"
-                placeholder="选择路由所指向的文件路径">
+            <el-select v-model="editParams.val.viewPath" placeholder="选择路由所指向的文件路径">
                 <el-option v-for="path in viewPaths" :key="path" :label="path" :value="path" />
             </el-select>
         </template>
@@ -58,11 +57,12 @@
  
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue'
-import { getAllMenus } from '@/api/sys'
+import { getAllMenus, saveMenu, delMenu } from '@/api/sys'
 import { rawList2Tree } from '@/utils/common'
 import { fuzzySearch } from '@/ui/helpers'
 import { TOptionOfTools } from '@/ui/fy/types'
 import useMenuOptions from './hooks/useMenuOptions'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
     name: 'Menu',
@@ -79,21 +79,32 @@ export default defineComponent({
         const editDialogTitle = ref('编辑菜单')
         // 当前编辑数据
         const currEditData = ref({})
+        // loading
+        const loading = ref(false)
 
         // 请求所有菜单
-        !(async function () {
-            const { ok, data = [] } = await getAllMenus()
-            if (ok) {
-                menuList.value = rawList2Tree(data) //tree
-            }
+        const getMenuList = (function getMenu() {
+            loading.value = true
+            getAllMenus().then((res) => {
+                const { ok, data = [] } = res
+                if (ok) {
+                    menuList.value = rawList2Tree(data) //tree
+                }
+                loading.value = false
+            })
+            return getMenu
         })()
 
         // 表格配置
-        const { tableCols, tableTools, editOptions,MenuType, menuTypeChange } = useMenuOptions()
+        const { tableCols, tableTools, editOptions, MenuType, menuTypeChange } = useMenuOptions()
 
         // 工具栏点击
         const toolsBtnClick = (btn: TOptionOfTools) => {
             console.log(btn)
+            // 刷新、搜索隐藏
+            if (btn === 'refresh') {
+                getMenuList()
+            }
         }
 
         // 位置移动
@@ -102,7 +113,7 @@ export default defineComponent({
         }
 
         // 行按钮
-        const handleTodo = (btn: string, index: number, row: IObj) => {
+        const handleTodo = async (btn: string, index: number, row: IObj) => {
             switch (btn) {
                 // 编辑按钮
                 case 'edit':
@@ -117,17 +128,26 @@ export default defineComponent({
                     break
                 // 删除按钮
                 case 'del':
-                    console.log('删除：', row)
+                    const { ok, msg } = await delMenu(row.id)
+                    if (ok) {
+                        ElMessage.success(msg)
+                        getMenuList()
+                    }
                     break
             }
         }
 
-         // 编辑完成回调
-        const bindEditSubmit = (formData: IObj) => {
-            console.log(formData)
+        // 编辑完成回调
+        const bindEditSubmit = async (formData: IMenu) => {
+            const { ok, msg } = await saveMenu(formData)
+            if (ok) {
+                ElMessage.success(msg)
+                getMenuList()
+            }
         }
 
         return {
+            loading,
             viewPaths,
             menuList,
             fuzzySearch,
@@ -143,7 +163,7 @@ export default defineComponent({
             editOptions,
             MenuType,
             menuTypeChange,
-            bindEditSubmit
+            bindEditSubmit,
         }
     },
 })

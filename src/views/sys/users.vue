@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-27 11:13:33
+ * @LastEditTime: 2021-12-27 14:25:53
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -31,7 +31,8 @@
 import { defineComponent, reactive, ref } from 'vue'
 import { TOptionOfTools } from '@/ui/fy/types'
 import useUsersOptions from './hooks/useUsersOptions'
-import { getUsersByPage } from '@/api/sys'
+import { getUsersByPage, saveUserInfo, delUsers } from '@/api/sys'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
     name: 'Users',
@@ -101,7 +102,7 @@ export default defineComponent({
         }
 
         // 表格工具栏点选
-        const toolsBtnClick = (btn: TOptionOfTools, flag: any) => {
+        const toolsBtnClick = async (btn: TOptionOfTools, flag: any) => {
             // 刷新、搜索隐藏
             if (btn === 'refresh' || (btn === 'search' && !flag)) {
                 handleReset()
@@ -114,7 +115,13 @@ export default defineComponent({
             }
             // 删除选定行
             if (btn === 'delete') {
-                console.log('删除：', flag)
+                const { ok, msg } = await delUsers(
+                    flag.map((item: { id: string }) => item.id).join(',')
+                )
+                if (ok) {
+                    ElMessage.success(msg)
+                    getUserList()
+                }
             }
         }
 
@@ -126,7 +133,7 @@ export default defineComponent({
         const currEditData = ref({})
 
         // 行按钮
-        const handleTodo = (btn: string, index: number, row: IObj) => {
+        const handleTodo = async (btn: string, index: number, row: IObj) => {
             switch (btn) {
                 // 编辑按钮
                 case 'edit':
@@ -139,14 +146,22 @@ export default defineComponent({
                     break
                 // 删除按钮
                 case 'del':
-                    console.log('删除：', row)
+                    const { ok, msg } = await delUsers(row.id)
+                    if (ok) {
+                        ElMessage.success(msg)
+                        getUserList()
+                    }
                     break
             }
         }
 
         // 编辑完成确认
-        const bindEditSubmit = (formData: IObj) => {
-            console.log(formData)
+        const bindEditSubmit = async (formData: IUserInfo) => {
+            const { ok, msg } = await saveUserInfo(formData)
+            if (ok) {
+                ElMessage.success(msg)
+                getUserList()
+            }
         }
 
         return {

@@ -2,7 +2,7 @@
  * @Description: 角色管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-27 11:36:11
+ * @LastEditTime: 2021-12-27 14:41:15
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -28,10 +28,11 @@
  
 <script lang="ts">
 import { defineComponent, ref, Ref } from 'vue'
-import { getAllRole } from '@/api/sys'
+import { getAllRole, delRole } from '@/api/sys'
 import { fuzzySearch } from '@/ui/helpers'
 import useRoleOptions from './hooks/useRoleOptions'
 import { TOptionOfTools } from '@/ui/fy/types'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
     name: 'Role',
@@ -66,7 +67,7 @@ export default defineComponent({
         const { tableCols, tableTools, editOptions } = useRoleOptions()
 
         // 行按钮
-        const handleTodo = (btn: string, index: number, row: IObj) => {
+        const handleTodo = async (btn: string, index: number, row: IObj) => {
             switch (btn) {
                 // 编辑按钮
                 case 'edit':
@@ -76,6 +77,11 @@ export default defineComponent({
                 // 删除按钮
                 case 'del':
                     console.log('删除：', row)
+                    const { ok, msg } = await delRole(row.id)
+                    if (ok) {
+                        ElMessage.success(msg)
+                        getRoleList()
+                    }
                     break
             }
         }
