@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-17 17:03:38
+ * @LastEditTime: 2021-12-27 11:13:33
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -31,7 +31,7 @@
 import { defineComponent, reactive, ref } from 'vue'
 import { TOptionOfTools } from '@/ui/fy/types'
 import useUsersOptions from './hooks/useUsersOptions'
-import { getUsersByPage } from '@/api/user'
+import { getUsersByPage } from '@/api/sys'
 
 export default defineComponent({
     name: 'Users',

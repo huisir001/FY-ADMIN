@@ -2,8 +2,9 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-12-23 14:01:23
+ * @LastEditTime: 2021-12-27 11:11:46
  */
+import user from './user'
 
 // 查询所有菜单，用于菜单管理
 const getAllMenus = {
@@ -282,10 +283,46 @@ const getAllRole = {
     ]
 }
 
+// 查询所有用户列表（用于用户管理）
+const getUsersByPage = {
+    data: {
+        'list|15': [{
+            ...user.getUserInfo.data,
+            username: '@name',
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        }],
+        page: 1,
+        limit: 10,
+        total: 100,
+        pageTotal: 10
+    }
+}
+
+// 保存账号(新增、编辑)
+const saveUserInfo = { msg: '保存成功' }
+// 保存菜单(新增、编辑)
+const saveMenu = { msg: '保存成功' }
+// 保存角色(新增、编辑)
+const saveRole = { msg: '保存成功' }
+// 删除账号(删除单个、多个)
+const delUsers = { msg: '删除成功' }
+// 删除菜单
+const delMenu = { msg: '删除成功' }
+// 删除角色
+const delRole = { msg: '删除成功' }
+
 const Sys: IObj = {
     getAllMenus,
     getAllDept,
-    getAllRole
+    getAllRole,
+    getUsersByPage,
+    saveUserInfo,
+    saveMenu,
+    saveRole,
+    delUsers,
+    delMenu,
+    delRole
 }
 
 export default Sys

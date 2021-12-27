@@ -2,7 +2,7 @@
  * @Description: 系統配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-21 09:57:09
- * @LastEditTime: 2021-12-23 11:10:37
+ * @LastEditTime: 2021-12-27 11:13:16
  */
 import Req from "../utils/Request"
 const Prefix = '/api/sys'
@@ -13,3 +13,6 @@ export const getAllMenus: IPromiseFunc = () => Req.get(`${Prefix}/getAllMenus`)
 export const getAllDept: IPromiseFunc = () => Req.get(`${Prefix}/getAllDept`)
 // 所有角色
 export const getAllRole: IPromiseFunc = () => Req.get(`${Prefix}/getAllRole`)
+// 用戶列表
+export const getUsersByPage: IPromiseFunc = (params: IGetUsersParams) =>
+    Req.get(`${Prefix}/getUsersByPage`, { params })
