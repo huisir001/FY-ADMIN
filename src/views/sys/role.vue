@@ -76,7 +76,6 @@ export default defineComponent({
                     break
                 // 删除按钮
                 case 'del':
-                    console.log('删除：', row)
                     const { ok, msg } = await delRole(row.id)
                     if (ok) {
                         ElMessage.success(msg)
