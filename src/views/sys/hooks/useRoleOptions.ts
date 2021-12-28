@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-23 11:22:29
- * @LastEditTime: 2021-12-23 13:44:55
+ * @LastEditTime: 2021-12-28 10:41:36
  */
 import { ICols, IFormOption, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -86,7 +86,7 @@ export default () => {
                 {
                     pattern: /^[a-zA-z_-]+$/,
                     trigger: 'blur',
-                    message: '标识须为英文、“_”或“-”组成',
+                    message: '标识须为英文及“_”或“-”组成',
                 },
             ],
         },

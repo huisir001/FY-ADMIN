@@ -2,7 +2,7 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-12-27 13:54:39
+ * @LastEditTime: 2021-12-28 10:51:48
  */
 import user from './user'
 
@@ -126,7 +126,7 @@ const getAllDept = {
             status: '@integer(0, 1)',
             leader: '@cname',
             email: '@email',
-            phone: /^1[3-9][0-9]{9}$/,
+            phone: /^(13[0-9]|14[57]|15[0-9]|18[0-35-9])\d{8}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
             parentId: null,
@@ -139,7 +139,7 @@ const getAllDept = {
             status: '@integer(0, 1)',
             leader: '@cname',
             email: '@email',
-            phone: /^1[3-9][0-9]{9}$/,
+            phone: /^(13[0-9]|14[57]|15[0-9]|18[0-35-9])\d{8}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
             parentId: null,
@@ -152,7 +152,7 @@ const getAllDept = {
             status: '@integer(0, 1)',
             leader: '@cname',
             email: '@email',
-            phone: /^1[3-9][0-9]{9}$/,
+            phone: /^(13[0-9]|14[57]|15[0-9]|18[0-35-9])\d{8}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
             parentId: null,
@@ -165,7 +165,7 @@ const getAllDept = {
             status: '@integer(0, 1)',
             leader: '@cname',
             email: '@email',
-            phone: /^1[3-9][0-9]{9}$/,
+            phone: /^(13[0-9]|14[57]|15[0-9]|18[0-35-9])\d{8}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
             parentId: null,
@@ -178,7 +178,7 @@ const getAllDept = {
             status: '@integer(0, 1)',
             leader: '@cname',
             email: '@email',
-            phone: /^1[3-9][0-9]{9}$/,
+            phone: /^(13[0-9]|14[57]|15[0-9]|18[0-35-9])\d{8}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
             parentId: null,
@@ -191,7 +191,7 @@ const getAllDept = {
             status: '@integer(0, 1)',
             leader: '@cname',
             email: '@email',
-            phone: /^1[3-9][0-9]{9}$/,
+            phone: /^(13[0-9]|14[57]|15[0-9]|18[0-35-9])\d{8}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
             parentId: '005',
@@ -204,7 +204,7 @@ const getAllDept = {
             status: '@integer(0, 1)',
             leader: '@cname',
             email: '@email',
-            phone: /^1[3-9][0-9]{9}$/,
+            phone: /^(13[0-9]|14[57]|15[0-9]|18[0-35-9])\d{8}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
             parentId: '005',
@@ -217,7 +217,7 @@ const getAllDept = {
             status: '@integer(0, 1)',
             leader: '@cname',
             email: '@email',
-            phone: /^1[3-9][0-9]{9}$/,
+            phone: /^(13[0-9]|14[57]|15[0-9]|18[0-35-9])\d{8}$/,
             delFlag: '@integer(0, 1)',
             remark: '',
             parentId: '005',

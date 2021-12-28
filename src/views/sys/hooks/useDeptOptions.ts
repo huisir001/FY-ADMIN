@@ -2,7 +2,7 @@
  * @Description: 部门管理配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-21 10:44:51
- * @LastEditTime: 2021-12-23 10:24:23
+ * @LastEditTime: 2021-12-28 10:52:17
  */
 import { ICols, IFormOption, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -102,6 +102,7 @@ export default () => {
             },
             rules: {
                 trigger: 'blur',
+                pattern: /^(13[0-9]|14[57]|15[0-9]|18[0-35-9])\d{8}$/,
                 message: '手机号填写错误',
             },
         },
@@ -114,6 +115,7 @@ export default () => {
             },
             rules: {
                 trigger: 'blur',
+                pattern: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
                 message: '邮箱填写错误',
             },
         },

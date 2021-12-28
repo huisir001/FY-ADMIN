@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2021-12-24 10:18:45
+ * @LastEditTime: 2021-12-28 11:00:55
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { ref } from "vue";
@@ -184,11 +184,21 @@ export default () => {
             props: {
                 placeholder: "请输入路径",
             },
+            rules: {
+                required: true,
+                trigger: "blur",
+                message: "路径不能为空",
+            },
         },
         {
             label: "路由文件",
             key: "viewPath",
             slot: "viewPath",
+            rules: {
+                required: true,
+                trigger: "blur",
+                message: "文件不能为空",
+            },
         },
         {
             label: "需要登录",
@@ -240,6 +250,11 @@ export default () => {
                     value: "dispatch",
                 },
             ],
+            rules: {
+                required: true,
+                trigger: "blur",
+                message: "触发方式不能为空",
+            },
         },
         {
             label: "事件名",
@@ -247,6 +262,11 @@ export default () => {
             key: "triggerMethod",
             props: {
                 placeholder: "输入按钮要触发的事件名",
+            },
+            rules: {
+                required: true,
+                trigger: "blur",
+                message: "事件名不能为空",
             },
         },
     ] as IFormOption[]);
