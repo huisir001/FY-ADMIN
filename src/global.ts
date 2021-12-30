@@ -2,7 +2,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-12-14 15:11:38
+ * @LastEditTime: 2021-12-30 10:23:26
  */
 
 /**
@@ -164,4 +164,34 @@ interface IRouteMeta {
   private?: boolean
 }
 
+/**
+ * 部門數據
+ */
+interface IDept {
+  id?: string
+  name?: string
+  status?: 1 | 0 //1-正常；0-停用
+  leader?: string
+  email?: string
+  phone?: string
+  delFlag?: 1 | 0 //1-已刪除；0-正常
+  remark?: string
+  parentId?: string | null
+  createTime?: string
+  updateTime?: string
+}
+
+/**
+ * 角色數據
+ */
+interface IRole {
+  id?: string
+  name?: string
+  key?: string
+  status?: 1 | 0 //1-正常；0-停用
+  delFlag?: 1 | 0 //1-已刪除；0-正常
+  remark?: string
+  createTime?: string
+  updateTime?: string
+}
 

@@ -2,7 +2,7 @@
  * @Description: 角色管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-27 14:41:15
+ * @LastEditTime: 2021-12-30 10:33:18
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -28,7 +28,7 @@
  
 <script lang="ts">
 import { defineComponent, ref, Ref } from 'vue'
-import { getAllRole, delRole } from '@/api/sys'
+import { getAllRole, saveRole, delRole } from '@/api/sys'
 import { fuzzySearch } from '@/ui/helpers'
 import useRoleOptions from './hooks/useRoleOptions'
 import { TOptionOfTools } from '@/ui/fy/types'
@@ -98,8 +98,12 @@ export default defineComponent({
         }
 
         // 编辑确认
-        const bindEditSubmit = (val: any) => {
-            console.log(val)
+        const bindEditSubmit = async (val: any) => {
+            const { ok, msg } = await saveRole(val)
+            if (ok) {
+                ElMessage.success(msg)
+                getRoleList()
+            }
         }
 
         return {

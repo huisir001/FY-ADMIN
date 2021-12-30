@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-27 14:14:50
+ * @LastEditTime: 2021-12-30 10:31:53
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -38,7 +38,7 @@ import { defineComponent, Ref, ref } from 'vue'
 import { pidList2SelectOptions, rawList2Tree } from '@/utils/common'
 import { fuzzySearch } from '@/ui/helpers'
 import { TOptionOfTools } from '@/ui/fy/types'
-import { getAllDept, delDept } from '@/api/sys'
+import { getAllDept, saveDept, delDept } from '@/api/sys'
 import useDeptOptions from './hooks/useDeptOptions'
 import { ElMessage } from 'element-plus'
 
@@ -116,8 +116,12 @@ export default defineComponent({
         }
 
         // 編輯确认
-        const bindEditSubmit = (val: any) => {
-            console.log(val, 31213)
+        const bindEditSubmit = async (val: any) => {
+            const { ok, msg } = await saveDept(val)
+            if (ok) {
+                ElMessage.success(msg)
+                getDeptList()
+            }
         }
 
         return {
