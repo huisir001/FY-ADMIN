@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-27 14:39:17
+ * @LastEditTime: 2021-12-30 17:38:44
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)"
@@ -36,6 +36,11 @@
     <!-- 编辑弹窗 -->
     <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
         :options="editOptions" top="13%" @submit="bindEditSubmit">
+        <template #parent="editParams">
+            <fy-tree-select v-model="editParams.val.parentId"
+                :label="treeSelectLabel(editParams.val.parentId)" :data="treeSlectData"
+                :option="{children:'children',label:'title'}" />
+        </template>
         <template #icon="editParams">
             <fy-icon-select v-model="editParams.val.icon" />
         </template>
@@ -56,7 +61,7 @@
 </template>
  
 <script lang="ts">
-import { defineComponent, Ref, ref } from 'vue'
+import { computed, defineComponent, Ref, ref } from 'vue'
 import { getAllMenus, saveMenu, delMenu } from '@/api/sys'
 import { rawList2Tree } from '@/utils/common'
 import { fuzzySearch } from '@/ui/helpers'
@@ -69,6 +74,8 @@ export default defineComponent({
     setup() {
         // 文件路径
         const viewPaths = $GLOBAL.VIEW_PATHS
+        // 表格原始数据
+        const tableRawData = ref([])
         // 菜单列表tree
         const menuList: Ref<any> = ref([])
         // 模糊搜索
@@ -88,6 +95,7 @@ export default defineComponent({
             getAllMenus().then((res) => {
                 const { ok, data = [] } = res
                 if (ok) {
+                    tableRawData.value = data
                     menuList.value = rawList2Tree(data) //tree
                 }
                 loading.value = false
@@ -146,6 +154,23 @@ export default defineComponent({
             }
         }
 
+        // 树结构选中项名称
+        const treeSelectLabel = (id: any) => {
+            const selectData: any = tableRawData.value.find((item: any) => item.id === id)
+            return selectData ? selectData.title : '主类目'
+        }
+
+        // 上级菜单树结构选择数据
+        const treeSlectData = computed(() => {
+            return [
+                {
+                    id: null,
+                    title: '主类目',
+                    children: menuList.value,
+                },
+            ]
+        })
+
         return {
             loading,
             viewPaths,
@@ -164,6 +189,8 @@ export default defineComponent({
             MenuType,
             menuTypeChange,
             bindEditSubmit,
+            treeSelectLabel,
+            treeSlectData,
         }
     },
 })

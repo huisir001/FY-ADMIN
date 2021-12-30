@@ -2,7 +2,7 @@
  * @Description: 部门管理配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-21 10:44:51
- * @LastEditTime: 2021-12-28 10:52:17
+ * @LastEditTime: 2021-12-30 17:30:05
  */
 import { ICols, IFormOption, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -62,7 +62,6 @@ export default () => {
     const editOptions: IFormOption[] = [
         {
             label: '上级部门',
-            component: 'select',
             key: 'parentId',
             slot: 'parent',
             default: null,

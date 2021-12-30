@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2021-12-28 11:00:55
+ * @LastEditTime: 2021-12-30 17:34:29
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { ref } from "vue";
@@ -118,6 +118,12 @@ export default () => {
      * 编辑弹窗配置
      */
     const editOptions = ref([
+        {
+            label: "上级菜单",
+            key: 'parentId',
+            slot: 'parent',
+            default: null,
+        },
         {
             label: "菜单名称",
             component: "input",
@@ -285,47 +291,34 @@ export default () => {
      * 菜单类型切换，显隐表单项
      */
     const menuTypeChange = (type: any) => {
+        const commonOptions = [
+            "parentId",
+            "title",
+            "type",
+            "orderNum",
+            "icon",
+            "status",
+            "visible",
+        ]
         // hide options
         const incOptions: IObj = {
-            [MenuType.cat]: [
-                "title",
-                "type",
-                "orderNum",
-                "icon",
-                "status",
-                "visible",
-            ],
+            [MenuType.cat]: commonOptions,
             [MenuType.route]: [
-                "title",
-                "type",
-                "orderNum",
-                "icon",
+                ...commonOptions,
                 "auth",
-                "status",
-                "visible",
                 "path",
                 "viewPath",
                 "private",
                 "keepAlive",
             ],
             [MenuType.link]: [
-                "title",
-                "type",
-                "orderNum",
-                "icon",
-                "status",
-                "visible",
+                ...commonOptions,
                 "path",
                 "blank",
             ],
             [MenuType.button]: [
-                "title",
-                "type",
-                "orderNum",
-                "icon",
+                ...commonOptions,
                 "auth",
-                "status",
-                "visible",
                 "triggerMode",
                 "triggerMethod",
             ],

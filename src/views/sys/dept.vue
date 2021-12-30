@@ -2,7 +2,7 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-30 10:31:53
+ * @LastEditTime: 2021-12-30 17:38:32
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -23,19 +23,16 @@
     <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
         :options="editOptions" top="15%" @submit="bindEditSubmit">
         <template #parent="editParams">
-            <el-select v-model="editParams.val.parentId" filterable>
-                <el-option label="无" :value="null" />
-                <el-option v-for="item in tableParentOptions" :key="item.value" :label="item.label"
-                    :value="item.value">
-                </el-option>
-            </el-select>
+            <fy-tree-select v-model="editParams.val.parentId"
+                :label="treeSelectLabel(editParams.val.parentId)" :data="treeSlectData"
+                :option="{children:'children',label:'name'}" />
         </template>
     </fy-edit-dialog>
 </template>
  
 <script lang="ts">
-import { defineComponent, Ref, ref } from 'vue'
-import { pidList2SelectOptions, rawList2Tree } from '@/utils/common'
+import { computed, defineComponent, Ref, ref } from 'vue'
+import { rawList2Tree } from '@/utils/common'
 import { fuzzySearch } from '@/ui/helpers'
 import { TOptionOfTools } from '@/ui/fy/types'
 import { getAllDept, saveDept, delDept } from '@/api/sys'
@@ -53,10 +50,10 @@ export default defineComponent({
         const editDialogTitle = ref('编辑部门')
         // 当前编辑数据
         const currEditData: Ref<IObj> = ref({})
+        // 表格原始数据
+        const tableRawData: Ref<any> = ref([])
         // 表格树形數據
         const tableData: Ref<any> = ref([])
-        // 父级部门选择
-        const tableParentOptions: Ref<any> = ref([])
         // loading
         const loading = ref(false)
 
@@ -66,7 +63,7 @@ export default defineComponent({
             getAllDept().then((res) => {
                 const { ok, data } = res
                 if (ok) {
-                    tableParentOptions.value = pidList2SelectOptions(data, 'name', 'id')
+                    tableRawData.value = data
                     tableData.value = rawList2Tree(data) //2tree
                 }
                 loading.value = false
@@ -115,6 +112,23 @@ export default defineComponent({
             }
         }
 
+        // 上级部门树结构选择数据
+        const treeSlectData = computed(() => {
+            return [
+                {
+                    id: null,
+                    name: '主类目',
+                    children: tableData.value,
+                },
+            ]
+        })
+
+        // 树结构选中项名称
+        const treeSelectLabel = (id: any) => {
+            const selectData = tableRawData.value.find((item: any) => item.id === id)
+            return selectData ? selectData.name : '主类目'
+        }
+
         // 編輯确认
         const bindEditSubmit = async (val: any) => {
             const { ok, msg } = await saveDept(val)
@@ -127,7 +141,8 @@ export default defineComponent({
         return {
             loading,
             tableData,
-            tableParentOptions,
+            treeSlectData,
+            treeSelectLabel,
             tableCols,
             tableTools,
             toolsBtnClick,

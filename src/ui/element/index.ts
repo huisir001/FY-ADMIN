@@ -2,7 +2,7 @@
  * @Description:ElementUI按需引入
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2021-12-21 14:40:05
+ * @LastEditTime: 2021-12-30 14:16:30
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -39,6 +39,7 @@ import {
     ElTooltip,
     ElLoading,
     ElCascader,
+    ElTree
 } from 'element-plus'
 
 const components = [
@@ -70,7 +71,8 @@ const components = [
     ElPopconfirm,
     ElTooltip,
     ElLoading,
-    ElCascader
+    ElCascader,
+    ElTree
 ]
 
 interface IElementUIOption {

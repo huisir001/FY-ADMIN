@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-12-27 10:49:51
+ * @LastEditTime: 2021-12-30 17:11:13
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -54,31 +54,4 @@ export const menu2Route = (menu: IMenu, menuList: IMenu[], Layout: any): RouteRe
         } : {}),
         meta: { title, icon, keepAlive, private: prvt }
     }
-}
-
-/**
- * 下拉选父节点列表
- * parentId list -> select option data
- */
-export const pidList2SelectOptions = (list: any[], labelKey: string = 'label', valKey: string = 'value') => {
-    // 递归找父级label
-    // 这里默认父级Id字段名为parentId
-    let labels: any[] = []
-    const getParentLabel = (currData: IObj, flag?: boolean) => {
-        if (!flag) {
-            labels = []
-        }
-        labels.unshift(currData[labelKey])
-        if (currData.parentId) {
-            getParentLabel(list.find(item => item.id === currData.parentId), true)
-        }
-    }
-
-    return list.map((item, index) => {
-        getParentLabel(item)
-        return {
-            label: labels.join(' > '),
-            value: item[valKey]
-        }
-    })
 }
