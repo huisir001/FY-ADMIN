@@ -2,7 +2,7 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2021-12-28 10:56:38
+ * @LastEditTime: 2021-12-31 11:03:55
  */
 import { IFormOption, ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -153,8 +153,8 @@ export default () => {
         },
         {
             label: '角色',
-            minWidth: 80,
-            prop: 'role',
+            minWidth: '200',
+            slot: 'role',
         },
         {
             label: '状态',
@@ -203,27 +203,8 @@ export default () => {
         },
         {
             label: '角色',
-            component: 'select',
             key: 'role',
-            props: {
-                placeholder: '选择用户角色',
-                multiple: true,
-                collapseTags: true
-            },
-            options: [
-                {
-                    label: '角色1',
-                    value: '1',
-                },
-                {
-                    label: '角色2',
-                    value: '2',
-                },
-                {
-                    label: '角色3',
-                    value: '3',
-                },
-            ],
+            slot: 'role',
             rules: {
                 required: true,
                 trigger: 'blur',

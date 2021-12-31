@@ -2,7 +2,7 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-12-28 10:51:48
+ * @LastEditTime: 2021-12-31 10:47:07
  */
 import user from './user'
 
@@ -231,7 +231,7 @@ const getAllDept = {
 const getAllRole = {
     data: [
         {
-            id: '@id',
+            id: '001',
             name: '超级管理员',
             key: "admin",
             status: '@integer(0, 1)',
@@ -241,7 +241,7 @@ const getAllRole = {
             updateTime: '@datetime',
         },
         {
-            id: '@id',
+            id: '002',
             name: '游客',
             key: "visitor",
             status: '@integer(0, 1)',
@@ -251,7 +251,7 @@ const getAllRole = {
             updateTime: '@datetime',
         },
         {
-            id: '@id',
+            id: '003',
             name: '测试',
             key: "test",
             status: '@integer(0, 1)',
@@ -261,7 +261,7 @@ const getAllRole = {
             updateTime: '@datetime',
         },
         {
-            id: '@id',
+            id: '004',
             name: '运营',
             key: "op",
             status: '@integer(0, 1)',
@@ -271,7 +271,7 @@ const getAllRole = {
             updateTime: '@datetime',
         },
         {
-            id: '@id',
+            id: '005',
             name: '开发',
             key: "dev",
             status: '@integer(0, 1)',
