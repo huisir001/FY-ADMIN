@@ -2,7 +2,7 @@
  * @Description: 树结构选择
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-24 10:51:13
- * @LastEditTime: 2021-12-30 17:42:18
+ * @LastEditTime: 2021-12-31 09:51:15
 -->
 <template>
     <el-popover :visible="visible" popper-class="tree-select" placement="bottom-start" :width="220"
@@ -11,8 +11,9 @@
             <el-input class="tree-select-input" v-model="label" readonly placeholder="请选择"
                 @click="visible = !visible">
                 <template #suffix>
-                    <fy-icon name="ArrowUp" color="var(--el-select-input-color)" size="14"
-                        :style="{transition:'transform var(--el-transition-duration)',transform:iconRotate}" />
+                    <fy-icon @click="visible = !visible" name="ArrowUp"
+                        color="var(--el-select-input-color)" size="14"
+                        :style="{transition:'transform var(--el-transition-duration)',transform:iconRotate, cursor: 'pointer'}" />
                 </template>
             </el-input>
         </template>
