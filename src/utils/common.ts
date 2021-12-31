@@ -2,9 +2,8 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-12-30 17:11:13
+ * @LastEditTime: 2021-12-31 10:21:19
  */
-import { RouteRecordRaw } from 'vue-router'
 
 /**
  * 递归转换菜单
@@ -37,21 +36,4 @@ export const rawList2Tree = (arrList: IObj[], parentIdKey: string = 'parentId', 
     }()
 
     return menuTree
-}
-
-/**
- * menuItem => routeItem
- */
-export const menu2Route = (menu: IMenu, menuList: IMenu[], Layout: any): RouteRecordRaw => {
-    const { id, path, title, icon, redirectId, parentId, keepAlive, private: prvt, viewPath } = menu
-    // 路由的name直接使用id，避免冲突
-    return {
-        path,
-        name: id,
-        component: parentId ? () => import(`@/${viewPath}`) : Layout,
-        ...(redirectId ? {
-            redirect: { name: menuList.find((item: IMenu) => item.id === redirectId)!.id }
-        } : {}),
-        meta: { title, icon, keepAlive, private: prvt }
-    }
 }

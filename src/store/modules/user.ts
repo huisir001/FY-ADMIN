@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-12-27 15:47:50
+ * @LastEditTime: 2021-12-31 10:21:13
  */
 import { STORAGE_OPTIONS } from '@/settings'
 import { ActionContext } from 'vuex'
@@ -11,7 +11,8 @@ import LocalCache from '@/utils/LocalCache'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 import Layout from '@/layout/index.vue'
-import { rawList2Tree, menu2Route } from '@/utils/common'
+import { rawList2Tree } from '@/utils/common'
+import { menu2Route } from '../helpers'
 import { getUserMenus } from '@/api/user'
 
 /**
@@ -133,8 +134,8 @@ export const user = {
         /**
          * 查询菜单列表
          * 后端通过登录用户查询所属的菜单
-         * 此处查出的并非所有菜单，而是用户有权限的菜单列表
-         * 菜单管理功能页只有总管理员有权限
+         * 此处查出的并非所有菜单，而是当前用户的菜单列表
+         * 菜单管理功能页只有admin有权限
          */
         async getMenus({ commit }: ActionContext<{}, {}>) {
             const { ok, data = [] } = await getUserMenus()
