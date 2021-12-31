@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-31 11:07:03
+ * @LastEditTime: 2021-12-31 11:12:38
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -14,7 +14,8 @@
         </template>
         <template #role="scope">
             <el-tag v-for="role in roles.filter(item=>scope.row.role.split(',').includes(item.id))"
-                :key="role.id" size="small" type="warning" style="margin-right:5px;">{{role.key}}
+                :key="role.id" size="small" type="warning" effect="plain" style="margin-right:5px;">
+                {{role.key}}
             </el-tag>
         </template>
         <template #status="scope">
