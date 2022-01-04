@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2021-12-14 16:26:00
+ * @LastEditTime: 2022-01-04 18:20:30
 -->
 <template>
     <div class="content">
@@ -28,14 +28,22 @@ export default defineComponent({
         const Store = useStore()
 
         // 历史路由name
-        const historyRoutesName = computed(()=> Store.state.sys.historyRoutes.map((item) => item.name))
+        const historyRoutesName = computed(() =>
+            Store.state.sys.historyRoutes.map((item) => item.name)
+        )
 
         // 这里的include中的name注意是组件的name,而不是路由的name
-        const cacheRouterNames = computed(() => 
-            Router.getRoutes().filter((item) => item.meta.keepAlive
-                && historyRoutesName.value.includes(item.name as string)
-                && item.components.default.name
-            ).map((item) => item.components.default.name)
+        // 这里特别注意：匿名组件不能被匹配，所以需要缓存的组件必须有name属性
+        // 若使用<script setup>单文件组件，则需要另外的<script>中导出组件name，否则无法被缓存
+        const cacheRouterNames = computed(() =>
+            Router.getRoutes()
+                .filter(
+                    (item) =>
+                        item.meta.keepAlive &&
+                        historyRoutesName.value.includes(item.name as string) &&
+                        item.components.default.name
+                )
+                .map((item) => item.components.default.name)
         )
 
         return {
