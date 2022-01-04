@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2022-01-04 10:36:11
+ * @LastEditTime: 2022-01-04 14:26:39
 -->
 <template>
     <!-- 工具栏 -->
@@ -18,7 +18,7 @@
         <el-table ref="elTable" v-bind="$attrs" v-loading="loading" size="small" border
             :max-height="tableCalcHeight" @selection-change="handleSelectionChange">
             <el-table-column v-for="(col,index) in cols.filter((col) => !col.hide)" :key="index"
-                v-bind="col">
+                v-bind="col" :column-key="col.prop||col.slot">
                 <!-- 表头插槽 -->
                 <template v-if="col.slotHead" #header>
                     <slot :name="col.slotHead" />
