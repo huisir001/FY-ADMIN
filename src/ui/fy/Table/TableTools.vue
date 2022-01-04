@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2021-12-16 14:34:31
+ * @LastEditTime: 2022-01-04 11:13:13
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -10,7 +10,7 @@
     </div>
     <div class="table-tools">
         <div class="left">
-            <el-button v-for="btn in leftBtns" :key="btn.name" size="mini" :type="btn.type"
+            <el-button v-for="btn in leftBtns" :key="btn.name" :type="btn.type"
                 :disabled="btn.disabled" @click="handleBtnClick(btn)">
                 <fy-icon :name="btn.icon" size="13" color="white" /> {{btn.title}}
             </el-button>
@@ -191,6 +191,9 @@ export default defineComponent({
     overflow-y: auto;
     :deep(.el-checkbox__label) {
         color: unset !important;
+    }
+    :deep(.el-checkbox) {
+        height: 22px;
     }
 }
 </style>

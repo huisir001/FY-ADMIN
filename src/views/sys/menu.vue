@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-30 17:38:44
+ * @LastEditTime: 2022-01-04 11:26:38
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)"
@@ -10,10 +10,10 @@
         <template #title="scope">
             <span>{{scope.row.title}}</span>
             <div class="sort-btn">
-                <el-button size="mini" type="text" @click="handleMoveDowm(scope.$index, scope.row)">
+                <el-button type="text" @click="handleMoveDowm(scope.$index, scope.row)">
                     <fy-icon name="sort-down" size="13" color="var(--el-color-primary)" />
                 </el-button>
-                <el-button size="mini" type="text" @click="handleMoveUp(scope.$index, scope.row)">
+                <el-button type="text" @click="handleMoveUp(scope.$index, scope.row)">
                     <fy-icon name="sort-up" size="13" color="var(--el-color-primary)" />
                 </el-button>
             </div>
@@ -27,7 +27,7 @@
         </template>
         <template #todoHead>
             <!-- 不分页情况下可以使用本地模糊搜索 -->
-            <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="输入名称或路径搜索..." />
+            <el-input v-model="fuzzySearchWord" clearable placeholder="输入关键字搜索..." />
         </template>
         <template #todo="scope">
             <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />

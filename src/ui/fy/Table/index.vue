@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2021-12-24 18:09:40
+ * @LastEditTime: 2022-01-04 10:36:11
 -->
 <template>
     <!-- 工具栏 -->
@@ -14,7 +14,7 @@
     <!-- 使用`v-bind="$attrs"`可继承组件调用是所配置的attr,这里可继承el-table组件所需要的所有属性及事件以及其他未作为props的行内属性 -->
     <!-- 继承的属性配置详见文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-attributes -->
     <!-- 继承的事件文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-events -->
-    <div ref="tableBox" :style="{height:height}">
+    <div ref="tableBox" :style="{height:height,textAlign:'right'}">
         <el-table ref="elTable" v-bind="$attrs" v-loading="loading" size="small" border
             :max-height="tableCalcHeight" @selection-change="handleSelectionChange">
             <el-table-column v-for="(col,index) in cols.filter((col) => !col.hide)" :key="index"
@@ -159,7 +159,6 @@ export default defineComponent({
 <style scoped lang="scss">
 .table-page-nav {
     margin-top: 15px;
-    text-align: right;
 }
 :deep(th.el-table__cell) {
     background: var(--color-table-thead-bg);
@@ -171,7 +170,7 @@ export default defineComponent({
 <style lang="scss">
 .el-table {
     --el-table-current-row-background-color: var(--el-color-primary-light-5);
-    max-height: 100%!important;
+    max-height: 100% !important;
     .cell {
         line-height: 24px;
         & > button {

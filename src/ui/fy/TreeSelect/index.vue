@@ -2,7 +2,7 @@
  * @Description: 树结构选择
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-24 10:51:13
- * @LastEditTime: 2021-12-31 09:51:15
+ * @LastEditTime: 2022-01-04 11:20:47
 -->
 <template>
     <el-popover :visible="visible" popper-class="tree-select" placement="bottom-start" :width="220"
@@ -17,8 +17,8 @@
                 </template>
             </el-input>
         </template>
-        <el-input class="search-input" v-model="filterText" clearable size="mini"
-            placeholder="搜索..." @input="searchInputChange" />
+        <el-input class="search-input" v-model="filterText" clearable placeholder="搜索..."
+            @input="searchInputChange" />
         <div class="tree-box">
             <el-tree ref="tree" class="filter-tree" :data="data" :props="option"
                 :filter-node-method="filterNode" node-key="id" highlight-current

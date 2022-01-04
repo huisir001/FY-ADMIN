@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2021-12-27 10:49:20
+ * @LastEditTime: 2022-01-04 11:24:57
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -13,23 +13,22 @@
         <div class="file-library-dialog-cont">
             <div class="left">
                 <div class="btn-group">
-                    <el-select v-model="fileQueryParams.group" placeholder="选择类目" size="mini"
-                        filterable @change="fileGroupChange">
+                    <el-select v-model="fileQueryParams.group" placeholder="选择类目" filterable
+                        @change="fileGroupChange">
                         <el-option v-for="item in groups" :key="item.id" :label="item.name"
                             :value="item.id">
                         </el-option>
                     </el-select>
-                    <el-input v-model="fileQueryParams.name" placeholder="在当前类目中搜索" size="mini"
-                        clearable>
+                    <el-input v-model="fileQueryParams.name" placeholder="搜索..." clearable>
                         <template #suffix>
                             <fy-icon name="search" size="14"
                                 color="var(--el-text-color-placeholder)" />
                         </template>
                     </el-input>
-                    <el-button size="mini" :loading="leftLoading" @click="getList">刷新</el-button>
+                    <el-button :loading="leftLoading" @click="getList">刷新</el-button>
                     <el-popconfirm title="你确定要删除当前文件吗?" @confirm="deleteFile">
                         <template #reference>
-                            <el-button :disabled="selectedIndex<0" size="mini" type="danger"
+                            <el-button :disabled="selectedIndex<0" type="danger"
                                 :loading="delBtnLoading">
                                 <fy-icon name="delete" size="13" color="white" /> 删除
                             </el-button>
@@ -41,7 +40,7 @@
                     <el-popover v-model:visible="popoverVisible" placement="bottom" :width="170">
                         <p style="text-align: center; margin-bottom: 10px">选择新增文件方式</p>
                         <div>
-                            <el-button size="mini" type="text"
+                            <el-button type="text"
                                 @click="popoverVisible = false;showFileUrlSetBox = true">
                                 URL插入
                             </el-button>
@@ -49,7 +48,7 @@
                                 action="/api/file/upload" accept="image/png, image/jpeg"
                                 :show-file-list="false" :on-success="handlePicSuccess"
                                 :before-upload="beforePicUpload">
-                                <el-button type="primary" size="mini"
+                                <el-button type="primary" size="small"
                                     @click="popoverVisible = false">直接上传
                                 </el-button>
                             </el-upload>
@@ -79,7 +78,7 @@
             <div class="right">
                 <template v-if="selectedIndex>=0">
                     <h5>图片详情</h5>
-                    <el-form label-width="75px" label-position="left" size="mini">
+                    <el-form label-width="75px" label-position="left">
                         <el-form-item label="图片预览">
                             <el-image class="preview-img" :src="currFile.url"
                                 :preview-src-list="[currFile.url]" fit="contain" />
@@ -101,7 +100,7 @@
                             <el-input v-model="currFile.name"></el-input>
                         </el-form-item>
                         <el-form-item label="选择类目">
-                            <el-select v-model="currFile.group" size="mini" filterable allow-create
+                            <el-select v-model="currFile.group" filterable allow-create
                                 default-first-option style="width:100%;">
                                 <el-option v-for="item in groups" :key="item.id" :label="item.name"
                                     :value="item.id">

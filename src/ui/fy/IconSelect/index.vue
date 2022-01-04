@@ -2,7 +2,7 @@
  * @Description: 图标选择
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-24 10:51:13
- * @LastEditTime: 2022-01-04 10:29:13
+ * @LastEditTime: 2022-01-04 11:15:42
 -->
 <template>
     <el-popover :visible="visible" popper-class="icon-select" placement="bottom-start" :width="220"
@@ -16,8 +16,7 @@
                 </template>
             </el-input>
         </template>
-        <el-input class="search-input" v-model="fuzzySearchWord" clearable size="mini"
-            placeholder="搜索..." />
+        <el-input class="search-input" v-model="fuzzySearchWord" clearable placeholder="搜索..." />
         <div class="icon-box">
             <div class="icon-item" v-for="item in fuzzySearch(fyIcons,fuzzySearchWord)" :key="item"
                 :title="item" @click="bindIconCheck(item)">

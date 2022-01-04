@@ -2,7 +2,7 @@
  * @Description: 角色管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-30 10:33:18
+ * @LastEditTime: 2022-01-04 11:27:31
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
@@ -13,7 +13,7 @@
         </template>
         <template #todoHead>
             <!-- 不分页情况下可以使用本地模糊搜索 -->
-            <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="输入关键字搜索..." />
+            <el-input v-model="fuzzySearchWord" clearable placeholder="输入关键字搜索..." />
         </template>
         <template #todo="scope">
             <fy-row-btns :contains="['edit', 'del']"

@@ -13,7 +13,7 @@
         </template>
         <template #todoHead>
             <!-- 不分页情况下可以使用本地模糊搜索 -->
-            <el-input v-model="fuzzySearchWord" size="mini" clearable placeholder="输入关键字搜索..." />
+            <el-input v-model="fuzzySearchWord" clearable placeholder="输入关键字搜索..." />
         </template>
         <template #todo="scope">
             <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
