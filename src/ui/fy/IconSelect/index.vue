@@ -2,7 +2,7 @@
  * @Description: 图标选择
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-24 10:51:13
- * @LastEditTime: 2022-01-04 11:15:42
+ * @LastEditTime: 2022-01-04 16:31:35
 -->
 <template>
     <el-popover :visible="visible" popper-class="icon-select" placement="bottom-start" :width="220"
@@ -25,55 +25,47 @@
         </div>
     </el-popover>
 </template>
- 
-<script lang="ts">
-import { defineComponent, getCurrentInstance, ref } from 'vue'
+
+<script lang="ts" setup>
+import { getCurrentInstance, ref } from 'vue'
 import { fuzzySearch, clickOtherPosToClose } from '@/ui/helpers'
 
-export default defineComponent({
-    name: 'IconSelect',
-    props: {
-        modelValue: {
-            type: String,
-            require: true,
-        },
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-        // 弹窗显隐
-        const visible = ref(false)
-
-        // 获取缓存的图标列表
-        const currInstance: any = getCurrentInstance()
-        const fyIcons = currInstance.proxy.$getIcons()
-
-        // 点选
-        const bindIconCheck = (iconName: string) => {
-            emit('update:modelValue', iconName)
-        }
-
-        // 模糊搜索
-        const fuzzySearchWord = ref('')
-
-        // 显隐事件
-        const show = () => {
-            const inputEl = document.querySelector('.icon-select-input')
-            const popEl = document.querySelector('.el-popover.icon-select')
-            clickOtherPosToClose([inputEl as HTMLElement, popEl as HTMLElement], () => {
-                visible.value = false
-            })
-        }
-
-        return {
-            visible,
-            bindIconCheck,
-            fyIcons,
-            fuzzySearch,
-            fuzzySearchWord,
-            show,
-        }
+// props
+defineProps({
+    modelValue: {
+        type: String,
+        require: true,
     },
 })
+
+// emit
+const emit = defineEmits<{
+    (e: 'update:modelValue', iconName: string): void
+}>()
+
+// 弹窗显隐
+const visible = ref(false)
+
+// 获取缓存的图标列表
+const currInstance: any = getCurrentInstance()
+const fyIcons = currInstance.proxy.$getIcons()
+
+// 点选
+const bindIconCheck = (iconName: string) => {
+    emit('update:modelValue', iconName)
+}
+
+// 模糊搜索
+const fuzzySearchWord = ref('')
+
+// 显隐事件
+const show = () => {
+    const inputEl = document.querySelector('.icon-select-input')
+    const popEl = document.querySelector('.el-popover.icon-select')
+    clickOtherPosToClose([inputEl as HTMLElement, popEl as HTMLElement], () => {
+        visible.value = false
+    })
+}
 </script>
  
 <style scoped lang="scss">
@@ -97,16 +89,14 @@ export default defineComponent({
         }
     }
 }
-</style>
-<style lang="scss">
-.el-popover.icon-select {
+:global(.el-popover.icon-select) {
     padding: 10px 8px 10px 10px;
-    .search-input {
-        width: calc(100% - 2px);
-        margin-bottom: 5px;
-    }
 }
-.icon-select-input .el-input__inner {
+:global(.el-popover.icon-select .search-input) {
+    width: calc(100% - 2px);
+    margin-bottom: 5px;
+}
+.icon-select-input:deep(.el-input__inner) {
     cursor: pointer;
 }
 </style>
