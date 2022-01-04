@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-04 14:04:26
+ * @LastEditTime: 2022-01-04 17:47:21
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)"
@@ -59,9 +59,13 @@
         </template>
     </fy-edit-dialog>
 </template>
- 
+
 <script lang="ts">
-import { computed, defineComponent, Ref, ref } from 'vue'
+export default { name: 'Menu' }
+</script>
+ 
+<script lang="ts" setup>
+import { computed, Ref, ref } from 'vue'
 import { getAllMenus, saveMenu, delMenu } from '@/api/sys'
 import { rawList2Tree } from '@/utils/common'
 import { fuzzySearch } from '@/ui/helpers'
@@ -69,130 +73,103 @@ import { TOptionOfTools } from '@/ui/fy/types'
 import useMenuOptions from './hooks/useMenuOptions'
 import { ElMessage } from 'element-plus'
 
-export default defineComponent({
-    name: 'Menu',
-    setup() {
-        // 文件路径
-        const viewPaths = $GLOBAL.VIEW_PATHS
-        // 表格原始数据
-        const tableRawData = ref([])
-        // 菜单列表tree
-        const menuList: Ref<any> = ref([])
-        // 模糊搜索
-        const fuzzySearchWord: Ref<string> = ref('')
-        // 编辑弹窗显隐
-        const showEditDialog = ref(false)
-        // 编辑弹窗标题
-        const editDialogTitle = ref('编辑菜单')
-        // 当前编辑数据
-        const currEditData = ref({})
-        // loading
-        const loading = ref(false)
+// 文件路径
+const viewPaths = $GLOBAL.VIEW_PATHS
+// 表格原始数据
+const tableRawData = ref([])
+// 菜单列表tree
+const menuList: Ref<any> = ref([])
+// 模糊搜索
+const fuzzySearchWord: Ref<string> = ref('')
+// 编辑弹窗显隐
+const showEditDialog = ref(false)
+// 编辑弹窗标题
+const editDialogTitle = ref('编辑菜单')
+// 当前编辑数据
+const currEditData = ref({})
+// loading
+const loading = ref(false)
 
-        // 请求所有菜单
-        const getMenuList = (function getMenu() {
-            loading.value = true
-            getAllMenus().then((res) => {
-                const { ok, data = [] } = res
-                if (ok) {
-                    tableRawData.value = data
-                    menuList.value = rawList2Tree(data) //tree
-                }
-                loading.value = false
-            })
-            return getMenu
-        })()
-
-        // 表格配置
-        const { tableCols, tableTools, editOptions, MenuType, menuTypeChange } = useMenuOptions()
-
-        // 工具栏点击
-        const toolsBtnClick = (btn: TOptionOfTools) => {
-            console.log(btn)
-            // 刷新、搜索隐藏
-            if (btn === 'refresh') {
-                getMenuList()
-            }
+// 请求所有菜单
+const getMenuList = (function getMenu() {
+    loading.value = true
+    getAllMenus().then((res) => {
+        const { ok, data = [] } = res
+        if (ok) {
+            tableRawData.value = data
+            menuList.value = rawList2Tree(data) //tree
         }
+        loading.value = false
+    })
+    return getMenu
+})()
 
-        // 位置移动
-        const handleMoveDowm = (index: number, row: any) => {
-            console.log(index, row)
-        }
+// 表格配置
+const { tableCols, tableTools, editOptions, MenuType, menuTypeChange } = useMenuOptions()
 
-        // 行按钮
-        const handleTodo = async (btn: string, index: number, row: IObj) => {
-            switch (btn) {
-                // 编辑按钮
-                case 'edit':
-                    console.log('编辑', row)
-                    menuTypeChange(row.type)
-                    currEditData.value = row
-                    showEditDialog.value = true
-                    break
-                // 新增按钮
-                case 'add':
-                    console.log('新增', row)
-                    break
-                // 删除按钮
-                case 'del':
-                    const { ok, msg } = await delMenu(row.id)
-                    if (ok) {
-                        ElMessage.success(msg)
-                        getMenuList()
-                    }
-                    break
-            }
-        }
+// 工具栏点击
+const toolsBtnClick = (btn: TOptionOfTools) => {
+    console.log(btn)
+    // 刷新、搜索隐藏
+    if (btn === 'refresh') {
+        getMenuList()
+    }
+}
 
-        // 编辑完成回调
-        const bindEditSubmit = async (formData: IMenu) => {
-            const { ok, msg } = await saveMenu(formData)
+// 位置移动
+const handleMoveDowm = (index: number, row: any) => {
+    console.log(index, row)
+}
+
+// 行按钮
+const handleTodo = async (btn: string, index: number, row: IObj) => {
+    switch (btn) {
+        // 编辑按钮
+        case 'edit':
+            console.log('编辑', row)
+            menuTypeChange(row.type)
+            currEditData.value = row
+            showEditDialog.value = true
+            break
+        // 新增按钮
+        case 'add':
+            console.log('新增', row)
+            break
+        // 删除按钮
+        case 'del':
+            const { ok, msg } = await delMenu(row.id)
             if (ok) {
                 ElMessage.success(msg)
                 getMenuList()
             }
-        }
+            break
+    }
+}
 
-        // 树结构选中项名称
-        const treeSelectLabel = (id: any) => {
-            const selectData: any = tableRawData.value.find((item: any) => item.id === id)
-            return selectData ? selectData.title : '主类目'
-        }
+// 编辑完成回调
+const bindEditSubmit = async (formData: IMenu) => {
+    const { ok, msg } = await saveMenu(formData)
+    if (ok) {
+        ElMessage.success(msg)
+        getMenuList()
+    }
+}
 
-        // 上级菜单树结构选择数据
-        const treeSlectData = computed(() => {
-            return [
-                {
-                    id: null,
-                    title: '主类目',
-                    children: menuList.value,
-                },
-            ]
-        })
+// 树结构选中项名称
+const treeSelectLabel = (id: any) => {
+    const selectData: any = tableRawData.value.find((item: any) => item.id === id)
+    return selectData ? selectData.title : '主类目'
+}
 
-        return {
-            loading,
-            viewPaths,
-            menuList,
-            fuzzySearch,
-            fuzzySearchWord,
-            tableCols,
-            tableTools,
-            toolsBtnClick,
-            handleMoveDowm,
-            handleTodo,
-            editDialogTitle,
-            showEditDialog,
-            currEditData,
-            editOptions,
-            MenuType,
-            menuTypeChange,
-            bindEditSubmit,
-            treeSelectLabel,
-            treeSlectData,
-        }
-    },
+// 上级菜单树结构选择数据
+const treeSlectData = computed(() => {
+    return [
+        {
+            id: null,
+            title: '主类目',
+            children: menuList.value,
+        },
+    ]
 })
 </script>
  
