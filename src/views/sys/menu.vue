@@ -2,11 +2,11 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-04 11:26:38
+ * @LastEditTime: 2022-01-04 14:04:26
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)"
-        row-key="id" :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
+        row-key="id" :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick">
         <template #title="scope">
             <span>{{scope.row.title}}</span>
             <div class="sort-btn">

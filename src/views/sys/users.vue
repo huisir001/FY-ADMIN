@@ -2,11 +2,11 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-31 11:12:38
+ * @LastEditTime: 2022-01-04 14:04:14
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
-        :total="total" :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick"
+        :total="total" :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick"
         @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
         <template #search>
             <fy-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"

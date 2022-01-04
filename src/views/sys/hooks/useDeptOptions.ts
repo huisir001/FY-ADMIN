@@ -2,7 +2,7 @@
  * @Description: 部门管理配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-21 10:44:51
- * @LastEditTime: 2021-12-30 17:30:05
+ * @LastEditTime: 2022-01-04 14:28:37
  */
 import { ICols, IFormOption, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -21,8 +21,8 @@ export default () => {
             label: '状态',
             minWidth: '80',
             filters: [
-                { text: '111', value: 1 },
-                { text: '222', value: 0 },
+                { text: '正常', value: 1 },
+                { text: '停用', value: 0 },
             ],
             slot: 'status',
         },
@@ -30,9 +30,6 @@ export default () => {
             label: '负责人',
             prop: 'leader',
             minWidth: '100',
-            formatter: (row: IObj, column: IObj, cellValue: any) => {
-                return cellValue + '111'
-            },
         },
         {
             label: '联系方式',

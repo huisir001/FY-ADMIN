@@ -2,11 +2,11 @@
  * @Description: 角色管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-04 11:27:31
+ * @LastEditTime: 2022-01-04 14:04:20
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
-        :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
+        :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick">
         <template #status="scope">
             <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
             <el-tag v-else size="small" type="danger">停用</el-tag>

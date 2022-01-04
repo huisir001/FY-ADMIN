@@ -2,11 +2,12 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2021-12-30 17:38:32
+ * @LastEditTime: 2022-01-04 14:38:22
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
-        row-key="id" :tools="tableTools" height="calc(100% - 45px)" @toolsClick="toolsBtnClick">
+        row-key="id" :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick"
+        @filter-change="filterChange">
         <template #status="scope">
             <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
             <el-tag v-else size="small" type="danger">停用</el-tag>
@@ -86,6 +87,14 @@ export default defineComponent({
             }
         }
 
+        // 表头筛选
+        const filterChange = ({ status }: any) => {
+            const filtersData = tableRawData.value.filter((item: any) =>
+                status.length ? status.includes(item.status) : true
+            )
+            tableData.value = rawList2Tree(filtersData)
+        }
+
         // 行按钮
         const handleTodo = async (btn: string, index: number, row: IObj) => {
             switch (btn) {
@@ -148,6 +157,7 @@ export default defineComponent({
             toolsBtnClick,
             fuzzySearchWord,
             fuzzySearch,
+            filterChange,
             handleTodo,
             editDialogTitle,
             showEditDialog,

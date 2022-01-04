@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-23 11:22:29
- * @LastEditTime: 2021-12-28 10:41:36
+ * @LastEditTime: 2022-01-04 14:39:37
  */
 import { ICols, IFormOption, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -25,10 +25,6 @@ export default () => {
         {
             label: '状态',
             minWidth: '80',
-            filters: [
-                { text: '111', value: 1 },
-                { text: '222', value: 0 },
-            ],
             slot: 'status',
         },
         {
