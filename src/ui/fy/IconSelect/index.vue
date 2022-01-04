@@ -2,14 +2,19 @@
  * @Description: 图标选择
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-24 10:51:13
- * @LastEditTime: 2021-12-24 16:36:11
+ * @LastEditTime: 2022-01-04 10:29:13
 -->
 <template>
     <el-popover :visible="visible" popper-class="icon-select" placement="bottom-start" :width="220"
         @show="show">
         <template #reference>
             <el-input class="icon-select-input" v-model="modelValue" readonly placeholder="请选择图标"
-                @click="visible = !visible" />
+                @click="visible = !visible">
+                <template v-if="modelValue" #suffix>
+                    <fy-icon @click="visible = !visible" :name="modelValue"
+                        color="var(--el-select-input-color)" size="14" style="cursor:pointer" />
+                </template>
+            </el-input>
         </template>
         <el-input class="search-input" v-model="fuzzySearchWord" clearable size="mini"
             placeholder="搜索..." />
