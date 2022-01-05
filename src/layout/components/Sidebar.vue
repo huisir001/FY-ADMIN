@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2021-11-02 00:20:04
+ * @LastEditTime: 2022-01-05 11:32:25
 -->
 <template>
     <div class="sidebar">
@@ -59,27 +59,17 @@
     </div>
 </template>
  
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import { useStore } from '@/store'
 
-export default defineComponent({
-    name: 'Sidebar',
-    setup() {
-        const Store = useStore()
+const Store = useStore()
 
-        // 菜单
-        const Menus = computed(() => Store.state.user.menuTree)
+// 菜单
+const Menus = computed(() => Store.state.user.menuTree)
 
-        // 折叠
-        const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
-
-        return {
-            sidebarCollapse,
-            Menus,
-        }
-    },
-})
+// 折叠
+const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
 </script>
  
 <style scoped lang="scss">

@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2021-11-01 20:55:28
+ * @LastEditTime: 2022-01-05 11:31:32
 -->
 <template>
     <div class="navbar">
@@ -40,90 +40,76 @@
     <ThemeSetDrawer v-model="showThemeDrawer" />
 </template>
  
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
 import { useStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
 import ThemeSetDrawer from '@/components/ThemeSetDrawer/index.vue'
 
-export default defineComponent({
-    name: 'Navbar',
-    components: {
-        ThemeSetDrawer,
-    },
-    setup() {
-        const Store = useStore()
-        const Route = useRoute()
-        const Router = useRouter()
+const Store = useStore()
+const Route = useRoute()
+const Router = useRouter()
 
-        // 面包屑
-        const breadCrumbs = computed(() => {
-            let crumbs = Route.matched
-                .filter((item) => item.name !== 'Home')
-                .map((item) => ({
-                    title: item.meta.title || item.name,
-                    path: item.path,
-                    redirect: item.redirect,
-                }))
+// 主题配置抽屉
+const showThemeDrawer = ref(false)
 
-            // 面包屑中添加首页
-            if (!crumbs.find((item) => item.path === '/')) {
-                crumbs.unshift({
-                    title: '首页',
-                    path: '/',
-                    redirect: undefined,
-                })
-            }
-            return crumbs
-        })
-
-        // 侧边栏状态
-        const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
-
-        // 侧边栏展开收缩
-        const sidebarCollapseChenge = () => {
-            Store.commit('sys/changeSidebarCollapse')
-        }
-
-        // 用户信息
-        const userInfo = computed(() => ({
-            nickname: (Store.state.user.userInfo || {}).nickname,
-            username: (Store.state.user.userInfo || {}).username,
-            avatar: (Store.state.user.userInfo || {}).avatar || defaultAvatar,
+// 面包屑
+const breadCrumbs = computed(() => {
+    let crumbs = Route.matched
+        .filter((item) => item.name !== 'Home')
+        .map((item) => ({
+            title: item.meta.title || item.name,
+            path: item.path,
+            redirect: item.redirect,
         }))
 
-        // 用户下拉菜单事件
-        const userNavChange = (e: any) => {
-            switch (e) {
-                case '0':
-                    Router.push({ name: 'Center' })
-                    break
-                case '1':
-                    ElMessageBox.confirm('您即将要登出，是否继续 ?', '提示', {
-                        confirmButtonText: '确定',
-                        cancelButtonText: '取消',
-                        type: 'warning',
-                    })
-                        .then(() => {
-                            Store.dispatch('user/logout')
-                        })
-                        .catch(() => {})
-                    break
-            }
-        }
-
-        return {
-            breadCrumbs,
-            userInfo,
-            sidebarCollapse,
-            sidebarCollapseChenge,
-            userNavChange,
-            showThemeDrawer: ref(false),
-        }
-    },
+    // 面包屑中添加首页
+    if (!crumbs.find((item) => item.path === '/')) {
+        crumbs.unshift({
+            title: '首页',
+            path: '/',
+            redirect: undefined,
+        })
+    }
+    return crumbs
 })
+
+// 侧边栏状态
+const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
+
+// 侧边栏展开收缩
+const sidebarCollapseChenge = () => {
+    Store.commit('sys/changeSidebarCollapse')
+}
+
+// 用户信息
+const userInfo = computed(() => ({
+    nickname: (Store.state.user.userInfo || {}).nickname,
+    username: (Store.state.user.userInfo || {}).username,
+    avatar: (Store.state.user.userInfo || {}).avatar || defaultAvatar,
+}))
+
+// 用户下拉菜单事件
+const userNavChange = (e: any) => {
+    switch (e) {
+        case '0':
+            Router.push({ name: 'Center' })
+            break
+        case '1':
+            ElMessageBox.confirm('您即将要登出，是否继续 ?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning',
+            })
+                .then(() => {
+                    Store.dispatch('user/logout')
+                })
+                .catch(() => {})
+            break
+    }
+}
 </script>
  
 <style scoped lang="scss">

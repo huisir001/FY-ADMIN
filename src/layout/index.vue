@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2021-11-03 11:42:24
+ * @LastEditTime: 2022-01-05 11:27:30
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -20,70 +20,51 @@
     </div>
 </template>
  
-<script lang="ts">
-import { computed, defineComponent, onMounted, watch } from 'vue'
+<script lang="ts" setup>
+import { computed, watch } from 'vue'
 import { useStore } from '@/store'
 import Sidebar from './components/Sidebar.vue'
 import Navbar from './components/Navbar.vue'
 import Tabbar from './components/Tabbar.vue'
 import Content from './components/Content.vue'
-export default defineComponent({
-    name: '',
-    components: {
-        Sidebar,
-        Navbar,
-        Tabbar,
-        Content,
-    },
-    setup() {
-        const Store = useStore()
 
-        // 历史路由数
-        const showTabbar = computed(
-            () => Store.state.sys.historyRoutes.length > 0 && Store.state.theme.showPageTagNav
-        )
+const Store = useStore()
 
-        // 侧边栏状态
-        const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
-        const sidebarHide = computed(() => Store.state.sys.sidebarHide)
+// 历史路由数
+const showTabbar = computed(
+    () => Store.state.sys.historyRoutes.length > 0 && Store.state.theme.showPageTagNav
+)
 
-        // 窗口宽度
-        const visibleAreaWidth = computed(() => Store.state.sys.visibleAreaWidth)
+// 侧边栏状态
+const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
+const sidebarHide = computed(() => Store.state.sys.sidebarHide)
 
-        // 监听窗口宽度变化做些事
-        watch(
-            visibleAreaWidth,
-            (val) => {
-                // 宽度为1000时折叠侧边栏
-                if (val && val <= 1000) {
-                    Store.state.sys.sidebarCollapse ||
-                        Store.commit('sys/setStates', { sidebarCollapse: true })
-                }
-                // 宽度为768是隐藏侧边栏
-                if (val && val <= 768) {
-                    Store.state.sys.sidebarHide ||
-                        Store.commit('sys/setStates', { sidebarHide: true })
-                } else {
-                    Store.state.sys.sidebarHide &&
-                        Store.commit('sys/setStates', { sidebarHide: false })
-                }
-            },
-            { immediate: true }
-        )
+// 窗口宽度
+const visibleAreaWidth = computed(() => Store.state.sys.visibleAreaWidth)
 
-        // 侧边栏展开收缩
-        const sidebarCollapseChenge = () => {
-            Store.commit('sys/changeSidebarCollapse')
+// 监听窗口宽度变化做些事
+watch(
+    visibleAreaWidth,
+    (val) => {
+        // 宽度为1000时折叠侧边栏
+        if (val && val <= 1000) {
+            Store.state.sys.sidebarCollapse ||
+                Store.commit('sys/setStates', { sidebarCollapse: true })
         }
-
-        return {
-            sidebarCollapse,
-            sidebarHide,
-            showTabbar,
-            sidebarCollapseChenge,
+        // 宽度为768是隐藏侧边栏
+        if (val && val <= 768) {
+            Store.state.sys.sidebarHide || Store.commit('sys/setStates', { sidebarHide: true })
+        } else {
+            Store.state.sys.sidebarHide && Store.commit('sys/setStates', { sidebarHide: false })
         }
     },
-})
+    { immediate: true }
+)
+
+// 侧边栏展开收缩
+const sidebarCollapseChenge = () => {
+    Store.commit('sys/changeSidebarCollapse')
+}
 </script>
  
 <style scoped lang="scss">
