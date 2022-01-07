@@ -2,7 +2,7 @@
  * @Description: Icon - theme
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-23 13:50:16
- * @LastEditTime: 2021-11-01 19:10:17
+ * @LastEditTime: 2022-01-07 15:32:25
 -->
 <template>
     <svg t="1632449726181" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -23,9 +23,5 @@
 </template>
  
 <script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-    name: 'Theme',
-})
+export default { name: 'Theme' }
 </script>

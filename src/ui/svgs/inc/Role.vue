@@ -2,7 +2,7 @@
  * @Description: 角色
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-02 17:55:45
- * @LastEditTime: 2021-12-23 14:18:15
+ * @LastEditTime: 2022-01-07 15:32:08
 -->
 <template>
     <svg t="1640240327620" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -17,9 +17,5 @@
 </template>
  
 <script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-    name: 'Role',
-})
+export default { name: 'Role' }
 </script>

@@ -2,7 +2,7 @@
  * @Description: 主题设置抽屉
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-23 14:38:39
- * @LastEditTime: 2021-11-01 20:55:18
+ * @LastEditTime: 2022-01-07 15:33:22
 -->
 <template>
     <el-drawer title="主题配置" :size="280" custom-class="fy-theme-drawer">
@@ -28,54 +28,38 @@
     </el-drawer>
 </template>
  
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import { THEME_OPTIONS } from '@/settings'
 import { useStore } from '@/store'
 
-export default defineComponent({
-    name: 'ThemeSetDrawer',
-    setup() {
-        const Store = useStore()
+const Store = useStore()
 
-        // 主题配置
-        const curThemeColorState = computed(() => Store.state.theme.color)
-        const curPageTagNavState = computed({
-            get: () => Store.state.theme.showPageTagNav,
-            set: (val) => {
-                Store.commit('theme/setStates', {
-                    showPageTagNav: val,
-                })
-            },
+// 主题配置
+const curThemeColorState = computed(() => Store.state.theme.color)
+const curPageTagNavState = computed({
+    get: () => Store.state.theme.showPageTagNav,
+    set: (val) => {
+        Store.commit('theme/setStates', {
+            showPageTagNav: val,
         })
-        const curBreadcrumbState = computed({
-            get: () => Store.state.theme.showBreadcrumb,
-            set: (val) => {
-                Store.commit('theme/setStates', {
-                    showBreadcrumb: val,
-                })
-            },
-        })
-
-        // 主题色改变
-        const selectColor = (val: string) => {
-            Store.commit('theme/setStates', {
-                color: val,
-            })
-        }
-
-        return {
-            THEME_OPTIONS: THEME_OPTIONS.map((item: any) => ({
-                name: item.name,
-                color: item.color,
-            })),
-            curThemeColorState,
-            curPageTagNavState,
-            curBreadcrumbState,
-            selectColor,
-        }
     },
 })
+const curBreadcrumbState = computed({
+    get: () => Store.state.theme.showBreadcrumb,
+    set: (val) => {
+        Store.commit('theme/setStates', {
+            showBreadcrumb: val,
+        })
+    },
+})
+
+// 主题色改变
+const selectColor = (val: string) => {
+    Store.commit('theme/setStates', {
+        color: val,
+    })
+}
 </script>
  
 <style scoped lang="scss">

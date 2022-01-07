@@ -2,7 +2,7 @@
  * @Description: 导出
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-02 17:55:45
- * @LastEditTime: 2021-11-02 18:20:06
+ * @LastEditTime: 2022-01-07 15:31:54
 -->
 <template>
     <svg t="1635848441656" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -15,11 +15,7 @@
             p-id="14504"></path>
     </svg>
 </template>
- 
-<script lang="ts">
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-    name: 'Export',
-})
+<script lang="ts">
+export default { name: 'Export' }
 </script>

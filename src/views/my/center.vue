@@ -2,7 +2,7 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2021-12-16 17:37:31
+ * @LastEditTime: 2022-01-07 15:26:38
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" class="fy-my-tabs">
@@ -82,64 +82,53 @@
         </el-tab-pane>
     </el-tabs>
 </template>
- 
+
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+export default { name: 'Center' }
+</script>
+
+ 
+<script lang="ts" setup>
+import { reactive, ref } from 'vue'
 import { useStore } from '@/store'
 // import { ElMessage } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
 
-export default defineComponent({
-    name: 'Center',
-    setup() {
-        const Store = useStore()
-        const activeTabName = ref('base')
-        // const userInfo = computed(() => Store.state.user.userInfo)
+const Store = useStore()
+const activeTabName = ref('base')
+// const userInfo = computed(() => Store.state.user.userInfo)
 
-        // 用户信息copy
-        let userInfoFormData = ref(Store.getters.copyUserInfo)
+// 用户信息copy
+let userInfoFormData = ref(Store.getters.copyUserInfo)
 
-        // 图片选择
-        const avatarSelected = (file: any) => {
-            console.log(file)
-            userInfoFormData.value.avatar = file.url
-        }
+// 图片选择
+const avatarSelected = (file: any) => {
+    console.log(file)
+    userInfoFormData.value.avatar = file.url
+}
 
-        // 保存用户信息
-        const onSubmitBaseUserinfo = () => {
-            console.log(userInfoFormData)
-        }
+// 保存用户信息
+const onSubmitBaseUserinfo = () => {
+    console.log(userInfoFormData)
+}
 
-        // 重置为原值
-        const resetBaseUserinfo = () => {
-            userInfoFormData.value = Store.getters.copyUserInfo
-            console.log(userInfoFormData)
-        }
+// 重置为原值
+const resetBaseUserinfo = () => {
+    userInfoFormData.value = Store.getters.copyUserInfo
+    console.log(userInfoFormData)
+}
 
-        // 修改密码form
-        const resetPassFormData = reactive({
-            oldPass: '',
-            newPass: '',
-            surePass: '',
-        })
-
-        // 修改密码
-        const onSubmitPassword = () => {
-            console.log(resetPassFormData)
-        }
-
-        return {
-            activeTabName,
-            userInfoFormData,
-            onSubmitBaseUserinfo,
-            resetBaseUserinfo,
-            defaultAvatar,
-            avatarSelected,
-            resetPassFormData,
-            onSubmitPassword,
-        }
-    },
+// 修改密码form
+const resetPassFormData = reactive({
+    oldPass: '',
+    newPass: '',
+    surePass: '',
 })
+
+// 修改密码
+const onSubmitPassword = () => {
+    console.log(resetPassFormData)
+}
 </script>
  
 <style scoped lang="scss">

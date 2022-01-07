@@ -2,13 +2,13 @@
  * @Description: 登录
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 14:52:06
- * @LastEditTime: 2021-11-01 22:02:02
+ * @LastEditTime: 2022-01-07 15:29:22
 -->
 <template>
     <div class="login">
         <el-form ref="loginForm" :rules="loginFormRules" :model="loginFormData"
             class="login-form-box">
-            <h3>{{TITLE}}</h3>
+            <h3>{{ TITLE }}</h3>
             <h5>账号密码登录</h5>
             <el-form-item prop="username">
                 <el-input v-model="loginFormData.username" clearable placeholder="账号">
@@ -29,66 +29,53 @@
         </el-form>
     </div>
 </template>
- 
-<script lang="ts">
+
+<script lang="ts" setup>
 import { TITLE } from '@/settings'
-import { defineComponent, reactive, ref, Ref } from 'vue'
+import { reactive, ref, Ref } from 'vue'
 import { useStore } from '@/store'
 import { FormRulesMap } from 'element-plus/lib/components/form/src/form.type'
 
-export default defineComponent({
-    name: 'Login',
-    setup() {
-        // store
-        const Store = useStore()
+// store
+const Store = useStore()
 
-        // ref
-        const loginForm: Ref = ref(null)
+// ref
+const loginForm: Ref = ref(null)
 
-        // 登录表单数据
-        const loginFormData: IUserInfo = reactive({
-            username: '',
-            password: '',
-        })
+// 登录表单数据
+const loginFormData: IUserInfo = reactive({
+    username: '',
+    password: '',
+})
 
-        // 表单验证
-        const loginFormRules: FormRulesMap = reactive({
-            username: {
-                required: true,
-                message: '请输入账号',
-                trigger: 'blur',
-            },
-            password: {
-                required: true,
-                message: '请输入密码',
-                trigger: 'blur',
-            },
-        })
-
-        // 提交
-        const onSubmit = () => {
-            // 验证
-            loginForm.value.validate(async (valid: boolean) => {
-                if (valid) {
-                    // 登录
-                    await Store.dispatch('user/login', loginFormData)
-                    return true
-                }
-                return false
-            })
-        }
-
-        return {
-            TITLE,
-            loginForm,
-            loginFormData,
-            loginFormRules,
-            onSubmit,
-        }
+// 表单验证
+const loginFormRules: FormRulesMap = reactive({
+    username: {
+        required: true,
+        message: '请输入账号',
+        trigger: 'blur',
+    },
+    password: {
+        required: true,
+        message: '请输入密码',
+        trigger: 'blur',
     },
 })
+
+// 提交
+const onSubmit = () => {
+    // 验证
+    loginForm.value.validate(async (valid: boolean) => {
+        if (valid) {
+            // 登录
+            await Store.dispatch('user/login', loginFormData)
+            return true
+        }
+        return false
+    })
+}
 </script>
- 
+
 <style scoped lang="scss">
 .login {
     width: 100%;
