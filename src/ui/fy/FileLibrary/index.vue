@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2022-01-04 11:24:57
+ * @LastEditTime: 2022-01-07 16:16:20
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -162,8 +162,8 @@
     </el-dialog>
 </template>
  
-<script lang="ts">
-import { computed, defineComponent, nextTick, reactive, ref, toRaw, watch } from 'vue'
+<script lang="ts" setup>
+import { computed, nextTick, reactive, ref, toRaw, watch, defineProps, defineEmits } from 'vue'
 import {
     getFileListByPage,
     removeFileById,
@@ -174,266 +174,228 @@ import {
 import { ElMessage } from 'element-plus'
 import { debounce } from '@/ui/helpers'
 
-export default defineComponent({
-    name: 'FileLibrary',
-    props: {
-        /**
-         * 文件类型，只支持上传图片和zip压缩包
-         */
-        type: {
-            type: String,
-            require: true,
-            validator(value: string) {
-                // 这个值必须匹配下列字符串中的一个
-                return ['pic', 'zip'].includes(value)
-            },
+const props = defineProps({
+    /**
+     * 文件类型，只支持上传图片和zip压缩包
+     */
+    type: {
+        type: String,
+        require: true,
+        validator(value: string) {
+            // 这个值必须匹配下列字符串中的一个
+            return ['pic', 'zip'].includes(value)
         },
     },
-    emits: ['selected'],
-    setup(props: any) {
-        const leftLoading = ref(false)
-        const saveDetailLoading = ref(false)
-        const delBtnLoading = ref(false)
-        const curPage = ref(1)
-        const pageTotal = ref(1)
-        const fileList = ref([])
-        const pageLimit = 10
-        const fileUrlSetFrom = ref()
+})
 
-        // 分类列表
-        const groups = ref<IFileGroup[]>([])
-        ;(async () => {
-            leftLoading.value = true
-            const res = await getFileGroupList()
-            groups.value = res.data.list
-            groups.value.unshift({
-                id: 'ALL',
-                name: '全部类目',
-            })
-            leftLoading.value = false
-        })()
+defineEmits(['selected'])
 
-        // 查詢参数
-        const fileQueryParams = reactive({
-            group: 'ALL', //分组
-            name: '', //搜索词（模糊搜索）
-            page: 1, //当前页
-        })
+const leftLoading = ref(false)
+const saveDetailLoading = ref(false)
+const delBtnLoading = ref(false)
+const curPage = ref(1)
+const pageTotal = ref(1)
+const fileList = ref([])
+const pageLimit = 10
+const fileUrlSetFrom = ref()
 
-        // 类目切换
-        const fileGroupChange = async () => {
-            fileQueryParams.name = ''
-            fileQueryParams.page = 1
-        }
+// 分类列表
+const groups = ref<IFileGroup[]>([])
+;(async () => {
+    leftLoading.value = true
+    const res = await getFileGroupList()
+    groups.value = res.data.list
+    groups.value.unshift({
+        id: 'ALL',
+        name: '全部类目',
+    })
+    leftLoading.value = false
+})()
 
-        // 查询(防抖)
-        watch(fileQueryParams, debounce(getList, 300))
+// 查詢参数
+const fileQueryParams = reactive({
+    group: 'ALL', //分组
+    name: '', //搜索词（模糊搜索）
+    page: 1, //当前页
+})
 
-        // 查询列表
-        async function getList() {
-            leftLoading.value = true
-            // 清空当前选中项
-            selectedIndex.value = -1
-            const { page, name, group } = fileQueryParams
-            console.log('+++', name)
-            const res = await getFileListByPage({
-                page,
-                name,
-                group: group === 'ALL' ? '' : group,
-                type: props.type,
-                limit: pageLimit,
-            })
-            // 有数据
-            const { list, pageTotal: pt } = res.data
-            curPage.value = page
-            pageTotal.value = pt
-            fileList.value = list
-            await nextTick()
-            leftLoading.value = false
-        }
+// 类目切换
+const fileGroupChange = async () => {
+    fileQueryParams.name = ''
+    fileQueryParams.page = 1
+}
 
-        // 页码切换
-        // const handleCurrentChange = (val: any) => {
-        //     console.log(`current page: ${val}`)
-        // }
+// 查询(防抖)
+watch(fileQueryParams, debounce(getList, 300))
 
-        // 当前所选
-        const selectedIndex = ref(-1)
+// 查询列表
+async function getList() {
+    leftLoading.value = true
+    // 清空当前选中项
+    selectedIndex.value = -1
+    const { page, name, group } = fileQueryParams
+    console.log('+++', name)
+    const res = await getFileListByPage({
+        page,
+        name,
+        group: group === 'ALL' ? '' : group,
+        type: props.type,
+        limit: pageLimit,
+    })
+    // 有数据
+    const { list, pageTotal: pt } = res.data
+    curPage.value = page
+    pageTotal.value = pt
+    fileList.value = list
+    await nextTick()
+    leftLoading.value = false
+}
 
-        // 选择
-        const handleSelected = async (index: number) => {
-            if (selectedIndex.value === index) {
-                selectedIndex.value = -1
-                return
+// 页码切换
+// const handleCurrentChange = (val: any) => {
+//     console.log(`current page: ${val}`)
+// }
+
+// 当前所选
+const selectedIndex = ref(-1)
+
+// 选择
+const handleSelected = async (index: number) => {
+    if (selectedIndex.value === index) {
+        selectedIndex.value = -1
+        return
+    }
+    selectedIndex.value = index
+}
+
+// 当前文件
+const currFile = computed(() =>
+    selectedIndex.value >= 0 ? fileList.value[selectedIndex.value] : {}
+)
+
+// 弹窗
+const showFileLibraryBox = ref(false)
+const showFileUrlSetBox = ref(false)
+const popoverVisible = ref(false)
+
+// 关闭弹窗清除状态
+watch(showFileLibraryBox, (val: boolean) => {
+    if (!val) {
+        selectedIndex.value = -1
+    }
+})
+
+// 文件url插入from
+const fileUrlSetFromData = reactive({
+    name: '',
+    desc: '',
+    url: '',
+})
+
+// 关闭弹窗清除状态
+watch(showFileUrlSetBox, (val: boolean) => {
+    if (!val) {
+        fileUrlSetFromData.name = ''
+        fileUrlSetFromData.desc = ''
+        fileUrlSetFromData.url = ''
+    }
+})
+
+// 文件URL from验证
+const fileUrlSetFromRules = reactive({
+    url: {
+        validator: (rule: any, value: string, callback: (arg0?: Error | undefined) => void) => {
+            if (!value || value === '') {
+                callback(new Error('URL为必填项'))
+            } else if (!/^https?:\/\/([\w-]+\.)+[\w-]+(:\d+)?(\/[\w-.\/?%&=]*)?$/.test(value)) {
+                callback(new Error('URL格式有误'))
+            } else {
+                callback()
             }
-            selectedIndex.value = index
-        }
-
-        // 当前文件
-        const currFile = computed(() =>
-            selectedIndex.value >= 0 ? fileList.value[selectedIndex.value] : {}
-        )
-
-        // 弹窗
-        const showFileLibraryBox = ref(false)
-        const showFileUrlSetBox = ref(false)
-        const popoverVisible = ref(false)
-
-        // 关闭弹窗清除状态
-        watch(showFileLibraryBox, (val: boolean) => {
-            if (!val) {
-                selectedIndex.value = -1
-            }
-        })
-
-        // 文件url插入from
-        const fileUrlSetFromData = reactive({
-            name: '',
-            desc: '',
-            url: '',
-        })
-
-        // 关闭弹窗清除状态
-        watch(showFileUrlSetBox, (val: boolean) => {
-            if (!val) {
-                fileUrlSetFromData.name = ''
-                fileUrlSetFromData.desc = ''
-                fileUrlSetFromData.url = ''
-            }
-        })
-
-        // 文件URL from验证
-        const fileUrlSetFromRules = reactive({
-            url: {
-                validator: (
-                    rule: any,
-                    value: string,
-                    callback: (arg0?: Error | undefined) => void
-                ) => {
-                    if (!value || value === '') {
-                        callback(new Error('URL为必填项'))
-                    } else if (
-                        !/^https?:\/\/([\w-]+\.)+[\w-]+(:\d+)?(\/[\w-.\/?%&=]*)?$/.test(value)
-                    ) {
-                        callback(new Error('URL格式有误'))
-                    } else {
-                        callback()
-                    }
-                },
-                required: true,
-                trigger: 'blur',
-            },
-            name: {
-                required: true,
-                message: '文件名称为必填项',
-                trigger: 'blur',
-            },
-        })
-
-        // 文件URL from提交
-        const fileUrlSetSubmit = () => {
-            // 验证
-            fileUrlSetFrom.value.validate(async (valid: boolean) => {
-                if (valid) {
-                    // 登录
-                    console.log(fileUrlSetFromData)
-                    return true
-                }
-                return false
-            })
-        }
-
-        // 文件删除
-        const deleteFile = async () => {
-            delBtnLoading.value = true
-            const { msg } = await removeFileById((currFile.value as IFileParams).id)
-            delBtnLoading.value = false
-            // 刷新列表
-            getList()
-            ElMessage.success(msg)
-        }
-
-        // 文件详情-保存详情
-        const updateFileInfo = async () => {
-            saveDetailLoading.value = true
-
-            let { id, group, name, desc } = toRaw(currFile.value) as IFileParams
-
-            // 选择全部类目
-            if (group === 'ALL') {
-                group = ''
-            } else if (!groups.value.find((item) => item.id === group)) {
-                // 新创建类目
-                console.log('这是新创建的类目:', group)
-                const { data } = await addFileGroup(group)
-                group = data.id
-            }
-
-            // 更新
-            await updateFile({ id, group, name, desc })
-
-            saveDetailLoading.value = false
-            ElMessage.success('保存成功!')
-        }
-
-        // 切换表格
-        const handleFileListChange = (val: IFileParams) => {
-            handleSelected(fileList.value.findIndex((item: IFileParams) => item.id == val.id))
-        }
-
-        // 图片选择
-        const handlePicSuccess = (res: any, file: { raw: any }) => {
-            console.log('11111111111111', res)
-            //本地选择的缓存图片  URL.createObjectURL(file.raw)
-            // userInfoFormData.value.avatar = URL.createObjectURL(file.raw)
-        }
-
-        // 图片上传前钩子
-        const beforePicUpload = (file: { type: string; size: number }) => {
-            const allowType = file.type === 'image/jpeg' || file.type === 'image/png'
-            const isLt2M = file.size / 1024 / 1024 < 2
-
-            if (!allowType) {
-                ElMessage.error('图片格式有误!')
-                return false
-            }
-            if (!isLt2M) {
-                ElMessage.error('上传图片不允许超过2MB!')
-                return false
-            }
-            return true
-        }
-
-        return {
-            groups,
-            fileGroupChange,
-            fileQueryParams,
-            getList,
-            showFileLibraryBox,
-            showFileUrlSetBox,
-            fileList,
-            currFile,
-            selectedIndex,
-            handleSelected,
-            fileUrlSetFrom,
-            fileUrlSetFromData,
-            fileUrlSetFromRules,
-            fileUrlSetSubmit,
-            handleFileListChange,
-            updateFileInfo,
-            saveDetailLoading,
-            handlePicSuccess,
-            beforePicUpload,
-            popoverVisible,
-            leftLoading,
-            delBtnLoading,
-            deleteFile,
-            curPage,
-            pageTotal,
-            pageLimit,
-        }
+        },
+        required: true,
+        trigger: 'blur',
+    },
+    name: {
+        required: true,
+        message: '文件名称为必填项',
+        trigger: 'blur',
     },
 })
+
+// 文件URL from提交
+const fileUrlSetSubmit = () => {
+    // 验证
+    fileUrlSetFrom.value.validate(async (valid: boolean) => {
+        if (valid) {
+            // 登录
+            console.log(fileUrlSetFromData)
+            return true
+        }
+        return false
+    })
+}
+
+// 文件删除
+const deleteFile = async () => {
+    delBtnLoading.value = true
+    const { msg } = await removeFileById((currFile.value as IFileParams).id)
+    delBtnLoading.value = false
+    // 刷新列表
+    getList()
+    ElMessage.success(msg)
+}
+
+// 文件详情-保存详情
+const updateFileInfo = async () => {
+    saveDetailLoading.value = true
+
+    let { id, group, name, desc } = toRaw(currFile.value) as IFileParams
+
+    // 选择全部类目
+    if (group === 'ALL') {
+        group = ''
+    } else if (!groups.value.find((item) => item.id === group)) {
+        // 新创建类目
+        console.log('这是新创建的类目:', group)
+        const { data } = await addFileGroup(group)
+        group = data.id
+    }
+
+    // 更新
+    await updateFile({ id, group, name, desc })
+
+    saveDetailLoading.value = false
+    ElMessage.success('保存成功!')
+}
+
+// 切换表格
+const handleFileListChange = (val: IFileParams) => {
+    handleSelected(fileList.value.findIndex((item: IFileParams) => item.id == val.id))
+}
+
+// 图片选择
+const handlePicSuccess = (res: any, file: { raw: any }) => {
+    console.log('11111111111111', res)
+    //本地选择的缓存图片  URL.createObjectURL(file.raw)
+    // userInfoFormData.value.avatar = URL.createObjectURL(file.raw)
+}
+
+// 图片上传前钩子
+const beforePicUpload = (file: { type: string; size: number }) => {
+    const allowType = file.type === 'image/jpeg' || file.type === 'image/png'
+    const isLt2M = file.size / 1024 / 1024 < 2
+
+    if (!allowType) {
+        ElMessage.error('图片格式有误!')
+        return false
+    }
+    if (!isLt2M) {
+        ElMessage.error('上传图片不允许超过2MB!')
+        return false
+    }
+    return true
+}
 </script>
  
 <style scoped lang="scss">

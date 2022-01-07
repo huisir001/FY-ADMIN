@@ -2,7 +2,7 @@
  * @Description: 表格操作按钮
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-16 16:56:44
- * @LastEditTime: 2022-01-04 11:14:05
+ * @LastEditTime: 2022-01-07 16:40:12
 -->
 <template>
     <el-button v-if="contains.includes('edit')" type="text" @click="$emit('todo','edit')">
@@ -23,17 +23,15 @@
         </template>
     </el-popconfirm>
 </template>
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+import { PropType, defineProps, defineEmits } from 'vue'
 
-export default defineComponent({
-    name: 'RowBtns',
-    emits: ['todo'],
-    props: {
-        contains: {
-            type: Array as PropType<'edit' | 'add' | 'del'[]>,
-            default: () => ['edit', 'add', 'del'],
-        },
+defineProps({
+    contains: {
+        type: Array as PropType<'edit' | 'add' | 'del'[]>,
+        default: () => ['edit', 'add', 'del'],
     },
 })
+
+defineEmits(['todo'])
 </script>

@@ -2,7 +2,7 @@
  * @Description: 图标动态引用封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 16:14:25
- * @LastEditTime: 2021-11-22 16:52:41
+ * @LastEditTime: 2022-01-07 16:18:14
 -->
 <template>
     <el-icon :color="color" :size="Number(size)" :class="{'fy-icon':height}"
@@ -10,30 +10,26 @@
         <component :is="`icon-${name}`" />
     </el-icon>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-    name: 'Icon',
-    props: {
-        name: {
-            type: String,
-            required: true,
-        },
-        size: {
-            type: [Number, String],
-            default: 20,
-        },
-        color: {
-            type: String,
-            default: 'var(--el-text-color-regular)',
-        },
-        /**
-         * 调整高度，单位px
-         */
-        height: {
-            type: Number,
-        },
+<script lang="ts" setup>
+import { defineProps } from 'vue'
+defineProps({
+    name: {
+        type: String,
+        required: true,
+    },
+    size: {
+        type: [Number, String],
+        default: 20,
+    },
+    color: {
+        type: String,
+        default: 'var(--el-text-color-regular)',
+    },
+    /**
+     * 调整高度，单位px
+     */
+    height: {
+        type: Number,
     },
 })
 </script>

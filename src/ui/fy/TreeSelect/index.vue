@@ -2,7 +2,7 @@
  * @Description: 树结构选择
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-24 10:51:13
- * @LastEditTime: 2022-01-04 11:20:47
+ * @LastEditTime: 2022-01-07 16:29:21
 -->
 <template>
     <el-popover :visible="visible" popper-class="tree-select" placement="bottom-start" :width="220"
@@ -27,98 +27,82 @@
     </el-popover>
 </template>
  
-<script lang="ts">
-import { computed, defineComponent, PropType, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, PropType, ref, defineProps, defineEmits } from 'vue'
 import { fuzzySearch, clickOtherPosToClose } from '@/ui/helpers'
 
-export default defineComponent({
-    name: 'TreeSelect',
-    props: {
-        modelValue: {
-            type: String,
-            require: true,
-        },
-        label: {
-            // 显示文本
-            type: String,
-            require: true,
-        },
-        data: {
-            type: Object,
-            require: true,
-        },
-        option: {
-            type: Object as PropType<{
-                children: string
-                label: string
-                disabled?: (data: any, node: any) => boolean
-            }>,
-            default: () => ({
-                children: 'children',
-                label: 'label',
-            }),
-        },
+const props = defineProps({
+    modelValue: {
+        type: String,
+        require: true,
     },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-        // 弹窗显隐
-        const visible = ref(false)
-
-        // 树ref
-        const tree = ref()
-
-        // 搜索节点
-        const filterText = ref('')
-
-        // 輸入框圖標反轉
-        const iconRotate = computed(() => (visible.value ? 'rotateZ(0)' : 'rotateZ(180deg)'))
-
-        // 点选
-        const bindCurrChange = (data: any) => {
-            emit('update:modelValue', data.id)
-        }
-
-        // 模糊搜索
-        const fuzzySearchWord = ref('')
-
-        // 显隐事件
-        const show = () => {
-            // 置空搜索
-            filterText.value = ''
-            searchInputChange('')
-            // 回显当前选择节点
-            tree.value.setCurrentKey(props.modelValue)
-            // 点击空白关闭下拉
-            const inputEl = document.querySelector('.tree-select-input')
-            const popEl = document.querySelector('.el-popover.tree-select')
-            clickOtherPosToClose([inputEl as HTMLElement, popEl as HTMLElement], () => {
-                visible.value = false
-            })
-        }
-
-        // 查询
-        const searchInputChange = (val: string) => {
-            tree.value.filter(val)
-        }
-        const filterNode = (value: string, data: any) => {
-            if (!value) return true
-            return data.name.indexOf(value) !== -1
-        }
-
-        return {
-            visible,
-            iconRotate,
-            bindCurrChange,
-            fuzzySearch,
-            fuzzySearchWord,
-            show,
-            tree,
-            searchInputChange,
-            filterText,
-            filterNode,
-        }
+    label: {
+        // 显示文本
+        type: String,
+        require: true,
+    },
+    data: {
+        type: Object,
+        require: true,
+    },
+    option: {
+        type: Object as PropType<{
+            children: string
+            label: string
+            disabled?: (data: any, node: any) => boolean
+        }>,
+        default: () => ({
+            children: 'children',
+            label: 'label',
+        }),
     },
 })
+
+const emit = defineEmits(['update:modelValue'])
+
+// 弹窗显隐
+const visible = ref(false)
+
+// 树ref
+const tree = ref()
+
+// 搜索节点
+const filterText = ref('')
+
+// 輸入框圖標反轉
+const iconRotate = computed(() => (visible.value ? 'rotateZ(0)' : 'rotateZ(180deg)'))
+
+// 点选
+const bindCurrChange = (data: any) => {
+    emit('update:modelValue', data.id)
+}
+
+// 模糊搜索
+const fuzzySearchWord = ref('')
+
+// 显隐事件
+const show = () => {
+    // 置空搜索
+    filterText.value = ''
+    searchInputChange('')
+    // 回显当前选择节点
+    tree.value.setCurrentKey(props.modelValue)
+    // 点击空白关闭下拉
+    const inputEl = document.querySelector('.tree-select-input')
+    const popEl = document.querySelector('.el-popover.tree-select')
+    clickOtherPosToClose([inputEl as HTMLElement, popEl as HTMLElement], () => {
+        visible.value = false
+    })
+}
+
+// 查询
+const searchInputChange = (val: string) => {
+    tree.value.filter(val)
+}
+const filterNode = (value: string, data: any) => {
+    if (!value) return true
+    return data.name.indexOf(value) !== -1
+}
 </script>
  
 <style scoped lang="scss">

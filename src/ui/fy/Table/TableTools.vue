@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2022-01-04 11:13:13
+ * @LastEditTime: 2022-01-07 16:40:58
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -57,97 +57,81 @@
     </div>
 </template>
  
-<script lang="ts">
-import { defineComponent, ref, PropType } from 'vue'
+<script lang="ts" setup>
+import { ref, PropType, defineProps, defineEmits } from 'vue'
 import useTableTools from './useTableTools'
 import { ICols, ITableTool, TOptionOfTools } from '../types'
 import useTableToolsAction from './useTableToolsAction'
 import { ElMessage } from 'element-plus'
 
-export default defineComponent({
-    name: 'TableTools',
-    props: {
-        elTable: {
-            type: Object,
-            required: true,
-        },
-        cols: {
-            type: Array as PropType<ICols[]>,
-            required: true,
-        },
-        tools: {
-            type: Array as PropType<TOptionOfTools[]>,
-            default: () => [],
-        },
+const { elTable, cols, tools } = defineProps({
+    elTable: {
+        type: Object,
+        required: true,
     },
-    emits: ['btnClick', 'showCols', 'bindRefresh'],
-    setup({ elTable, cols, tools }, { emit }) {
-        // 所有按钮
-        const { left, right } = useTableTools()
-
-        // 是否有搜索表单
-        const hasSearchTool = tools.includes('search')
-
-        // 左侧按钮组
-        const leftBtns = left.filter((item: any) => tools.includes(item.name))
-
-        // 右侧按钮组
-        const rightBtns = right.filter((item: any) => tools.includes(item.name))
-
-        // 搜索表单栏状态
-        const showSearchForm = ref(false)
-
-        // 表格折叠状态
-        const treeTableExpanded = ref(false)
-
-        // 部分工具栏固定方法
-        const { selectShowCols, toggleTreeTableAll, exportCurrPage } = useTableToolsAction(
-            elTable,
-            cols
-        )
-
-        // 右侧按钮点击
-        const handleBtnClick = (btn: ITableTool) => {
-            if (!btn.disabled) {
-                if (btn.name === 'delete') {
-                    // 删除
-                    const selection = elTable.value.selection
-                    if (!(selection && selection.length)) {
-                        ElMessage.warning('请勾选一行！')
-                    } else {
-                        emit('btnClick', btn.name, selection)
-                    }
-                } else if (btn.name === 'search') {
-                    // 搜索按钮：显隐表单
-                    showSearchForm.value = !showSearchForm.value
-                    emit('btnClick', btn.name, showSearchForm.value)
-                } else if (btn.name === 'fold') {
-                    // 展开折叠
-                    treeTableExpanded.value = !treeTableExpanded.value
-                    toggleTreeTableAll(treeTableExpanded.value)
-                    emit('btnClick', btn.name, treeTableExpanded.value)
-                } else if (btn.name === 'refresh') {
-                    // 刷新
-                    emit('bindRefresh')
-                    emit('btnClick', btn.name)
-                } else {
-                    // 通知父组件
-                    emit('btnClick', btn.name)
-                }
-            }
-        }
-
-        return {
-            leftBtns,
-            rightBtns,
-            hasSearchTool,
-            showSearchForm,
-            handleBtnClick,
-            exportCurrPage,
-            ...selectShowCols(),
-        }
+    cols: {
+        type: Array as PropType<ICols[]>,
+        required: true,
+    },
+    tools: {
+        type: Array as PropType<TOptionOfTools[]>,
+        default: () => [],
     },
 })
+
+const emit = defineEmits(['btnClick', 'showCols', 'bindRefresh'])
+
+// 所有按钮
+const { left, right } = useTableTools()
+
+// 是否有搜索表单
+const hasSearchTool = tools.includes('search')
+
+// 左侧按钮组
+const leftBtns = left.filter((item: any) => tools.includes(item.name))
+
+// 右侧按钮组
+const rightBtns = right.filter((item: any) => tools.includes(item.name))
+
+// 搜索表单栏状态
+const showSearchForm = ref(false)
+
+// 表格折叠状态
+const treeTableExpanded = ref(false)
+
+// 部分工具栏固定方法
+const { selectShowCols, toggleTreeTableAll, exportCurrPage } = useTableToolsAction(elTable, cols)
+
+// 右侧按钮点击
+const handleBtnClick = (btn: ITableTool) => {
+    if (!btn.disabled) {
+        if (btn.name === 'delete') {
+            // 删除
+            const selection = elTable.value.selection
+            if (!(selection && selection.length)) {
+                ElMessage.warning('请勾选一行！')
+            } else {
+                emit('btnClick', btn.name, selection)
+            }
+        } else if (btn.name === 'search') {
+            // 搜索按钮：显隐表单
+            showSearchForm.value = !showSearchForm.value
+            emit('btnClick', btn.name, showSearchForm.value)
+        } else if (btn.name === 'fold') {
+            // 展开折叠
+            treeTableExpanded.value = !treeTableExpanded.value
+            toggleTreeTableAll(treeTableExpanded.value)
+            emit('btnClick', btn.name, treeTableExpanded.value)
+        } else if (btn.name === 'refresh') {
+            // 刷新
+            emit('bindRefresh')
+            emit('btnClick', btn.name)
+        } else {
+            // 通知父组件
+            emit('btnClick', btn.name)
+        }
+    }
+}
 </script>
  
 <style scoped lang="scss">

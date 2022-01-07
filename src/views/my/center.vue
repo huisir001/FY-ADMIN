@@ -2,7 +2,7 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2022-01-07 15:26:38
+ * @LastEditTime: 2022-01-07 16:42:10
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" class="fy-my-tabs">
@@ -86,7 +86,6 @@
 <script lang="ts">
 export default { name: 'Center' }
 </script>
-
  
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
