@@ -2,7 +2,7 @@
  * @Description: 编译时变量(vue.config.js中所需配置)，可执行node脚本
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-21 16:30:19
- * @LastEditTime: 2021-11-25 10:18:05
+ * @LastEditTime: 2022-01-10 14:32:40
  */
 const TITLE = require('./title.ts')
 const getAllFilePath = require('./inc/getAllFilePath')
@@ -11,7 +11,7 @@ const getAllFilePath = require('./inc/getAllFilePath')
  * CSS CDN Resources
  */
 const CSSCDN = [
-    '//cdn.jsdelivr.net/npm/element-plus/dist/index.css',   // element-plus 
+    '//unpkg.com/element-plus/dist/index.css',   // element-plus 
 ]
 
 /**
