@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2022-01-04 14:26:39
+ * @LastEditTime: 2022-01-10 10:51:12
 -->
 <template>
     <!-- 工具栏 -->
@@ -161,7 +161,7 @@ export default defineComponent({
     margin-top: 15px;
 }
 :deep(th.el-table__cell) {
-    background: var(--color-table-thead-bg);
+    background: var(--color-table-thead-bg)!important;
     .cell {
         color: var(--el-text-color-regular);
     }

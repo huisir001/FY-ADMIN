@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2022-01-07 16:40:58
+ * @LastEditTime: 2022-01-10 11:07:00
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -17,7 +17,8 @@
         </div>
         <div class="right">
             <template v-for="btn in rightBtns" :key="btn.name">
-                <el-dropdown v-if="btn.dropdown" :class="{disabled:btn.disabled}" trigger="click"
+                <el-dropdown v-if="btn.dropdown" :class="{disabled:btn.disabled}"
+                    popper-class="right-drop-menu" trigger="click"
                     :hide-on-click="btn.name==='export'"
                     @visibleChange="$emit('btnClick',btn.name,$event)">
                     <el-tooltip effect="light" :content="btn.title" placement="top"
@@ -28,7 +29,7 @@
                         </div>
                     </el-tooltip>
                     <template #dropdown>
-                        <el-dropdown-menu class="table-tool-dropmenu">
+                        <el-dropdown-menu>
                             <template v-if="btn.name==='cols'">
                                 <el-checkbox-group v-model="showCols">
                                     <el-dropdown-item v-for="label in colLables" :key="label">
@@ -101,6 +102,7 @@ const treeTableExpanded = ref(false)
 
 // 部分工具栏固定方法
 const { selectShowCols, toggleTreeTableAll, exportCurrPage } = useTableToolsAction(elTable, cols)
+const { colLables, showCols } = selectShowCols()
 
 // 右侧按钮点击
 const handleBtnClick = (btn: ITableTool) => {
@@ -135,7 +137,6 @@ const handleBtnClick = (btn: ITableTool) => {
 </script>
  
 <style scoped lang="scss">
-@import '@/assets/styles/mixin.scss';
 .table-tools {
     display: flex;
     justify-content: space-between;
@@ -169,14 +170,17 @@ const handleBtnClick = (btn: ITableTool) => {
         }
     }
 }
-.table-tool-dropmenu {
+</style>
+<style lang="scss">
+@import '@/assets/styles/mixin.scss';
+.right-drop-menu {
     @include scrollBar;
     max-height: 300px;
     overflow-y: auto;
-    :deep(.el-checkbox__label) {
+    .el-checkbox__label {
         color: unset !important;
     }
-    :deep(.el-checkbox) {
+    .el-checkbox {
         height: 22px;
     }
 }

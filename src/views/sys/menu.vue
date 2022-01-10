@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-04 17:47:21
+ * @LastEditTime: 2022-01-10 11:23:07
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)"
@@ -27,7 +27,7 @@
         </template>
         <template #todoHead>
             <!-- 不分页情况下可以使用本地模糊搜索 -->
-            <el-input v-model="fuzzySearchWord" clearable placeholder="输入关键字搜索..." />
+            <el-input v-model="fuzzySearchWord" size="small" clearable placeholder="输入关键字搜索..." />
         </template>
         <template #todo="scope">
             <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />

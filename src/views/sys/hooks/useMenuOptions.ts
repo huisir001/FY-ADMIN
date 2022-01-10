@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2021-12-30 17:34:29
+ * @LastEditTime: 2022-01-10 11:29:47
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { ref } from "vue";
@@ -212,7 +212,7 @@ export default () => {
             key: "private",
             props: {
                 activeText: "需要",
-                inactiveText: "不需要",
+                inactiveText: "无需",
                 // activeValue: 1,
                 // inactiveValue: 0
             },
