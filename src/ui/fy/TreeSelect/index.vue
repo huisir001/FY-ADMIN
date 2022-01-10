@@ -2,7 +2,7 @@
  * @Description: 树结构选择
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-24 10:51:13
- * @LastEditTime: 2022-01-10 14:00:43
+ * @LastEditTime: 2022-01-10 16:20:27
 -->
 <template>
     <el-popover :visible="visible" popper-class="tree-select" placement="bottom-start" :width="220"
@@ -29,7 +29,7 @@
  
 <script lang="ts" setup>
 import { computed, PropType, ref } from 'vue'
-import { fuzzySearch, clickOtherPosToClose } from '@/ui/helpers'
+import { clickOtherPosToClose } from '@/ui/helpers'
 
 const props = defineProps({
     modelValue: {
@@ -76,9 +76,6 @@ const iconRotate = computed(() => (visible.value ? 'rotateZ(0)' : 'rotateZ(180de
 const bindCurrChange = (data: any) => {
     emit('update:modelValue', data.id)
 }
-
-// 模糊搜索
-const fuzzySearchWord = ref('')
 
 // 显隐事件
 const show = () => {
