@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2022-01-10 10:51:12
+ * @LastEditTime: 2022-01-10 15:24:52
 -->
 <template>
     <!-- 工具栏 -->
@@ -15,10 +15,10 @@
     <!-- 继承的属性配置详见文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-attributes -->
     <!-- 继承的事件文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-events -->
     <div ref="tableBox" :style="{height:height,textAlign:'right'}">
-        <el-table ref="elTable" v-bind="$attrs" v-loading="loading" size="small" border
-            :max-height="tableCalcHeight" @selection-change="handleSelectionChange">
-            <el-table-column v-for="(col,index) in cols.filter((col) => !col.hide)" :key="index"
-                v-bind="col" :column-key="col.prop||col.slot">
+        <el-table ref="elTable" v-bind="$attrs" v-loading="loading" style="width:100%" size="small"
+            border :max-height="tableCalcHeight" @selection-change="handleSelectionChange">
+            <el-table-column v-for="col in cols.filter((col) => !col.hide)"
+                :key="col.prop||col.slot" v-bind="col" :column-key="col.prop||col.slot">
                 <!-- 表头插槽 -->
                 <template v-if="col.slotHead" #header>
                     <slot :name="col.slotHead" />
@@ -161,7 +161,7 @@ export default defineComponent({
     margin-top: 15px;
 }
 :deep(th.el-table__cell) {
-    background: var(--color-table-thead-bg)!important;
+    background: var(--color-table-thead-bg) !important;
     .cell {
         color: var(--el-text-color-regular);
     }
@@ -172,19 +172,10 @@ export default defineComponent({
     --el-table-current-row-background-color: var(--el-color-primary-light-5);
     max-height: 100% !important;
     .cell {
-        line-height: 24px;
-        & > button {
-            min-height: 23px;
-            padding: 0;
-            border: 0;
-        }
         .el-checkbox {
             height: 14px;
             transform: translate(-1px, 3px);
         }
-    }
-    tr:last-child > td {
-        border-bottom: none;
     }
 }
 @media screen and (max-width: 1024px) {

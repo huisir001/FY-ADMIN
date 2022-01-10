@@ -2,7 +2,7 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2022-01-10 14:00:05
+ * @LastEditTime: 2022-01-10 14:13:33
 -->
 <template>
     <el-dialog custom-class="fy-edit-dialog" :modelValue="modelValue"
@@ -122,32 +122,35 @@ const open = () => {
     .el-dialog__footer {
         text-align: center;
     }
+    .el-form--inline .el-form-item {
+        margin-right: 20px;
+    }
 }
-@media all and (min-width: 1019px) {
+@media all and (min-width: 999px) {
     .fy-edit-dialog.el-dialog {
-        width: 998px;
-        left: calc(50vw - 499px);
-        .el-form-item:nth-child(3n) {
+        width: 978px;
+        left: calc(50vw - 489px);
+        .el-form--inline .el-form-item:nth-child(3n) {
             margin-right: 0;
         }
     }
 }
-@media all and (min-width: 695px) and (max-width: 1018px) {
+@media all and (min-width: 685px) and (max-width: 998px) {
     .fy-edit-dialog.el-dialog {
-        width: 674px;
-        left: calc(50vw - 337px);
-        .el-form-item:nth-child(2n) {
+        width: 664px;
+        left: calc(50vw - 332px);
+        .el-form--inline .el-form-item:nth-child(2n) {
             margin-right: 0;
         }
     }
 }
-@media all and (min-width: 376px) and (max-width: 694px) {
+@media all and (min-width: 376px) and (max-width: 684px) {
     .fy-edit-dialog.el-dialog {
         width: 374px;
         left: calc(50vw - 187px);
         .el-dialog__body {
             text-align: center;
-            .el-form-item {
+            .el-form--inline .el-form-item {
                 margin-right: 0;
             }
         }
@@ -158,7 +161,7 @@ const open = () => {
         width: calc(100% - 20px);
         left: 10px;
         min-width: auto;
-        .el-form-item {
+        .el-form--inline .el-form-item {
             margin-right: 0;
         }
     }
