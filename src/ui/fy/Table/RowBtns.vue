@@ -2,14 +2,16 @@
  * @Description: 表格操作按钮
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-16 16:56:44
- * @LastEditTime: 2022-01-10 10:37:39
+ * @LastEditTime: 2022-01-10 14:00:31
 -->
 <template>
-    <el-button v-if="contains.includes('edit')" type="text" size="small" @click="$emit('todo','edit')">
+    <el-button v-if="contains.includes('edit')" type="text" size="small"
+        @click="$emit('todo','edit')">
         <fy-icon name="edit" size="13" color="var(--el-color-primary)" style="margin-right:3px;" />
         编辑
     </el-button>
-    <el-button v-if="contains.includes('add')" type="text" size="small" @click="$emit('todo','add')">
+    <el-button v-if="contains.includes('add')" type="text" size="small"
+        @click="$emit('todo','add')">
         <fy-icon name="plus" size="13" color="var(--el-color-primary)" style="margin-right:3px;" />
         新增
     </el-button>
@@ -24,7 +26,7 @@
     </el-popconfirm>
 </template>
 <script lang="ts" setup>
-import { PropType, defineProps, defineEmits } from 'vue'
+import { PropType } from 'vue'
 
 defineProps({
     contains: {

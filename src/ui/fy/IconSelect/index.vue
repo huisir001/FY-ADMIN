@@ -2,7 +2,7 @@
  * @Description: 图标选择
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-24 10:51:13
- * @LastEditTime: 2022-01-07 16:09:22
+ * @LastEditTime: 2022-01-10 14:00:21
 -->
 <template>
     <el-popover :visible="visible" popper-class="icon-select" placement="bottom-start" :width="220"
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getCurrentInstance, ref, defineProps, defineEmits } from 'vue'
+import { getCurrentInstance, ref } from 'vue'
 import { fuzzySearch, clickOtherPosToClose } from '@/ui/helpers'
 
 // props

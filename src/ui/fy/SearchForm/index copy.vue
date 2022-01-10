@@ -2,7 +2,7 @@
  * @Description: 搜索表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-04 16:39:23
- * @LastEditTime: 2022-01-07 16:20:49
+ * @LastEditTime: 2022-01-10 14:00:26
 -->
 <template>
     <el-form ref="elForm" :model="params" class="fy-search-form" :inline="inline"
@@ -36,7 +36,7 @@
 </template>
  
 <script lang="ts" setup>
-import { computed, PropType, ref, defineProps, defineEmits } from 'vue'
+import { computed, PropType, ref } from 'vue'
 import { IFormOption } from '../types'
 
 const props = defineProps({

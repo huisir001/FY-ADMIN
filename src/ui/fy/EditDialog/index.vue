@@ -2,7 +2,7 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2022-01-10 11:16:47
+ * @LastEditTime: 2022-01-10 14:00:05
 -->
 <template>
     <el-dialog custom-class="fy-edit-dialog" :modelValue="modelValue"
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, PropType, ref, defineProps, defineEmits } from 'vue'
+import { onMounted, PropType, ref } from 'vue'
 import { IFormOption } from '../types'
 import { boxMove } from '@/ui/helpers'
 

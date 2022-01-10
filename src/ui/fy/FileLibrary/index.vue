@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2022-01-07 16:16:20
+ * @LastEditTime: 2022-01-10 14:00:12
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -163,7 +163,7 @@
 </template>
  
 <script lang="ts" setup>
-import { computed, nextTick, reactive, ref, toRaw, watch, defineProps, defineEmits } from 'vue'
+import { computed, nextTick, reactive, ref, toRaw, watch } from 'vue'
 import {
     getFileListByPage,
     removeFileById,

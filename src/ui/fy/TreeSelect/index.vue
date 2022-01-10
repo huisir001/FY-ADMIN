@@ -2,7 +2,7 @@
  * @Description: 树结构选择
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-24 10:51:13
- * @LastEditTime: 2022-01-07 16:29:21
+ * @LastEditTime: 2022-01-10 14:00:43
 -->
 <template>
     <el-popover :visible="visible" popper-class="tree-select" placement="bottom-start" :width="220"
@@ -28,7 +28,7 @@
 </template>
  
 <script lang="ts" setup>
-import { computed, PropType, ref, defineProps, defineEmits } from 'vue'
+import { computed, PropType, ref } from 'vue'
 import { fuzzySearch, clickOtherPosToClose } from '@/ui/helpers'
 
 const props = defineProps({
