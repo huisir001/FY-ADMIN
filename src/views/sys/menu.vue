@@ -2,11 +2,11 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-10 11:23:07
+ * @LastEditTime: 2022-01-10 16:55:03
 -->
 <template>
-    <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(menuList,fuzzySearchWord)"
-        row-key="id" :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick">
+    <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
+        :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick">
         <template #title="scope">
             <span>{{scope.row.title}}</span>
             <div class="sort-btn">
@@ -27,7 +27,7 @@
         </template>
         <template #todoHead>
             <!-- 不分页情况下可以使用本地模糊搜索 -->
-            <el-input v-model="fuzzySearchWord" size="small" clearable placeholder="输入关键字搜索..." />
+            <fy-fuzzy-search v-model="searchData" :data="menuList" />
         </template>
         <template #todo="scope">
             <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
@@ -68,7 +68,6 @@ export default { name: 'Menu' }
 import { computed, Ref, ref } from 'vue'
 import { getAllMenus, saveMenu, delMenu } from '@/api/sys'
 import { rawList2Tree } from '@/utils/common'
-import { fuzzySearch } from '@/ui/helpers'
 import { TOptionOfTools } from '@/ui/fy/types'
 import useMenuOptions from './hooks/useMenuOptions'
 import { ElMessage } from 'element-plus'
@@ -80,7 +79,7 @@ const tableRawData = ref([])
 // 菜单列表tree
 const menuList: Ref<any> = ref([])
 // 模糊搜索
-const fuzzySearchWord: Ref<string> = ref('')
+const searchData: Ref<any> = ref([])
 // 编辑弹窗显隐
 const showEditDialog = ref(false)
 // 编辑弹窗标题

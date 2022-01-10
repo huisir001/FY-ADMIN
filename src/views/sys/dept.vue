@@ -2,11 +2,11 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-10 11:23:03
+ * @LastEditTime: 2022-01-10 16:51:05
 -->
 <template>
-    <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
-        row-key="id" :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick"
+    <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
+        :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick"
         @filter-change="filterChange">
         <template #status="scope">
             <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
@@ -14,7 +14,7 @@
         </template>
         <template #todoHead>
             <!-- 不分页情况下可以使用本地模糊搜索 -->
-            <el-input v-model="fuzzySearchWord" size="small" clearable placeholder="输入关键字搜索..." />
+            <fy-fuzzy-search v-model="searchData" :data="tableData" />
         </template>
         <template #todo="scope">
             <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
@@ -38,14 +38,11 @@ export default { name: 'Dept' }
 <script lang="ts" setup>
 import { computed, Ref, ref } from 'vue'
 import { rawList2Tree } from '@/utils/common'
-import { fuzzySearch } from '@/ui/helpers'
 import { TOptionOfTools } from '@/ui/fy/types'
 import { getAllDept, saveDept, delDept } from '@/api/sys'
 import useDeptOptions from './hooks/useDeptOptions'
 import { ElMessage } from 'element-plus'
 
-// 模糊搜索
-const fuzzySearchWord: Ref<string> = ref('')
 // 编辑弹窗显隐
 const showEditDialog = ref(false)
 // 编辑弹窗标题
@@ -56,6 +53,8 @@ const currEditData: Ref<IObj> = ref({})
 const tableRawData: Ref<any> = ref([])
 // 表格树形數據
 const tableData: Ref<any> = ref([])
+// 模糊搜索结果
+const searchData: Ref<any> = ref([])
 // loading
 const loading = ref(false)
 

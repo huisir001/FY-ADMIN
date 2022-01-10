@@ -2,18 +2,18 @@
  * @Description: 角色管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-10 11:23:11
+ * @LastEditTime: 2022-01-10 16:56:31
 -->
 <template>
-    <fy-table :loading="loading" :cols="tableCols" :data="fuzzySearch(tableData,fuzzySearchWord)"
-        :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick">
+    <fy-table :loading="loading" :cols="tableCols" :data="searchData" :tools="tableTools"
+        height="calc(100% - 48px)" @toolsClick="toolsBtnClick">
         <template #status="scope">
             <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
             <el-tag v-else size="small" type="danger">停用</el-tag>
         </template>
         <template #todoHead>
             <!-- 不分页情况下可以使用本地模糊搜索 -->
-            <el-input v-model="fuzzySearchWord" size="small" clearable placeholder="输入关键字搜索..." />
+            <fy-fuzzy-search v-model="searchData" :data="tableData" />
         </template>
         <template #todo="scope">
             <fy-row-btns :contains="['edit', 'del']"
@@ -33,13 +33,12 @@ export default { name: 'Role' }
 <script lang="ts" setup>
 import { ref, Ref } from 'vue'
 import { getAllRole, saveRole, delRole } from '@/api/sys'
-import { fuzzySearch } from '@/ui/helpers'
 import useRoleOptions from './hooks/useRoleOptions'
 import { TOptionOfTools } from '@/ui/fy/types'
 import { ElMessage } from 'element-plus'
 
 // 模糊搜索
-const fuzzySearchWord: Ref<string> = ref('')
+const searchData: Ref<any> = ref([])
 // 编辑弹窗显隐
 const showEditDialog = ref(false)
 // 编辑弹窗标题
