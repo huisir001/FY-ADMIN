@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-05 10:16:43
+ * @LastEditTime: 2022-01-10 17:19:17
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -37,7 +37,6 @@
                     :value="role.id" />
             </el-select>
         </template>
-
     </fy-edit-dialog>
 </template>
 
