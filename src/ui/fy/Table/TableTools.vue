@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2022-01-10 14:04:58
+ * @LastEditTime: 2022-01-11 17:14:12
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -19,7 +19,7 @@
             <template v-for="btn in rightBtns" :key="btn.name">
                 <el-dropdown v-if="btn.dropdown" :class="{disabled:btn.disabled}"
                     popper-class="right-drop-menu" trigger="click"
-                    :hide-on-click="btn.name==='export'"
+                    :hide-on-click="btn.name==='export'" @command="handleDropdown"
                     @visibleChange="$emit('btnClick',btn.name,$event)">
                     <el-tooltip effect="light" :content="btn.title" placement="top"
                         :auto-close="1000">
@@ -38,9 +38,9 @@
                                 </el-checkbox-group>
                             </template>
                             <template v-if="btn.name==='export'">
-                                <el-dropdown-item @click="exportCurrPage(1)">导出csv
+                                <el-dropdown-item :command="1">导出csv
                                 </el-dropdown-item>
-                                <el-dropdown-item @click="exportCurrPage(2)">导出excel
+                                <el-dropdown-item :command="2">导出excel
                                 </el-dropdown-item>
                             </template>
                         </el-dropdown-menu>
@@ -109,6 +109,13 @@ const treeTableExpanded = ref(false)
 // 部分工具栏固定方法
 const { selectShowCols, toggleTreeTableAll, exportCurrPage } = useTableToolsAction(elTable, cols)
 const { colLables, showCols } = selectShowCols()
+
+// 导出
+const handleDropdown = (e: any) => {
+    if (typeof e === 'number') {
+        exportCurrPage(e)
+    }
+}
 
 // 右侧按钮点击
 const handleBtnClick = (btn: ITableTool) => {
