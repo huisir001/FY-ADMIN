@@ -2,5 +2,48 @@
  * @Description:
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:37:24
- * @LastEditTime: 2021-09-09 16:37:25
+ * @LastEditTime: 2022-01-11 15:31:24
  */
+:export {
+  /* primary color */
+  --el-color-primary: #f0468d;
+  --el-color-primary-light-1: #ec5896;
+  --el-color-primary-light-2: #e96ca0;
+  --el-color-primary-light-3: #e97daa;
+  --el-color-primary-light-4: #e786af;
+  --el-color-primary-light-5: #e696b7;
+  --el-color-primary-light-6: #e2a1bc;
+  --el-color-primary-light-7: #e2b2c6;
+  --el-color-primary-light-8: #e9c8d6;
+  --el-color-primary-light-9: #f8ecf1;
+
+  /* bg color */
+  --el-background-color-base: #f5f7fa;
+
+  /* 导航栏 */
+  --color-sidebar-bg: #2f3447;
+  --color-sidebar-font: var(--el-color-info-lighter);
+  --color-sidebar-menu-bg-hover: var(--el-color-primary);
+  --color-sidebar-menu-font-hover: var(--el-color-white);
+  --color-sidebar-menu-font-active: var(--el-color-primary-light-2);
+
+  /* 自定义 */
+  --color-content-bg: var(--el-color-white);
+
+  /* navbar */
+  --color-navbar-bg: var(--el-color-white);
+  --color-navbar-text: var(--el-text-color-regular);
+  --color-navbar-text-hov: var(--el-color-primary);
+
+  /* tabbar */
+  --color-tabbar-bg: var(--el-color-white);
+  --color-tabbar-font: var(--el-text-color-secondary);
+  --color-tabbar-font-act: var(--el-text-color-regular);
+  --color-tabbar-border: var(--color-grey-lighter);
+  --color-tabbar-circle: var(--el-border-color-base);
+  --color-tabbar-circle-hov: var(--el-color-primary-light-5);
+  --color-tabbar-circle-act: var(--el-color-primary);
+
+  /* 表格 */
+  --color-table-thead-bg: #fafafa;
+}

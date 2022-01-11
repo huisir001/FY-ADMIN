@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2022-01-05 11:33:03
+ * @LastEditTime: 2022-01-11 15:14:27
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -241,9 +241,9 @@ const ctxMenuList: IBtnOptions[] = [
  
 <style scoped lang="scss">
 $--tab-height: 30px;
-$--tab-border: 1px solid var(--color-grey-lighter);
+$--tab-border: 1px solid var(--color-tabbar-border);
 @mixin fy-tabbar-item-act {
-    color: var(--el-text-color-regular);
+    color: var(--color-tabbar-font-act);
     .icon {
         width: 14px;
         margin-left: 5px;
@@ -321,7 +321,7 @@ $--tab-border: 1px solid var(--color-grey-lighter);
                     width: 0;
                     margin-left: 0;
                     overflow: hidden;
-                    color: var(--el-text-color-regular);
+                    color: var(--color-tabbar-font);
                     svg {
                         transform: scale(0.76);
                     }
@@ -333,13 +333,13 @@ $--tab-border: 1px solid var(--color-grey-lighter);
                 &:hover {
                     @include fy-tabbar-item-act;
                     & > span.tabbar-item-circle {
-                        background-color: var(--el-color-primary-light-5);
+                        background-color: var(--color-tabbar-circle-hov);
                     }
                 }
                 &.act {
                     @include fy-tabbar-item-act;
                     & > span.tabbar-item-circle {
-                        background-color: var(--el-color-primary);
+                        background-color: var(--color-tabbar-circle-act);
                     }
                 }
             }

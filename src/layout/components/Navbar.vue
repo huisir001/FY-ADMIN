@@ -2,14 +2,14 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-01-05 11:31:32
+ * @LastEditTime: 2022-01-11 15:00:51
 -->
 <template>
     <div class="navbar">
         <div class="fy-nav-left">
             <div class="sidebar-collapse-btn nav-item" :class="{reverse:sidebarCollapse}"
                 @click="sidebarCollapseChenge">
-                <fy-icon name="fold" :size="22" color="var(--el-text-color-regular)" />
+                <fy-icon name="fold" :size="22" color="var(--color-navbar-text)" />
             </div>
             <div v-if="$store.state.theme.showBreadcrumb" class="breadCrumbs nav-item">
                 <el-breadcrumb separator="/">
@@ -21,7 +21,7 @@
         </div>
         <div class="fy-nav-right">
             <div class="theme-nav nav-item" @click="showThemeDrawer = true">
-                <fy-icon name="theme" :size="20" color="var(--el-text-color-regular)" />
+                <fy-icon name="theme" :size="20" color="var(--color-navbar-text)" />
             </div>
             <el-dropdown size="medium" trigger="click" @command="userNavChange">
                 <div class="user-nav el-dropdown-link nav-item">
@@ -131,7 +131,7 @@ const userNavChange = (e: any) => {
             cursor: pointer;
             padding: 0 10px;
             height: 32px;
-            color: var(--el-text-color-regular);
+            color: var(--color-navbar-text);
         }
     }
     .fy-nav-right {
@@ -156,12 +156,16 @@ const userNavChange = (e: any) => {
         &:deep(.el-breadcrumb) {
             height: 14px;
             overflow: hidden;
-            .redirect .is-link {
+            .el-breadcrumb__inner.is-link {
                 font-weight: normal;
-                color: var(--el-text-color-regular);
-                cursor: unset;
+                color: var(--color-navbar-text);
                 &:hover {
-                    color: var(--el-text-color-regular);
+                    color: var(--color-navbar-text-hov);
+                }
+            }
+            .el-breadcrumb__item:last-child .el-breadcrumb__inner {
+                &:hover {
+                    color: var(--color-navbar-text);
                 }
             }
         }

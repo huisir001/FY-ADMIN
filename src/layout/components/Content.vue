@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2022-01-05 10:36:36
+ * @LastEditTime: 2022-01-11 11:13:35
 -->
 <template>
     <div class="content">
@@ -52,7 +52,7 @@ const cacheRouterNames = computed(() =>
     width: calc(100% - 20px);
     height: calc(100% - 100px);
     margin: 10px;
-    padding: 20px;
+    padding: 15px;
     overflow-y: auto;
     background: var(--color-content-bg);
     border-radius: var(--el-border-radius-small);

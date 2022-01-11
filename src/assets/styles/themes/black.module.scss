@@ -2,40 +2,47 @@
  * @Description: 黑色主题
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:37:06
- * @LastEditTime: 2021-10-26 14:51:20
+ * @LastEditTime: 2022-01-11 15:17:16
  */
 :export {
   /* primary color */
-  --el-color-primary: #409eff;
-  --el-color-primary-light-1: #53a8ff;
-  --el-color-primary-light-2: #66b1ff;
-  --el-color-primary-light-3: #79bbff;
-  --el-color-primary-light-4: #8cc5ff;
-  --el-color-primary-light-5: #a0cfff;
-  --el-color-primary-light-6: #b3d8ff;
-  --el-color-primary-light-7: #c6e2ff;
-  --el-color-primary-light-8: #d9ecff;
-  --el-color-primary-light-9: #ecf5ff;
+  --el-color-primary: #000000;
+  --el-color-primary-light-1: #111111;
+  --el-color-primary-light-2: #222222;
+  --el-color-primary-light-3: #333333;
+  --el-color-primary-light-4: #444444;
+  --el-color-primary-light-5: #555555;
+  --el-color-primary-light-6: #666666;
+  --el-color-primary-light-7: #777777;
+  --el-color-primary-light-8: #888888;
+  --el-color-primary-light-9: #999999;
 
   /* bg color */
   --el-background-color-base: #3d435a;
-
-  /* 自定义 */
-  --color-navbar-bg: var(--el-background-color-base);
-  --color-content-bg: var(--el-background-color-base);
-
-  /* tabbar */
-  --color-tabbar-bg: var(--el-background-color-base);
-  --color-tabbar-font: var(--el-text-color-secondary);
-  --color-tabbar-border: var(--color-grey-lighter);
-  --color-tabbar-circle: var(--el-border-color-base);
 
   /* 导航栏 */
   --color-sidebar-bg: #2f3447;
   --color-sidebar-font: var(--el-color-info-lighter);
   --color-sidebar-menu-bg-hover: var(--el-color-primary);
   --color-sidebar-menu-font-hover: var(--el-color-white);
-  --color-sidebar-menu-font-active: var(--el-color-primary-light-2);
+  --color-sidebar-menu-font-active: #409eff;
+
+  /* 自定义 */
+  --color-content-bg: var(--el-color-white);
+
+  /* navbar */
+  --color-navbar-bg: var(--el-background-color-base);
+  --color-navbar-text: var(--color-grey-lighter);
+  --color-navbar-text-hov: #409eff;
+
+  /* tabbar */
+  --color-tabbar-bg: var(--color-sidebar-bg);
+  --color-tabbar-font: var(--color-grey);
+  --color-tabbar-font-act: var(--el-color-white);
+  --color-tabbar-border: var(--el-background-color-base);
+  --color-tabbar-circle: var(--color-grey);
+  --color-tabbar-circle-hov: var(--color-grey-light);
+  --color-tabbar-circle-act: var(--el-color-white);
 
   /* 表格 */
   --color-table-thead-bg: #fafafa;
