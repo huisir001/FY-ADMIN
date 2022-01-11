@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2022-01-11 17:14:12
+ * @LastEditTime: 2022-01-11 18:07:07
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -186,7 +186,7 @@ const handleBtnClick = (btn: ITableTool) => {
 </style>
 <style lang="scss">
 @import '@/assets/styles/mixin.scss';
-.right-drop-menu {
+.right-drop-menu ul.el-dropdown-menu {
     @include scrollBar;
     max-height: 300px;
     overflow-y: auto;
