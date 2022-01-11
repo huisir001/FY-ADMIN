@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2022-01-11 18:07:07
+ * @LastEditTime: 2022-01-11 18:10:49
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -18,9 +18,8 @@
         <div class="right">
             <template v-for="btn in rightBtns" :key="btn.name">
                 <el-dropdown v-if="btn.dropdown" :class="{disabled:btn.disabled}"
-                    popper-class="right-drop-menu" trigger="click"
-                    :hide-on-click="btn.name==='export'" @command="handleDropdown"
-                    @visibleChange="$emit('btnClick',btn.name,$event)">
+                    popper-class="right-drop-menu" :hide-on-click="btn.name==='export'"
+                    @command="handleDropdown" @visibleChange="$emit('btnClick',btn.name,$event)">
                     <el-tooltip effect="light" :content="btn.title" placement="top"
                         :auto-close="1000">
                         <div class="tool-item el-dropdown-link" :class="{[btn.name]:true}">
