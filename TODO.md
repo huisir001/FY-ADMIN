@@ -20,4 +20,4 @@
 
 ## 問題
 - √由於vue3中不知如何銷毀被keep-alive緩存的組件，所以這裏設置max最大緩存數，達到max時最先緩存的組件會被銷毀
-- bug:表格-横向滚动-改变窗口大小显隐横向滚动时报错：Uncaught (in promise) TypeError: Cannot read properties of null (reading 'insertBefore') 及 Unhandled error during execution of scheduler flush. This is likely a Vue internals bug. 
+- √bug:表格-横向滚动-改变窗口大小显隐横向滚动时报错：Uncaught (in promise) TypeError: Cannot read properties of null (reading 'insertBefore') 及 Unhandled error during execution of scheduler flush. This is likely a Vue internals bug. 
