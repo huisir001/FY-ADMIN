@@ -2,7 +2,7 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2022-01-10 14:13:33
+ * @LastEditTime: 2022-01-11 10:51:52
 -->
 <template>
     <el-dialog custom-class="fy-edit-dialog" :modelValue="modelValue"
@@ -116,6 +116,9 @@ const open = () => {
 </script>
 
 <style lang="scss">
+.el-overlay {
+    z-index: 2000 !important;
+}
 .fy-edit-dialog.el-dialog {
     position: absolute;
     margin: 0;
