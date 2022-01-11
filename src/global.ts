@@ -71,7 +71,8 @@ declare interface IUserInfo extends IObj {
   status?: 0 | 1 | '' | '0' | '1'    //0-冻结 1-正常  ''-全部
   createTime?: string
   updateTime?: string
-  role?: string  //角色，逗号分割角色ID号
+  roleIds?: string  //角色，逗号分割角色ID号
+  roleNames?: string  //角色，逗号分割角色名称
 }
 
 /**

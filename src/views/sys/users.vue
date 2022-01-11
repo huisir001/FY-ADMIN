@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-10 17:19:17
+ * @LastEditTime: 2022-01-11 10:43:15
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -13,9 +13,9 @@
                 @reset="handleReset" />
         </template>
         <template #role="scope">
-            <el-tag v-for="role in roles.filter(item=>scope.row.role.split(',').includes(item.id))"
-                :key="role.id" size="small" type="warning" effect="plain" style="margin-right:5px;">
-                {{role.key}}
+            <el-tag v-for="role in scope.row.roleNames.split(',')" :key="role" size="small"
+                type="warning" effect="plain" style="margin-right:5px;">
+                {{role}}
             </el-tag>
         </template>
         <template #status="scope">
@@ -32,7 +32,8 @@
     <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
         :options="editOptions" top="15%" @submit="bindEditSubmit">
         <template #role="editParams">
-            <el-select v-model="editParams.val.role" placeholder="选择用户所属角色" multiple collapseTags>
+            <el-select v-model="editParams.val.roleIdArr" placeholder="选择用户所属角色" multiple
+                collapseTags>
                 <el-option v-for="role in roles" :key="role.id" :label="role.name"
                     :value="role.id" />
             </el-select>
@@ -153,7 +154,7 @@ const handleTodo = async (btn: string, index: number, row: IObj) => {
             showEditDialog.value = true
             currEditData.value = {
                 ...row,
-                role: row.role.split(','),
+                roleIdArr: row.roleIds.split(','),
             }
             break
         // 删除按钮
@@ -182,6 +183,12 @@ const roles = ref([])
 
 // 编辑完成确认
 const bindEditSubmit = async (formData: IUserInfo) => {
+    formData.roleIds = formData.roleIdArr.join(',')
+    formData.roleNames = roles.value
+        .filter((item: any) => formData.roleIdArr.includes(item.id))
+        .map((item: any) => item.name)
+        .join(',')
+    delete formData.roleIdArr
     const { ok, msg } = await saveUserInfo(formData)
     if (ok) {
         ElMessage.success(msg)

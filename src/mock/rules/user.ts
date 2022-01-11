@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2021-12-31 10:47:44
+ * @LastEditTime: 2022-01-11 10:21:38
  */
 
 import { Random } from "mockjs"
@@ -18,7 +18,8 @@ const getUserInfo = {
         phone: /^(13[0-9]|14[57]|15[0-9]|18[0-35-9])\d{8}$/,
         status: 1, //1-正常；0-停用
         avatar: Random.image('50x50', '#2f3447', '#FFF', 'A'),
-        role: "001,002,003",
+        roleIds: "001,002,003",
+        roleNames: "超级管理员,游客,测试",
         dept: { // 所属部门
             id: '002',
             name: '行政部',
