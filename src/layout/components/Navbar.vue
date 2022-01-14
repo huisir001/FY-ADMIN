@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-01-14 10:24:16
+ * @LastEditTime: 2022-01-14 14:46:01
 -->
 <template>
     <div class="navbar">
@@ -46,7 +46,7 @@ import { useStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
-import ThemeSetDrawer from '@/components/ThemeSetDrawer/index.vue'
+import ThemeSetDrawer from './ThemeSet.vue'
 
 const Store = useStore()
 const Route = useRoute()
