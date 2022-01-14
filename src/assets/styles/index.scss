@@ -2,7 +2,7 @@
  * @Description: 基础样式
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-12-20 15:32:29
+ * @LastEditTime: 2022-01-14 14:41:44
  */
 
 /* 自定义变量 */
@@ -170,4 +170,8 @@ h6 {
   &.selected > * {
     color: var(--el-color-primary);
   }
+}
+
+.el-button.is-plain {
+  --el-button-border-color: var(--el-color-primary-light-8);
 }
