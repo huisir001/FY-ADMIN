@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2022-01-12 18:04:33
+ * @LastEditTime: 2022-01-14 10:19:06
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -19,7 +19,7 @@
             <template v-for="btn in rightBtns" :key="btn.name">
                 <el-dropdown v-if="btn.dropdown" :class="{disabled:btn.disabled}"
                     popper-class="right-drop-menu" :hide-on-click="btn.name==='export'"
-                    trigger="click" @command="handleDropdown"
+                    trigger="click" max-height="300px" @command="handleDropdown"
                     @visibleChange="$emit('btnClick',btn.name,$event)">
                     <el-tooltip effect="light" :content="btn.title" placement="top"
                         :auto-close="1000">
@@ -185,11 +185,7 @@ const handleBtnClick = (btn: ITableTool) => {
 }
 </style>
 <style lang="scss">
-@import '@/assets/styles/mixin.scss';
 .right-drop-menu ul.el-dropdown-menu {
-    @include scrollBar;
-    max-height: 300px;
-    overflow-y: auto;
     .el-checkbox__label {
         color: unset !important;
     }

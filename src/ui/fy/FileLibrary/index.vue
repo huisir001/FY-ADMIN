@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2022-01-10 14:00:12
+ * @LastEditTime: 2022-01-14 10:29:43
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -54,7 +54,7 @@
                             </el-upload>
                         </div>
                         <template #reference>
-                            <div class="thumbnail upload">
+                            <div class="thumbnail upload"  @click="popoverVisible = !popoverVisible">
                                 <fy-icon name="plus" size="30"
                                     color="var(--el-text-color-placeholder)" />
                             </div>

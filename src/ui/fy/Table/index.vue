@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2022-01-10 16:57:36
+ * @LastEditTime: 2022-01-14 13:53:29
 -->
 <template>
     <!-- 工具栏 -->
@@ -15,7 +15,7 @@
     <!-- 继承的属性配置详见文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-attributes -->
     <!-- 继承的事件文档：https://element-plus.gitee.io/zh-CN/component/table.html#table-events -->
     <div ref="tableBox" :style="{height:height,textAlign:'right'}">
-        <el-table ref="elTable" v-bind="$attrs" v-loading="loading" size="small" border
+        <el-table ref="myTable" v-bind="$attrs" v-loading="loading" size="small" border
             :max-height="tableCalcHeight" @selection-change="handleSelectionChange">
             <el-table-column v-for="col in cols.filter((col) => !col.hide)"
                 :key="col.prop||col.slot" v-bind="col" :column-key="col.prop||col.slot">
@@ -100,7 +100,7 @@ export default defineComponent({
     emits: ['toolsClick', 'bindRefresh', 'pageSizeChange', 'pageCurrChange'],
     setup({ limits, height, page }, { emit }) {
         /* 表格对象 */
-        const elTable: Ref<IObj> = ref({})
+        const myTable: Ref<IObj> = ref({})
 
         /* 工具栏点击 */
         const handleBtnClick = (arg1: string, arg2: any) => {
@@ -139,7 +139,7 @@ export default defineComponent({
 
         // 监听多选
         const handleSelectionChange = (val: any) => {
-            elTable.value.selection = val
+            myTable.value.selection = val
         }
         return {
             handleBtnClick,
@@ -148,8 +148,8 @@ export default defineComponent({
             limit,
             handleSizeChange,
             handleCurrChange,
-            elTable,
-            tableRef: computed(() => elTable), // 这里使用computed对elTable进行跟踪，传递到tools子组件
+            myTable,
+            tableRef: computed(() => myTable), // 这里使用computed对elTable进行跟踪，传递到tools子组件
             handleSelectionChange,
         }
     },
