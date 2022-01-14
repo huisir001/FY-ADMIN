@@ -2,7 +2,7 @@
  * @Description: vue-cli配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-08 17:34:47
- * @LastEditTime: 2021-10-21 18:49:03
+ * @LastEditTime: 2022-01-14 14:54:41
  */
 const webpack = require('webpack')
 const { TITLE, CSSCDN, JSCDN, GLOBAL } = require("./src/settings/process")
@@ -71,7 +71,7 @@ module.exports = {
         // 配置图片文件支持
         config.module
             .rule('images')
-            .test(/\.(png|jpe?g|gif|webp|ico|cur)(\?.*)?$/)
+            .test(/\.(png|jpe?g|gif|webp|ico|cur|svg)(\?.*)?$/)
     },
     /* 配置代理解决跨域测试 */
     // devServer: {
