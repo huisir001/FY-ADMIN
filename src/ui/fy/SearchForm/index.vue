@@ -2,11 +2,11 @@
  * @Description: 搜索表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-04 16:39:23
- * @LastEditTime: 2021-12-20 11:30:05
+ * @LastEditTime: 2022-01-14 10:08:25
 -->
 <template>
     <el-form ref="elForm" :model="params" class="fy-search-form" :inline="inline"
-        label-width="auto">
+        label-width="78px">
         <template v-for="item in options" :key="item.key">
             <el-form-item v-if="!item.hide" :label="item.label" :prop="item.key" :rules="item.rules">
                 <slot v-if="item.slot" :name="item.slot" />
