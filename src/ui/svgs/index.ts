@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2021-12-30 10:56:38
+ * @LastEditTime: 2022-01-17 17:42:59
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -34,7 +34,9 @@ import {
     Menu,
     QuestionFilled,
     ArrowDown,
-    ArrowUp
+    ArrowUp,
+    Grid,
+    FullScreen
 } from '@element-plus/icons'
 
 /**
@@ -43,6 +45,7 @@ import {
 import Theme from './inc/Theme.vue'
 import Export from './inc/Export.vue'
 import Role from './inc/Role.vue'
+import Layout from './inc/Layout.vue'
 
 
 const components = [
@@ -69,10 +72,13 @@ const components = [
     QuestionFilled,
     ArrowDown,
     ArrowUp,
+    Grid,
+    FullScreen,
     /* my-icons */
     Theme,
     Export,
-    Role
+    Role,
+    Layout
 ]
 
 export default (app: App<any>) => {
