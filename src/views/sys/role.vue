@@ -2,28 +2,30 @@
  * @Description: 角色管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-10 16:56:31
+ * @LastEditTime: 2022-01-17 16:20:30
 -->
 <template>
-    <fy-table :loading="loading" :cols="tableCols" :data="searchData" :tools="tableTools"
-        height="calc(100% - 48px)" @toolsClick="toolsBtnClick">
-        <template #status="scope">
-            <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
-            <el-tag v-else size="small" type="danger">停用</el-tag>
-        </template>
-        <template #todoHead>
-            <!-- 不分页情况下可以使用本地模糊搜索 -->
-            <fy-fuzzy-search v-model="searchData" :data="tableData" />
-        </template>
-        <template #todo="scope">
-            <fy-row-btns :contains="['edit', 'del']"
-                @todo="handleTodo($event,scope.$index,scope.row)" />
-        </template>
-    </fy-table>
-    <!-- 编辑弹窗 -->
-    <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
-        :options="editOptions" top="15%" @submit="bindEditSubmit">
-    </fy-edit-dialog>
+    <fy-container>
+        <fy-table :loading="loading" :cols="tableCols" :data="searchData" :tools="tableTools"
+            height="calc(100% - 48px)" @toolsClick="toolsBtnClick">
+            <template #status="scope">
+                <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
+                <el-tag v-else size="small" type="danger">停用</el-tag>
+            </template>
+            <template #todoHead>
+                <!-- 不分页情况下可以使用本地模糊搜索 -->
+                <fy-fuzzy-search v-model="searchData" :data="tableData" />
+            </template>
+            <template #todo="scope">
+                <fy-row-btns :contains="['edit', 'del']"
+                    @todo="handleTodo($event,scope.$index,scope.row)" />
+            </template>
+        </fy-table>
+        <!-- 编辑弹窗 -->
+        <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
+            :options="editOptions" top="15%" @submit="bindEditSubmit">
+        </fy-edit-dialog>
+    </fy-container>
 </template>
 
 <script lang="ts">
