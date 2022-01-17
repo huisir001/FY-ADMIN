@@ -2,7 +2,7 @@
  * @Description: 内容区，路由必备
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-17 14:54:26
- * @LastEditTime: 2022-01-17 16:19:03
+ * @LastEditTime: 2022-01-17 17:09:40
 -->
 <template>
     <div class="full-cont">
@@ -28,8 +28,8 @@ defineProps({
 <style scoped lang="scss">
 .full-cont {
     width: 100%;
+    height: 100%;
     padding: 15px;
-    min-height: 100%;
     background: v-bind(color);
     border-radius: var(--el-border-radius-small);
 }
