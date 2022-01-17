@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2022-01-17 15:54:12
+ * @LastEditTime: 2022-01-17 18:11:20
 -->
 <template>
     <div class="page-view">
@@ -52,13 +52,10 @@ const cacheRouterNames = computed(() =>
 </script>
  
 <style scoped lang="scss">
-@import '@/assets/styles/mixin.scss';
 .page-view {
-    @include scrollBar;
     width: calc(100% - 20px);
     height: calc(100% - 100px);
     margin: 10px;
-    overflow-y: auto;
     &.home {
         height: calc(100% - 70px);
     }
