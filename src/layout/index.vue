@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2022-01-05 11:27:30
+ * @LastEditTime: 2022-01-17 15:52:40
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -15,7 +15,7 @@
         <div class="right">
             <Navbar />
             <Tabbar v-if="showTabbar" />
-            <Content :class="{home:!showTabbar}" />
+            <PageView :class="{home:!showTabbar}" />
         </div>
     </div>
 </template>
@@ -26,7 +26,7 @@ import { useStore } from '@/store'
 import Sidebar from './components/Sidebar.vue'
 import Navbar from './components/Navbar.vue'
 import Tabbar from './components/Tabbar.vue'
-import Content from './components/Content.vue'
+import PageView from './components/PageView.vue'
 
 const Store = useStore()
 

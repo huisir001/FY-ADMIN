@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-01-14 14:46:01
+ * @LastEditTime: 2022-01-17 15:53:05
 -->
 <template>
     <div class="navbar">
@@ -39,6 +39,12 @@
     </div>
     <ThemeSetDrawer v-model="showThemeDrawer" />
 </template>
+
+<script lang="ts">
+export default {
+    name: 'Navbar',
+}
+</script>
  
 <script lang="ts" setup>
 import { computed, ref } from 'vue'

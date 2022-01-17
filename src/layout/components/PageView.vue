@@ -2,10 +2,10 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2022-01-11 11:13:35
+ * @LastEditTime: 2022-01-17 15:54:12
 -->
 <template>
-    <div class="content">
+    <div class="page-view">
         <router-view v-slot="{ Component }">
             <!-- 由於vue3中不知如何銷毀被緩存的組件，所以這裏設置max最大緩存數，達到max時最先緩存的組件會被銷毀 -->
             <!-- 这里的include中的name注意是组件的name,而不是路由的name! -->
@@ -15,6 +15,12 @@
         </router-view>
     </div>
 </template>
+
+<script lang="ts">
+export default {
+    name: 'PageView',
+}
+</script>
  
 <script lang="ts" setup>
 import { computed } from 'vue'
@@ -47,15 +53,12 @@ const cacheRouterNames = computed(() =>
  
 <style scoped lang="scss">
 @import '@/assets/styles/mixin.scss';
-.content {
+.page-view {
     @include scrollBar;
     width: calc(100% - 20px);
     height: calc(100% - 100px);
     margin: 10px;
-    padding: 15px;
     overflow-y: auto;
-    background: var(--color-content-bg);
-    border-radius: var(--el-border-radius-small);
     &.home {
         height: calc(100% - 70px);
     }

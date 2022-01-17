@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2022-01-11 15:14:27
+ * @LastEditTime: 2022-01-17 15:53:38
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -31,6 +31,12 @@
         </template>
     </div>
 </template>
+
+<script lang="ts">
+export default {
+    name: 'Tabbar',
+}
+</script>
  
 <script lang="ts" setup>
 import { computed, nextTick, ref, watch } from 'vue'

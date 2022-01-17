@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2022-01-05 11:32:25
+ * @LastEditTime: 2022-01-17 15:53:24
 -->
 <template>
     <div class="sidebar">
@@ -58,6 +58,12 @@
         </div>
     </div>
 </template>
+
+<script lang="ts">
+export default {
+    name: 'Sidebar',
+}
+</script>
  
 <script lang="ts" setup>
 import { computed } from 'vue'
