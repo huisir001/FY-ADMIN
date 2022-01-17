@@ -140,6 +140,7 @@ export interface IFormOption {
         placeholder?: string
         //year/month/date/dates/datetime/week/datetimerange/daterange/monthrange
         type?: string
+        autocomplete?: "on" | "off"
         rangeSeparator?: string
         startPlaceholder?: string
         endPlaceholder?: string

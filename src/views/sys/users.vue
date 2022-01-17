@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-11 10:43:15
+ * @LastEditTime: 2022-01-17 11:14:06
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -125,6 +125,7 @@ const toolsBtnClick = async (btn: TOptionOfTools, flag: any) => {
     // 新增
     if (btn === 'add') {
         editDialogTitle.value = '新增用户'
+        editOptions.find((item) => item.key == 'password')!.hide = false
         showEditDialog.value = true
         currEditData.value = {}
     }
@@ -151,6 +152,7 @@ const handleTodo = async (btn: string, index: number, row: IObj) => {
         // 编辑按钮
         case 'edit':
             editDialogTitle.value = '编辑用户'
+            editOptions.find((item) => item.key == 'password')!.hide = true
             showEditDialog.value = true
             currEditData.value = {
                 ...row,

@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-10 16:55:03
+ * @LastEditTime: 2022-01-17 10:56:48
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
@@ -113,6 +113,11 @@ const toolsBtnClick = (btn: TOptionOfTools) => {
     if (btn === 'refresh') {
         getMenuList()
     }
+    if (btn === 'add') {
+        editDialogTitle.value = '新增菜单'
+        currEditData.value = {}
+        showEditDialog.value = true
+    }
 }
 
 // 位置移动
@@ -126,13 +131,17 @@ const handleTodo = async (btn: string, index: number, row: IObj) => {
         // 编辑按钮
         case 'edit':
             console.log('编辑', row)
+            editDialogTitle.value = '编辑菜单'
             menuTypeChange(row.type)
             currEditData.value = row
             showEditDialog.value = true
             break
         // 新增按钮
         case 'add':
-            console.log('新增', row)
+            currEditData.value = {
+                parentId: row.id,
+            }
+            showEditDialog.value = true
             break
         // 删除按钮
         case 'del':

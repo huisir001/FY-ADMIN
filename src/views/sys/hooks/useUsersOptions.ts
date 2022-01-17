@@ -2,7 +2,7 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2022-01-17 10:13:03
+ * @LastEditTime: 2022-01-17 11:10:02
  */
 import { IFormOption, ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -195,6 +195,21 @@ export default () => {
                 required: true,
                 trigger: 'blur',
                 message: '账号不能为空'
+            }
+        },
+        {
+            label: '密码',
+            component: 'input',
+            key: 'password',
+            props: {
+                placeholder: '请输入密码',
+                type: 'password',
+                autocomplete: 'off'
+            },
+            rules: {
+                required: true,
+                trigger: 'blur',
+                message: '密码不能为空'
             }
         },
         {
