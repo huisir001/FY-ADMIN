@@ -2,7 +2,7 @@
  * @Description:ElementUI按需引入
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2022-01-17 14:20:44
+ * @LastEditTime: 2022-01-18 16:23:18
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -42,6 +42,7 @@ import {
     ElTree,
     ElCol,
     ElRow,
+    ElCard
 } from 'element-plus'
 
 const components = [
@@ -77,6 +78,7 @@ const components = [
     ElTree,
     ElCol,
     ElRow,
+    ElCard
 ]
 
 interface IElementUIOption {
