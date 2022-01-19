@@ -2,7 +2,7 @@
  * @Description: 卡片组件
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-17 17:01:24
- * @LastEditTime: 2022-01-18 18:06:33
+ * @LastEditTime: 2022-01-19 11:28:03
 -->
 <template>
     <el-row>
@@ -21,6 +21,9 @@
                 <p>对比的基本思想是，要避免页面上的元素太过相似。</p>
                 <p>如果元素（字体、颜色、大小、线宽、形状、空间等）不相同，那就干脆让它们截然不同。</p>
                 <p>要让页面引人注意，对比通常是最重要的一个因素...</p>
+                <p>对比的基本思想是，要避免页面上的元素太过相似。</p>
+                <p>如果元素（字体、颜色、大小、线宽、形状、空间等）不相同，那就干脆让它们截然不同。</p>
+                <p>要让页面引人注意，对比通常是最重要的一个因素...</p>
             </fy-card>
         </el-col>
         <el-col :span="12">
@@ -31,6 +34,71 @@
                 <p>对比的基本思想是，要避免页面上的元素太过相似。</p>
                 <p>如果元素（字体、颜色、大小、线宽、形状、空间等）不相同，那就干脆让它们截然不同。</p>
                 <p>要让页面引人注意，对比通常是最重要的一个因素...</p>
+                <p>对比的基本思想是，要避免页面上的元素太过相似。</p>
+                <p>如果元素（字体、颜色、大小、线宽、形状、空间等）不相同，那就干脆让它们截然不同。</p>
+                <p>要让页面引人注意，对比通常是最重要的一个因素...</p>
+            </fy-card>
+        </el-col>
+    </el-row>
+    <el-row :gutter="10" class="card-row">
+        <el-col :md="6" :sm="12">
+            <fy-card :type="2" title="销售额">
+                <template #headerRight>
+                    <el-tag>月</el-tag>
+                </template>
+                <h2 style="font-size:30px;line-height:2">￥12,000</h2>
+                <el-progress :text-inside="true" :stroke-width="15" :percentage="53"
+                    status="success" />
+                <el-divider style="margin:20px 0 10px 0"></el-divider>
+                <div class="flex-between">
+                    <span>总销售额</span>
+                    <span>68万</span>
+                </div>
+            </fy-card>
+        </el-col>
+        <el-col :md="6" :sm="12">
+            <fy-card :type="2" title="销售额">
+                <template #headerRight>
+                    <el-tag>月</el-tag>
+                </template>
+                <h2 style="font-size:30px;line-height:2">￥12,000</h2>
+                <el-progress :text-inside="true" :stroke-width="15" :percentage="53"
+                    status="success" />
+                <el-divider style="margin:20px 0 10px 0"></el-divider>
+                <div class="flex-between">
+                    <span>总销售额</span>
+                    <span>68万</span>
+                </div>
+            </fy-card>
+        </el-col>
+        <el-col :md="6" :sm="12">
+            <fy-card :type="2" title="销售额">
+                <template #headerRight>
+                    <el-tag>月</el-tag>
+                </template>
+                <h2 style="font-size:30px;line-height:2">￥12,000</h2>
+                <el-progress :text-inside="true" :stroke-width="15" :percentage="53"
+                    status="success" />
+                <el-divider style="margin:20px 0 10px 0"></el-divider>
+                <div class="flex-between">
+                    <span>总销售额</span>
+                    <span>68万</span>
+                </div>
+            </fy-card>
+        </el-col>
+        <el-col :md="6" :sm="12">
+            <fy-card :type="2" title="销售额">
+                <template #headerRight>
+                    <el-tag>月</el-tag>
+                </template>
+                <h2 style="font-size:30px;line-height:2">￥12,000</h2>
+                <el-progress :text-inside="true" :stroke-width="15" :percentage="53"
+                    status="success" />
+                <el-divider style="margin:20px 0 10px 0"></el-divider>
+                <div class="flex-between">
+                    <span>总销售额</span>
+                    <span>68万</span>
+                </div>
             </fy-card>
         </el-col>
     </el-row>
@@ -66,6 +134,14 @@ const list = [
     height: 200px;
 }
 .el-row {
+    margin-bottom: 10px;
+}
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card-row:deep(.el-col) {
     margin-bottom: 10px;
 }
 </style>
