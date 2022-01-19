@@ -2,39 +2,37 @@
  * @Description: 部门管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-17 16:18:53
+ * @LastEditTime: 2022-01-19 10:49:29
 -->
 <template>
-    <fy-container>
-        <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
-            :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick"
-            @filter-change="filterChange">
-            <template #status="scope">
-                <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
-                <el-tag v-else size="small" type="danger">停用</el-tag>
-            </template>
-            <template #todoHead>
-                <!-- 不分页情况下可以使用本地模糊搜索 -->
-                <fy-fuzzy-search v-model="searchData" :data="tableData" />
-            </template>
-            <template #todo="scope">
-                <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
-            </template>
-        </fy-table>
-        <!-- 编辑弹窗 -->
-        <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
-            :options="editOptions" top="15%" @submit="bindEditSubmit">
-            <template #parent="editParams">
-                <fy-tree-select v-model="editParams.val.parentId"
-                    :label="treeSelectLabel(editParams.val.parentId)" :data="treeSlectData"
-                    :option="{children:'children',label:'name'}" />
-            </template>
-        </fy-edit-dialog>
-    </fy-container>
+    <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
+        :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick"
+        @filter-change="filterChange">
+        <template #status="scope">
+            <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
+            <el-tag v-else size="small" type="danger">停用</el-tag>
+        </template>
+        <template #todoHead>
+            <!-- 不分页情况下可以使用本地模糊搜索 -->
+            <fy-fuzzy-search v-model="searchData" :data="tableData" />
+        </template>
+        <template #todo="scope">
+            <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
+        </template>
+    </fy-table>
+    <!-- 编辑弹窗 -->
+    <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
+        :options="editOptions" top="15%" @submit="bindEditSubmit">
+        <template #parent="editParams">
+            <fy-tree-select v-model="editParams.val.parentId"
+                :label="treeSelectLabel(editParams.val.parentId)" :data="treeSlectData"
+                :option="{children:'children',label:'name'}" />
+        </template>
+    </fy-edit-dialog>
 </template>
 
 <script lang="ts">
-export default { name: 'Dept' }
+export default { name: 'Dept', fullCont: true }
 </script>
  
 <script lang="ts" setup>

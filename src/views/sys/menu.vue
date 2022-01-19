@@ -2,68 +2,66 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-17 16:20:19
+ * @LastEditTime: 2022-01-19 10:49:37
 -->
 <template>
-    <fy-container>
-        <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
-            :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick">
-            <template #title="scope">
-                <span>{{scope.row.title}}</span>
-                <div class="sort-btn">
-                    <el-button type="text" @click="handleMoveDowm(scope.$index, scope.row)">
-                        <fy-icon name="sort-down" size="13" color="var(--el-color-primary)" />
-                    </el-button>
-                    <el-button type="text" @click="handleMoveUp(scope.$index, scope.row)">
-                        <fy-icon name="sort-up" size="13" color="var(--el-color-primary)" />
-                    </el-button>
-                </div>
-            </template>
-            <template #icon="scope">
-                <fy-icon v-if="scope.row.icon" :name="scope.row.icon" size="14" :height="16" />
-            </template>
-            <template #status="scope">
-                <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
-                <el-tag v-else size="small" type="danger">停用</el-tag>
-            </template>
-            <template #todoHead>
-                <!-- 不分页情况下可以使用本地模糊搜索 -->
-                <fy-fuzzy-search v-model="searchData" :data="menuList" />
-            </template>
-            <template #todo="scope">
-                <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
-            </template>
-        </fy-table>
-        <!-- 编辑弹窗 -->
-        <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
-            :options="editOptions" top="13%" @submit="bindEditSubmit">
-            <template #parent="editParams">
-                <fy-tree-select v-model="editParams.val.parentId"
-                    :label="treeSelectLabel(editParams.val.parentId)" :data="treeSlectData"
-                    :option="{children:'children',label:'title'}" />
-            </template>
-            <template #icon="editParams">
-                <fy-icon-select v-model="editParams.val.icon" />
-            </template>
-            <template #type="editParams">
-                <el-select v-model="editParams.val.type" @change="menuTypeChange">
-                    <el-option label="目录" :value="MenuType.cat" />
-                    <el-option label="路由" :value="MenuType.route" />
-                    <el-option label="链接" :value="MenuType.link" />
-                    <el-option label="按钮" :value="MenuType.button" />
-                </el-select>
-            </template>
-            <template #viewPath="editParams">
-                <el-select v-model="editParams.val.viewPath" placeholder="选择路由所指向的文件路径">
-                    <el-option v-for="path in viewPaths" :key="path" :label="path" :value="path" />
-                </el-select>
-            </template>
-        </fy-edit-dialog>
-    </fy-container>
+    <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
+        :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick">
+        <template #title="scope">
+            <span>{{scope.row.title}}</span>
+            <div class="sort-btn">
+                <el-button type="text" @click="handleMoveDowm(scope.$index, scope.row)">
+                    <fy-icon name="sort-down" size="13" color="var(--el-color-primary)" />
+                </el-button>
+                <el-button type="text" @click="handleMoveUp(scope.$index, scope.row)">
+                    <fy-icon name="sort-up" size="13" color="var(--el-color-primary)" />
+                </el-button>
+            </div>
+        </template>
+        <template #icon="scope">
+            <fy-icon v-if="scope.row.icon" :name="scope.row.icon" size="14" :height="16" />
+        </template>
+        <template #status="scope">
+            <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
+            <el-tag v-else size="small" type="danger">停用</el-tag>
+        </template>
+        <template #todoHead>
+            <!-- 不分页情况下可以使用本地模糊搜索 -->
+            <fy-fuzzy-search v-model="searchData" :data="menuList" />
+        </template>
+        <template #todo="scope">
+            <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
+        </template>
+    </fy-table>
+    <!-- 编辑弹窗 -->
+    <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
+        :options="editOptions" top="13%" @submit="bindEditSubmit">
+        <template #parent="editParams">
+            <fy-tree-select v-model="editParams.val.parentId"
+                :label="treeSelectLabel(editParams.val.parentId)" :data="treeSlectData"
+                :option="{children:'children',label:'title'}" />
+        </template>
+        <template #icon="editParams">
+            <fy-icon-select v-model="editParams.val.icon" />
+        </template>
+        <template #type="editParams">
+            <el-select v-model="editParams.val.type" @change="menuTypeChange">
+                <el-option label="目录" :value="MenuType.cat" />
+                <el-option label="路由" :value="MenuType.route" />
+                <el-option label="链接" :value="MenuType.link" />
+                <el-option label="按钮" :value="MenuType.button" />
+            </el-select>
+        </template>
+        <template #viewPath="editParams">
+            <el-select v-model="editParams.val.viewPath" placeholder="选择路由所指向的文件路径">
+                <el-option v-for="path in viewPaths" :key="path" :label="path" :value="path" />
+            </el-select>
+        </template>
+    </fy-edit-dialog>
 </template>
 
 <script lang="ts">
-export default { name: 'Menu' }
+export default { name: 'Menu', fullCont: true }
 </script>
  
 <script lang="ts" setup>

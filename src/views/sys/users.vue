@@ -2,50 +2,47 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-17 16:20:43
+ * @LastEditTime: 2022-01-19 10:49:52
 -->
 <template>
-    <fy-container>
-        <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
-            :total="total" :tools="tableTools" height="calc(100% - 48px)"
-            @toolsClick="toolsBtnClick" @pageSizeChange="pageSizeChange"
-            @pageCurrChange="pageCurrChange">
-            <template #search>
-                <fy-search-form v-model="searchParams" :options="searchOptions"
-                    @submit="handleSearch" @reset="handleReset" />
-            </template>
-            <template #role="scope">
-                <el-tag v-for="role in scope.row.roleNames.split(',')" :key="role" size="small"
-                    type="warning" effect="plain" style="margin-right:5px;">
-                    {{role}}
-                </el-tag>
-            </template>
-            <template #status="scope">
-                <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
-                <el-tag v-else-if="scope.row.status==0" size="small" type="danger">冻结</el-tag>
-                <el-tag v-else size="small" type="danger">暂无</el-tag>
-            </template>
-            <template #todo="scope">
-                <fy-row-btns :contains="['edit','del']"
-                    @todo="handleTodo($event,scope.$index,scope.row)" />
-            </template>
-        </fy-table>
-        <!-- 编辑弹窗 -->
-        <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
-            :options="editOptions" top="15%" @submit="bindEditSubmit">
-            <template #role="editParams">
-                <el-select v-model="editParams.val.roleIdArr" placeholder="选择用户所属角色" multiple
-                    collapseTags>
-                    <el-option v-for="role in roles" :key="role.id" :label="role.name"
-                        :value="role.id" />
-                </el-select>
-            </template>
-        </fy-edit-dialog>
-    </fy-container>
+    <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
+        :total="total" :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick"
+        @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
+        <template #search>
+            <fy-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
+                @reset="handleReset" />
+        </template>
+        <template #role="scope">
+            <el-tag v-for="role in scope.row.roleNames.split(',')" :key="role" size="small"
+                type="warning" effect="plain" style="margin-right:5px;">
+                {{role}}
+            </el-tag>
+        </template>
+        <template #status="scope">
+            <el-tag v-if="scope.row.status==1" size="small">正常</el-tag>
+            <el-tag v-else-if="scope.row.status==0" size="small" type="danger">冻结</el-tag>
+            <el-tag v-else size="small" type="danger">暂无</el-tag>
+        </template>
+        <template #todo="scope">
+            <fy-row-btns :contains="['edit','del']"
+                @todo="handleTodo($event,scope.$index,scope.row)" />
+        </template>
+    </fy-table>
+    <!-- 编辑弹窗 -->
+    <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
+        :options="editOptions" top="15%" @submit="bindEditSubmit">
+        <template #role="editParams">
+            <el-select v-model="editParams.val.roleIdArr" placeholder="选择用户所属角色" multiple
+                collapseTags>
+                <el-option v-for="role in roles" :key="role.id" :label="role.name"
+                    :value="role.id" />
+            </el-select>
+        </template>
+    </fy-edit-dialog>
 </template>
 
 <script lang="ts">
-export default { name: 'Users' }
+export default { name: 'Users', fullCont: true }
 </script>
  
 <script lang="ts" setup>
