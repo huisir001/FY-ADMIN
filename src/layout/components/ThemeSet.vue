@@ -2,7 +2,7 @@
  * @Description: 主题设置抽屉
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-23 14:38:39
- * @LastEditTime: 2022-01-14 14:45:36
+ * @LastEditTime: 2022-01-24 16:43:09
 -->
 <template>
     <el-drawer title="主题配置" :size="280" custom-class="fy-theme-drawer">
@@ -35,7 +35,7 @@ export default { name: 'ThemeSetDrawer' }
  
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { THEME_OPTIONS } from '@/settings'
+import { THEME_OPTIONS } from 'settings'
 import { useStore } from '@/store'
 
 const Store = useStore()

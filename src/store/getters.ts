@@ -2,10 +2,10 @@
  * @Description:getters-包装 state 数据
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-18 17:04:48
- * @LastEditTime: 2021-10-21 18:32:33
+ * @LastEditTime: 2022-01-24 16:43:16
  */
 import LocalCache from '@/utils/LocalCache'
-import { STORAGE_OPTIONS } from '@/settings'
+import { STORAGE_OPTIONS } from 'settings'
 export default {
     /**
      * 取Token

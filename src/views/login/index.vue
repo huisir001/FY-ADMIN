@@ -2,7 +2,7 @@
  * @Description: 登录
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 14:52:06
- * @LastEditTime: 2022-01-07 15:29:22
+ * @LastEditTime: 2022-01-24 16:43:32
 -->
 <template>
     <div class="login">
@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import { TITLE } from '@/settings'
+import { TITLE } from 'settings'
 import { reactive, ref, Ref } from 'vue'
 import { useStore } from '@/store'
 import { FormRulesMap } from 'element-plus/lib/components/form/src/form.type'

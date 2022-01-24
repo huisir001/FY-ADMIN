@@ -2,9 +2,11 @@
  * @Description: 辅助 
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-31 10:19:03
- * @LastEditTime: 2021-12-31 10:20:45
+ * @LastEditTime: 2022-01-24 19:21:26
  */
 import { RouteRecordRaw } from 'vue-router'
+const viewModules = import.meta.glob('../views/**/*.vue')
+
 /**
  * menuItem => routeItem
  */
@@ -14,7 +16,7 @@ export const menu2Route = (menu: IMenu, menuList: IMenu[], Layout: any): RouteRe
     return {
         path,
         name: id,
-        component: parentId ? () => import(`@/${viewPath}`) : Layout,
+        component: parentId ? () => viewModules[`../${viewPath}`] : Layout,
         ...(redirectId ? {
             redirect: { name: menuList.find((item: IMenu) => item.id === redirectId)!.id }
         } : {}),

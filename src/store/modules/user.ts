@@ -2,9 +2,9 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2021-12-31 10:21:13
+ * @LastEditTime: 2022-01-24 16:43:25
  */
-import { STORAGE_OPTIONS } from '@/settings'
+import { STORAGE_OPTIONS } from 'settings'
 import { ActionContext } from 'vuex'
 import { doLogin, doLogout } from '@/api/user'
 import LocalCache from '@/utils/LocalCache'

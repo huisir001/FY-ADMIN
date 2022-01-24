@@ -1,8 +1,9 @@
+/// <reference types="vite/client" />
 /*
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-12-30 10:23:26
+ * @LastEditTime: 2022-01-24 18:25:34
  */
 
 /**
@@ -47,14 +48,11 @@ declare interface IObj {
 declare type IPromiseFunc = (...params: any) => Promise<any>
 
 /**
- * vue.config.js中定义的全局变量名称(编译时全局变量)
+ * vite.config.js中定义的全局变量名称(编译时全局变量)
  */
-declare const $GLOBAL: {
-  BASE_API?: string
-  BASE_URL?: string
-  NODE_ENV?: string
-  VIEW_PATHS: string[]
-}
+declare const __BASE_API__: string
+declare const __NODE_ENV__: string
+declare const __VIEW_PATHS__: string[]
 
 /**
  * 用户数据

@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-19 10:49:37
+ * @LastEditTime: 2022-01-24 17:02:25
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
@@ -73,7 +73,7 @@ import useMenuOptions from './hooks/useMenuOptions'
 import { ElMessage } from 'element-plus'
 
 // 文件路径
-const viewPaths = $GLOBAL.VIEW_PATHS
+const viewPaths = __VIEW_PATHS__
 // 表格原始数据
 const tableRawData = ref([])
 // 菜单列表tree

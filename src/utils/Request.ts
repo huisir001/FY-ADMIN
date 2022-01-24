@@ -2,7 +2,7 @@
  * @Description: axios中间件（初始化和全局配置）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2020-08-06 13:16:24
- * @LastEditTime: 2021-11-05 15:44:42
+ * @LastEditTime: 2022-01-24 17:01:43
  */
 // tslint:disable:no-console
 import { ElMessage } from 'element-plus'
@@ -10,12 +10,12 @@ import axios from 'axios'
 // import PageLoading from './PageLoading'
 import LocalCache from './LocalCache'
 import { store } from '@/store'
-import { TOKEN_OPTIONS, STORAGE_OPTIONS } from '@/settings'
+import { TOKEN_OPTIONS, STORAGE_OPTIONS } from 'settings'
 
 
 //初始化
 const Axios: any = axios.create({
-    baseURL: $GLOBAL.BASE_API, //api路径
+    baseURL: __BASE_API__, //api路径
     withCredentials: true, // 跨域时允许设置cookie
     timeout: 10000,      //超时
 })

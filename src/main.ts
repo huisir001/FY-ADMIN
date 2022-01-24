@@ -2,7 +2,7 @@
  * @Description: 入口
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2021-11-22 10:40:08
+ * @LastEditTime: 2022-01-24 18:50:20
  */
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -18,7 +18,7 @@ import './assets/styles/index.scss';
 // Mockjs
 // tslint:disable:align
 // tslint:disable:no-var-requires
-; ($GLOBAL.NODE_ENV === "development") && require('./mock')
+; (__NODE_ENV__ === "development") && import('./mock')
 
 createApp(App)
     .use(options)

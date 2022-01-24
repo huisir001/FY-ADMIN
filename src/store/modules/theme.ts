@@ -2,9 +2,9 @@
  * @Description: 主题配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:27:56
- * @LastEditTime: 2021-10-21 18:32:46
+ * @LastEditTime: 2022-01-24 16:43:19
  */
-import { STORAGE_OPTIONS, THEME_OPTIONS } from '@/settings'
+import { STORAGE_OPTIONS, THEME_OPTIONS } from 'settings'
 import LocalCache from '@/utils/LocalCache'
 import DomCreate from '@/utils/DomCreate'
 
