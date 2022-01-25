@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2022-01-17 15:52:40
+ * @LastEditTime: 2022-01-25 14:43:39
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -83,7 +83,7 @@ $--transition-width: width var(--el-transition-duration);
         height: 100%;
         width: 100%;
         background: rgba(0, 0, 0, 0.35);
-        z-index: 5;
+        z-index: 9998;
     }
     .left {
         transition: $--transition-width;
@@ -108,7 +108,7 @@ $--transition-width: width var(--el-transition-duration);
         .left {
             position: absolute;
             width: 0;
-            z-index: 999;
+            z-index: 9999;
             top: 0;
             left: 0;
             :deep(.logo-box) {
@@ -122,7 +122,7 @@ $--transition-width: width var(--el-transition-duration);
     &.sidebarHide:not(.collapse) {
         .left {
             position: absolute;
-            z-index: 999;
+            z-index: 9999;
             top: 0;
             left: 0;
         }
