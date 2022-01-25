@@ -2,7 +2,7 @@
  * @Description: UI组件依赖工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-17 11:03:27
- * @LastEditTime: 2021-12-27 10:48:53
+ * @LastEditTime: 2022-01-25 17:23:13
  */
 
 /**
@@ -146,4 +146,50 @@ export const boxMove = ({ box, parent, target }: { box: HTMLElement, parent?: HT
     parentBoxEl.addEventListener("mouseup", () => {
         isDrop = false; //设置为false不可移动
     }, false)
+}
+
+/**
+ * 启动全屏
+ * launchFullScreen(document.documentElement); // 整个网页
+ */
+export const launchFullScreen = (element: HTMLElement | any) => {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    }
+}
+
+/**
+ * 退出全屏
+ */
+export const exitFullscreen = () => {
+    const doc: any = document
+    if (doc.exitFullscreen) {
+        doc.exitFullscreen();
+    } else if (doc.mozCancelFullScreen) {
+        doc.mozCancelFullScreen();
+    } else if (doc.webkitExitFullscreen) {
+        doc.webkitExitFullscreen();
+    } else if (doc.msExitFullscreen) {
+        doc.msExitFullscreen();
+    }
+}
+
+/**
+ * 是否全屏
+ */
+export const isFullScreen = () => {
+    const doc: any = document
+    return !!(
+        doc.fullscreen ||
+        doc.mozFullScreen ||
+        doc.webkitIsFullScreen ||
+        doc.webkitFullScreen ||
+        doc.msFullScreen
+    );
 }

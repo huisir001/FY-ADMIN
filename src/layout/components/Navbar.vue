@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-01-17 15:53:05
+ * @LastEditTime: 2022-01-25 17:20:38
 -->
 <template>
     <div class="navbar">
@@ -20,6 +20,9 @@
             </div>
         </div>
         <div class="fy-nav-right">
+            <div class="nav-item" @click="fullScreen">
+                <fy-icon name="FullScreen" :size="20" color="var(--color-navbar-text)" />
+            </div>
             <div class="theme-nav nav-item" @click="showThemeDrawer = true">
                 <fy-icon name="theme" :size="20" color="var(--color-navbar-text)" />
             </div>
@@ -53,6 +56,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
 import ThemeSetDrawer from './ThemeSet.vue'
+import { launchFullScreen, exitFullscreen, isFullScreen } from '@/ui/helpers'
 
 const Store = useStore()
 const Route = useRoute()
@@ -97,6 +101,15 @@ const userInfo = computed(() => ({
     avatar: (Store.state.user.userInfo || {}).avatar || defaultAvatar,
 }))
 
+// 全屏
+const fullScreen = () => {
+    if (!isFullScreen()) {
+        launchFullScreen(document.documentElement)
+    } else {
+        exitFullscreen()
+    }
+}
+
 // 用户下拉菜单事件
 const userNavChange = (e: any) => {
     switch (e) {
@@ -138,6 +151,12 @@ const userNavChange = (e: any) => {
             padding: 0 10px;
             height: 32px;
             color: var(--color-navbar-text);
+            &:hover {
+                color: var(--el-color-primary);
+                i {
+                    --color: var(--el-color-primary) !important;
+                }
+            }
         }
     }
     .fy-nav-right {
