@@ -2,7 +2,7 @@
  * @Description: vite config
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-24 14:04:37
- * @LastEditTime: 2022-01-24 18:47:48
+ * @LastEditTime: 2022-01-25 11:05:16
  */
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -10,7 +10,6 @@ import { injectHtml } from 'vite-plugin-html'
 import { TITLE, CSSCDN, JSCDN } from './settings'
 import { loadEnv } from 'vite'
 import path from 'path'
-
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {

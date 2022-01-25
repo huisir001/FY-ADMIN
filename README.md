@@ -36,9 +36,6 @@ npm run serve:dev
 
 # 启动本地测试服务
 npm run serve:test
-
-#启用lint检测
-npm run lint
 ```
 
 ## 部署
