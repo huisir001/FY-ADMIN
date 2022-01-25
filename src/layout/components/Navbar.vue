@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-01-25 17:20:38
+ * @LastEditTime: 2022-01-25 17:50:19
 -->
 <template>
     <div class="navbar">
@@ -21,7 +21,7 @@
         </div>
         <div class="fy-nav-right">
             <div class="nav-item" @click="fullScreen">
-                <fy-icon name="FullScreen" :size="20" color="var(--color-navbar-text)" />
+                <fy-icon :name="fullScreenIcon" :size="20" color="var(--color-navbar-text)" />
             </div>
             <div class="theme-nav nav-item" @click="showThemeDrawer = true">
                 <fy-icon name="theme" :size="20" color="var(--color-navbar-text)" />
@@ -101,12 +101,17 @@ const userInfo = computed(() => ({
     avatar: (Store.state.user.userInfo || {}).avatar || defaultAvatar,
 }))
 
+// 全屏按钮icon
+const fullScreenIcon = ref('FullScreen')
+
 // 全屏
 const fullScreen = () => {
     if (!isFullScreen()) {
         launchFullScreen(document.documentElement)
+        fullScreenIcon.value = 'ExitFullScreen'
     } else {
         exitFullscreen()
+        fullScreenIcon.value = 'FullScreen'
     }
 }
 

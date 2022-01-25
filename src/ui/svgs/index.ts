@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2022-01-25 11:10:48
+ * @LastEditTime: 2022-01-25 17:48:02
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -48,6 +48,7 @@ import Theme from './inc/Theme.vue'
 import Export from './inc/Export.vue'
 import Role from './inc/Role.vue'
 import Layout from './inc/Layout.vue'
+import ExitFullScreen from './inc/ExitFullScreen.vue'
 
 
 const components = [
@@ -82,7 +83,8 @@ const components = [
     Theme,
     Export,
     Role,
-    Layout
+    Layout,
+    ExitFullScreen
 ]
 
 export default (app: App<any>) => {
