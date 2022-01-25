@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2021-12-31 10:21:19
+ * @LastEditTime: 2022-01-25 11:22:00
  */
 
 /**
@@ -18,7 +18,6 @@ export const rawList2Tree = (arrList: IObj[], parentIdKey: string = 'parentId', 
 
     !function Recursion(pid?: string) {
         const tempArr: IObj[] = []
-        // tslint:disable-next-line:prefer-for-of
         for (let index = 0; index < arrList.length; index++) {
             const item = arrList[index]
             // 如果没有父id（第一次递归的时候）将所有父级查询出来

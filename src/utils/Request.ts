@@ -2,9 +2,8 @@
  * @Description: axios中间件（初始化和全局配置）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2020-08-06 13:16:24
- * @LastEditTime: 2022-01-24 17:01:43
+ * @LastEditTime: 2022-01-25 11:22:23
  */
-// tslint:disable:no-console
 import { ElMessage } from 'element-plus'
 import axios from 'axios'
 // import PageLoading from './PageLoading'
