@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2022-01-25 14:43:39
+ * @LastEditTime: 2022-01-26 14:16:34
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -11,11 +11,17 @@
             @click="sidebarCollapseChenge"></div>
         <!-- 侧边 -->
         <Sidebar class="left" />
-        <!-- 右侧内容区 -->
+        <!-- 右侧 -->
         <div class="right">
-            <Navbar />
-            <Tabbar v-if="showTabbar" />
-            <PageView :class="{home:!showTabbar}" />
+            <!-- 右侧顶栏 -->
+            <div class="right-top">
+                <Navbar />
+                <Tabbar v-if="showTabbar" />
+            </div>
+            <!-- 右侧内容区 -->
+            <div class="right-bot" :class="{home:!showTabbar}">
+                <PageView />
+            </div>
         </div>
     </div>
 </template>
@@ -68,6 +74,7 @@ const sidebarCollapseChenge = () => {
 </script>
  
 <style scoped lang="scss">
+@import '@/assets/styles/mixin.scss';
 $--left-width-default: 250px;
 $--left-width-collapse: 64px;
 $--transition-width: width var(--el-transition-duration);
@@ -92,14 +99,37 @@ $--transition-width: width var(--el-transition-duration);
         overflow: hidden;
     }
     .right {
+        position: relative;
         transition: $--transition-width;
         width: calc(100% - #{$--left-width-default});
         height: 100%;
+        .right-top {
+            transition: $--transition-width;
+            position: fixed;
+            width: calc(100% - #{$--left-width-default});
+            top: 0;
+            right: 0;
+            z-index: 999;
+        }
+        .right-bot {
+            @include scrollBar;
+            position: absolute;
+            overflow-y: auto;
+            width: 100%;
+            height: calc(100% - 101px);
+            top: 91px;
+            left: 0;
+            &.home {
+                top: 60px;
+                height: calc(100% - 70px);
+            }
+        }
     }
     &.collapse:not(.sidebarHide) {
         .left {
             width: $--left-width-collapse;
         }
+        .right-top,
         .right {
             width: calc(100% - #{$--left-width-collapse});
         }
@@ -115,6 +145,7 @@ $--transition-width: width var(--el-transition-duration);
                 visibility: hidden;
             }
         }
+        .right-top,
         .right {
             width: 100%;
         }
@@ -126,6 +157,7 @@ $--transition-width: width var(--el-transition-duration);
             top: 0;
             left: 0;
         }
+        .right-top,
         .right {
             width: 100%;
         }

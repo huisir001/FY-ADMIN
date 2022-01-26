@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2022-01-19 10:52:19
+ * @LastEditTime: 2022-01-26 14:26:06
 -->
 <template>
     <div class="page-view" :class="{full:fullCont}">
@@ -56,21 +56,14 @@ const cacheRouterNames = computed(() =>
 </script>
  
 <style scoped lang="scss">
-@import '@/assets/styles/mixin.scss';
 .page-view {
-    @include scrollBar;
-    overflow-y: auto;
-    overflow-x: hidden;
     width: calc(100% - 20px);
-    height: calc(100% - 100px);
-    margin: 10px;
+    margin: 0 10px;
     &.full {
+        height: 100%;
         padding: 15px;
         background: var(--el-color-white);
         border-radius: var(--el-border-radius-small);
-    }
-    &.home {
-        height: calc(100% - 70px);
     }
 }
 </style>
