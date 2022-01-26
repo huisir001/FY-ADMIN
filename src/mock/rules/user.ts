@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-01-18 18:19:58
+ * @LastEditTime: 2022-01-26 10:18:48
  */
 
 import { Random } from "mockjs"
@@ -227,7 +227,7 @@ const getUserMenus = {
         updateTime: '@datetime',
         path: '/example', //唯一
         title: '组件示例',
-        icon: "layout",
+        icon: "Module",
         redirectId: '006',
         parentId: null,
         keepAlive: true, //默认为true
