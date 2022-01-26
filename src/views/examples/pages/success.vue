@@ -2,7 +2,7 @@
  * @Description: 成功页
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-27 16:30:36
- * @LastEditTime: 2022-01-27 17:17:01
+ * @LastEditTime: 2022-01-27 03:42:09
 -->
 <template>
     <el-card style="border:0;" shadow="never">
@@ -24,9 +24,6 @@
 export default {
     name: 'success',
 }
-</script>
-
-<script lang="ts" setup>
 </script>
 
 <style scoped lang="scss">

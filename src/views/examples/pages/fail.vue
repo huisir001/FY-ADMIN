@@ -2,7 +2,7 @@
  * @Description: 失败页
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-27 16:30:44
- * @LastEditTime: 2022-01-27 17:15:49
+ * @LastEditTime: 2022-01-27 03:42:05
 -->
 <template>
     <el-card style="border:0;" shadow="never">
@@ -31,9 +31,6 @@
 export default {
     name: 'fail',
 }
-</script>
-
-<script lang="ts" setup>
 </script>
 
 <style scoped lang="scss">
