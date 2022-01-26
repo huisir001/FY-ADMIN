@@ -2,7 +2,7 @@
  * @Description: 卡片
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-18 10:10:30
- * @LastEditTime: 2022-01-18 16:25:26
+ * @LastEditTime: 2022-01-26 10:42:07
 -->
 <template>
     <card-1 v-if="type==1" :data="data" />
@@ -12,6 +12,9 @@
         </template>
         <slot />
     </card-2>
+    <card-3 v-if="type==3" :img="img">
+        <slot />
+    </card-3>
 </template>
 
 <script lang="ts">
@@ -24,6 +27,7 @@ export default {
 import { PropType } from 'vue'
 import card1 from './card_1.vue'
 import card2 from './card_2.vue'
+import card3 from './card_3.vue'
 
 defineProps({
     type: {
@@ -32,9 +36,13 @@ defineProps({
     },
     data: {
         type: [Array, Object],
-        require: true,
+        require: false,
     },
     title: {
+        type: String,
+        default: '',
+    },
+    img: {
         type: String,
         default: '',
     },

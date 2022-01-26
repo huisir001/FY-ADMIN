@@ -2,7 +2,7 @@
  * @Description: 卡片组件
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-17 17:01:24
- * @LastEditTime: 2022-01-19 11:28:03
+ * @LastEditTime: 2022-01-26 10:51:10
 -->
 <template>
     <el-row>
@@ -102,6 +102,48 @@
             </fy-card>
         </el-col>
     </el-row>
+    <el-row :gutter="10" class="card-row">
+        <el-col :md="6" :sm="12">
+            <fy-card :type="3" img="http://dummyimage.com/500x300/81559b/FFF&text=Demo">
+                <div style="padding: 14px">
+                    <div class="title">FY-ADMIN</div>
+                    <div class="desc">
+                        基于Element-Plus+Vue3+Ts开发的一套企业级中后台系统，内置权限管理功能、多种组件及配置功能，适用于各种中后台系统，你可以将它应用在任何需要服务端管理的应用。
+                    </div>
+                </div>
+            </fy-card>
+        </el-col>
+        <el-col :md="6" :sm="12">
+            <fy-card :type="3" img="http://dummyimage.com/500x300/2f2224/FFF&text=Demo">
+                <div style="padding: 14px">
+                    <div class="title">FY-ADMIN</div>
+                    <div class="desc">
+                        基于Element-Plus+Vue3+Ts开发的一套企业级中后台系统，内置权限管理功能、多种组件及配置功能，适用于各种中后台系统，你可以将它应用在任何需要服务端管理的应用。
+                    </div>
+                </div>
+            </fy-card>
+        </el-col>
+        <el-col :md="6" :sm="12">
+            <fy-card :type="3" img="http://dummyimage.com/500x300/818489/FFF&text=Demo">
+                <div style="padding: 14px">
+                    <div class="title">FY-ADMIN</div>
+                    <div class="desc">
+                        基于Element-Plus+Vue3+Ts开发的一套企业级中后台系统，内置权限管理功能、多种组件及配置功能，适用于各种中后台系统，你可以将它应用在任何需要服务端管理的应用。
+                    </div>
+                </div>
+            </fy-card>
+        </el-col>
+        <el-col :md="6" :sm="12">
+            <fy-card :type="3" img="http://dummyimage.com/500x300/001958/FFF&text=Demo">
+                <div style="padding: 14px">
+                    <div class="title">FY-ADMIN</div>
+                    <div class="desc">
+                        基于Element-Plus+Vue3+Ts开发的一套企业级中后台系统，内置权限管理功能、多种组件及配置功能，适用于各种中后台系统，你可以将它应用在任何需要服务端管理的应用。
+                    </div>
+                </div>
+            </fy-card>
+        </el-col>
+    </el-row>
 </template>
 
 <script lang="ts">
@@ -143,5 +185,16 @@ const list = [
 }
 .card-row:deep(.el-col) {
     margin-bottom: 10px;
+}
+.title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+.desc {
+    color: #9fa2a9;
+    font-size: 14px;
+    line-height: 1.4;
 }
 </style>
