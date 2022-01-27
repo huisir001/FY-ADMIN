@@ -2,7 +2,7 @@
  * @Description: 登录
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 14:52:06
- * @LastEditTime: 2022-01-24 16:43:32
+ * @LastEditTime: 2022-01-27 09:56:05
 -->
 <template>
     <div class="login">
@@ -11,7 +11,8 @@
             <h3>{{ TITLE }}</h3>
             <h5>账号密码登录</h5>
             <el-form-item prop="username">
-                <el-input v-model="loginFormData.username" clearable placeholder="账号">
+                <el-input v-model="loginFormData.username" clearable placeholder="账号"
+                    @keyup.enter="onSubmit">
                     <template #prefix>
                         <fy-icon name="user" size="14" color="var(--el-text-color-placeholder)" />
                     </template>
@@ -19,7 +20,7 @@
             </el-form-item>
             <el-form-item prop="password">
                 <el-input type="password" v-model="loginFormData.password" clearable
-                    placeholder="密码">
+                    placeholder="密码" @keyup.enter="onSubmit">
                     <template #prefix>
                         <fy-icon name="key" size="14" color="var(--el-text-color-placeholder)" />
                     </template>
