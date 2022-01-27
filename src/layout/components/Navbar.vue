@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-01-25 17:50:19
+ * @LastEditTime: 2022-01-27 11:04:36
 -->
 <template>
     <div class="navbar">
@@ -50,7 +50,7 @@ export default {
 </script>
  
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
@@ -104,16 +104,35 @@ const userInfo = computed(() => ({
 // 全屏按钮icon
 const fullScreenIcon = ref('FullScreen')
 
+// 窗口高度
+const visibleAreaHeight = computed(() => Store.state.sys.visibleAreaHeight)
+
+// 监听窗口高度变化判断是否全屏来切换全屏ICON
+watch(
+    visibleAreaHeight,
+    () => {
+        fullScreenIcon.value = isFullScreen() ? 'ExitFullScreen' : 'FullScreen'
+    },
+    { immediate: true }
+)
+
 // 全屏
 const fullScreen = () => {
     if (!isFullScreen()) {
         launchFullScreen(document.documentElement)
-        fullScreenIcon.value = 'ExitFullScreen'
     } else {
         exitFullscreen()
-        fullScreenIcon.value = 'FullScreen'
     }
 }
+
+// 捕获F11全屏
+window.addEventListener('keydown', (e) => {
+    if (e.keyCode === 122 || e.key === 'F11') {
+        fullScreen()
+        e.preventDefault()
+        return false
+    }
+})
 
 // 用户下拉菜单事件
 const userNavChange = (e: any) => {

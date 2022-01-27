@@ -2,7 +2,7 @@
  * @Description: UI组件依赖工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-17 11:03:27
- * @LastEditTime: 2022-01-25 17:23:13
+ * @LastEditTime: 2022-01-27 10:48:27
  */
 
 /**
@@ -184,12 +184,5 @@ export const exitFullscreen = () => {
  * 是否全屏
  */
 export const isFullScreen = () => {
-    const doc: any = document
-    return !!(
-        doc.fullscreen ||
-        doc.mozFullScreen ||
-        doc.webkitIsFullScreen ||
-        doc.webkitFullScreen ||
-        doc.msFullScreen
-    );
+    return Math.abs(window.screen.height - window.document.documentElement.clientHeight) <= 17
 }
