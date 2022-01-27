@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2022-01-26 10:18:29
+ * @LastEditTime: 2022-01-27 16:29:23
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -38,7 +38,10 @@ import {
     Grid,
     FullScreen,
     CreditCard,
-    Postcard
+    Postcard,
+    Files,
+    DocumentChecked,
+    DocumentDelete,
 } from '@element-plus/icons-vue'
 
 /**
@@ -50,6 +53,7 @@ import Role from './inc/Role.vue'
 import Layout from './inc/Layout.vue'
 import ExitFullScreen from './inc/ExitFullScreen.vue'
 import Module from './inc/Module.vue'
+import PageManage from './inc/PageManage.vue'
 
 
 const components = [
@@ -80,13 +84,17 @@ const components = [
     FullScreen,
     CreditCard,
     Postcard,
+    Files,
+    DocumentChecked,
+    DocumentDelete,
     /* my-icons */
     Theme,
     Export,
     Role,
     Layout,
     ExitFullScreen,
-    Module
+    Module,
+    PageManage
 ]
 
 export default (app: App<any>) => {

@@ -2,7 +2,7 @@
  * @Description:ElementUI按需引入
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2022-01-19 11:14:58
+ * @LastEditTime: 2022-01-27 17:01:38
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -43,7 +43,9 @@ import {
     ElCol,
     ElRow,
     ElCard,
-    ElProgress
+    ElProgress,
+    ElResult,
+    ElLink
 } from 'element-plus'
 
 const components = [
@@ -80,7 +82,9 @@ const components = [
     ElCol,
     ElRow,
     ElCard,
-    ElProgress
+    ElProgress,
+    ElResult,
+    ElLink
 ]
 
 interface IElementUIOption {
