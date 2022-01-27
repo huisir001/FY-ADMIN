@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-export default { name: 'Users', fullCont: true }
+export default { name: 'Users', isFull: true }
 </script>
  
 <script lang="ts" setup>

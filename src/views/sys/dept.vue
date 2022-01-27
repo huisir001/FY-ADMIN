@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-export default { name: 'Dept', fullCont: true }
+export default { name: 'Dept', isFull: true }
 </script>
  
 <script lang="ts" setup>

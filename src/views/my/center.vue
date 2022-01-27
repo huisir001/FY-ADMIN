@@ -84,7 +84,7 @@
 </template>
 
 <script lang="ts">
-export default { name: 'Center', fullCont: true }
+export default { name: 'Center', isFull: true }
 </script>
  
 <script lang="ts" setup>

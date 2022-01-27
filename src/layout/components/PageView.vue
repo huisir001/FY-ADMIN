@@ -5,7 +5,7 @@
  * @LastEditTime: 2022-01-27 10:01:09
 -->
 <template>
-    <div class="page-view" :class="{full:fullCont}">
+    <div class="page-view" :class="{full:isFull}">
         <router-view v-slot="{ Component }">
             <!-- 由於vue3中不知如何銷毀被緩存的組件，所以這裏設置max最大緩存數，達到max時最先緩存的組件會被銷毀 -->
             <!-- 这里的include中的name注意是组件的name,而不是路由的name! -->
@@ -30,8 +30,8 @@ import { useStore } from '@/store'
 const Router = useRouter()
 const Store = useStore()
 
-const fullCont = computed(
-    () => (useRoute().matched[useRoute().matched.length - 1].components.default as any).fullCont
+const isFull = computed(
+    () => (useRoute().matched[useRoute().matched.length - 1].components.default as any).isFull
 )
 
 // 历史路由name

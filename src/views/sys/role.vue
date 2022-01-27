@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-export default { name: 'Role', fullCont: true }
+export default { name: 'Role', isFull: true }
 </script>
  
 <script lang="ts" setup>

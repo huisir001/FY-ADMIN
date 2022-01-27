@@ -61,7 +61,7 @@
 </template>
 
 <script lang="ts">
-export default { name: 'Menu', fullCont: true }
+export default { name: 'Menu', isFull: true }
 </script>
  
 <script lang="ts" setup>
