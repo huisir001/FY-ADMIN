@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2022-01-17 15:53:24
+ * @LastEditTime: 2022-01-28 17:15:56
 -->
 <template>
     <div class="sidebar">
@@ -16,7 +16,7 @@
                 active-text-color="var(--color-sidebar-font)" :collapse="sidebarCollapse">
                 <template v-for="menu in Menus" :key="menu.id">
                     <el-menu-item v-if="!menu.children || !menu.children.length" :index="menu.id"
-                        @click="$router.push({name:menu.id})">
+                        @click="bindMenuClick(menu)">
                         <fy-icon v-if="menu.icon" :name="menu.icon"
                             color="var(--color-sidebar-font)" />
                         <template #title>
@@ -25,27 +25,31 @@
                     </el-menu-item>
                     <el-sub-menu v-else :index="menu.id">
                         <template #title>
-                            <fy-icon v-if="menu.icon" :name="menu.icon"
-                                color="var(--color-sidebar-font)" />
-                            <span>{{menu.title}}</span>
+                            <div class="sub-menu-item" @click="bindMenuClick(menu)">
+                                <fy-icon v-if="menu.icon" :name="menu.icon"
+                                    color="var(--color-sidebar-font)" />
+                                <span>{{menu.title}}</span>
+                            </div>
                         </template>
                         <template v-for="sub1 in menu.children" :key="sub1.id">
                             <el-menu-item v-if="!sub1.children || !sub1.children.length"
                                 :index="sub1.id" :class="{act:$route.name==sub1.id}"
-                                @click="$router.push({name:sub1.id})">
+                                @click="bindMenuClick(sub1)">
                                 <fy-icon v-if="sub1.icon" :name="sub1.icon"
                                     color="var(--color-sidebar-font)" />
                                 {{sub1.title}}
                             </el-menu-item>
                             <el-sub-menu v-else :index="sub1.id">
                                 <template #title>
-                                    <fy-icon v-if="sub1.icon" :name="sub1.icon"
-                                        color="var(--color-sidebar-font)" />
-                                    <span>{{sub1.title}}</span>
+                                    <div class="sub-menu-item" @click="bindMenuClick(sub1)">
+                                        <fy-icon v-if="sub1.icon" :name="sub1.icon"
+                                            color="var(--color-sidebar-font)" />
+                                        <span>{{sub1.title}}</span>
+                                    </div>
                                 </template>
                                 <el-menu-item v-for="sub2 in sub1.children" :key="sub2.id"
                                     :index="sub2.id" :class="{act:$route.name==sub2.id}"
-                                    @click="$router.push({name:sub2.id})">
+                                    @click="bindMenuClick(sub2)">
                                     <fy-icon v-if="sub2.icon" :name="sub2.icon"
                                         color="var(--color-sidebar-font)" />
                                     <span>{{sub2.title}}</span>
@@ -68,14 +72,36 @@ export default {
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from '@/store'
+import { useRouter } from 'vue-router'
+import { MenuType } from '@/ui/types'
 
 const Store = useStore()
+const Router = useRouter()
 
 // 菜单
 const Menus = computed(() => Store.state.user.menuTree)
 
-// 折叠
+// 侧边栏收放
 const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
+
+// 菜单点击
+const bindMenuClick = (menu: any) => {
+    console.log(menu)
+    switch (menu.type) {
+        case MenuType.cat:
+            return
+            break
+        case MenuType.route:
+            Router.push({ name: menu.id })
+            break
+        case MenuType.link:
+            console.log('link')
+            break
+        case MenuType.button:
+            console.log('button')
+            break
+    }
+}
 </script>
  
 <style scoped lang="scss">

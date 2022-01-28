@@ -2,10 +2,11 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2022-01-28 15:50:29
+ * @LastEditTime: 2022-01-28 17:15:39
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { ref } from "vue";
+import { MenuType } from '@/ui/types'
 export default () => {
     /**
      * 表格列配置
@@ -278,16 +279,6 @@ export default () => {
             },
         },
     ] as IFormOption[]);
-
-    /**
-     * 菜单类型
-     */
-    enum MenuType {
-        cat, // 目录
-        route, // 路由
-        link, // 链接
-        button, // 按钮
-    }
 
     /**
      * 菜单类型公共表单项
