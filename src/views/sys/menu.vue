@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-25 10:59:25
+ * @LastEditTime: 2022-01-28 09:57:47
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
@@ -117,6 +117,7 @@ const toolsBtnClick = (btn: TOptionOfTools) => {
     if (btn === 'add') {
         editDialogTitle.value = '新增菜单'
         currEditData.value = {}
+        menuTypeChange(1)
         showEditDialog.value = true
     }
 }
@@ -142,6 +143,7 @@ const handleTodo = async (btn: string, index: number, row: IObj) => {
             currEditData.value = {
                 parentId: row.id,
             }
+            menuTypeChange(1)
             showEditDialog.value = true
             break
         // 删除按钮

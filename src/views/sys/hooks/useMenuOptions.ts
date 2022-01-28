@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2022-01-10 11:29:47
+ * @LastEditTime: 2022-01-28 09:54:45
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { ref } from "vue";
@@ -288,41 +288,49 @@ export default () => {
     }
 
     /**
+     * 菜单类型公共表单项
+     */
+    const commonOptions = [
+        "parentId",
+        "title",
+        "type",
+        "orderNum",
+        "icon",
+        "status",
+        "visible",
+    ]
+
+    /**
+     * 各类型显示表单项 options
+     */
+    const incOptions: IObj = {
+        [MenuType.cat]: commonOptions,
+        [MenuType.route]: [
+            ...commonOptions,
+            "auth",
+            "path",
+            "viewPath",
+            "private",
+            "keepAlive",
+        ],
+        [MenuType.link]: [
+            ...commonOptions,
+            "path",
+            "blank",
+        ],
+        [MenuType.button]: [
+            ...commonOptions,
+            "auth",
+            "triggerMode",
+            "triggerMethod",
+        ],
+    };
+
+
+    /**
      * 菜单类型切换，显隐表单项
      */
     const menuTypeChange = (type: any) => {
-        const commonOptions = [
-            "parentId",
-            "title",
-            "type",
-            "orderNum",
-            "icon",
-            "status",
-            "visible",
-        ]
-        // hide options
-        const incOptions: IObj = {
-            [MenuType.cat]: commonOptions,
-            [MenuType.route]: [
-                ...commonOptions,
-                "auth",
-                "path",
-                "viewPath",
-                "private",
-                "keepAlive",
-            ],
-            [MenuType.link]: [
-                ...commonOptions,
-                "path",
-                "blank",
-            ],
-            [MenuType.button]: [
-                ...commonOptions,
-                "auth",
-                "triggerMode",
-                "triggerMethod",
-            ],
-        };
         editOptions.value.forEach((opt) => {
             opt.hide = !incOptions[type].includes(opt.key);
         });
