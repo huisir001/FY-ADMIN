@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2022-01-24 16:43:25
+ * @LastEditTime: 2022-01-28 18:22:56
  */
 import { STORAGE_OPTIONS } from 'settings'
 import { ActionContext } from 'vuex'
@@ -14,6 +14,7 @@ import Layout from '@/layout/index.vue'
 import { rawList2Tree } from '@/utils/common'
 import { menu2Route } from '../helpers'
 import { getUserMenus } from '@/api/user'
+import { MenuType } from '@/ui/types'
 
 /**
  * 用户state接口
@@ -149,16 +150,18 @@ export const user = {
                     const menu = data[index];
                     const { parentId, type, status } = menu
 
-                    if (type !== 1 || !status) { return }
+                    if ((type === MenuType.cat || type === MenuType.route) && status) {
 
-                    const Route = menu2Route(menu, data, Layout)
+                        const Route = menu2Route(menu, data, Layout)
 
-                    if (parentId) {
-                        // 路由的name直接使用id，避免冲突
-                        router.addRoute(data.find((item: IMenu) => item.id === parentId).id, Route)
-                    } else {
-                        router.addRoute(Route)
+                        if (parentId) {
+                            // 路由的name直接使用id，避免冲突
+                            router.addRoute(data.find((item: IMenu) => item.id === parentId).id, Route)
+                        } else {
+                            router.addRoute(Route)
+                        }
                     }
+
                 }
 
                 // 更新列表
