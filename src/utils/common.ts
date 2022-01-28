@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2022-01-25 11:22:00
+ * @LastEditTime: 2022-01-28 15:48:39
  */
 
 /**
@@ -16,15 +16,17 @@ export const rawList2Tree = (arrList: IObj[], parentIdKey: string = 'parentId', 
 
     let menuTree: IObj[] = []
 
-    !function Recursion(pid?: string) {
+    !function Recursion(level: number = 0, pid?: string) {
         const tempArr: IObj[] = []
         for (let index = 0; index < arrList.length; index++) {
             const item = arrList[index]
             // 如果没有父id（第一次递归的时候）将所有父级查询出来
             // 这里认为 !item[parentIdKey] 是最顶层
             if (pid ? item[parentIdKey] === pid : !item[parentIdKey]) {
+                // 树层级标记
+                item.treeLevel = level
                 // 通过父节点ID查询所有子节点
-                item[childKey] = Recursion(item.id)
+                item[childKey] = Recursion(level + 1, item.id)
                 tempArr.push(item)
             }
         }

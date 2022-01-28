@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-28 09:57:47
+ * @LastEditTime: 2022-01-28 16:01:07
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
@@ -30,7 +30,8 @@
             <fy-fuzzy-search v-model="searchData" :data="menuList" />
         </template>
         <template #todo="scope">
-            <fy-row-btns @todo="handleTodo($event,scope.$index,scope.row)" />
+            <fy-row-btns :contains="scope.row.treeLevel===2?['edit', 'del']:['edit', 'add', 'del']"
+                @todo="handleTodo($event,scope.$index,scope.row)" />
         </template>
     </fy-table>
     <!-- 编辑弹窗 -->
@@ -174,11 +175,21 @@ const treeSelectLabel = (id: any) => {
 
 // 上级菜单树结构选择数据
 const treeSlectData = computed(() => {
+    // 过滤不需要选择的层级
+    const copyMenuList = JSON.parse(JSON.stringify(menuList.value))
+    copyMenuList.forEach((item: { children: any[] }) => {
+        if (item.children && item.children.length) {
+            item.children.forEach((item1) => {
+                item1.children = null
+            })
+        }
+    })
+
     return [
         {
             id: null,
             title: '主类目',
-            children: menuList.value,
+            children: copyMenuList,
         },
     ]
 })

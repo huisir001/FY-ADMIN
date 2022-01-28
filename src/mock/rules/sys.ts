@@ -2,7 +2,7 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2022-01-28 10:39:46
+ * @LastEditTime: 2022-01-28 14:38:17
  */
 import user from './user'
 
@@ -278,6 +278,28 @@ const getAllMenus = {
         icon: "DocumentDelete",
         redirectId: null,
         parentId: '007',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 2,
+        auth: null,
+        type: 1,
+        query: null,
+        viewPath: 'views/examples/pages/fail.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    {
+        id: '010',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/pages/fail',
+        title: '测试子目录1',
+        icon: "DocumentDelete",
+        redirectId: null,
+        parentId: '009',
         keepAlive: true,
         visible: true,
         private: true,

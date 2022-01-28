@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2022-01-28 10:40:35
+ * @LastEditTime: 2022-01-28 15:50:29
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { ref } from "vue";
@@ -101,6 +101,7 @@ export default () => {
         {
             fixed: "right",
             minWidth: 180,
+            align: "center",
             slotHead: "todoHead",
             slot: "todo",
         },
