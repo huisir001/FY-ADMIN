@@ -2,7 +2,7 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2021-12-31 10:47:07
+ * @LastEditTime: 2022-01-28 10:39:46
  */
 import user from './user'
 
@@ -14,19 +14,19 @@ const getAllMenus = {
         updateTime: '@datetime',
         path: '/sys', //唯一
         title: '系统配置',
-        icon: "Setting",
+        icon: "setting",
         redirectId: '002',
         parentId: null,
         keepAlive: true, //默认为true
         visible: true, //默认展示
-        private: true, //type=1/3时，默认true,必须登录才能访问，否则跳登录页
+        private: true, //默认true,必须登录才能访问，否则跳登录页
         orderNum: 1, //排序index
         auth: null, //权限，空字符串或null则为所有权限
-        type: 1, //1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
+        type: 1, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
         blank: true, //type=2时在新页面打开链接，默认为true
-        triggerMode: 'commit', //type=3时要激活事件的方式：commit/dispatch
+        triggerMode: null, //type=3时要激活事件的方式：commit/dispatch
         triggerMethod: null, //字符串，type=3时要激活的事件
         status: 1, //1-正常；0-停用
     },
@@ -36,7 +36,7 @@ const getAllMenus = {
         updateTime: '@datetime',
         path: '/sys/dept',
         title: '部门管理',
-        icon: "Operation",
+        icon: "operation",
         redirectId: null,
         parentId: '001',
         keepAlive: true,
@@ -57,7 +57,7 @@ const getAllMenus = {
         updateTime: '@datetime',
         path: '/sys/menu',
         title: '菜单管理',
-        icon: "Menu",
+        icon: "menu",
         redirectId: null,
         parentId: '001',
         keepAlive: true,
@@ -78,7 +78,7 @@ const getAllMenus = {
         updateTime: '@datetime',
         path: '/sys/role',
         title: '角色管理',
-        icon: "Role",
+        icon: "role",
         redirectId: null,
         parentId: '001',
         keepAlive: true,
@@ -99,7 +99,7 @@ const getAllMenus = {
         updateTime: '@datetime',
         path: '/sys/users',
         title: '用户管理',
-        icon: "User",
+        icon: "user",
         redirectId: null,
         parentId: '001',
         keepAlive: true,
@@ -114,7 +114,184 @@ const getAllMenus = {
         triggerMode: null,
         triggerMethod: null,
         status: 1,
-    }]
+    },
+    {
+        id: '003', //主键
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/layout', //唯一
+        title: '布局容器',
+        icon: "layout",
+        redirectId: '004',
+        parentId: null,
+        keepAlive: true, //默认为true
+        visible: true, //默认展示
+        private: true, //默认true,必须登录才能访问，否则跳登录页
+        orderNum: 1, //排序index
+        auth: null, //权限，空字符串或null则为所有权限
+        type: 1, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
+        query: null, //type=1/2时传参（{a=1,b=2}）
+        viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
+        blank: true, //type=2时在新页面打开链接，默认为true
+        triggerMode: null, //type=3时要激活事件的方式：commit/dispatch
+        triggerMethod: null, //字符串，type=3时要激活的事件
+        status: 1, //1-正常；0-停用
+    },
+    {
+        id: '004',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/layout/full',
+        title: '整体布局',
+        icon: "fullScreen",
+        redirectId: null,
+        parentId: '003',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 2,
+        auth: null,
+        type: 1,
+        query: null,
+        viewPath: 'views/examples/container/full.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    {
+        id: '@id',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/layout/grid',
+        title: '栅格布局',
+        icon: "grid",
+        redirectId: null,
+        parentId: '003',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 2,
+        auth: null,
+        type: 1,
+        query: null,
+        viewPath: 'views/examples/container/grid.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    {
+        id: '005', //主键
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/example', //唯一
+        title: '组件示例',
+        icon: "Module",
+        redirectId: '006',
+        parentId: null,
+        keepAlive: true, //默认为true
+        visible: true, //默认展示
+        private: true, //默认true,必须登录才能访问，否则跳登录页
+        orderNum: 1, //排序index
+        auth: null, //权限，空字符串或null则为所有权限
+        type: 1, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
+        query: null, //type=1/2时传参（{a=1,b=2}）
+        viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
+        blank: true, //type=2时在新页面打开链接，默认为true
+        triggerMode: null, //type=3时要激活事件的方式：commit/dispatch
+        triggerMethod: null, //字符串，type=3时要激活的事件
+        status: 1, //1-正常；0-停用
+    },
+    {
+        id: '006',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/example/card',
+        title: '卡片',
+        icon: "Postcard",
+        redirectId: null,
+        parentId: '005',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 2,
+        auth: null,
+        type: 1,
+        query: null,
+        viewPath: 'views/examples/basicComp/card.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    {
+        id: '007', //主键
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/example', //唯一
+        title: '页面示例',
+        icon: "PageManage",
+        // redirectId: '008',
+        parentId: null,
+        keepAlive: true, //默认为true
+        visible: true, //默认展示
+        private: true, //默认true,必须登录才能访问，否则跳登录页
+        orderNum: 1, //排序index
+        auth: null, //权限，空字符串或null则为所有权限
+        type: 0, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
+        query: null, //type=1/2时传参（{a=1,b=2}）
+        viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
+        blank: true, //type=2时在新页面打开链接，默认为true
+        triggerMode: null, //type=3时要激活事件的方式：commit/dispatch
+        triggerMethod: null, //字符串，type=3时要激活的事件
+        status: 1, //1-正常；0-停用
+    },
+    {
+        id: '008',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/pages/success',
+        title: '成功页',
+        icon: "DocumentChecked",
+        redirectId: null,
+        parentId: '007',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 2,
+        auth: null,
+        type: 1,
+        query: null,
+        viewPath: 'views/examples/pages/success.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    {
+        id: '009',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/pages/fail',
+        title: '失败页',
+        icon: "DocumentDelete",
+        redirectId: null,
+        parentId: '007',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 2,
+        auth: null,
+        type: 1,
+        query: null,
+        viewPath: 'views/examples/pages/fail.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    ]
 }
 
 // 查询所有部门，用于部门管理

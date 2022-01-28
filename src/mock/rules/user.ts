@@ -62,7 +62,7 @@ const getUserMenus = {
         private: true, //默认true,必须登录才能访问，否则跳登录页
         orderNum: 1, //排序index
         auth: null, //权限，空字符串或null则为所有权限
-        type: 1, //1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
+        type: 1, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
         blank: true, //type=2时在新页面打开链接，默认为true
@@ -169,7 +169,7 @@ const getUserMenus = {
         private: true, //默认true,必须登录才能访问，否则跳登录页
         orderNum: 1, //排序index
         auth: null, //权限，空字符串或null则为所有权限
-        type: 1, //1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
+        type: 1, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
         blank: true, //type=2时在新页面打开链接，默认为true
@@ -235,7 +235,7 @@ const getUserMenus = {
         private: true, //默认true,必须登录才能访问，否则跳登录页
         orderNum: 1, //排序index
         auth: null, //权限，空字符串或null则为所有权限
-        type: 1, //1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
+        type: 1, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
         blank: true, //type=2时在新页面打开链接，默认为true
@@ -279,7 +279,7 @@ const getUserMenus = {
         private: true, //默认true,必须登录才能访问，否则跳登录页
         orderNum: 1, //排序index
         auth: null, //权限，空字符串或null则为所有权限
-        type: 1, //1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
+        type: 1, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
         blank: true, //type=2时在新页面打开链接，默认为true

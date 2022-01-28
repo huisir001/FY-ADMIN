@@ -3,7 +3,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2022-01-24 18:25:34
+ * @LastEditTime: 2022-01-28 10:44:36
  */
 
 /**
@@ -133,7 +133,7 @@ declare interface IMenu {
   private: boolean //默认true,必须登录才能访问，否则跳登录页
   orderNum: number //排序index
   auth?: string //权限，空字符串或null则为所有权限
-  type: 1 | 2 | 3 //1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
+  type: 0 | 1 | 2 | 3 //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
   query?: string //type=1/2时传参（{a=1,b=2}）
   viewPath?: string //type=1时跳转的文件路径(相对于src目录)若为null,且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
   blank: boolean //type=2时在新页面打开链接，默认为true

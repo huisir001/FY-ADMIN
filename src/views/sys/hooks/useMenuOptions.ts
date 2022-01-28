@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2022-01-28 09:54:45
+ * @LastEditTime: 2022-01-28 10:40:35
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { ref } from "vue";
@@ -25,9 +25,10 @@ export default () => {
         {
             label: "类型",
             prop: "type",
-            minWidth: 60,
+            minWidth: 50,
             formatter: (row: IObj, column: IObj, cellValue: number) => {
                 const types: IObj = {
+                    0: "目录",
                     1: "路由",
                     2: "链接",
                     3: "按钮",
@@ -42,7 +43,7 @@ export default () => {
         {
             label: "显隐",
             prop: "visible",
-            minWidth: 60,
+            minWidth: 50,
             formatter: (row: IObj, column: IObj, cellValue: boolean) => {
                 return cellValue ? "显示" : "隐藏";
             },
@@ -59,7 +60,7 @@ export default () => {
         {
             label: "文件路径",
             helpTip: "路由类型的菜单可配置Vue文件路径",
-            minWidth: 130,
+            minWidth: 170,
             prop: "viewPath",
         },
         {
@@ -84,7 +85,7 @@ export default () => {
         },
         {
             label: "状态",
-            minWidth: 70,
+            minWidth: 60,
             filters: [
                 { text: "111", value: 1 },
                 { text: "222", value: 0 },
