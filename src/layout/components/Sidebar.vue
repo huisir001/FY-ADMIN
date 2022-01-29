@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2022-01-28 17:15:56
+ * @LastEditTime: 2022-01-29 12:06:24
 -->
 <template>
     <div class="sidebar">
@@ -25,11 +25,9 @@
                     </el-menu-item>
                     <el-sub-menu v-else :index="menu.id">
                         <template #title>
-                            <div class="sub-menu-item" @click="bindMenuClick(menu)">
-                                <fy-icon v-if="menu.icon" :name="menu.icon"
-                                    color="var(--color-sidebar-font)" />
-                                <span>{{menu.title}}</span>
-                            </div>
+                            <fy-icon v-if="menu.icon" :name="menu.icon"
+                                color="var(--color-sidebar-font)" @click="bindMenuClick(menu)" />
+                            <span @click="bindMenuClick(menu)">{{menu.title}}</span>
                         </template>
                         <template v-for="sub1 in menu.children" :key="sub1.id">
                             <el-menu-item v-if="!sub1.children || !sub1.children.length"
@@ -41,11 +39,10 @@
                             </el-menu-item>
                             <el-sub-menu v-else :index="sub1.id">
                                 <template #title>
-                                    <div class="sub-menu-item" @click="bindMenuClick(sub1)">
-                                        <fy-icon v-if="sub1.icon" :name="sub1.icon"
-                                            color="var(--color-sidebar-font)" />
-                                        <span>{{sub1.title}}</span>
-                                    </div>
+                                    <fy-icon v-if="sub1.icon" :name="sub1.icon"
+                                        color="var(--color-sidebar-font)"
+                                        @click="bindMenuClick(sub1)" />
+                                    <span @click="bindMenuClick(sub1)">{{sub1.title}}</span>
                                 </template>
                                 <el-menu-item v-for="sub2 in sub1.children" :key="sub2.id"
                                     :index="sub2.id" :class="{act:$route.name==sub2.id}"
