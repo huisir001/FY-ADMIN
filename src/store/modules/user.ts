@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2022-01-29 11:31:24
+ * @LastEditTime: 2022-01-29 15:44:54
  */
 import { STORAGE_OPTIONS } from 'settings'
 import { ActionContext } from 'vuex'
@@ -148,7 +148,7 @@ export const user = {
                 // 重新登录后这里无需考虑路由会重复。相同name的路由会覆盖先前路由
                 for (let index = 0; index < data.length; index++) {
                     const menu = data[index];
-                    const { parentId, type, status } = menu
+                    const { parentId, type, status, blank } = menu
 
                     if (type === MenuType.route && status) {
 
@@ -160,6 +160,13 @@ export const user = {
                         } else {
                             router.addRoute(Route)
                         }
+                    }
+
+                    // 内嵌页面
+                    if (type === MenuType.link && !blank && status) {
+                        menu.viewPath = "ui/pages/Frame/index.vue"
+                        const Route = menu2Route(menu, data, Layout)
+                        router.addRoute('Link', Route)
                     }
 
                 }

@@ -51,6 +51,12 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
+    path: '/link',
+    name: 'Link',
+    component: Layout,
+    meta: { title: '链接', visible: false, private: true, keepAlive: true },
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('../views/login/index.vue'),

@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2022-01-27 10:01:09
+ * @LastEditTime: 2022-01-29 16:28:42
 -->
 <template>
     <div class="page-view" :class="{full:isFull}">

@@ -3,7 +3,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2022-01-28 10:44:36
+ * @LastEditTime: 2022-01-29 16:57:05
  */
 
 /**
@@ -140,7 +140,8 @@ declare interface IMenu {
   triggerMode?: 'commit' | 'dispatch' //type=3时要激活事件的方式：commit/dispatch
   triggerMethod?: string //字符串，type=3时要激活的事件
   status: 1 | 0 //1-正常；0-停用（停用时用户无法查询，且访问受限），admin能查询所有菜单，侧边栏不展示
-  children?: IMenu[]
+  children?: IMenu[],
+  src?: string //link-链接
 }
 
 /**

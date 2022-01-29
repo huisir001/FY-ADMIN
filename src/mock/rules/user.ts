@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-01-29 11:30:50
+ * @LastEditTime: 2022-01-29 16:53:17
  */
 
 import { Random } from "mockjs"
@@ -379,7 +379,8 @@ const getUserMenus = {
         id: '012',
         createTime: '@datetime',
         updateTime: '@datetime',
-        path: null,
+        path: '/zuifengyun',
+        src: "https://www.zuifengyun.com",
         title: '框架内',
         icon: "DocumentDelete",
         redirectId: null,
@@ -402,10 +403,11 @@ const getUserMenus = {
         createTime: '@datetime',
         updateTime: '@datetime',
         path: null,
+        src: "https://www.zuifengyun.com",
         title: '新标签',
         icon: "DocumentDelete",
         redirectId: null,
-        parentId: null,
+        parentId: '011',
         keepAlive: true,
         visible: true,
         private: true,

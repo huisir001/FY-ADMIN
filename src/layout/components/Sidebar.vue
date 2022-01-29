@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2022-01-29 12:06:24
+ * @LastEditTime: 2022-01-29 16:50:29
 -->
 <template>
     <div class="sidebar">
@@ -92,7 +92,11 @@ const bindMenuClick = (menu: any) => {
             Router.push({ name: menu.id })
             break
         case MenuType.link:
-            console.log('link')
+            if (menu.blank) {
+                window.open(menu.path)
+            } else {
+                Router.push({ name: menu.id })
+            }
             break
         case MenuType.button:
             console.log('button')

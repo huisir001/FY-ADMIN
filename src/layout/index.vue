@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2022-01-26 14:16:34
+ * @LastEditTime: 2022-01-29 16:29:01
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -19,7 +19,7 @@
                 <Tabbar v-if="showTabbar" />
             </div>
             <!-- 右侧内容区 -->
-            <div class="right-bot" :class="{home:!showTabbar}">
+            <div class="right-bot" :class="{home:!showTabbar,frame:isFrame}">
                 <PageView />
             </div>
         </div>
@@ -33,8 +33,14 @@ import Sidebar from './components/Sidebar.vue'
 import Navbar from './components/Navbar.vue'
 import Tabbar from './components/Tabbar.vue'
 import PageView from './components/PageView.vue'
+import { useRoute } from 'vue-router'
 
 const Store = useStore()
+
+// 是否为框架
+const isFrame = computed(
+    () => (useRoute().matched[useRoute().matched.length - 1].components.default as any).isFrame
+)
 
 // 历史路由数
 const showTabbar = computed(
@@ -119,6 +125,20 @@ $--transition-width: width var(--el-transition-duration);
             height: calc(100% - 101px);
             top: 91px;
             left: 0;
+            &.frame {
+                overflow: hidden;
+                top: 81px;
+                height: calc(100% - 81px);
+                &.home {
+                    top: 50px;
+                    height: calc(100% - 50px);
+                }
+                :deep(.page-view) {
+                    margin: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
             &.home {
                 top: 60px;
                 height: calc(100% - 70px);
