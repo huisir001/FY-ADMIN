@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-01-27 03:53:25
+ * @LastEditTime: 2022-01-29 11:30:50
  */
 
 import { Random } from "mockjs"
@@ -279,7 +279,7 @@ const getUserMenus = {
         private: true, //默认true,必须登录才能访问，否则跳登录页
         orderNum: 1, //排序index
         auth: null, //权限，空字符串或null则为所有权限
-        type: 0, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
+        type: 1, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
         blank: true, //type=2时在新页面打开链接，默认为true
@@ -348,6 +348,72 @@ const getUserMenus = {
         type: 1,
         query: null,
         viewPath: 'views/examples/pages/fail.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    {
+        id: '011',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: null,
+        title: '链接',
+        icon: "DocumentDelete",
+        redirectId: null,
+        parentId: null,
+        keepAlive: true,
+        visible: false,
+        private: true,
+        orderNum: 2,
+        auth: null,
+        type: 0,
+        query: null,
+        viewPath: null,
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    {
+        id: '012',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: null,
+        title: '框架内',
+        icon: "DocumentDelete",
+        redirectId: null,
+        parentId: "011",
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 2,
+        auth: null,
+        type: 2,
+        query: null,
+        viewPath: null,
+        blank: false,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    {
+        id: '013',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: null,
+        title: '新标签',
+        icon: "DocumentDelete",
+        redirectId: null,
+        parentId: null,
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 2,
+        auth: null,
+        type: 2,
+        query: null,
+        viewPath: null,
         blank: true,
         triggerMode: null,
         triggerMethod: null,

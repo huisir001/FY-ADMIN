@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2022-01-28 17:15:39
+ * @LastEditTime: 2022-01-29 10:07:16
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { ref } from "vue";
@@ -237,7 +237,7 @@ export default () => {
             key: "blank",
             props: {
                 activeText: "新标签",
-                inactiveText: "当前标签",
+                inactiveText: "框架内",
                 // activeValue: 1,
                 // inactiveValue: 0
             },

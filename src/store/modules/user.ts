@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2022-01-28 18:22:56
+ * @LastEditTime: 2022-01-29 11:31:24
  */
 import { STORAGE_OPTIONS } from 'settings'
 import { ActionContext } from 'vuex'
@@ -150,7 +150,7 @@ export const user = {
                     const menu = data[index];
                     const { parentId, type, status } = menu
 
-                    if ((type === MenuType.cat || type === MenuType.route) && status) {
+                    if (type === MenuType.route && status) {
 
                         const Route = menu2Route(menu, data, Layout)
 

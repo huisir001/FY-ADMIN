@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2022-01-24 19:09:00
+ * @LastEditTime: 2022-01-29 11:18:28
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -19,6 +19,7 @@ import rearHook from './rearHook'
  *   title: 'title'               // 设置该路由在侧边栏\面包屑\浏览器标签栏中展示的名字,当不设置时显示路由name
  *   icon: ''                     // 设置该路由的图标，不设置则会使用默认
  *   private:true                 // 默认true,当设置false时该路由无需登录就可以访问，比如登录页，注册页，404等等，否则必须登录（跳转登录页）
+ *   visible:true                 // 默认true,展示到tab栏
  * }
  */
 
@@ -45,7 +46,7 @@ const routes: RouteRecordRaw[] = [
         path: 'center',
         name: 'Center',
         component: () => import('../views/my/center.vue'),
-        meta: { title: "个人中心", visible: false, private: true, keepAlive: true },
+        meta: { title: "个人中心", visible: true, private: true, keepAlive: true },
       }
     ]
   },
