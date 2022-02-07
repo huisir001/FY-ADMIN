@@ -2,12 +2,12 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2022-01-12 18:03:46
+ * @LastEditTime: 2022-02-07 16:36:02
 -->
 <template>
     <el-dialog custom-class="fy-edit-dialog" :modelValue="modelValue"
         @update:modelValue="$emit('update:modelValue', $event)" :title="title" @open="open"
-        @closed="closed">
+        @closed="closed" width="30%" draggable center>
         <fy-search-form ref="fyForm" v-model="formParams" :options="options" :showSearchBtn="false">
             <template v-for="item in options.filter((o) => o.slot)" :key="item.key"
                 v-slot:[item.slot]>
@@ -24,9 +24,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, PropType, ref } from 'vue'
+import { PropType, ref } from 'vue'
 import { IFormOption } from '../types'
-import { boxMove } from '@/ui/helpers'
 
 const props = defineProps({
     // 弹窗显隐
@@ -62,19 +61,6 @@ const props = defineProps({
 // emit
 const emit = defineEmits(['update:modelValue', 'submit'])
 
-// 弹窗元素
-const dialogEl = ref()
-
-// 弹窗拖拽跟随
-onMounted(() => {
-    const dialogHeaderEl = document.querySelector('.fy-edit-dialog .el-dialog__header')
-    dialogEl.value = document.querySelector('.fy-edit-dialog.el-dialog')
-    boxMove({
-        box: dialogEl.value as HTMLElement,
-        target: dialogHeaderEl as HTMLElement,
-    })
-})
-
 // 表单对象
 const fyForm = ref()
 // 中转表单数据
@@ -109,19 +95,11 @@ const open = () => {
     })
     // 合并
     Object.assign(formParams.value, props.params)
-    // 将弹窗位置还原默认
-    dialogEl.value.style =
-        typeof props.top === 'number' ? 'top:' + props.top + 'px' : 'top:' + props.top
 }
 </script>
 
 <style lang="scss">
 .fy-edit-dialog.el-dialog {
-    position: absolute;
-    margin: 0;
-    .el-dialog__footer {
-        text-align: center;
-    }
     .el-form--inline .el-form-item {
         margin-right: 20px;
     }
@@ -129,7 +107,6 @@ const open = () => {
 @media all and (min-width: 999px) {
     .fy-edit-dialog.el-dialog {
         width: 978px;
-        left: calc(50vw - 489px);
         .el-form--inline .el-form-item:nth-child(3n) {
             margin-right: 0;
         }
@@ -138,7 +115,6 @@ const open = () => {
 @media all and (min-width: 685px) and (max-width: 998px) {
     .fy-edit-dialog.el-dialog {
         width: 664px;
-        left: calc(50vw - 332px);
         .el-form--inline .el-form-item:nth-child(2n) {
             margin-right: 0;
         }
@@ -147,7 +123,6 @@ const open = () => {
 @media all and (min-width: 376px) and (max-width: 684px) {
     .fy-edit-dialog.el-dialog {
         width: 374px;
-        left: calc(50vw - 187px);
         .el-dialog__body {
             text-align: center;
             .el-form--inline .el-form-item {
@@ -159,7 +134,6 @@ const open = () => {
 @media all and (max-width: 375px) {
     .fy-edit-dialog.el-dialog {
         width: calc(100% - 20px);
-        left: 10px;
         min-width: auto;
         .el-form--inline .el-form-item {
             margin-right: 0;
