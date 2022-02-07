@@ -2,11 +2,12 @@
  * @Description: UI全局注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-03 17:24:53
- * @LastEditTime: 2021-11-22 10:45:13
+ * @LastEditTime: 2022-02-07 16:33:02
  */
 import { App } from 'vue'
-import element from './element'
+import ElementPlus from 'element-plus'
 import svgs from './svgs'
 import fy from './fy'
 
-export default (app: App<any>) => app.use(element).use(svgs).use(fy)
+/* 这里ElementPlus使用完整导入，方便扩展 */
+export default (app: App<any>) => app.use(ElementPlus, { size: 'small', zIndex: 3000 }).use(svgs).use(fy)
