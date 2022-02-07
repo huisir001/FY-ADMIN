@@ -11,7 +11,7 @@
       <link type="text/css" rel="stylesheet" href="<%= value %>" />
     <% }) %>
     <% JSCDN.forEach((value) => { %>
-      <script type="text/javascript" src="<%= value %>" ></script>
+      <script type="text/javascript" src="<%= value.src %>"></script>
     <% }) %>
   </head>
   <body>
