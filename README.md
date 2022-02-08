@@ -36,6 +36,11 @@ npm run serve:dev
 
 # 启动本地测试服务
 npm run serve:test
+
+# Vite移除cache
+npm run serve:dev --force
+# 或者
+rm -rf node_modules/.vite
 ```
 
 ## 部署
