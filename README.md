@@ -46,9 +46,6 @@ rm -rf node_modules/.vite
 ## 部署
 
 ```bash
-# 构建测试环境
-npm run build:test
-
 # 构建生产环境
-npm run build:pro
+npm run build
 ```
