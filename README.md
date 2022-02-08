@@ -37,7 +37,7 @@ npm run serve:dev
 # 启动本地测试服务
 npm run serve:test
 
-# Vite移除cache
+# Vite移除cache (避免更新package后仍使用旧版依赖产生未知问题)
 npm run serve:dev --force
 # 或者
 rm -rf node_modules/.vite
