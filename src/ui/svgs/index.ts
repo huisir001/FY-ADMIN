@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2022-02-08 13:52:53
+ * @LastEditTime: 2022-02-08 14:56:57
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -55,6 +55,7 @@ import Layout from './inc/Layout.vue'
 import ExitFullScreen from './inc/ExitFullScreen.vue'
 import Module from './inc/Module.vue'
 import PageManage from './inc/PageManage.vue'
+import ClickButton from './inc/ClickButton.vue'
 
 
 const components = [
@@ -96,7 +97,8 @@ const components = [
     Layout,
     ExitFullScreen,
     Module,
-    PageManage
+    PageManage,
+    ClickButton
 ]
 
 export default (app: App<any>) => {
