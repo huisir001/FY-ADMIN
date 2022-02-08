@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2022-01-29 10:07:16
+ * @LastEditTime: 2022-02-08 14:43:47
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { ref } from "vue";
@@ -102,7 +102,6 @@ export default () => {
         {
             fixed: "right",
             minWidth: 180,
-            align: "center",
             slotHead: "todoHead",
             slot: "todo",
         },
@@ -272,11 +271,15 @@ export default () => {
             props: {
                 placeholder: "输入按钮要触发的事件名",
             },
-            rules: {
+            rules: [{
                 required: true,
                 trigger: "blur",
                 message: "事件名不能为空",
-            },
+            }, {
+                trigger: 'blur',
+                pattern: /^[A-Za-z]+(\/[A-Za-z]+)*(\w+)*$/,
+                message: '由英文、数字、/、_组成，以英文开头，“/”后面须为英文开头。如“user/login”',
+            }],
         },
     ] as IFormOption[]);
 

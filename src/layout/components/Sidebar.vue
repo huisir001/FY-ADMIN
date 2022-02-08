@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2022-02-07 09:43:27
+ * @LastEditTime: 2022-02-08 14:59:42
 -->
 <template>
     <div class="sidebar">
@@ -83,15 +83,16 @@ const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
 
 // 菜单点击
 const bindMenuClick = (menu: any) => {
-    console.log(menu)
     switch (menu.type) {
         case MenuType.cat:
             return
             break
         case MenuType.route:
+            //路由
             Router.push({ name: menu.id })
             break
         case MenuType.link:
+            // 链接
             if (menu.blank) {
                 window.open(menu.src)
             } else {
@@ -99,7 +100,8 @@ const bindMenuClick = (menu: any) => {
             }
             break
         case MenuType.button:
-            console.log('button')
+            // 按钮
+            Store[menu.triggerMode as 'commit' | 'dispatch'](menu.triggerMethod)
             break
     }
 }
