@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2022-01-29 16:29:01
+ * @LastEditTime: 2022-02-08 15:55:29
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -38,9 +38,7 @@ import { useRoute } from 'vue-router'
 const Store = useStore()
 
 // 是否为框架
-const isFrame = computed(
-    () => (useRoute().matched[useRoute().matched.length - 1].components.default as any).isFrame
-)
+const isFrame = computed(() => useRoute().name === 'Frame')
 
 // 历史路由数
 const showTabbar = computed(

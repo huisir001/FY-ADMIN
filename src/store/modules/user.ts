@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2022-01-29 15:44:54
+ * @LastEditTime: 2022-02-08 16:53:22
  */
 import { STORAGE_OPTIONS } from 'settings'
 import { ActionContext } from 'vuex'
@@ -11,7 +11,6 @@ import LocalCache from '@/utils/LocalCache'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 import Layout from '@/layout/index.vue'
-import { rawList2Tree } from '@/utils/common'
 import { menu2Route } from '../helpers'
 import { getUserMenus } from '@/api/user'
 import { MenuType } from '@/ui/types'
@@ -23,7 +22,7 @@ export interface IUserState extends IObj {
     loginStatus?: 0 | 1 | 2
     token?: string | null
     userInfo?: IObj | null
-    menuTree: IMenu[]
+    menus: IMenu[]
 }
 
 export const user = {
@@ -50,7 +49,7 @@ export const user = {
         /**
          * 菜单列表
          */
-        menuTree: []
+        menus: []
     },
     mutations: {
         /**
@@ -89,11 +88,11 @@ export const user = {
          */
         clearAllMenuAndRoute(state: IObj) {
             // 清除路由
-            state.menuTree.forEach((menu: IMenu) => {
+            state.menus.forEach((menu: IMenu) => {
                 router.removeRoute(menu.id)
             });
             // 清除菜单
-            state.menuTree = []
+            state.menus = []
         },
     },
     actions: {
@@ -141,8 +140,9 @@ export const user = {
         async getMenus({ commit }: ActionContext<{}, {}>) {
             const { ok, data = [] } = await getUserMenus()
             if (ok) {
-                // parentId list => children tree
-                const menuTreeList = rawList2Tree(data)
+
+                // 更新列表
+                commit('setStates', { menus: data })
 
                 // 动态添加路由
                 // 重新登录后这里无需考虑路由会重复。相同name的路由会覆盖先前路由
@@ -161,18 +161,7 @@ export const user = {
                             router.addRoute(Route)
                         }
                     }
-
-                    // 内嵌页面
-                    if (type === MenuType.link && !blank && status) {
-                        menu.viewPath = "ui/pages/Frame/index.vue"
-                        const Route = menu2Route(menu, data, Layout)
-                        router.addRoute('Link', Route)
-                    }
-
                 }
-
-                // 更新列表
-                commit('setStates', { menuTree: menuTreeList })
             }
         },
     },

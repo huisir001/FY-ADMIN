@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2022-02-08 14:59:42
+ * @LastEditTime: 2022-02-08 18:01:00
 -->
 <template>
     <div class="sidebar">
@@ -71,12 +71,13 @@ import { computed } from 'vue'
 import { useStore } from '@/store'
 import { useRouter } from 'vue-router'
 import { MenuType } from '@/ui/types'
+import { rawList2Tree } from '@/utils/common'
 
 const Store = useStore()
 const Router = useRouter()
 
 // 菜单
-const Menus = computed(() => Store.state.user.menuTree)
+const Menus = computed(() => rawList2Tree(Store.state.user.menus))
 
 // 侧边栏收放
 const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
@@ -96,7 +97,7 @@ const bindMenuClick = (menu: any) => {
             if (menu.blank) {
                 window.open(menu.src)
             } else {
-                Router.push({ name: menu.id })
+                Router.push({ name: 'Frame', params: { id: menu.id } })
             }
             break
         case MenuType.button:

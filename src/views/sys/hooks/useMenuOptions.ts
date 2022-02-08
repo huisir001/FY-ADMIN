@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2022-02-08 14:43:47
+ * @LastEditTime: 2022-02-08 18:13:43
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { ref } from "vue";
@@ -242,6 +242,19 @@ export default () => {
             },
         },
         {
+            label: "链接",
+            component: "input",
+            key: "src",
+            props: {
+                placeholder: "请输入链接",
+            },
+            rules: {
+                required: true,
+                trigger: "blur",
+                message: "链接不能为空",
+            },
+        },
+        {
             label: "触发方式",
             component: "select",
             key: "triggerMode",
@@ -311,7 +324,7 @@ export default () => {
         ],
         [MenuType.link]: [
             ...commonOptions,
-            "path",
+            "src",
             "blank",
         ],
         [MenuType.button]: [

@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-08 14:58:33
+ * @LastEditTime: 2022-02-08 18:14:26
  */
 
 import { Random } from "mockjs"
@@ -379,7 +379,7 @@ const getUserMenus = {
         id: '012',
         createTime: '@datetime',
         updateTime: '@datetime',
-        path: '/zuifengyun',
+        path: null,
         src: "https://www.zuifengyun.com",
         title: '框架内',
         icon: null,
