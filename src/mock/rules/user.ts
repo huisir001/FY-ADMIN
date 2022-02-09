@@ -2,13 +2,14 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-08 18:14:26
+ * @LastEditTime: 2022-02-09 15:07:52
  */
-
+import { rules2MockMethods } from '../helpers'
 import { Random } from "mockjs"
+const Prefix = '/api/user/'
 
 // 用户信息
-const getUserInfo = {
+export const getUserInfo = {
     data: {
         id: '@id',
         username: 'admin',
@@ -47,7 +48,7 @@ const logout = { msg: '注销登陆成功' }
 const resetPass = { msg: '修改密码成功' }
 
 // 查询当前用户菜单列表
-const getUserMenus = {
+export const getUserMenus = {
     data: [{
         id: '001', //主键
         createTime: '@datetime',
@@ -490,7 +491,7 @@ const getUserMenus = {
     ]
 }
 
-const User: IObj = {
+const Rules: IObj = {
     signup,
     login,
     getUserInfo,
@@ -499,4 +500,4 @@ const User: IObj = {
     getUserMenus
 }
 
-export default User
+export default rules2MockMethods(Rules, Prefix)

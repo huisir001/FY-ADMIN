@@ -2,12 +2,15 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2022-02-08 14:41:01
+ * @LastEditTime: 2022-02-09 15:08:17
  */
-import user from './user'
+import { rules2MockMethods } from '../helpers'
+import { getUserInfo, getUserMenus } from './user'
+
+const Prefix = '/api/sys/'
 
 // 查询所有菜单，用于菜单管理
-const getAllMenus = user.getUserMenus
+const getAllMenus = getUserMenus
 
 // 查询所有部门，用于部门管理
 const getAllDept = {
@@ -179,7 +182,7 @@ const getAllRole = {
 const getUsersByPage = {
     data: {
         'list|15': [{
-            ...user.getUserInfo.data,
+            ...getUserInfo.data,
             username: '@name',
             createTime: '@datetime',
             updateTime: '@datetime',
@@ -208,7 +211,7 @@ const delRole = delUsers
 // 删除部门
 const delDept = delUsers
 
-const Sys: IObj = {
+const Rules: IObj = {
     getAllMenus,
     getAllDept,
     getAllRole,
@@ -223,4 +226,4 @@ const Sys: IObj = {
     delDept
 }
 
-export default Sys
+export default rules2MockMethods(Rules, Prefix)

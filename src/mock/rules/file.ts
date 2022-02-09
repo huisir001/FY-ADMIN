@@ -2,10 +2,11 @@
  * @Description: 上传
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 22:56:35
- * @LastEditTime: 2021-10-09 18:12:04
+ * @LastEditTime: 2022-02-09 15:05:04
  */
-
+import { rules2MockMethods } from '../helpers'
 import { Random } from "mockjs"
+const Prefix = '/api/file/'
 
 // 上传文件
 const upload = {
@@ -44,42 +45,10 @@ const removeFileById = { msg: '删除成功' }
 // 查询类目列表
 const getFileGroupList = {
     data: {
-        list: [
+        'list|5-10': [
             {
-                "id": 1,
-                "name": "干别速"
-            },
-            {
-                "id": 2,
-                "name": "领则则活"
-            },
-            {
-                "id": 3,
-                "name": "心总走地"
-            },
-            {
-                "id": 4,
-                "name": "许际党入"
-            },
-            {
-                "id": 5,
-                "name": "起号干在"
-            },
-            {
-                "id": 6,
-                "name": "际题加能"
-            },
-            {
-                "id": 7,
-                "name": "特风切或"
-            },
-            {
-                "id": 8,
-                "name": "参世消品"
-            },
-            {
-                "id": 9,
-                "name": "农形直心南"
+                id: '@id',
+                name: '@ctitle(3, 5)',
             },
         ]
     }
@@ -97,7 +66,7 @@ const addFileGroup = {
 // 更新文件信息
 const update = { msg: '更新成功' }
 
-const File: IObj = {
+const Rules: IObj = {
     upload,
     getFileListByPage,
     removeFileById,
@@ -106,4 +75,4 @@ const File: IObj = {
     update
 }
 
-export default File
+export default rules2MockMethods(Rules, Prefix)

@@ -2,17 +2,18 @@
  * @Description: vite config
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-24 14:04:37
- * @LastEditTime: 2022-02-07 16:31:57
+ * @LastEditTime: 2022-02-09 14:22:51
  */
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { injectHtml } from 'vite-plugin-html'
+import { viteMockServe } from "vite-plugin-mock"
 import { TITLE, CSSCDN, JSCDN } from './settings'
 import { loadEnv } from 'vite'
 import path from 'path'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, command }) => {
   return {
     base: '/',
     resolve: {
@@ -32,8 +33,15 @@ export default defineConfig(({ mode }) => {
           TITLE,
           CSSCDN,
           // 打包时再导入外部CDN，开发环境使用包管理
-          JSCDN: loadEnv(mode, process.cwd()).VITE_NODE_ENV == 'production' ? JSCDN : []
+          JSCDN: command === 'build' ? JSCDN : []
         }
+      }),
+      viteMockServe({
+        mockPath: "./src/mock", // 解析根目录下的mock文件夹
+        localEnabled: command === 'serve',  // 开发打包开关
+        prodEnabled: command === 'build' && loadEnv(mode, process.cwd()).VITE_NODE_ENV === 'development', // 生产打包开关
+        supportTs: true, // 打开后，可以读取 ts 文件模块。 请注意，打开后将无法监视.js 文件。
+        watchFiles: true, // 监视文件更改
       })
     ],
     // 環境變量配置
