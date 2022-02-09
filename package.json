@@ -35,6 +35,7 @@
   "devDependencies": {
     "@types/mockjs": "^1.0.6",
     "@vitejs/plugin-vue": "^2.1.0",
+    "rollup-plugin-external-globals": "^0.6.1",
     "sass": "^1.49.7",
     "typescript": "~4.1.6",
     "vite": "^2.7.13",

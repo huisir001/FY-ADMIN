@@ -2,9 +2,15 @@
  * @Description: 辅助
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-09 14:54:22
- * @LastEditTime: 2022-02-09 15:00:35
+ * @LastEditTime: 2022-02-09 17:42:27
  */
 import { MockMethod } from 'vite-plugin-mock'
+
+/**
+ * DOC:https://github.com/nuysoft/Mock/wiki
+ * Examples:http://mockjs.com/examples.html
+ * https://gitee.com/wangchao2203/vite-plugin-mock
+ */
 
 export const rules2MockMethods = (rules: IObj, prefix: string) => {
     const MockMethods: MockMethod[] = []

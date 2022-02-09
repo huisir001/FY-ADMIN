@@ -7,6 +7,7 @@ specifiers:
   axios: ^0.21.4
   element-plus: ^2.0.1
   mockjs: ^1.1.0
+  rollup-plugin-external-globals: ^0.6.1
   sass: ^1.49.7
   typescript: ~4.1.6
   vite: ^2.7.13
@@ -31,6 +32,7 @@ dependencies:
 devDependencies:
   '@types/mockjs': 1.0.6
   '@vitejs/plugin-vue': 2.1.0_vite@2.7.13+vue@3.2.30
+  rollup-plugin-external-globals: 0.6.1
   sass: 1.49.7
   typescript: 4.1.6
   vite: 2.7.13_sass@1.49.7
@@ -1212,6 +1214,12 @@ packages:
     resolution: {integrity: sha512-+lP4/6lKUBfQjZ2pdxThZvLUAafmZb8OAxFb8XXtiQmS35INgr85hdOGoEs124ez1FCnZJt6jau/T+alh58QFQ==}
     dev: true
 
+  /is-reference/1.2.1:
+    resolution: {integrity: sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==}
+    dependencies:
+      '@types/estree': 0.0.39
+    dev: true
+
   /is-regex/1.1.4:
     resolution: {integrity: sha512-kvRdxDsxZjhzUX07ZnLydzS1TU/TJlTUHHY4YLL87e37oUA49DfkLqgy+VjFocowy29cKvcSiu+kIv728jTTVg==}
     engines: {node: '>= 0.4'}
@@ -1324,7 +1332,6 @@ packages:
     resolution: {integrity: sha512-4CrMT5DOHTDk4HYDlzmwu4FVCcIYI8gauveasrdCu2IKIFOJ3f0v/8MDGJCDL9oD2ppz/Av1b0Nj345H9M+XIA==}
     dependencies:
       sourcemap-codec: 1.4.8
-    dev: false
 
   /memoize-one/6.0.0:
     resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
@@ -1621,6 +1628,17 @@ packages:
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
     dev: true
 
+  /rollup-plugin-external-globals/0.6.1:
+    resolution: {integrity: sha512-mlp3KNa5sE4Sp9UUR2rjBrxjG79OyZAh/QC18RHIjM+iYkbBwNXSo8DHRMZWtzJTrH8GxQ+SJvCTN3i14uMXIA==}
+    peerDependencies:
+      rollup: ^2.25.0
+    dependencies:
+      '@rollup/pluginutils': 4.1.2
+      estree-walker: 2.0.2
+      is-reference: 1.2.1
+      magic-string: 0.25.7
+    dev: true
+
   /rollup/2.67.1:
     resolution: {integrity: sha512-1Sbcs4OuW+aD+hhqpIRl+RqooIpF6uQcfzU/QSI7vGkwADY6cM4iLsBGRM2CGLXDTDN5y/yShohFmnKegSPWzg==}
     engines: {node: '>=10.0.0'}
@@ -1688,7 +1706,6 @@ packages:
 
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
-    dev: false
 
   /statuses/1.5.0:
     resolution: {integrity: sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=}

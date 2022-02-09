@@ -2,12 +2,13 @@
  * @Description: vite config
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-24 14:04:37
- * @LastEditTime: 2022-02-09 14:22:51
+ * @LastEditTime: 2022-02-09 18:09:42
  */
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { injectHtml } from 'vite-plugin-html'
 import { viteMockServe } from "vite-plugin-mock"
+import externalGlobals from "rollup-plugin-external-globals"
 import { TITLE, CSSCDN, JSCDN } from './settings'
 import { loadEnv } from 'vite'
 import path from 'path'
@@ -15,7 +16,7 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
   return {
-    base: '/',
+    base: './',
     resolve: {
       // 路径缩写
       alias: {
@@ -36,13 +37,21 @@ export default defineConfig(({ mode, command }) => {
           JSCDN: command === 'build' ? JSCDN : []
         }
       }),
+      /**
+       * vite-Mock插件（vue-cli是直接使用，无插件）
+       * 开发环境是使用 Connect 中间件实现的。
+       * 与生产环境不同，您可以在浏览器控制台中查看网络请求记录
+       * https://gitee.com/wangchao2203/vite-plugin-mock
+       */
       viteMockServe({
+        ignore: /^\_/, // 忽略以_开头的文件
         mockPath: "./src/mock", // 解析根目录下的mock文件夹
-        localEnabled: command === 'serve',  // 开发打包开关
-        prodEnabled: command === 'build' && loadEnv(mode, process.cwd()).VITE_NODE_ENV === 'development', // 生产打包开关
         supportTs: true, // 打开后，可以读取 ts 文件模块。 请注意，打开后将无法监视.js 文件。
         watchFiles: true, // 监视文件更改
-      })
+        logger: false, // 关闭控制台请求日志
+        localEnabled: command === 'serve',  // 开发打包开关
+        prodEnabled: false // 生产环境关闭Mock（这里原本是想生产环境也用mock的，但仔细想了想没必要）
+      }),
     ],
     // 環境變量配置
     define: {
@@ -61,10 +70,10 @@ export default defineConfig(({ mode, command }) => {
         // 确保外部化处理不想打包进库的依赖
         // 外部包
         external: JSCDN.map(item => item.dependencies),
-        output: {
+        plugins: [
           // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
-          globals: getOutputGlobals(JSCDN)
-        }
+          externalGlobals(getOutputGlobals(JSCDN)),
+        ],
       }
     },
     server: {

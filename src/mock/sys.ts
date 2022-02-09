@@ -2,11 +2,10 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2022-02-09 15:08:17
+ * @LastEditTime: 2022-02-09 17:42:46
  */
-import { rules2MockMethods } from '../helpers'
+import { rules2MockMethods } from './_helpers'
 import { getUserInfo, getUserMenus } from './user'
-
 const Prefix = '/api/sys/'
 
 // 查询所有菜单，用于菜单管理

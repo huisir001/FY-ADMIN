@@ -2,9 +2,9 @@
  * @Description: 上传
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 22:56:35
- * @LastEditTime: 2022-02-09 15:05:04
+ * @LastEditTime: 2022-02-09 17:43:05
  */
-import { rules2MockMethods } from '../helpers'
+import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
 const Prefix = '/api/file/'
 

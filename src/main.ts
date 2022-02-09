@@ -2,7 +2,7 @@
  * @Description: 入口
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2022-02-09 11:36:06
+ * @LastEditTime: 2022-02-09 18:08:38
  */
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -11,7 +11,7 @@ import router from './router'
 import { store, storeKey } from './store'
 import ui from './ui'
 import directives from './directives'
-import './assets/styles/index.scss';
+import './assets/styles/index.scss'
 
 createApp(App)
     .use(options)

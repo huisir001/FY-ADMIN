@@ -2,9 +2,9 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-09 15:07:52
+ * @LastEditTime: 2022-02-09 17:43:11
  */
-import { rules2MockMethods } from '../helpers'
+import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
 const Prefix = '/api/user/'
 
