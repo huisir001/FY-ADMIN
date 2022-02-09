@@ -7,15 +7,10 @@
     <link rel="icon" href="/favicon.ico">
     <title><%= TITLE %></title>
     <!-- CDNResources -->
-    <% CSSCDN.forEach((item) => { %>
-    <link type="text/css" rel="stylesheet" href="<%= item %>" />
-    <% }) %>
-    <% JSCDN.forEach((item) => { %>
-    <script type="text/javascript" src="<%= item.src %>"></script>
-    <% }) %>
+    <% CSSCDN.forEach((item) => { %><link type="text/css" rel="stylesheet" href="<%= item %>" /><% }) %>
+    <% JSCDN.forEach((item) => { %><script type="text/javascript" src="<%= item.src %>"></script><% }) %>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <div id="app"></div><script type="module" src="/src/main.ts"></script>
   </body>
 </html>
