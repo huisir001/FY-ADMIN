@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-01-27 11:04:36
+ * @LastEditTime: 2022-02-10 15:24:45
 -->
 <template>
     <div class="navbar">
@@ -14,7 +14,8 @@
             <div v-if="$store.state.theme.showBreadcrumb" class="breadCrumbs nav-item">
                 <el-breadcrumb separator="/">
                     <el-breadcrumb-item v-for="item in breadCrumbs" :key="item.title"
-                        :to="{ path: item.path }" :class="{redirect:item.redirect}">{{item.title}}
+                        :to="{ name: item.name,params:item.params }"
+                        :class="{redirect:item.redirect}">{{item.title}}
                     </el-breadcrumb-item>
                 </el-breadcrumb>
             </div>
@@ -68,21 +69,22 @@ const showThemeDrawer = ref(false)
 // 面包屑
 const breadCrumbs = computed(() => {
     let crumbs = Route.matched
-        .filter((item) => item.name !== 'Home')
+        .filter((item) => item.name !== 'Home' && item.path !== '/')
         .map((item) => ({
             title: item.meta.title || item.name,
-            path: item.path,
+            name: item.name,
             redirect: item.redirect,
+            params: item.path.includes('/:') ? Route.params : {},
         }))
 
     // 面包屑中添加首页
-    if (!crumbs.find((item) => item.path === '/')) {
-        crumbs.unshift({
-            title: '首页',
-            path: '/',
-            redirect: undefined,
-        })
-    }
+    crumbs.unshift({
+        title: '首页',
+        name: 'Home',
+        redirect: undefined,
+        params: {},
+    })
+
     return crumbs
 })
 
