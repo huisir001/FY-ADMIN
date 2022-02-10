@@ -2,7 +2,7 @@
  * @Description: 跳转权限-路由前置钩子
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-17 19:28:46
- * @LastEditTime: 2021-11-22 11:29:46
+ * @LastEditTime: 2022-02-10 18:15:07
  */
 import { getUserInfo } from '@/api/user'
 import { NavigationGuardWithThis } from 'vue-router'
@@ -16,8 +16,12 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
 
     // 若跳登录页，则清除登陆状态，直接跳转
     if (to.name === 'Login') {
+        // 清除登录状态
         store.commit('user/clearLoginState')
+        // 清除菜单和路由
         store.commit('user/clearAllMenuAndRoute')
+        // 清除TAB路由
+        store.commit('sys/clearHistoryRoute')
         next()
         return
     }

@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2022-02-08 16:53:22
+ * @LastEditTime: 2022-02-10 18:35:57
  */
 import { STORAGE_OPTIONS } from 'settings'
 import { ActionContext } from 'vuex'
@@ -23,6 +23,7 @@ export interface IUserState extends IObj {
     token?: string | null
     userInfo?: IObj | null
     menus: IMenu[]
+    dynamicRoutes: string[]
 }
 
 export const user = {
@@ -49,7 +50,12 @@ export const user = {
         /**
          * 菜单列表
          */
-        menus: []
+        menus: [],
+
+        /**
+         * 新增的动态路由name列表
+         */
+        dynamicRoutes: []
     },
     mutations: {
         /**
@@ -88,9 +94,9 @@ export const user = {
          */
         clearAllMenuAndRoute(state: IObj) {
             // 清除路由
-            state.menus.forEach((menu: IMenu) => {
-                router.removeRoute(menu.id)
-            });
+            state.dynamicRoutes.forEach((routeName: string) => {
+                router.removeRoute(routeName)
+            })
             // 清除菜单
             state.menus = []
         },
@@ -144,6 +150,9 @@ export const user = {
                 // 更新列表
                 commit('setStates', { menus: data })
 
+                // 动态路由缓存
+                const dynamicRoutes = []
+
                 // 动态添加路由
                 // 重新登录后这里无需考虑路由会重复。相同name的路由会覆盖先前路由
                 for (let index = 0; index < data.length; index++) {
@@ -159,9 +168,15 @@ export const user = {
                             router.addRoute(data.find((item: IMenu) => item.id === parentId).id, Route)
                         } else {
                             router.addRoute(Route)
+                            // 缓存动态路由name表（父级）
+                            dynamicRoutes.push(Route.name)
                         }
+
                     }
                 }
+
+                // 设置缓存动态路由name
+                commit('setStates', { dynamicRoutes })
             }
         },
     },
