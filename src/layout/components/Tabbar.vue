@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2022-02-08 17:54:19
+ * @LastEditTime: 2022-02-10 15:03:08
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -53,7 +53,7 @@ const scrollBtnDisabled = ref<[boolean, boolean]>([false, false])
 const translateX = ref<number>(0)
 
 // 历史路由
-const historyRoutes = computed(() => Store.state.sys.historyRoutes)
+const historyRoutes = computed(() => JSON.parse(JSON.stringify(Store.state.sys.historyRoutes)))
 
 // 当前路由
 const curRouteName = computed(() => Route.name)
@@ -81,9 +81,17 @@ const setBtnState = (tranX: number) => {
 // historyRoutes变化要更新showScrollBtn.value
 watch(
     historyRoutes,
-    (val) => {
+    (val, oldval) => {
         if (val.length > 0) {
             nextTick(() => {
+                // 新增路由
+                if (oldval && val.length > oldval.length) {
+                    tabChange(
+                        val.length - 1,
+                        document.querySelector('.fy-tabbar-item.act') as HTMLElement,
+                        true
+                    )
+                }
                 showScrollBtn.value = tabbarRef.value ? getOverLength() > 0 : false
                 setBtnState(translateX.value)
             })
@@ -191,7 +199,7 @@ const handleNextBtn = (isTabChange: boolean = false) => {
 }
 
 // 切换tab
-function tabChange(index: number, target: HTMLElement) {
+function tabChange(index: number, target: HTMLElement, isNew?: boolean) {
     // 切换tab滚动
     if (showScrollBtn.value) {
         const offsetRight = tabbarRef.value.clientWidth - 60 - target.offsetLeft - translateX.value
@@ -208,9 +216,11 @@ function tabChange(index: number, target: HTMLElement) {
         }
     }
 
-    // 切换路由
-    const { name, path, params } = historyRoutes.value[index]
-    Router.push({ name, path, params })
+    if (!isNew) {
+        // 切换路由
+        const { name, path, params } = historyRoutes.value[index]
+        Router.push({ name, path, params })
+    }
 }
 
 // 监听滚动
