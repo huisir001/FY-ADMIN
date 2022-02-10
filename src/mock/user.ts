@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-09 17:43:11
+ * @LastEditTime: 2022-02-10 17:54:58
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -273,7 +273,7 @@ export const getUserMenus = {
         path: '/example', //唯一
         title: '页面示例',
         icon: "PageManage",
-        // redirectId: '008',
+        redirectId: '008',
         parentId: null,
         keepAlive: true, //默认为true
         visible: true, //默认展示
@@ -319,28 +319,6 @@ export const getUserMenus = {
         icon: "DocumentDelete",
         redirectId: null,
         parentId: '007',
-        keepAlive: true,
-        visible: true,
-        private: true,
-        orderNum: 2,
-        auth: null,
-        type: 1,
-        query: null,
-        viewPath: 'views/examples/pages/fail.vue',
-        blank: true,
-        triggerMode: null,
-        triggerMethod: null,
-        status: 1,
-    },
-    {
-        id: '010',
-        createTime: '@datetime',
-        updateTime: '@datetime',
-        path: '/pages/fail',
-        title: '测试子目录1',
-        icon: "DocumentDelete",
-        redirectId: null,
-        parentId: '009',
         keepAlive: true,
         visible: true,
         private: true,
