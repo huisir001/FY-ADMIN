@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2022-02-10 18:35:57
+ * @LastEditTime: 2022-02-11 11:02:14
  */
 import { STORAGE_OPTIONS } from 'settings'
 import { ActionContext } from 'vuex'
@@ -161,16 +161,22 @@ export const user = {
 
                     if (type === MenuType.route && status) {
 
-                        const Route = menu2Route(menu, data, Layout)
+                        const Route = menu2Route(menu)
 
-                        if (parentId) {
-                            // 路由的name直接使用id，避免冲突
-                            router.addRoute(data.find((item: IMenu) => item.id === parentId).id, Route)
-                        } else {
-                            router.addRoute(Route)
-                            // 缓存动态路由name表（父级）
-                            dynamicRoutes.push(Route.name)
-                        }
+                        router.addRoute('Home', Route)
+                        // 缓存动态路由name表（父级）
+                        dynamicRoutes.push(Route.name)
+
+                        // const Route = menu2Route(menu, data, Layout)
+
+                        // if (parentId) {
+                        //     // 路由的name直接使用id，避免冲突
+                        //     router.addRoute(data.find((item: IMenu) => item.id === parentId).id, Route)
+                        // } else {
+                        //     router.addRoute(Route)
+                        //     // 缓存动态路由name表（父级）
+                        //     dynamicRoutes.push(Route.name)
+                        // }
 
                     }
                 }
