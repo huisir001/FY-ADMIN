@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2022-02-11 10:36:45
+ * @LastEditTime: 2022-02-11 11:06:03
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -28,14 +28,14 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'Home',
     component: Layout,
-    redirect: { name: 'Home' },
-    meta: { title: '首页', visible: false, private: true },
+    redirect: { name: 'Dashboard' },
+    meta: { visible: false, private: true },
     children: [
       {
         path: '',
         name: 'Dashboard',
         component: () => import('../views/home/index.vue'),
-        meta: { title: '主控台', visible: false, private: true },
+        meta: { title: '首页', visible: false, private: true },
       },
       {
         path: '/frame/:id',
