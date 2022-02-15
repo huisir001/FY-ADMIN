@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2022-02-15 10:58:08
+ * @LastEditTime: 2022-02-15 14:02:30
 -->
 <template>
     <div class="sidebar">
@@ -70,8 +70,8 @@ export default {
 import { computed } from 'vue'
 import { useStore } from '@/store'
 import { useRouter } from 'vue-router'
-import { MenuType } from '@/ui/types'
 import { rawList2Tree } from '@/utils/common'
+import bindMenuJump from './bindMenuJump'
 
 const Store = useStore()
 const Router = useRouter()
@@ -83,29 +83,7 @@ const Menus = computed(() => rawList2Tree(Store.getters.copyUserMenu))
 const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
 
 // 菜单点击
-const bindMenuClick = (menu: any) => {
-    switch (menu.type) {
-        case MenuType.cat:
-            return
-            break
-        case MenuType.route:
-            //路由
-            Router.push({ name: menu.id })
-            break
-        case MenuType.link:
-            // 链接
-            if (menu.blank) {
-                window.open(menu.src)
-            } else {
-                Router.push({ name: 'Frame', params: { id: menu.id } })
-            }
-            break
-        case MenuType.button:
-            // 按钮
-            Store[menu.triggerMode as 'commit' | 'dispatch'](menu.triggerMethod)
-            break
-    }
-}
+const bindMenuClick = (menu:IMenu)=> bindMenuJump(menu,Router,Store)
 </script>
  
 <style scoped lang="scss">
