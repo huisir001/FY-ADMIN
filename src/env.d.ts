@@ -3,7 +3,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2022-01-29 16:57:05
+ * @LastEditTime: 2022-02-15 15:45:57
  */
 
 /**
@@ -126,7 +126,6 @@ declare interface IMenu {
   path: string
   title: string
   icon: string
-  redirectId: string
   parentId?: string
   keepAlive: boolean //默认为true
   visible: boolean //默认展示,false时不展示，但用链接能够访问

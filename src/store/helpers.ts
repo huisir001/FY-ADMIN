@@ -2,7 +2,7 @@
  * @Description: 辅助 
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-31 10:19:03
- * @LastEditTime: 2022-02-11 10:29:30
+ * @LastEditTime: 2022-02-15 15:51:16
  */
 import { RouteRecordRaw } from 'vue-router'
 
@@ -18,7 +18,7 @@ export const viewModules = { ...viewModules1, ...viewModules2 }
  * menuItem => routeItem
  */
 export const menu2Route = (menu: IMenu): RouteRecordRaw => {
-    const { id, path, title, icon, redirectId, parentId, keepAlive, private: prvt, viewPath, visible } = menu
+    const { id, path, title, icon, parentId, keepAlive, private: prvt, viewPath, visible } = menu
     // 路由的name直接使用id，避免冲突
     return {
         path,
