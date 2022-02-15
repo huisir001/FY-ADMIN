@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2022-02-10 15:03:08
+ * @LastEditTime: 2022-02-15 11:00:07
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -53,7 +53,7 @@ const scrollBtnDisabled = ref<[boolean, boolean]>([false, false])
 const translateX = ref<number>(0)
 
 // 历史路由
-const historyRoutes = computed(() => JSON.parse(JSON.stringify(Store.state.sys.historyRoutes)))
+const historyRoutes = computed(() => Store.getters.copyHistRoutes)
 
 // 当前路由
 const curRouteName = computed(() => Route.name)

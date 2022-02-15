@@ -2,10 +2,11 @@
  * @Description:getters-包装 state 数据
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-18 17:04:48
- * @LastEditTime: 2022-01-24 16:43:16
+ * @LastEditTime: 2022-02-15 10:59:31
  */
 import LocalCache from '@/utils/LocalCache'
 import { STORAGE_OPTIONS } from 'settings'
+import { IState } from './index'
 export default {
     /**
      * 取Token
@@ -13,7 +14,7 @@ export default {
      * 查询时若一处被清理则回填
      * getter在返回一个函数时，函数的返回值不会被缓存
      */
-    getToken: (state: any) => () => {
+    getToken: (state: IState) => () => {
         const C_TOKEN = LocalCache.getCache(STORAGE_OPTIONS.Token)
         const S_TOKEN = state.user.token
 
@@ -29,7 +30,17 @@ export default {
     },
 
     /**
-     * 复制userInfo
+     * 拷贝userInfo
      */
-    copyUserInfo: (state: any) => JSON.parse(JSON.stringify(state.user.userInfo))
+    copyUserInfo: (state: IState) => JSON.parse(JSON.stringify(state.user.userInfo)),
+
+    /**
+     * 拷贝menu
+     */
+    copyUserMenu: (state: IState) => JSON.parse(JSON.stringify(state.user.menus)),
+
+    /**
+     * 拷贝historyRoutes
+     */
+    copyHistRoutes: (state: IState) => JSON.parse(JSON.stringify(state.sys.historyRoutes))
 }

@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2022-02-08 18:01:00
+ * @LastEditTime: 2022-02-15 10:58:08
 -->
 <template>
     <div class="sidebar">
@@ -77,7 +77,7 @@ const Store = useStore()
 const Router = useRouter()
 
 // 菜单
-const Menus = computed(() => rawList2Tree(Store.state.user.menus))
+const Menus = computed(() => rawList2Tree(Store.getters.copyUserMenu))
 
 // 侧边栏收放
 const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
