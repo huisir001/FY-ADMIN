@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-02-11 11:06:10
+ * @LastEditTime: 2022-02-15 15:32:19
 -->
 <template>
     <div class="navbar">
@@ -14,8 +14,8 @@
             <div v-if="$store.state.theme.showBreadcrumb" class="breadCrumbs nav-item">
                 <el-breadcrumb separator="/">
                     <el-breadcrumb-item v-for="item in breadCrumbs" :key="item.title"
-                        :to="{ name: item.name,params:item.params }"
-                        :class="{redirect:item.redirect}">{{item.title}}
+                        @click="bindMenuClick(item)" :class="{isLink:item.type!==MenuType.cat}">
+                        {{item.title}}
                     </el-breadcrumb-item>
                 </el-breadcrumb>
             </div>
@@ -58,6 +58,8 @@ import { ElMessageBox } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
 import ThemeSetDrawer from './ThemeSet.vue'
 import { launchFullScreen, exitFullscreen, isFullScreen } from '@/ui/helpers'
+import { MenuType } from '@/ui/types'
+import menuJump from './menuJump'
 
 const Store = useStore()
 const Route = useRoute()
@@ -68,30 +70,42 @@ const showThemeDrawer = ref(false)
 
 // 面包屑
 const breadCrumbs = computed(() => {
-    let crumbs = Route.matched
-        .filter((item) => item.name !== 'Home' && item.path !== '/')
-        .map((item) => {
-            const isCurrRoute = Route.name === item.name
-            return {
-                title: item.meta.title || item.name,
-                ...(isCurrRoute
-                    ? {}
-                    : {
-                          name: item.name,
-                          redirect: item.redirect,
-                          params: item.path.includes('/:') ? Route.params : {},
-                      }),
+    const crumbs = []
+    if (Route.name !== 'Home' && Route.name !== 'Dashboard' && Route.path !== '/') {
+        const Menus = Store.state.user.menus
+        const currMenu = Menus.find((item) => {
+            if (Route.name === 'Frame') {
+                return item.id === Route.params.id
+            } else {
+                return item.id === Route.name
             }
         })
+        crumbs.unshift(currMenu)
+        ;(function getParentMenu(menu?: IMenu) {
+            if (menu && menu.parentId) {
+                let parentMenu = Menus.find((item) => item.id === menu.parentId)
+                crumbs.unshift(parentMenu)
+                getParentMenu(parentMenu)
+            }
+        })(currMenu)
+    }
 
     // 面包屑中添加首页
     crumbs.unshift({
         title: '首页',
-        name: 'Home',
+        id: 'Home',
+        type: MenuType.route,
     })
 
     return crumbs
 })
+
+// 面包屑菜单点击
+const bindMenuClick = (menu: IMenu) => {
+    if (menu.id !== Route.name) {
+        menuJump(menu, Router, Store)
+    }
+}
 
 // 侧边栏状态
 const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
@@ -212,16 +226,18 @@ const userNavChange = (e: any) => {
         &:deep(.el-breadcrumb) {
             height: 14px;
             overflow: hidden;
-            .el-breadcrumb__inner.is-link {
-                font-weight: normal;
-                color: var(--color-navbar-text);
-                &:hover {
-                    color: var(--color-navbar-text-hov);
+            .el-breadcrumb__item {
+                &.isLink .el-breadcrumb__inner {
+                    cursor: pointer;
+                    &:hover {
+                        color: var(--color-navbar-text-hov);
+                    }
                 }
-            }
-            .el-breadcrumb__item:last-child .el-breadcrumb__inner {
-                &:hover {
-                    color: var(--color-navbar-text);
+                &:last-child .el-breadcrumb__inner {
+                    cursor: text;
+                    &:hover {
+                        color: var(--color-navbar-text);
+                    }
                 }
             }
         }

@@ -2,7 +2,7 @@
  * @Description: 辅助脚本
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-15 11:36:27
- * @LastEditTime: 2022-02-15 14:02:01
+ * @LastEditTime: 2022-02-15 15:22:22
  */
 import { MenuType } from '@/ui/types'
 import { Router } from 'vue-router'

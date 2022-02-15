@@ -2,7 +2,7 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2022-02-15 14:02:30
+ * @LastEditTime: 2022-02-15 14:49:23
 -->
 <template>
     <div class="sidebar">
@@ -71,7 +71,7 @@ import { computed } from 'vue'
 import { useStore } from '@/store'
 import { useRouter } from 'vue-router'
 import { rawList2Tree } from '@/utils/common'
-import bindMenuJump from './bindMenuJump'
+import menuJump from './menuJump'
 
 const Store = useStore()
 const Router = useRouter()
@@ -83,7 +83,7 @@ const Menus = computed(() => rawList2Tree(Store.getters.copyUserMenu))
 const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
 
 // 菜单点击
-const bindMenuClick = (menu:IMenu)=> bindMenuJump(menu,Router,Store)
+const bindMenuClick = (menu:IMenu)=> menuJump(menu,Router,Store)
 </script>
  
 <style scoped lang="scss">
