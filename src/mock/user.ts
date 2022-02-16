@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-15 15:50:23
+ * @LastEditTime: 2022-02-16 10:44:03
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -61,7 +61,6 @@ export const getUserMenus = {
         visible: true, //默认展示
         private: true, //默认true,必须登录才能访问，否则跳登录页
         orderNum: 1, //排序index
-        auth: null, //权限，空字符串或null则为所有权限
         type: 0, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
@@ -82,7 +81,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 1,
         query: null,
         viewPath: 'views/sys/dept.vue',
@@ -102,7 +100,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 3,
-        auth: null,
         type: 1,
         query: null,
         viewPath: 'views/sys/menu.vue',
@@ -122,7 +119,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 4,
-        auth: null,
         type: 1,
         query: null,
         viewPath: 'views/sys/role.vue',
@@ -142,7 +138,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 4,
-        auth: null,
         type: 1,
         query: null,
         viewPath: 'views/sys/users.vue',
@@ -163,7 +158,6 @@ export const getUserMenus = {
         visible: true, //默认展示
         private: true, //默认true,必须登录才能访问，否则跳登录页
         orderNum: 1, //排序index
-        auth: null, //权限，空字符串或null则为所有权限
         type: 0, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
@@ -184,7 +178,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 1,
         query: null,
         viewPath: 'views/examples/container/full.vue',
@@ -205,7 +198,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 1,
         query: null,
         viewPath: 'views/examples/container/grid.vue',
@@ -226,7 +218,6 @@ export const getUserMenus = {
         visible: true, //默认展示
         private: true, //默认true,必须登录才能访问，否则跳登录页
         orderNum: 1, //排序index
-        auth: null, //权限，空字符串或null则为所有权限
         type: 0, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
@@ -247,7 +238,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 1,
         query: null,
         viewPath: 'views/examples/basicComp/card.vue',
@@ -268,7 +258,6 @@ export const getUserMenus = {
         visible: true, //默认展示
         private: true, //默认true,必须登录才能访问，否则跳登录页
         orderNum: 1, //排序index
-        auth: null, //权限，空字符串或null则为所有权限
         type: 0, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
@@ -289,7 +278,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 1,
         query: null,
         viewPath: 'views/examples/pages/success.vue',
@@ -310,7 +298,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 1,
         query: null,
         viewPath: 'views/examples/pages/fail.vue',
@@ -331,7 +318,6 @@ export const getUserMenus = {
         visible: false,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 0,
         query: null,
         viewPath: null,
@@ -353,7 +339,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 2,
         query: null,
         viewPath: null,
@@ -375,7 +360,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 2,
         query: null,
         viewPath: null,
@@ -396,7 +380,6 @@ export const getUserMenus = {
         visible: false,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 0,
         query: null,
         viewPath: null,
@@ -417,7 +400,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 3,
         query: null,
         viewPath: null,
@@ -438,7 +420,6 @@ export const getUserMenus = {
         visible: true,
         private: true,
         orderNum: 2,
-        auth: null,
         type: 3,
         query: null,
         viewPath: null,
