@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2022-02-08 18:13:43
+ * @LastEditTime: 2022-02-16 10:41:34
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { ref } from "vue";
@@ -73,10 +73,6 @@ export default () => {
             formatter: (row: IObj, column: IObj, cellValue: boolean) => {
                 return cellValue ? "是" : "否";
             },
-        },
-        {
-            label: "权限",
-            prop: "auth",
         },
         {
             label: "排序",
@@ -157,11 +153,6 @@ export default () => {
             label: "图标",
             slot: "icon",
             key: "icon",
-        },
-        {
-            label: "权限",
-            key: "auth",
-            slot: "auth",
         },
         {
             label: "状态",
@@ -316,7 +307,6 @@ export default () => {
         [MenuType.cat]: commonOptions,
         [MenuType.route]: [
             ...commonOptions,
-            "auth",
             "path",
             "viewPath",
             "private",
@@ -329,7 +319,6 @@ export default () => {
         ],
         [MenuType.button]: [
             ...commonOptions,
-            "auth",
             "triggerMode",
             "triggerMethod",
         ],
