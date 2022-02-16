@@ -2,7 +2,7 @@
  * @Description: 个人组件封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 17:33:54
- * @LastEditTime: 2022-01-19 10:52:36
+ * @LastEditTime: 2022-02-16 14:39:45
  */
 import { App } from 'vue'
 import Icon from './Icon/index.vue'
@@ -15,6 +15,7 @@ import IconSelect from './IconSelect/index.vue'
 import TreeSelect from './TreeSelect/index.vue'
 import FuzzySearch from './FuzzySearch/index.vue'
 import Card from './Card/index.vue'
+import Editor from './Editor/index.vue'
 
 
 const components: IObj = {
@@ -27,7 +28,8 @@ const components: IObj = {
     IconSelect,
     TreeSelect,
     FuzzySearch,
-    Card
+    Card,
+    Editor
 }
 
 export default (app: App<any>) => {
