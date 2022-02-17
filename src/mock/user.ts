@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-16 14:41:46
+ * @LastEditTime: 2022-02-17 10:54:57
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -251,8 +251,8 @@ export const getUserMenus = {
         createTime: '@datetime',
         updateTime: '@datetime',
         path: '/example/editor',
-        title: '编辑器',
-        icon: "Postcard",
+        title: '富文本编辑器',
+        icon: "Edit",
         parentId: '005',
         keepAlive: true,
         visible: true,
