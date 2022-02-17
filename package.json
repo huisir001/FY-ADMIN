@@ -23,6 +23,8 @@
   ],
   "dependencies": {
     "@element-plus/icons-vue": "^0.2.6",
+    "@wangeditor/editor": "^0.15.6",
+    "@wangeditor/editor-for-vue": "^5.1.8-9",
     "axios": "^0.21.4",
     "element-plus": "^2.0.1",
     "mockjs": "^1.1.0",
