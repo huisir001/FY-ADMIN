@@ -2,7 +2,7 @@
  * @Description: 富文本编辑器
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-16 14:30:17
- * @LastEditTime: 2022-02-17 18:07:50
+ * @LastEditTime: 2022-02-17 18:09:33
 -->
 <template>
     <!-- doc:https://www.wangeditor.com/v5/ -->
@@ -15,7 +15,6 @@
             @onFocus="$emit('onFocus',$event)" @onBlur="$emit('onBlur',$event)"
             @customAlert="customAlert" class="editor-container" />
     </div>
-    <button @click="sdsad">撒大声地</button>
 </template>
 
 <script lang="ts">
@@ -26,7 +25,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onBeforeUnmount, PropType, ref } from 'vue'
-import { IToolbarConfig, DomEditor } from '@wangeditor/editor'
+import { IToolbarConfig } from '@wangeditor/editor'
 import { Editor, Toolbar, getEditor, removeEditor } from '@wangeditor/editor-for-vue'
 import '@wangeditor/editor/dist/css/style.css'
 import toolbarKeys from './toolbarKeys.json'
@@ -92,11 +91,6 @@ const editorId = `editor-${Date.now()}`
 // 工具栏配置
 const toolbarConfig: Partial<IToolbarConfig> = {
     toolbarKeys: props.toolbar,
-}
-
-const sdsad = () => {
-    const toolbar = DomEditor.getToolbar(getEditor(editorId)!)
-    console.log(JSON.stringify(toolbar?.getConfig().toolbarKeys))
 }
 
 // 自定义编辑器提示
