@@ -3,7 +3,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2022-02-16 10:41:08
+ * @LastEditTime: 2022-02-17 13:54:55
  */
 
 /**
@@ -32,6 +32,10 @@ declare module '*.png' {
 }
 declare module '*.jpg' {
   const mod: any
+  export default mod
+}
+declare module '*.json' {
+  const value: any
   export default mod
 }
 
