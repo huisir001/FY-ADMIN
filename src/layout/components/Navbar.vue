@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-02-15 15:32:19
+ * @LastEditTime: 2022-02-17 17:56:50
 -->
 <template>
     <div class="navbar">
@@ -70,8 +70,23 @@ const showThemeDrawer = ref(false)
 
 // 面包屑
 const breadCrumbs = computed(() => {
-    const crumbs = []
-    if (Route.name !== 'Home' && Route.name !== 'Dashboard' && Route.path !== '/') {
+    let crumbs: any[] = []
+
+    // 个人中心
+    if (Route.name === 'Center') {
+        crumbs = [
+            {
+                title: '用户配置',
+                id: 'Home',
+                type: MenuType.cat,
+            },
+            {
+                title: '个人中心',
+                id: 'Center',
+                type: MenuType.route,
+            },
+        ]
+    } else if (Route.name !== 'Home' && Route.name !== 'Dashboard' && Route.path !== '/') {
         const Menus = Store.state.user.menus
         const currMenu = Menus.find((item) => {
             if (Route.name === 'Frame') {
@@ -90,7 +105,7 @@ const breadCrumbs = computed(() => {
         })(currMenu)
     }
 
-    // 面包屑中添加首页
+    // 面包屑中添加预定义的路由
     crumbs.unshift({
         title: '首页',
         id: 'Home',
