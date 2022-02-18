@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2022-01-14 10:29:43
+ * @LastEditTime: 2022-02-18 15:00:58
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -46,15 +46,15 @@
                             </el-button>
                             <el-upload style="display:inline-block;margin-left:10px;"
                                 action="/api/file/upload" accept="image/png, image/jpeg"
-                                :show-file-list="false" :on-success="handlePicSuccess"
-                                :before-upload="beforePicUpload">
+                                :headers="uploadHeaders" :show-file-list="false"
+                                :on-success="handlePicSuccess" :before-upload="beforePicUpload">
                                 <el-button type="primary" size="small"
                                     @click="popoverVisible = false">直接上传
                                 </el-button>
                             </el-upload>
                         </div>
                         <template #reference>
-                            <div class="thumbnail upload"  @click="popoverVisible = !popoverVisible">
+                            <div class="thumbnail upload" @click="popoverVisible = !popoverVisible">
                                 <fy-icon name="plus" size="30"
                                     color="var(--el-text-color-placeholder)" />
                             </div>
@@ -118,8 +118,9 @@
                     <p>请从图片库中选择图片。</p>
                     <p>也可以
                         <el-upload class="upload-inline" action="/api/file/upload"
-                            accept="image/png, image/jpeg" :show-file-list="false"
-                            :on-success="handlePicSuccess" :before-upload="beforePicUpload">
+                            accept="image/png, image/jpeg" :headers="uploadHeaders"
+                            :show-file-list="false" :on-success="handlePicSuccess"
+                            :before-upload="beforePicUpload">
                             <span>上传新图片</span>
                         </el-upload>
                         或
@@ -173,6 +174,8 @@ import {
 } from '@/api/file'
 import { ElMessage } from 'element-plus'
 import { debounce } from '@/ui/helpers'
+import { TOKEN_OPTIONS } from 'settings'
+import { useStore } from '@/store'
 
 const props = defineProps({
     /**
@@ -198,6 +201,7 @@ const pageTotal = ref(1)
 const fileList = ref([])
 const pageLimit = 10
 const fileUrlSetFrom = ref()
+const uploadHeaders = { [TOKEN_OPTIONS.key]: useStore().getters.getToken() }
 
 // 分类列表
 const groups = ref<IFileGroup[]>([])
