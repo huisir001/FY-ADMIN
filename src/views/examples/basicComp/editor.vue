@@ -2,7 +2,7 @@
  * @Description: 编辑器
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-16 14:29:02
- * @LastEditTime: 2022-02-17 14:32:07
+ * @LastEditTime: 2022-02-18 17:18:47
 -->
 <template>
     <div class="my-editor">
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 const htmlVal = ref('')
 
 // 监听内容变化

@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2022-02-18 15:00:58
+ * @LastEditTime: 2022-02-18 16:25:57
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -400,6 +400,15 @@ const beforePicUpload = (file: { type: string; size: number }) => {
     }
     return true
 }
+
+// 暴露给ref
+defineExpose({
+    // 选择文件
+    selectFile() {
+        showFileLibraryBox.value = true
+        getList()
+    },
+})
 </script>
  
 <style scoped lang="scss">

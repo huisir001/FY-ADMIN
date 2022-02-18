@@ -2,7 +2,7 @@
  * @Description: 富文本编辑器
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-16 14:30:17
- * @LastEditTime: 2022-02-17 18:09:33
+ * @LastEditTime: 2022-02-18 17:32:44
 -->
 <template>
     <!-- doc:https://www.wangeditor.com/v5/ -->
@@ -15,6 +15,7 @@
             @onFocus="$emit('onFocus',$event)" @onBlur="$emit('onBlur',$event)"
             @customAlert="customAlert" class="editor-container" />
     </div>
+    <fy-file-library type="pic" ref="fileLibrary" @selected="fileSelected" />
 </template>
 
 <script lang="ts">
@@ -74,6 +75,9 @@ const props = defineProps({
     },
 })
 
+// 图片仓库
+const fileLibrary: any = ref(null)
+
 // editor高度
 const editorHeight = computed(() =>
     typeof props.height == 'number' ? props.height + 'px' : props.height
@@ -125,6 +129,9 @@ const customCheckLinkFn = (text: string, url: string): string | boolean | undefi
     return true
 }
 
+// 图片插入
+let insertImgFn: any = null
+
 // 编辑栏配置
 const editorConfig = {
     placeholder: props.placeholder,
@@ -145,16 +152,18 @@ const editorConfig = {
         },
         // 上传图片配置
         uploadImage: {
-            fieldName: 'file',
-            server: ' /api/file/upload',
-            // 自定义插入图片
-            customInsert(res: any, insertFn: (url: string, alt?: any, href?: any) => void) {
-                // res 即服务端的返回结果
-                // 从 res 中找到 url alt href ，然后插图图片
-                insertFn(res.data.url)
+            // 自定义选择图片
+            customBrowseAndUpload(insertFn: any) {
+                insertImgFn = insertFn
+                fileLibrary.value.selectFile()
             },
         },
     },
+}
+
+// 监听图片选择
+const fileSelected = (file: any) => {
+    insertImgFn(file.url, file.name)
 }
 
 // 组件销毁时，也及时销毁编辑器
