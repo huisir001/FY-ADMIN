@@ -2,7 +2,7 @@
  * @Description: 富文本编辑器
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-16 14:30:17
- * @LastEditTime: 2022-02-18 17:32:44
+ * @LastEditTime: 2022-02-18 17:46:45
 -->
 <template>
     <!-- doc:https://www.wangeditor.com/v5/ -->
@@ -10,7 +10,7 @@
         <Toolbar mode="default" :editorId="editorId" :defaultConfig="toolbarConfig"
             style="border-bottom: 1px solid #ccc" />
         <Editor mode="default" :editorId="editorId" :defaultConfig="editorConfig"
-            :defaultHtml="defaultHtml" @onChange="$emit('onChange',$event)"
+            :defaultHtml="modelValue" @onChange="handleChange"
             @onCreated="$emit('onCreated',$event)" @onDestroyed="$emit('onDestroyed',$event)"
             @onFocus="$emit('onFocus',$event)" @onBlur="$emit('onBlur',$event)"
             @customAlert="customAlert" class="editor-container" />
@@ -34,15 +34,14 @@ import { ElMessage } from 'element-plus'
 
 // props
 const props = defineProps({
+    modelValue: {
+        type: String,
+        default: '',
+    },
     // 工具欄配置
     toolbar: {
         type: Array as PropType<typeof toolbarKeys>,
         default: () => toolbarKeys,
-    },
-    // 初始化内容
-    defaultHtml: {
-        type: String,
-        default: '',
     },
     // 提示
     placeholder: {
@@ -75,9 +74,6 @@ const props = defineProps({
     },
 })
 
-// 图片仓库
-const fileLibrary: any = ref(null)
-
 // editor高度
 const editorHeight = computed(() =>
     typeof props.height == 'number' ? props.height + 'px' : props.height
@@ -87,7 +83,12 @@ const editorMinHeight = computed(() =>
 )
 
 // emits
-defineEmits(['update:modelValue', 'onChange', 'onCreated', 'onDestroyed', 'onFocus', 'onBlur'])
+const emit = defineEmits(['update:modelValue', 'onCreated', 'onDestroyed', 'onFocus', 'onBlur'])
+
+// 监听内容变化
+const handleChange = (editor: any) => {
+    emit('update:modelValue', editor.getHtml())
+}
 
 // 编辑器 id ，要全局唯一
 const editorId = `editor-${Date.now()}`
@@ -129,6 +130,9 @@ const customCheckLinkFn = (text: string, url: string): string | boolean | undefi
     return true
 }
 
+// 图片仓库
+const fileLibrary: any = ref(null)
+
 // 图片插入
 let insertImgFn: any = null
 
@@ -164,6 +168,7 @@ const editorConfig = {
 // 监听图片选择
 const fileSelected = (file: any) => {
     insertImgFn(file.url, file.name)
+    insertImgFn = null
 }
 
 // 组件销毁时，也及时销毁编辑器

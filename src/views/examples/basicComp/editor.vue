@@ -2,11 +2,11 @@
  * @Description: 编辑器
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-16 14:29:02
- * @LastEditTime: 2022-02-18 17:18:47
+ * @LastEditTime: 2022-02-18 17:47:10
 -->
 <template>
     <div class="my-editor">
-        <fy-editor @onChange="handleChange" />
+        <fy-editor v-model="htmlVal" />
     </div>
     <fy-card :type="2" title="HTML内容">
         {{htmlVal}}
@@ -20,14 +20,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 const htmlVal = ref('')
-
-// 监听内容变化
-const handleChange = (editor: any) => {
-    console.log(editor)
-    htmlVal.value = editor.getHtml()
-}
 </script>
 
 <style scoped lang="scss">
