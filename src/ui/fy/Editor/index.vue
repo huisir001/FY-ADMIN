@@ -2,7 +2,7 @@
  * @Description: 富文本编辑器
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-16 14:30:17
- * @LastEditTime: 2022-02-18 17:46:45
+ * @LastEditTime: 2022-02-21 11:28:26
 -->
 <template>
     <!-- doc:https://www.wangeditor.com/v5/ -->
@@ -186,5 +186,8 @@ onBeforeUnmount(() => {
     overflow-y: hidden;
     height: v-bind(editorHeight) !important;
     min-height: v-bind(editorMinHeight);
+}
+:global(.w-e-full-screen-container) {
+    z-index: 1000;
 }
 </style>
