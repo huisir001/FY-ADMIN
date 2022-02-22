@@ -2,7 +2,7 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2022-02-22 15:04:32
+ * @LastEditTime: 2022-02-22 15:19:34
  */
 import { rules2MockMethods } from './_helpers'
 import { getUserInfo, getUserMenus } from './user'
@@ -229,6 +229,8 @@ const delMenu = delUsers
 const delRole = delUsers
 // 删除部门
 const delDept = delUsers
+// 删除日志
+const delLogs = delUsers
 
 const Rules: IObj = {
     getAllMenus,
@@ -243,7 +245,8 @@ const Rules: IObj = {
     delUsers,
     delMenu,
     delRole,
-    delDept
+    delDept,
+    delLogs
 }
 
 export default rules2MockMethods(Rules, Prefix)
