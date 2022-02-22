@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-17 10:54:57
+ * @LastEditTime: 2022-02-22 15:16:30
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -54,7 +54,7 @@ export const getUserMenus = {
         createTime: '@datetime',
         updateTime: '@datetime',
         path: null, //唯一
-        title: '系统配置',
+        title: '系统管理',
         icon: "setting",
         parentId: null,
         keepAlive: true, //默认为true
@@ -141,6 +141,25 @@ export const getUserMenus = {
         type: 1,
         query: null,
         viewPath: 'views/sys/users.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    }, {
+        id: '@id',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/sys/logs',
+        title: '请求日志',
+        icon: "Document",
+        parentId: '001',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 4,
+        type: 1,
+        query: null,
+        viewPath: 'views/sys/logs.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,

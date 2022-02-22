@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2022-02-08 14:56:57
+ * @LastEditTime: 2022-02-22 15:16:21
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -40,6 +40,7 @@ import {
     CreditCard,
     Postcard,
     Files,
+    Document,
     DocumentChecked,
     DocumentDelete,
     Link
@@ -87,6 +88,7 @@ const components = [
     CreditCard,
     Postcard,
     Files,
+    Document,
     DocumentChecked,
     DocumentDelete,
     Link,

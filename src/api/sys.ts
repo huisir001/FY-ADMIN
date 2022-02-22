@@ -2,7 +2,7 @@
  * @Description: 系統配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-21 09:57:09
- * @LastEditTime: 2021-12-30 10:24:43
+ * @LastEditTime: 2022-02-22 15:05:54
  */
 import Req from "../utils/Request";
 const Prefix = "/api/sys";
@@ -37,3 +37,10 @@ export const delMenu = (id: string) => Req.post(`${Prefix}/delMenu`, { id });
 export const delRole = (id: string) => Req.post(`${Prefix}/delRole`, { id });
 // 删除部门
 export const delDept = (id: string) => Req.post(`${Prefix}/delDept`, { id });
+
+// 日志列表
+export const getLogsByPage: IPromiseFunc = (params: IGetLogsParams) =>
+    Req.get(`${Prefix}/getLogsByPage`, { params });
+// 删除日志(删除单个、多个,逗号分割)
+export const delLogs = (ids: string) =>
+    Req.post(`${Prefix}/delLogs`, { ids });
