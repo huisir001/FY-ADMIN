@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-19 10:49:52
+ * @LastEditTime: 2022-02-22 14:44:55
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -77,16 +77,18 @@ const searchParams: IUserInfo = reactive({
 })
 
 // 请求用户列表
-const getUserList = (function getUsers(search = null) {
+const getUserList = (function getUsers() {
     loading.value = true
-    getUsersByPage({ page: currPage.value, limit: limit.value, search }).then((res) => {
-        const { ok, data } = res
-        if (ok) {
-            tableData.value = data.list
-            total.value = data.total
+    getUsersByPage({ page: currPage.value, limit: limit.value, search: searchParams }).then(
+        (res) => {
+            const { ok, data } = res
+            if (ok) {
+                tableData.value = data.list
+                total.value = data.total
+            }
+            loading.value = false
         }
-        loading.value = false
-    })
+    )
     return getUsers
 })()
 
