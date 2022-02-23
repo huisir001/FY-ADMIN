@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2022-02-22 15:16:21
+ * @LastEditTime: 2022-02-23 18:16:07
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -43,7 +43,8 @@ import {
     Document,
     DocumentChecked,
     DocumentDelete,
-    Link
+    Link,
+    Monitor
 } from '@element-plus/icons-vue'
 
 /**
@@ -92,6 +93,7 @@ const components = [
     DocumentChecked,
     DocumentDelete,
     Link,
+    Monitor,
     /* my-icons */
     Theme,
     Export,
