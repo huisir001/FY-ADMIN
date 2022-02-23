@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2022-02-11 11:06:03
+ * @LastEditTime: 2022-02-23 18:03:18
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -40,7 +40,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/frame/:id',
         name: 'Frame',
-        component: () => import('../ui/pages/Frame/index.vue'),
+        component: () => import('../ui/pages/tool/frame.vue'),
         meta: { visible: true, private: true, keepAlive: true },
       },
     ]

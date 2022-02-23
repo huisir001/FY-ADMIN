@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-01-28 16:01:07
+ * @LastEditTime: 2022-02-23 10:14:57
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
@@ -54,7 +54,7 @@
             </el-select>
         </template>
         <template #viewPath="editParams">
-            <el-select v-model="editParams.val.viewPath" placeholder="选择路由所指向的文件路径">
+            <el-select v-model="editParams.val.viewPath" placeholder="选择路由所指向的文件路径" filterable>
                 <el-option v-for="path in viewPaths" :key="path" :label="path" :value="path" />
             </el-select>
         </template>
@@ -75,7 +75,7 @@ import { ElMessage } from 'element-plus'
 import { viewModules } from '@/store/helpers'
 
 // 文件路径
-const viewPaths = Object.keys(viewModules).map((item) => 'views/' + item.split('views/')[1])
+const viewPaths = Object.keys(viewModules).map((item) => item.slice(3))
 // 表格原始数据
 const tableRawData = ref([])
 // 菜单列表tree

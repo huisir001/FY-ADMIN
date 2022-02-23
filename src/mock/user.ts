@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-22 15:16:30
+ * @LastEditTime: 2022-02-23 18:08:06
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -83,7 +83,7 @@ export const getUserMenus = {
         orderNum: 2,
         type: 1,
         query: null,
-        viewPath: 'views/sys/dept.vue',
+        viewPath: 'ui/pages/sys/dept.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,
@@ -102,7 +102,7 @@ export const getUserMenus = {
         orderNum: 3,
         type: 1,
         query: null,
-        viewPath: 'views/sys/menu.vue',
+        viewPath: 'ui/pages/sys/menu.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,
@@ -121,7 +121,7 @@ export const getUserMenus = {
         orderNum: 4,
         type: 1,
         query: null,
-        viewPath: 'views/sys/role.vue',
+        viewPath: 'ui/pages/sys/role.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,
@@ -140,7 +140,7 @@ export const getUserMenus = {
         orderNum: 4,
         type: 1,
         query: null,
-        viewPath: 'views/sys/users.vue',
+        viewPath: 'ui/pages/sys/users.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,
@@ -159,7 +159,7 @@ export const getUserMenus = {
         orderNum: 4,
         type: 1,
         query: null,
-        viewPath: 'views/sys/logs.vue',
+        viewPath: 'ui/pages/sys/logs.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,
