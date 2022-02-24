@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-24 10:17:18
+ * @LastEditTime: 2022-02-24 10:40:54
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -470,7 +470,7 @@ export const getUserMenus = {
         id: '@id',
         createTime: '@datetime',
         updateTime: '@datetime',
-        path: '/monitor/logs',
+        path: '/monitor/reqlogs',
         title: '请求日志',
         icon: "Document",
         parentId: '015',
@@ -480,7 +480,26 @@ export const getUserMenus = {
         orderNum: 4,
         type: 1,
         query: null,
-        viewPath: 'ui/pages/monitor/logs.vue',
+        viewPath: 'ui/pages/monitor/reqlogs.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    }, {
+        id: '@id',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/monitor/loginlogs',
+        title: '登录日志',
+        icon: "Document",
+        parentId: '015',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 4,
+        type: 1,
+        query: null,
+        viewPath: 'ui/pages/monitor/loginlogs.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,

@@ -1,8 +1,8 @@
 <!--
- * @Description: 日志管理
+ * @Description: 登录日志管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-02-24 10:15:30
+ * @LastEditTime: 2022-02-24 16:32:23
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -25,12 +25,12 @@ export default { name: 'Logs', isFull: true }
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { TOptionOfTools } from '@/ui/fy/types'
-import useLogsOptions from './hooks/useLogsOptions'
-import { getLogsByPage, delLogs } from '@/api/sys'
+import useLoginLogsOptions from './hooks/useLoginLogsOptions'
+import { getLoginLogsByPage, delLoginReqLogs } from '@/api/monitor'
 import { ElMessage } from 'element-plus'
 
 // 表格配置
-const { searchOptions, tableCols, tableTools } = useLogsOptions()
+const { searchOptions, tableCols, tableTools } = useLoginLogsOptions()
 // loading
 const loading = ref(false)
 // 用户列表数据
@@ -42,7 +42,7 @@ const limit = ref(15)
 // 总条数
 const total = ref(0)
 // 搜索表单数据
-const searchParams: ILog = reactive({
+const searchParams: IReqLog = reactive({
     userId: '',
     username: '',
     ip: '',
@@ -52,7 +52,7 @@ const searchParams: ILog = reactive({
 // 请求日志列表
 const getLogs = (function getLogs() {
     loading.value = true
-    getLogsByPage({ page: currPage.value, limit: limit.value, search: searchParams }).then(
+    getLoginLogsByPage({ page: currPage.value, limit: limit.value, search: searchParams }).then(
         (res) => {
             const { ok, data } = res
             if (ok) {
@@ -99,7 +99,9 @@ const toolsBtnClick = async (btn: TOptionOfTools, flag: any) => {
     }
     // 删除选定行
     if (btn === 'delete') {
-        const { ok, msg } = await delLogs(flag.map((item: { id: string }) => item.id).join(','))
+        const { ok, msg } = await delLoginReqLogs(
+            flag.map((item: { id: string }) => item.id).join(',')
+        )
         if (ok) {
             ElMessage.success(msg)
             getLogs()
@@ -112,7 +114,7 @@ const handleTodo = async (btn: string, index: number, row: IObj) => {
     switch (btn) {
         // 删除按钮
         case 'del':
-            const { ok, msg } = await delLogs(row.id)
+            const { ok, msg } = await delLoginReqLogs(row.id)
             if (ok) {
                 ElMessage.success(msg)
                 getLogs()

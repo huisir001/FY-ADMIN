@@ -2,7 +2,7 @@
  * @Description: 系统配置(唯总管理员才有权限)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-15 15:10:44
- * @LastEditTime: 2022-02-22 15:19:34
+ * @LastEditTime: 2022-02-24 16:29:52
  */
 import { rules2MockMethods } from './_helpers'
 import { getUserInfo, getUserMenus } from './user'
@@ -193,26 +193,6 @@ const getUsersByPage = {
     }
 }
 
-// 查询所有日志列表（用于日志管理）
-const getLogsByPage = {
-    data: {
-        'list|15': [{
-            id: '@id',
-            ip: '@ip', // 访客IP
-            userId: '@id', // 用户id
-            username: '@name',
-            action: '@url', // 请求地址
-            desc: '@ctitle(3, 5)', // 操作说明
-            createTime: '@datetime',
-            updateTime: '@datetime',
-        }],
-        page: 1,
-        limit: 10,
-        total: 100,
-        pageTotal: 10
-    }
-}
-
 // 保存账号(新增、编辑)
 const saveUserInfo = { msg: '保存成功' }
 // 保存菜单(新增、编辑)
@@ -229,15 +209,13 @@ const delMenu = delUsers
 const delRole = delUsers
 // 删除部门
 const delDept = delUsers
-// 删除日志
-const delLogs = delUsers
+
 
 const Rules: IObj = {
     getAllMenus,
     getAllDept,
     getAllRole,
     getUsersByPage,
-    getLogsByPage,
     saveUserInfo,
     saveMenu,
     saveRole,
@@ -246,7 +224,6 @@ const Rules: IObj = {
     delMenu,
     delRole,
     delDept,
-    delLogs
 }
 
 export default rules2MockMethods(Rules, Prefix)

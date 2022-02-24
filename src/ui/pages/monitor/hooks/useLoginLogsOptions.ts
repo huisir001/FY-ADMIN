@@ -1,8 +1,8 @@
 /*
- * @Description: 日志管理-配置项
+ * @Description: 登录日志管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2022-02-22 15:08:31
+ * @LastEditTime: 2022-02-24 16:13:06
  */
 import { IFormOption, ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -20,11 +20,11 @@ export default () => {
             },
         },
         {
-            label: '用户昵称',
+            label: '用户名',
             component: 'input',
             key: 'username',
             props: {
-                placeholder: '请输入用户昵称',
+                placeholder: '请输入用户名',
             },
         },
         {
@@ -58,7 +58,7 @@ export default () => {
             align: "center"
         },
         {
-            label: '访客IP',
+            label: 'IP地址',
             minWidth: 100,
             prop: 'ip'
         },
@@ -68,19 +68,29 @@ export default () => {
             prop: 'userId',
         },
         {
-            label: '用户昵称',
+            label: '用户名',
             minWidth: 100,
             prop: 'username',
         },
         {
-            label: '请求地址',
+            label: '登录地点',
             minWidth: '200',
-            prop: 'action',
+            prop: 'location',
         },
         {
-            label: '操作说明',
+            label: '反馈信息',
             minWidth: 100,
-            prop: 'desc',
+            prop: 'msg',
+        },
+        {
+            label: '操作系统',
+            minWidth: 100,
+            prop: 'os',
+        },
+        {
+            label: '浏览器',
+            minWidth: 100,
+            prop: 'browser',
         },
         {
             label: '创建时间',
