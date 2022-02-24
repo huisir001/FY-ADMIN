@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-24 10:40:54
+ * @LastEditTime: 2022-02-24 17:22:20
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -491,7 +491,7 @@ export const getUserMenus = {
         updateTime: '@datetime',
         path: '/monitor/loginlogs',
         title: '登录日志',
-        icon: "Document",
+        icon: "LoginLogs",
         parentId: '015',
         keepAlive: true,
         visible: true,
