@@ -2,7 +2,7 @@
  * @Description: 日志管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-02-22 15:06:50
+ * @LastEditTime: 2022-02-24 10:15:30
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
