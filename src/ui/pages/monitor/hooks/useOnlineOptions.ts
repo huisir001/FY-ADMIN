@@ -1,8 +1,8 @@
 /*
- * @Description: 登录日志管理-配置项
+ * @Description: 在线用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2022-02-25 14:33:01
+ * @LastEditTime: 2022-02-25 18:19:36
  */
 import { IFormOption, ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -99,6 +99,11 @@ export default () => {
             sortable: true,
         },
         {
+            label: '登录状态',
+            minWidth: 80,
+            slot: 'status',
+        },
+        {
             label: '操作',
             fixed: 'right',
             minWidth: 160,
@@ -109,7 +114,7 @@ export default () => {
     /**
      * 表格工具欄
      */
-    const tableTools: TOptionOfTools[] = ['delete', 'search', 'export', 'refresh', 'cols']
+    const tableTools: TOptionOfTools[] = ['search', 'export', 'refresh', 'cols']
 
 
     return {

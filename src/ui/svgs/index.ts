@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2022-02-24 17:21:55
+ * @LastEditTime: 2022-02-25 14:41:21
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -59,6 +59,7 @@ import Module from './inc/Module.vue'
 import PageManage from './inc/PageManage.vue'
 import ClickButton from './inc/ClickButton.vue'
 import LoginLogs from './inc/LoginLogs.vue'
+import OnlineUser from './inc/OnlineUser.vue'
 
 
 const components = [
@@ -95,6 +96,7 @@ const components = [
     DocumentDelete,
     Link,
     Monitor,
+    OnlineUser,
     /* my-icons */
     Theme,
     Export,

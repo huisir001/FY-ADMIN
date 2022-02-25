@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-24 17:22:20
+ * @LastEditTime: 2022-02-25 14:42:19
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -500,6 +500,25 @@ export const getUserMenus = {
         type: 1,
         query: null,
         viewPath: 'ui/pages/monitor/loginlogs.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    }, {
+        id: '@id',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/monitor/online',
+        title: '在线用户',
+        icon: "OnlineUser",
+        parentId: '015',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 4,
+        type: 1,
+        query: null,
+        viewPath: 'ui/pages/monitor/online.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,

@@ -2,7 +2,7 @@
  * @Description: 监控日志
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-24 16:15:38
- * @LastEditTime: 2022-02-24 16:25:10
+ * @LastEditTime: 2022-02-25 18:18:24
  */
 import Req from "../utils/Request";
 const Prefix = "/api/monitor";
@@ -22,3 +22,11 @@ export const getLoginLogsByPage: IPromiseFunc = (params: IGetLogsParams) =>
 // 删除登录日志(删除单个、多个,逗号分割)
 export const delLoginReqLogs = (ids: string) =>
     Req.post(`${Prefix}/delLoginReqLogs`, { ids });
+
+// 在线用户列表
+export const getOnlineUsersByPage: IPromiseFunc = (params: IGetLogsParams) =>
+    Req.get(`${Prefix}/getOnlineUsersByPage`, { params });
+
+// 强退
+export const forcedExit = (id: string) =>
+    Req.post(`${Prefix}/forcedExit`, { id });

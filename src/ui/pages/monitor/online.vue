@@ -1,8 +1,8 @@
 <!--
- * @Description: 登录日志管理
+ * @Description: 在线用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-02-25 14:29:56
+ * @LastEditTime: 2022-02-25 18:20:30
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -12,8 +12,17 @@
             <fy-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
                 @reset="handleReset" />
         </template>
+        <template #status="scope">
+            <el-tag v-if="scope.row.status==1" size="small" type="success">在线</el-tag>
+            <el-tag v-else-if="scope.row.status==0" size="small" type="info">离线</el-tag>
+        </template>
         <template #todo="scope">
-            <fy-row-btns :contains="['del']" @todo="handleTodo($event,scope.$index,scope.row)" />
+            <el-popconfirm v-if="scope.row.status==1" confirm-button-text="确认"
+                cancel-button-text="取消" title="确认强制退出?" @confirm="$emit('todo','del')">
+                <template #reference>
+                    <el-button type="danger" size="small">强退</el-button>
+                </template>
+            </el-popconfirm>
         </template>
     </fy-table>
 </template>
@@ -25,12 +34,12 @@ export default { name: 'Logs', isFull: true }
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { TOptionOfTools } from '@/ui/fy/types'
-import useLoginLogsOptions from './hooks/useLoginLogsOptions'
-import { getLoginLogsByPage, delLoginReqLogs } from '@/api/monitor'
+import useOnlineOptions from './hooks/useOnlineOptions'
+import { getOnlineUsersByPage, forcedExit } from '@/api/monitor'
 import { ElMessage } from 'element-plus'
 
 // 表格配置
-const { searchOptions, tableCols, tableTools } = useLoginLogsOptions()
+const { searchOptions, tableCols, tableTools } = useOnlineOptions()
 // loading
 const loading = ref(false)
 // 用户列表数据
@@ -52,7 +61,7 @@ const searchParams: IReqLog = reactive({
 // 请求日志列表
 const getLogs = (function getLogs() {
     loading.value = true
-    getLoginLogsByPage({ page: currPage.value, limit: limit.value, search: searchParams }).then(
+    getOnlineUsersByPage({ page: currPage.value, limit: limit.value, search: searchParams }).then(
         (res) => {
             const { ok, data } = res
             if (ok) {
@@ -99,9 +108,7 @@ const toolsBtnClick = async (btn: TOptionOfTools, flag: any) => {
     }
     // 删除选定行
     if (btn === 'delete') {
-        const { ok, msg } = await delLoginReqLogs(
-            flag.map((item: { id: string }) => item.id).join(',')
-        )
+        const { ok, msg } = await forcedExit(flag.map((item: { id: string }) => item.id).join(','))
         if (ok) {
             ElMessage.success(msg)
             getLogs()
@@ -114,7 +121,7 @@ const handleTodo = async (btn: string, index: number, row: IObj) => {
     switch (btn) {
         // 删除按钮
         case 'del':
-            const { ok, msg } = await delLoginReqLogs(row.id)
+            const { ok, msg } = await forcedExit(row.id)
             if (ok) {
                 ElMessage.success(msg)
                 getLogs()
