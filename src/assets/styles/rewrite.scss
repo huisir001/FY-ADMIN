@@ -2,13 +2,14 @@
  * @Description: element-ui-css重写
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-18 17:27:44
- * @LastEditTime: 2022-01-18 17:28:46
+ * @LastEditTime: 2022-02-28 14:34:01
  */
 
 @import "./mixin.scss";
 
 .el-dialog {
   .el-dialog__header {
+    margin: 0;
     padding: 12px 20px;
     line-height: 1;
     background: var(--color-sidebar-bg);
@@ -17,7 +18,12 @@
       font-size: var(--el-font-size-medium);
     }
     .el-dialog__headerbtn {
-      top: 16px;
+      top: 0;
+      height: 48px;
+      width: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       .el-dialog__close {
         color: var(--color-sidebar-font);
       }
