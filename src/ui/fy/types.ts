@@ -2,7 +2,7 @@
  * @Description: 类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 14:22:33
- * @LastEditTime: 2021-12-22 16:50:58
+ * @LastEditTime: 2022-02-28 15:00:51
  */
 
 /**
@@ -103,7 +103,7 @@ export type TUseTableTools = () => { left: ITableTool[], right: ITableTool[] }
 /**
  * 表格工具配置传参
  */
-export type TOptionOfTools = 'add' | 'delete' | 'fold' | 'export' | 'search' | 'refresh' | 'cols'
+export type TOptionOfTools = 'forcedExit' | 'add' | 'delete' | 'fold' | 'export' | 'search' | 'refresh' | 'cols'
 
 /**
  * 表单验证
@@ -117,6 +117,18 @@ export interface IFormRule {
     max?: number
     validator?: (rule: any, value: any, callback: () => any) => any
     pattern?: RegExp
+}
+
+/**
+ * 详情弹窗配置
+ */
+export interface IDetailOption {
+    // 名称
+    label: string
+    // 字段
+    key: string
+    // 用来格式化内容，返回值为当前数据的展示内容
+    formatter?: (params: IObj) => any
 }
 
 /**

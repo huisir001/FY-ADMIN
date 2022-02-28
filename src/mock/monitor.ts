@@ -2,7 +2,7 @@
  * @Description: 监控日志
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-24 16:27:37
- * @LastEditTime: 2022-02-25 15:10:15
+ * @LastEditTime: 2022-02-28 10:48:36
  */
 
 import { rules2MockMethods } from './_helpers'
@@ -41,6 +41,12 @@ const getLoginLogsByPage = {
             userId: '@id', // 用户id
             username: '@name',
             location: '@city(true)', // 请求地址
+            "msg|1": [
+                "登录成功",
+                "登录失败",
+                "未知错误",
+                "用户名或密码错误",
+            ], // 操作反馈
             "os|1": [
                 "Windows 10",
                 "Mac OS",
@@ -77,12 +83,6 @@ const getOnlineUsersByPage = {
             username: '@name',
             ip: '@ip', // IP
             location: '@city(true)', // 登录地址
-            "msg|1": [
-                "登录成功",
-                "登录失败",
-                "未知错误",
-                "用户名或密码错误",
-            ], // 操作反馈
             "os|1": [
                 "Windows 10",
                 "Mac OS",
@@ -101,8 +101,7 @@ const getOnlineUsersByPage = {
                 "Safari",
                 "Chrome Mobile",
             ], // 浏览器
-            status: '@integer(0, 1)',
-            createTime: '@datetime', // 登录时间
+            loginTime: '@datetime', // 登录时间
         }],
         page: 1,
         limit: 10,

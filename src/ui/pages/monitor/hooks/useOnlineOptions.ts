@@ -2,9 +2,9 @@
  * @Description: 在线用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2022-02-25 18:19:36
+ * @LastEditTime: 2022-02-28 15:05:22
  */
-import { IFormOption, ICols, TOptionOfTools } from '@/ui/fy/types'
+import { IFormOption, IDetailOption, ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
 export default () => {
     /**
@@ -14,7 +14,7 @@ export default () => {
         {
             label: '用户ID',
             component: 'input',
-            key: 'userId',
+            key: 'id',
             props: {
                 placeholder: '请输入用户ID',
             },
@@ -58,19 +58,39 @@ export default () => {
             align: "center"
         },
         {
-            label: 'IP地址',
-            minWidth: 100,
-            prop: 'ip'
-        },
-        {
             label: '用户id',
-            minWidth: 120,
-            prop: 'userId',
+            minWidth: 140,
+            prop: 'id',
         },
         {
-            label: '用户名',
-            minWidth: 100,
+            label: '账号',
+            minWidth: 120,
             prop: 'username',
+        },
+        {
+            label: '昵称',
+            minWidth: 60,
+            prop: 'nickname',
+        },
+        {
+            label: '性别',
+            minWidth: 60,
+            align: "center",
+            prop: 'sex',
+            formatter: (row: IObj, column: IObj, cellValue: number) => {
+                const sex = ["保密", "男", "女"]
+                return sex[cellValue && Number(cellValue)]
+            },
+        },
+        {
+            label: '角色',
+            minWidth: '200',
+            slot: 'role',
+        },
+        {
+            label: 'IP地址',
+            minWidth: 110,
+            prop: 'ip'
         },
         {
             label: '登录地点',
@@ -78,30 +98,10 @@ export default () => {
             prop: 'location',
         },
         {
-            label: '反馈信息',
-            minWidth: 100,
-            prop: 'msg',
-        },
-        {
-            label: '操作系统',
-            minWidth: 100,
-            prop: 'os',
-        },
-        {
-            label: '浏览器',
-            minWidth: 100,
-            prop: 'browser',
-        },
-        {
             label: '登录时间',
-            prop: 'createTime',
+            prop: 'loginTime',
             minWidth: 160,
             sortable: true,
-        },
-        {
-            label: '登录状态',
-            minWidth: 80,
-            slot: 'status',
         },
         {
             label: '操作',
@@ -111,15 +111,84 @@ export default () => {
         },
     ]
 
+    const detailOptions: IDetailOption[] = [
+        {
+            label: '用户id',
+            key: 'id',
+        },
+        {
+            label: '账号',
+            key: 'username',
+        },
+        {
+            label: '昵称',
+            key: 'nickname',
+        },
+        {
+            label: '性别',
+            key: 'sex',
+            formatter: (params: IObj) => {
+                const sexs = ["保密", "男", "女"]
+                return sexs[params.sex]
+            },
+        },
+        {
+            label: '邮箱',
+            key: 'email',
+        },
+        {
+            label: '手机号',
+            key: 'phone',
+        },
+        {
+            label: '状态',
+            key: 'status',
+            formatter: (params: IObj) => {
+                const statusArr = ["冻结", "正常"]
+                return statusArr[params.status]
+            },
+        },
+        {
+            label: '角色',
+            key: 'roleNames',
+        },
+        {
+            label: '部门',
+            key: 'dept',
+            formatter: (params: IObj) => params.dept.name,
+        },
+        {
+            label: 'IP地址',
+            key: 'ip'
+        },
+        {
+            label: '登录地点',
+            key: 'location',
+        },
+        {
+            label: '操作系统',
+            key: 'os',
+        },
+        {
+            label: '浏览器',
+            key: 'browser',
+        },
+        {
+            label: '登录时间',
+            key: 'loginTime',
+        },
+    ]
+
     /**
      * 表格工具欄
      */
-    const tableTools: TOptionOfTools[] = ['search', 'export', 'refresh', 'cols']
+    const tableTools: TOptionOfTools[] = ['forcedExit', 'search', 'export', 'refresh', 'cols']
 
 
     return {
         searchOptions,
         tableCols: ref(tableCols),
         tableTools,
+        detailOptions
     }
 }

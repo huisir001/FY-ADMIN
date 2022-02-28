@@ -2,7 +2,7 @@
  * @Description: 在线用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-02-25 18:20:30
+ * @LastEditTime: 2022-02-28 14:47:23
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -12,19 +12,20 @@
             <fy-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
                 @reset="handleReset" />
         </template>
-        <template #status="scope">
-            <el-tag v-if="scope.row.status==1" size="small" type="success">在线</el-tag>
-            <el-tag v-else-if="scope.row.status==0" size="small" type="info">离线</el-tag>
+        <template #role="scope">
+            <el-tag v-for="role in scope.row.roleNames.split(',')" :key="role" size="small"
+                type="warning" effect="plain" class="mr-5">
+                {{role}}
+            </el-tag>
         </template>
         <template #todo="scope">
-            <el-popconfirm v-if="scope.row.status==1" confirm-button-text="确认"
-                cancel-button-text="取消" title="确认强制退出?" @confirm="$emit('todo','del')">
-                <template #reference>
-                    <el-button type="danger" size="small">强退</el-button>
-                </template>
-            </el-popconfirm>
+            <fy-row-btns :contains="['detail','exit']"
+                @todo="handleTodo($event,scope.$index,scope.row)" />
         </template>
     </fy-table>
+    <!-- 详情弹窗 -->
+    <fy-detail-dialog v-model="showDetailDialog" :params="currDetailData" :title="detailDialogTitle"
+        :options="detailOptions" top="15%" />
 </template>
 
 <script lang="ts">
@@ -32,14 +33,14 @@ export default { name: 'Logs', isFull: true }
 </script>
  
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, Ref } from 'vue'
 import { TOptionOfTools } from '@/ui/fy/types'
 import useOnlineOptions from './hooks/useOnlineOptions'
 import { getOnlineUsersByPage, forcedExit } from '@/api/monitor'
 import { ElMessage } from 'element-plus'
 
 // 表格配置
-const { searchOptions, tableCols, tableTools } = useOnlineOptions()
+const { searchOptions, tableCols, tableTools, detailOptions } = useOnlineOptions()
 // loading
 const loading = ref(false)
 // 用户列表数据
@@ -57,6 +58,12 @@ const searchParams: IReqLog = reactive({
     ip: '',
     dateRange: '',
 })
+// 详情弹窗显隐
+const showDetailDialog = ref(false)
+// 详情弹窗标题
+const detailDialogTitle = ref('在线用户详情')
+// 当前详情数据
+const currDetailData: Ref<IObj> = ref({})
 
 // 请求日志列表
 const getLogs = (function getLogs() {
@@ -106,8 +113,8 @@ const toolsBtnClick = async (btn: TOptionOfTools, flag: any) => {
     if (btn === 'refresh' || (btn === 'search' && !flag)) {
         handleReset()
     }
-    // 删除选定行
-    if (btn === 'delete') {
+    // 强退
+    if (btn === 'forcedExit') {
         const { ok, msg } = await forcedExit(flag.map((item: { id: string }) => item.id).join(','))
         if (ok) {
             ElMessage.success(msg)
@@ -119,8 +126,13 @@ const toolsBtnClick = async (btn: TOptionOfTools, flag: any) => {
 // 行按钮
 const handleTodo = async (btn: string, index: number, row: IObj) => {
     switch (btn) {
-        // 删除按钮
-        case 'del':
+        // 详情按钮
+        case 'detail':
+            currDetailData.value = row
+            showDetailDialog.value = true
+            break
+        // 强退按钮
+        case 'exit':
             const { ok, msg } = await forcedExit(row.id)
             if (ok) {
                 ElMessage.success(msg)

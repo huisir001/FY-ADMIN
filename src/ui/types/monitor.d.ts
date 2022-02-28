@@ -2,7 +2,7 @@
  * @Description: 监控页类型(src\ui\pages\monitor)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-21 14:04:18
- * @LastEditTime: 2022-02-24 10:53:18
+ * @LastEditTime: 2022-02-28 10:49:21
  */
 
 /**
@@ -36,10 +36,21 @@ declare interface ILoginLog extends IObj {
 }
 
 /**
+ * 在线用户参数
+ */
+declare interface IOnlineUser extends IUserInfo {
+    ip?: string // 访客IP
+    location?: string // 登录地点
+    os?: string // 操作系统
+    browser?: string // 浏览器
+    loginTime?: string // 登录时间
+}
+
+/**
  * 日志分页列表入参
  */
 declare interface IGetLogsParams {
-    search?: IReqLog | ILoginLog
+    search?: IReqLog | ILoginLog | IOnlineUser
     page?: number // 当前页码
     limit?: number // 每页条数
 }
