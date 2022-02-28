@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-02-22 14:44:55
+ * @LastEditTime: 2022-02-28 14:12:03
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -14,7 +14,7 @@
         </template>
         <template #role="scope">
             <el-tag v-for="role in scope.row.roleNames.split(',')" :key="role" size="small"
-                type="warning" effect="plain" style="margin-right:5px;">
+                type="warning" effect="plain" class="mr-5">
                 {{role}}
             </el-tag>
         </template>

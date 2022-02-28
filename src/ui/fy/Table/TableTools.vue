@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2022-01-14 10:19:06
+ * @LastEditTime: 2022-02-28 14:10:08
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -12,7 +12,8 @@
         <div class="left">
             <el-button v-for="btn in leftBtns" :key="btn.name" :type="btn.type"
                 :disabled="btn.disabled" @click="handleBtnClick(btn)">
-                <fy-icon :name="btn.icon" size="13" color="white" /> {{btn.title}}
+                <fy-icon :name="btn.icon" size="13" color="white" class="mr-3" />
+                {{btn.title}}
             </el-button>
         </div>
         <div class="right">
@@ -120,7 +121,7 @@ const handleDropdown = (e: any) => {
 // 右侧按钮点击
 const handleBtnClick = (btn: ITableTool) => {
     if (!btn.disabled) {
-        if (btn.name === 'delete') {
+        if (['delete', 'forcedExit'].includes(btn.name)) {
             // 删除
             const selection = elTable.value.selection
             if (!(selection && selection.length)) {

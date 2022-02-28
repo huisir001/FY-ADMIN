@@ -18,3 +18,8 @@
 .flex-around{
     justify-content: space-around;
 }
+@for $i from 1 through 20 {
+    .mr-#{$i} { margin-right: 1px * $i; }
+    .ml-#{$i} { margin-left: 1px * $i; }
+    .m-#{$i} { margin: 1px * $i; }
+}
