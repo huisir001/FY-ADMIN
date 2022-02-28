@@ -2,7 +2,7 @@
  * @Description: 表格工具栏配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 10:50:15
- * @LastEditTime: 2021-12-16 10:43:20
+ * @LastEditTime: 2022-02-28 13:48:01
  */
 import { TUseTableTools } from '../types'
 
@@ -18,6 +18,12 @@ const tableTools: TUseTableTools = () => ({
             title: '删除',
             name: 'delete',
             icon: 'delete',
+            type: 'danger',
+        },
+        {
+            title: '强退',
+            name: 'forcedExit',
+            icon: 'Exit',
             type: 'danger',
         },
         {
