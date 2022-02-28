@@ -88,31 +88,7 @@ const getData = (function getData() {
 </script>
 
 <style scoped lang="scss">
-.grid-content {
-    background: #fff;
-    border-radius: 4px;
-    height: 200px;
-}
 .el-row {
     margin-bottom: 10px;
-}
-.flex-between {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.card-row:deep(.el-col) {
-    margin-bottom: 10px;
-}
-.title {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 8px;
-}
-.desc {
-    color: #9fa2a9;
-    font-size: 14px;
-    line-height: 1.4;
 }
 </style>
