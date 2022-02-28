@@ -2,11 +2,11 @@
  * @Description: 服务器监控
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-17 17:01:24
- * @LastEditTime: 2022-02-28 17:42:14
+ * @LastEditTime: 2022-02-28 18:03:41
 -->
 <template>
     <el-row :gutter="10">
-        <el-col :span="12">
+        <el-col :sm="12" :xs="24">
             <fy-card :type="2" title="CPU">
                 <el-descriptions :column="2" v-loading="loading">
                     <el-descriptions-item v-for="item in cpuOptions" :key="item.key"
@@ -16,7 +16,7 @@
                 </el-descriptions>
             </fy-card>
         </el-col>
-        <el-col :span="12">
+        <el-col :sm="12" :xs="24">
             <fy-card :type="2" title="内存">
                 <el-descriptions :column="2" v-loading="loading">
                     <el-descriptions-item v-for="item in memOptions" :key="item.key"
@@ -88,7 +88,7 @@ const getData = (function getData() {
 </script>
 
 <style scoped lang="scss">
-.el-row {
+.el-col {
     margin-bottom: 10px;
 }
 </style>
