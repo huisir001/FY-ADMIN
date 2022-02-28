@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-02-17 17:56:50
+ * @LastEditTime: 2022-02-28 10:23:33
 -->
 <template>
     <div class="navbar">
@@ -242,6 +242,9 @@ const userNavChange = (e: any) => {
             height: 14px;
             overflow: hidden;
             .el-breadcrumb__item {
+                .el-breadcrumb__inner {
+                    color: var(--color-navbar-text);
+                }
                 &.isLink .el-breadcrumb__inner {
                     cursor: pointer;
                     &:hover {

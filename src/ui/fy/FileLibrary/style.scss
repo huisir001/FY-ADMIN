@@ -60,7 +60,7 @@
     }
   }
   .right {
-    background: var(--el-color-info-lighter);
+    background: var(--el-color-info-light-9);
     border-radius: var(--el-border-radius-small);
     padding: 20px;
     overflow-y: auto;
@@ -101,7 +101,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        color: var(--el-color-info-lighter);
+        color: var(--el-color-info-light-9);
         pointer-events: none;
         background: rgba(255, 255, 255, 0.4);
       }

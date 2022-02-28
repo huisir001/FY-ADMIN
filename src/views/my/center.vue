@@ -133,7 +133,7 @@ const onSubmitPassword = () => {
 <style scoped lang="scss">
 .fy-my-tabs:deep(.el-tabs__content) {
     padding: 20px;
-    background-color: var(--el-color-info-lighter);
+    background-color: var(--el-color-info-light-9);
     border-radius: var(--el-border-radius-small);
 }
 .avatar {
