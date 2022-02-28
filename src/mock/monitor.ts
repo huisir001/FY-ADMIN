@@ -2,7 +2,7 @@
  * @Description: 监控日志
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-24 16:27:37
- * @LastEditTime: 2022-02-28 10:48:36
+ * @LastEditTime: 2022-02-28 17:50:50
  */
 
 import { rules2MockMethods } from './_helpers'
@@ -116,13 +116,51 @@ const delLoginReqLogs = { msg: '删除成功' }
 // 强退
 const forcedExit = { msg: '强制退出成功' }
 
+// 服务器监控
+const getServerInfo = {
+    data: {
+        cpu: {
+            cpuNum: 2,
+            sys: 0.51,
+            used: 3.55,
+            free: 95.94
+        },
+        // 内存
+        mem: {
+            total: 7.56,
+            used: 3.77,
+            free: 3.79,
+            usage: 49.82
+        },
+        // 服务器信息
+        sys: {
+            name: "iZwz94p7mycommzd52gme4Z",
+            ip: "172.18.179.171",
+            os: "Linux",
+            arch: "amd64"
+        },
+        // 磁盘信息
+        disk: [
+            {
+                dir: "/",
+                sysType: "ext4",
+                total: "39.2 GB",
+                free: "23.4 GB",
+                used: "15.9 GB",
+                usage: 40.43
+            }
+        ]
+    }
+}
+
 const Rules: IObj = {
     getReqLogsByPage,
     getLoginLogsByPage,
     getOnlineUsersByPage,
+    getServerInfo,
     delReqLogs,
     delLoginReqLogs,
-    forcedExit
+    forcedExit,
 }
 
 export default rules2MockMethods(Rules, Prefix)

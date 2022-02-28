@@ -2,7 +2,7 @@
  * @Description: 监控日志
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-24 16:15:38
- * @LastEditTime: 2022-02-28 11:15:14
+ * @LastEditTime: 2022-02-28 16:29:41
  */
 import Req from "../utils/Request";
 const Prefix = "/api/monitor";
@@ -30,3 +30,7 @@ export const getOnlineUsersByPage: IPromiseFunc = (params: IGetLogsParams) =>
 // 强退
 export const forcedExit = (ids: string) =>
     Req.post(`${Prefix}/forcedExit`, { ids });
+
+// 服务器监控信息
+export const getServerInfo = () =>
+    Req.get(`${Prefix}/getServerInfo`);

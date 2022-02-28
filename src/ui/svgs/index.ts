@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2022-02-28 13:47:37
+ * @LastEditTime: 2022-02-28 16:45:46
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -46,7 +46,8 @@ import {
     Link,
     Monitor,
     SwitchButton,
-    ChatLineSquare
+    ChatLineSquare,
+    Cpu
 } from '@element-plus/icons-vue'
 
 /**
@@ -101,6 +102,7 @@ const components = [
     Monitor,
     SwitchButton,
     ChatLineSquare,
+    Cpu,
     /* my-icons */
     Theme,
     Export,
