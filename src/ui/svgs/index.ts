@@ -2,7 +2,7 @@
  * @Description: svg-icon 全局按需注册
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 19:03:38
- * @LastEditTime: 2022-02-25 14:41:21
+ * @LastEditTime: 2022-02-28 13:47:37
  */
 
 /* 使用vue插件方式导出组件，插件API：https://v3.cn.vuejs.org/guide/plugins.html */
@@ -44,7 +44,9 @@ import {
     DocumentChecked,
     DocumentDelete,
     Link,
-    Monitor
+    Monitor,
+    SwitchButton,
+    ChatLineSquare
 } from '@element-plus/icons-vue'
 
 /**
@@ -60,6 +62,7 @@ import PageManage from './inc/PageManage.vue'
 import ClickButton from './inc/ClickButton.vue'
 import LoginLogs from './inc/LoginLogs.vue'
 import OnlineUser from './inc/OnlineUser.vue'
+import Exit from './inc/Exit.vue'
 
 
 const components = [
@@ -96,7 +99,8 @@ const components = [
     DocumentDelete,
     Link,
     Monitor,
-    OnlineUser,
+    SwitchButton,
+    ChatLineSquare,
     /* my-icons */
     Theme,
     Export,
@@ -106,7 +110,9 @@ const components = [
     Module,
     PageManage,
     ClickButton,
-    LoginLogs
+    OnlineUser,
+    LoginLogs,
+    Exit
 ]
 
 export default (app: App<any>) => {
