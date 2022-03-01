@@ -1,9 +1,19 @@
 /*
- * @Description: UI组件依赖工具
+ * @Description: UI组件依赖
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-17 11:03:27
- * @LastEditTime: 2022-02-07 16:38:09
+ * @LastEditTime: 2022-03-01 15:06:20
  */
+
+/**
+ * 菜单类型
+ */
+export enum MenuType {
+    cat, // 目录
+    route, // 路由
+    link, // 链接
+    button, // 按钮
+}
 
 /**
  * 防抖

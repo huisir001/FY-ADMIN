@@ -2,7 +2,7 @@
  * @Description: 用户信息
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 16:10:06
- * @LastEditTime: 2022-02-11 11:02:14
+ * @LastEditTime: 2022-03-01 15:08:20
  */
 import { STORAGE_OPTIONS } from 'settings'
 import { ActionContext } from 'vuex'
@@ -13,7 +13,7 @@ import router from '@/router'
 import Layout from '@/layout/index.vue'
 import { menu2Route } from '../helpers'
 import { getUserMenus } from '@/api/user'
-import { MenuType } from '@/ui/types'
+import { MenuType } from '@/ui/helpers'
 
 /**
  * 用户state接口

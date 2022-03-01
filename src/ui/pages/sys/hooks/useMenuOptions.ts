@@ -2,11 +2,11 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2022-02-16 10:41:34
+ * @LastEditTime: 2022-03-01 15:08:57
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
+import { MenuType } from '@/ui/helpers'
 import { ref } from "vue";
-import { MenuType } from '@/ui/types'
 export default () => {
     /**
      * 表格列配置
@@ -338,7 +338,6 @@ export default () => {
         tableCols: ref(tableCols),
         tableTools,
         editOptions,
-        MenuType,
         menuTypeChange,
     };
 };

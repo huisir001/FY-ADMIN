@@ -2,7 +2,7 @@
  * @Description: 菜单管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-02-23 10:14:57
+ * @LastEditTime: 2022-03-01 15:01:53
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="searchData" row-key="id"
@@ -73,6 +73,7 @@ import { TOptionOfTools } from '@/ui/fy/types'
 import useMenuOptions from './hooks/useMenuOptions'
 import { ElMessage } from 'element-plus'
 import { viewModules } from '@/store/helpers'
+import { MenuType } from '@/ui/helpers'
 
 // 文件路径
 const viewPaths = Object.keys(viewModules).map((item) => item.slice(3))
@@ -106,7 +107,7 @@ const getMenuList = (function getMenu() {
 })()
 
 // 表格配置
-const { tableCols, tableTools, editOptions, MenuType, menuTypeChange } = useMenuOptions()
+const { tableCols, tableTools, editOptions, menuTypeChange } = useMenuOptions()
 
 // 工具栏点击
 const toolsBtnClick = (btn: TOptionOfTools) => {

@@ -2,12 +2,12 @@
  * @Description: 辅助脚本
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-15 11:36:27
- * @LastEditTime: 2022-02-15 15:22:22
+ * @LastEditTime: 2022-03-01 15:07:06
  */
-import { MenuType } from '@/ui/types'
 import { Router } from 'vue-router'
 import { IState } from '@/store'
 import { Store } from 'vuex'
+import { MenuType } from '@/ui/helpers'
 
 // 菜单点击
 export default (menu: IMenu, router: Router, store: Store<IState>) => {

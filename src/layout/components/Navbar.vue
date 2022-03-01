@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-02-28 10:23:33
+ * @LastEditTime: 2022-03-01 15:07:38
 -->
 <template>
     <div class="navbar">
@@ -57,8 +57,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
 import ThemeSetDrawer from './ThemeSet.vue'
-import { launchFullScreen, exitFullscreen, isFullScreen } from '@/ui/helpers'
-import { MenuType } from '@/ui/types'
+import { MenuType, launchFullScreen, exitFullscreen, isFullScreen } from '@/ui/helpers'
 import menuJump from './menuJump'
 
 const Store = useStore()
