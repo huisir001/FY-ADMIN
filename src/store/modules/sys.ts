@@ -2,8 +2,19 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2022-02-08 18:11:52
+ * @LastEditTime: 2022-03-01 11:05:34
  */
+
+/**
+ * 路由meta
+ */
+interface IRouteMeta {
+    keepAlive?: boolean
+    title: string
+    icon?: string
+    private?: boolean
+}
+
 /**
  * 用户state接口
  */

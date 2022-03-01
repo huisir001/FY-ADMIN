@@ -3,7 +3,7 @@
  * @Description: 全局类型定义
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2022-02-17 13:54:55
+ * @LastEditTime: 2022-03-01 11:09:04
  */
 
 /**
@@ -35,7 +35,7 @@ declare module '*.jpg' {
   export default mod
 }
 declare module '*.json' {
-  const value: any
+  const mod: any
   export default mod
 }
 
@@ -57,6 +57,10 @@ declare type IPromiseFunc = (...params: any) => Promise<any>
 declare const __BASE_API__: string
 declare const __NODE_ENV__: string
 declare const __VIEW_PATHS__: string[]
+
+
+/* ************************************************ */
+
 
 /**
  * 用户数据
@@ -113,14 +117,6 @@ declare interface IFileParams {
 }
 
 /**
- * 文件分类
- */
-declare interface IFileGroup {
-  id: string
-  name: string
-}
-
-/**
  * 菜单参数
  */
 declare interface IMenu {
@@ -154,16 +150,6 @@ interface IBtnOptions {
   icon?: string
   disabled?: boolean
   callback: (el: HTMLElement) => void
-}
-
-/**
- * 路由meta
- */
-interface IRouteMeta {
-  keepAlive?: boolean
-  title: string
-  icon?: string
-  private?: boolean
 }
 
 /**

@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2022-02-18 16:25:57
+ * @LastEditTime: 2022-03-01 11:08:44
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -204,7 +204,7 @@ const fileUrlSetFrom = ref()
 const uploadHeaders = { [TOKEN_OPTIONS.key]: useStore().getters.getToken() }
 
 // 分类列表
-const groups = ref<IFileGroup[]>([])
+const groups = ref<{ id: string; name: string }[]>([])
 ;(async () => {
     leftLoading.value = true
     const res = await getFileGroupList()
