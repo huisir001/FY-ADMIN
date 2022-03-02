@@ -2,7 +2,7 @@
  * @Description: 公共工具
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 18:50:17
- * @LastEditTime: 2022-01-28 15:48:39
+ * @LastEditTime: 2022-03-02 16:11:43
  */
 
 /**
@@ -37,4 +37,24 @@ export const rawList2Tree = (arrList: IObj[], parentIdKey: string = 'parentId', 
     }()
 
     return menuTree
+}
+
+/**
+ * 复制到剪贴板
+ */
+export const copy2Clipboard = (str: string) => {
+    return new Promise((resolve, reject) => {
+        const input = document.createElement('input')
+        document.body.appendChild(input)
+        input.value = str // 复制到剪切板的内容
+        input.select()
+        if (document.execCommand) {
+            document.execCommand('copy')
+            input.remove()
+            resolve(true)
+        } else {
+            input.remove()
+            reject('当前浏览器不支持拷贝！')
+        }
+    })
 }
