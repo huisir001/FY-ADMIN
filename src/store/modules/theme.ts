@@ -2,7 +2,7 @@
  * @Description: 主题配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:27:56
- * @LastEditTime: 2022-01-24 16:43:19
+ * @LastEditTime: 2022-03-02 11:14:37
  */
 import { STORAGE_OPTIONS, THEME_OPTIONS } from 'settings'
 import LocalCache from '@/utils/LocalCache'
@@ -14,7 +14,8 @@ import DomCreate from '@/utils/DomCreate'
 const {
     color: C_COLOR,
     showPageTagNav: C_SHOW_PAGE_TAG_NAV,
-    showBreadcrumb: C_SHOW_BREAD_CRUMB
+    showBreadcrumb: C_SHOW_BREAD_CRUMB,
+    showLogo: C_SHOW_LOGO,
 } = LocalCache.getCache(STORAGE_OPTIONS.Theme) || {}
 
 /**
@@ -24,6 +25,7 @@ export interface IThemeState extends IObj {
     color?: string
     showPageTagNav?: boolean
     showBreadcrumb?: boolean
+    showLogo?: boolean
     linkEl?: DomCreate
 }
 
@@ -44,6 +46,11 @@ export const theme = {
          * 面包屑显隐
          */
         showBreadcrumb: C_SHOW_BREAD_CRUMB === undefined ? true : C_SHOW_BREAD_CRUMB,
+
+        /**
+         * LOGO显隐
+         */
+        showLogo: C_SHOW_LOGO === undefined ? true : C_SHOW_LOGO,
 
         /**
          * 样式dom
@@ -74,8 +81,8 @@ export const theme = {
                 state[key] = obj[key]
             })
             // 缓存
-            const { color, showPageTagNav, showBreadcrumb } = state
-            LocalCache.setCache(STORAGE_OPTIONS.Theme, { color, showPageTagNav, showBreadcrumb })
+            const { color, showPageTagNav, showBreadcrumb, showLogo } = state
+            LocalCache.setCache(STORAGE_OPTIONS.Theme, { color, showPageTagNav, showBreadcrumb, showLogo })
         },
     },
 }

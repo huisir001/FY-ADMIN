@@ -2,7 +2,7 @@
  * @Description: 主题设置抽屉
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-23 14:38:39
- * @LastEditTime: 2022-01-24 16:43:09
+ * @LastEditTime: 2022-03-02 11:16:47
 -->
 <template>
     <el-drawer title="主题配置" :size="280" custom-class="fy-theme-drawer">
@@ -22,6 +22,8 @@
                 <el-switch v-model="curPageTagNavState" inactive-text="显示标签栏">
                 </el-switch>
                 <el-switch v-model="curBreadcrumbState" inactive-text="显示面包屑">
+                </el-switch>
+                <el-switch v-model="curLogoState" inactive-text="显示侧栏LOGO">
                 </el-switch>
             </div>
         </div>
@@ -55,6 +57,14 @@ const curBreadcrumbState = computed({
     set: (val) => {
         Store.commit('theme/setStates', {
             showBreadcrumb: val,
+        })
+    },
+})
+const curLogoState = computed({
+    get: () => Store.state.theme.showLogo,
+    set: (val) => {
+        Store.commit('theme/setStates', {
+            showLogo: val,
         })
     },
 })

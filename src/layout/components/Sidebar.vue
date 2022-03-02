@@ -2,11 +2,11 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2022-02-15 14:49:23
+ * @LastEditTime: 2022-03-02 11:17:46
 -->
 <template>
     <div class="sidebar">
-        <div class="logo-box">
+        <div v-if="$store.state.theme.showLogo" class="logo-box">
             <img v-show="sidebarCollapse" src="../../assets/images/logo_icon_w.svg">
             <img v-show="!sidebarCollapse" src="../../assets/images/logo.svg">
         </div>
@@ -83,7 +83,7 @@ const Menus = computed(() => rawList2Tree(Store.getters.copyUserMenu))
 const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
 
 // 菜单点击
-const bindMenuClick = (menu:IMenu)=> menuJump(menu,Router,Store)
+const bindMenuClick = (menu: IMenu) => menuJump(menu, Router, Store)
 </script>
  
 <style scoped lang="scss">
