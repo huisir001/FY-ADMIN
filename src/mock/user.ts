@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-02-28 16:45:56
+ * @LastEditTime: 2022-03-02 18:25:17
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -261,6 +261,65 @@ export const getUserMenus = {
         type: 1,
         query: null,
         viewPath: 'views/examples/basicComp/editor.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    {
+        id: '231', //主键
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: null, //唯一
+        title: '指令示例',
+        icon: "Directive",
+        parentId: null,
+        keepAlive: true, //默认为true
+        visible: true, //默认展示
+        private: true, //默认true,必须登录才能访问，否则跳登录页
+        orderNum: 1, //排序index
+        type: 0, //0-目录；1-普通路由；2-链接；3-按钮(可添加vuex-commit事件)
+        query: null, //type=1/2时传参（{a=1,b=2}）
+        viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
+        blank: true, //type=2时在新页面打开链接，默认为true
+        triggerMode: null, //type=3时要激活事件的方式：commit/dispatch
+        triggerMethod: null, //字符串，type=3时要激活的事件
+        status: 1, //1-正常；0-停用
+    }, {
+        id: '@id',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/example/copyByClick',
+        title: '左键单击复制',
+        icon: "CopyDocument",
+        parentId: '231',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 2,
+        type: 1,
+        query: null,
+        viewPath: 'views/examples/directive/copyByClick.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    {
+        id: '@id',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/example/contextMenu',
+        title: '右键自定义菜单',
+        icon: "Mouse",
+        parentId: '231',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 2,
+        type: 1,
+        query: null,
+        viewPath: 'views/examples/directive/contextMenu.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,
