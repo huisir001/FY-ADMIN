@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2022-02-28 17:43:53
+ * @LastEditTime: 2022-04-01 14:58:53
 -->
 <template>
     <!-- 工具栏 -->
@@ -37,9 +37,9 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-pagination v-if="page" class="table-page-nav" :currentPage="curr" :page-sizes="limits"
-            :page-size="limit" layout="total, sizes, prev, pager, next, jumper" :total="total"
-            background hide-on-single-page @size-change="handleSizeChange"
+        <el-pagination v-if="page" small class="table-page-nav" :currentPage="curr"
+            :page-sizes="limits" :page-size="limit" layout="total, sizes, prev, pager, next, jumper"
+            :total="total" background hide-on-single-page @size-change="handleSizeChange"
             @current-change="handleCurrChange">
         </el-pagination>
     </div>

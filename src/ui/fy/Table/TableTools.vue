@@ -2,7 +2,7 @@
  * @Description: 表格工具栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-27 18:09:14
- * @LastEditTime: 2022-02-28 14:10:08
+ * @LastEditTime: 2022-04-01 14:54:58
 -->
 <template>
     <div v-if="hasSearchTool" v-show="showSearchForm" class="search-from-box">
@@ -166,7 +166,7 @@ const handleBtnClick = (btn: ITableTool) => {
             display: flex;
             justify-content: center;
             align-items: center;
-            border: var(--el-border-base);
+            border: var(--el-border);
             cursor: pointer;
             transition: 0.3s all;
             outline: none !important;

@@ -34,7 +34,7 @@
 
     .thumbnail {
       position: relative;
-      border: var(--el-border-base);
+      border: var(--el-border);
       border-radius: var(--el-border-radius-small);
       cursor: pointer;
       .pic-item {
@@ -90,7 +90,7 @@
       width: 100%;
       height: 120px;
       padding: 3px;
-      border: var(--el-border-base);
+      border: var(--el-border);
       background: var(--el-color-info-light);
       &:hover::after {
         content: "";
