@@ -5,6 +5,7 @@
   "author": "HuiSir<273250950@qq.com>",
   "scripts": {
     "serve:dev": "vite --mode dev",
+    "serve:dev-force": "vite --mode dev --force",
     "serve:test": "vite --mode test",
     "build:pro": "vite build --mode pro",
     "preview": "vite preview --mode dev"
