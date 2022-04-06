@@ -2,7 +2,7 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2022-04-06 11:32:26
+ * @LastEditTime: 2022-04-06 14:00:12
  */
 import { IFormOption, ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -98,6 +98,11 @@ export default () => {
                     value: '1',
                 },
             ],
+        },
+        {
+            label: '部门',
+            key: 'deptId',
+            slot: 'deptId',
         },
         {
             label: '创建时间',

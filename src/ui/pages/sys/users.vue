@@ -2,15 +2,22 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-04-06 11:37:53
+ * @LastEditTime: 2022-04-06 14:30:14
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
         :total="total" :tools="tableTools" height="calc(100% - 48px)" @toolsClick="toolsBtnClick"
         @pageSizeChange="pageSizeChange" @pageCurrChange="pageCurrChange">
         <template #search>
-            <fy-search-form v-model="searchParams" :options="searchOptions" @submit="handleSearch"
-                @reset="handleReset" />
+            <fy-search-form v-model="searchParams" v-loading="dialogLoading"
+                :options="searchOptions" @submit="handleSearch" @reset="handleReset">
+                <template #deptId>
+                    <el-select v-model="searchParams.deptId" placeholder="选择所属部门">
+                        <el-option v-for="dept in deptRawData" :key="dept.id" :label="dept.name"
+                            :value="dept.id" />
+                    </el-select>
+                </template>
+            </fy-search-form>
         </template>
         <template #role="scope">
             <el-tag v-for="role in scope.row.roleNames.split(',')" :key="role" size="small"
@@ -82,13 +89,14 @@ const searchParams: IUserInfo = reactive({
     sex: '',
     status: '',
     dateRange: '',
+    deptId: '',
 })
 // 部门数据
 const deptRawData: Ref<any> = ref([])
 const deptTreeData: Ref<any> = ref([])
 
 // 请求部門列表
-const getDeptList = () => {
+const getDeptList = (function getDepts() {
     dialogLoading.value = true
     getAllDept()
         .then((res) => {
@@ -101,7 +109,8 @@ const getDeptList = () => {
         .finally(() => {
             dialogLoading.value = false
         })
-}
+    return getDepts
+})()
 
 // 请求用户列表
 const getUserList = (function getUsers() {
