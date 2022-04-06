@@ -2,18 +2,21 @@
  * @Description: 编辑弹窗
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-15 10:37:22
- * @LastEditTime: 2022-02-07 16:36:02
+ * @LastEditTime: 2022-04-06 11:13:17
 -->
 <template>
     <el-dialog custom-class="fy-edit-dialog" :modelValue="modelValue"
         @update:modelValue="$emit('update:modelValue', $event)" :title="title" @open="open"
         @closed="closed" width="30%" draggable center>
-        <fy-search-form ref="fyForm" v-model="formParams" :options="options" :showSearchBtn="false">
-            <template v-for="item in options.filter((o) => o.slot)" :key="item.key"
-                v-slot:[item.slot]>
-                <slot :name="item.slot" :val="formParams" />
-            </template>
-        </fy-search-form>
+        <div v-loading="loading">
+            <fy-search-form ref="fyForm" v-model="formParams" :options="options"
+                :showSearchBtn="false">
+                <template v-for="item in options.filter((o) => o.slot)" :key="item.key"
+                    v-slot:[item.slot]>
+                    <slot :name="item.slot" :val="formParams" />
+                </template>
+            </fy-search-form>
+        </div>
         <template #footer>
             <span class="dialog-footer">
                 <el-button plain @click="$emit('update:modelValue', false)">取消</el-button>
@@ -55,6 +58,11 @@ const props = defineProps({
         type: Object as PropType<IObj>,
         require: true,
         default: () => ({}),
+    },
+    // loading
+    loading: {
+        type: Boolean,
+        default: false,
     },
 })
 

@@ -2,7 +2,7 @@
  * @Description: element-ui-css重写
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-18 17:27:44
- * @LastEditTime: 2022-02-28 14:34:01
+ * @LastEditTime: 2022-04-06 11:13:03
  */
 
 @import "./mixin.scss";
@@ -17,16 +17,16 @@
       color: var(--color-sidebar-font);
       font-size: var(--el-font-size-medium);
     }
-    .el-dialog__headerbtn {
-      top: 0;
-      height: 48px;
-      width: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .el-dialog__close {
-        color: var(--color-sidebar-font);
-      }
+  }
+  .el-dialog__headerbtn {
+    top: 0;
+    height: 48px;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .el-dialog__close {
+      color: var(--color-sidebar-font);
     }
   }
   .el-dialog__body {
