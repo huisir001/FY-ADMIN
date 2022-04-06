@@ -2,7 +2,7 @@
  * @Description: 蓝色主题
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 16:36:58
- * @LastEditTime: 2022-02-28 10:16:16
+ * @LastEditTime: 2022-04-06 14:57:38
  */
 
 //  blue.module.scss  名称包含module才能将css用export导出，在js中导入
@@ -43,7 +43,7 @@
   --color-tabbar-font: var(--el-text-color-secondary);
   --color-tabbar-font-act: var(--el-text-color-regular);
   --color-tabbar-border: var(--color-grey-lighter);
-  --color-tabbar-circle: var(--el-border-color-base);
+  --color-tabbar-circle: var(--el-border-color);
   --color-tabbar-circle-hov: var(--el-color-primary-light-5);
   --color-tabbar-circle-act: var(--el-color-primary);
 
