@@ -2,7 +2,7 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2022-01-17 11:10:02
+ * @LastEditTime: 2022-04-06 11:32:26
  */
 import { IFormOption, ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -152,6 +152,11 @@ export default () => {
             prop: 'phone',
         },
         {
+            label: '部门',
+            minWidth: '200',
+            prop: 'deptName',
+        },
+        {
             label: '角色',
             minWidth: '200',
             slot: 'role',
@@ -211,6 +216,12 @@ export default () => {
                 trigger: 'blur',
                 message: '密码不能为空'
             }
+        },
+        {
+            label: '部门',
+            key: 'deptId',
+            slot: 'deptId',
+            default: null,
         },
         {
             label: '角色',

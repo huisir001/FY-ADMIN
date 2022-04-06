@@ -2,7 +2,7 @@
  * @Description: 用户管理
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 15:14:07
- * @LastEditTime: 2022-02-28 14:12:03
+ * @LastEditTime: 2022-04-06 11:37:53
 -->
 <template>
     <fy-table :loading="loading" :cols="tableCols" :data="tableData" page :curr="currPage"
@@ -29,14 +29,19 @@
         </template>
     </fy-table>
     <!-- 编辑弹窗 -->
-    <fy-edit-dialog v-model="showEditDialog" :params="currEditData" :title="editDialogTitle"
-        :options="editOptions" top="15%" @submit="bindEditSubmit">
+    <fy-edit-dialog v-model="showEditDialog" :loading="dialogLoading" :params="currEditData"
+        :title="editDialogTitle" :options="editOptions" top="15%" @submit="bindEditSubmit">
         <template #role="editParams">
             <el-select v-model="editParams.val.roleIdArr" placeholder="选择用户所属角色" multiple
                 collapseTags>
                 <el-option v-for="role in roles" :key="role.id" :label="role.name"
                     :value="role.id" />
             </el-select>
+        </template>
+        <template #deptId="editParams">
+            <fy-tree-select v-model="editParams.val.deptId"
+                :label="treeSelectLabel(editParams.val.deptId)" :data="treeSlectData"
+                :option="{children:'children',label:'name'}" />
         </template>
     </fy-edit-dialog>
 </template>
@@ -46,16 +51,19 @@ export default { name: 'Users', isFull: true }
 </script>
  
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { reactive, Ref, ref, computed } from 'vue'
 import { TOptionOfTools } from '@/ui/fy/types'
+import { rawList2Tree } from '@/utils/common'
 import useUsersOptions from './hooks/useUsersOptions'
-import { getUsersByPage, saveUserInfo, delUsers, getAllRole } from '@/api/sys'
+import { getUsersByPage, saveUserInfo, delUsers, getAllRole, getAllDept } from '@/api/sys'
 import { ElMessage } from 'element-plus'
 
 // 表格配置
 const { searchOptions, tableCols, tableTools, editOptions } = useUsersOptions()
 // loading
 const loading = ref(false)
+// 弹窗loading
+const dialogLoading = ref(false)
 // 用户列表数据
 const tableData = ref([])
 // 当前页
@@ -75,22 +83,59 @@ const searchParams: IUserInfo = reactive({
     status: '',
     dateRange: '',
 })
+// 部门数据
+const deptRawData: Ref<any> = ref([])
+const deptTreeData: Ref<any> = ref([])
+
+// 请求部門列表
+const getDeptList = () => {
+    dialogLoading.value = true
+    getAllDept()
+        .then((res) => {
+            const { ok, data } = res
+            if (ok) {
+                deptRawData.value = data
+                deptTreeData.value = rawList2Tree(data) //2tree
+            }
+        })
+        .finally(() => {
+            dialogLoading.value = false
+        })
+}
 
 // 请求用户列表
 const getUserList = (function getUsers() {
     loading.value = true
-    getUsersByPage({ page: currPage.value, limit: limit.value, search: searchParams }).then(
-        (res) => {
+    getUsersByPage({ page: currPage.value, limit: limit.value, search: searchParams })
+        .then((res) => {
             const { ok, data } = res
             if (ok) {
                 tableData.value = data.list
                 total.value = data.total
             }
+        })
+        .finally(() => {
             loading.value = false
-        }
-    )
+        })
     return getUsers
 })()
+
+// 上级部门树结构选择数据
+const treeSlectData = computed(() => {
+    return [
+        {
+            id: null,
+            name: '无',
+        },
+        ...deptTreeData.value,
+    ]
+})
+
+// 树结构选中项名称
+const treeSelectLabel = (id: any) => {
+    const selectData = deptRawData.value.find((item: any) => item.id === id)
+    return selectData ? selectData.name : '无'
+}
 
 // 当前页切换
 const pageCurrChange = (val: number) => {
@@ -127,7 +172,9 @@ const toolsBtnClick = async (btn: TOptionOfTools, flag: any) => {
     // 新增
     if (btn === 'add') {
         editDialogTitle.value = '新增用户'
+        // 新增用户时需配置密码
         editOptions.find((item) => item.key == 'password')!.hide = false
+        getDeptList()
         showEditDialog.value = true
         currEditData.value = {}
     }
@@ -155,6 +202,7 @@ const handleTodo = async (btn: string, index: number, row: IObj) => {
         case 'edit':
             editDialogTitle.value = '编辑用户'
             editOptions.find((item) => item.key == 'password')!.hide = true
+            getDeptList()
             showEditDialog.value = true
             currEditData.value = {
                 ...row,

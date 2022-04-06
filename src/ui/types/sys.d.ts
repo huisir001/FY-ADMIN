@@ -2,7 +2,7 @@
  * @Description: 系统管理页相关类型
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-03-01 14:01:24
- * @LastEditTime: 2022-03-01 15:05:42
+ * @LastEditTime: 2022-04-06 11:33:07
  */
 
 /**
@@ -79,6 +79,8 @@ declare interface IUserInfo extends IObj {
     updateTime?: string
     roleIds?: string  //角色，逗号分割角色ID号
     roleNames?: string  //角色，逗号分割角色名称
+    deptId?: string //部门ID
+    deptName?: string //部门名称
 }
 
 /**

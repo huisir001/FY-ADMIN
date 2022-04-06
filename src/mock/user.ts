@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-03-02 18:25:17
+ * @LastEditTime: 2022-04-06 11:33:20
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -21,10 +21,8 @@ export const getUserInfo = {
         avatar: Random.image('50x50', '#2f3447', '#FFF', 'A'),
         roleIds: "001,002,003",
         roleNames: "超级管理员,游客,测试",
-        dept: { // 所属部门
-            id: '002',
-            name: '行政部',
-        }
+        deptId: '002', // 部门ID
+        deptName: '行政部', // 部门名称
     }
 }
 
