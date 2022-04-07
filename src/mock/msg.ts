@@ -2,7 +2,7 @@
  * @Description: 通知公告
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-04-06 16:53:33
- * @LastEditTime: 2022-04-06 17:58:42
+ * @LastEditTime: 2022-04-07 14:38:08
  */
 import { rules2MockMethods } from './_helpers'
 const Prefix = '/api/msg/'
@@ -11,6 +11,12 @@ const Prefix = '/api/msg/'
 const getMsgsByPage = {
     data: {
         'list|15': [{
+            id: '123',
+            title: '@ctitle(5, 20)',
+            status: 0, // 0-未读，1-已读
+            createTime: '@datetime',
+            updateTime: '@datetime',
+        }, {
             id: '@id',
             title: '@ctitle(5, 20)',
             status: 0, // 0-未读，1-已读
@@ -27,7 +33,7 @@ const getMsgsByPage = {
 // 查询详情（标记已读）
 const getMsgDetail = {
     data: {
-        id: '@id',
+        id: '123',
         title: '@ctitle(5, 20)',
         status: 1, // 0-未读，1-已读
         content: '@cparagraph(1, 100)',
