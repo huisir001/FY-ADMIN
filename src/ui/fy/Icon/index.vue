@@ -2,7 +2,7 @@
  * @Description: 图标动态引用封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-01 16:14:25
- * @LastEditTime: 2022-04-07 16:06:14
+ * @LastEditTime: 2022-04-07 16:09:12
 -->
 <template>
     <el-icon :color="color" :size="Number(size)" :class="{'fy-icon':height}"
@@ -34,7 +34,7 @@ defineProps({
 </script>
 <style scoped lang="scss">
 .fy-icon {
-    display: inline-table;
-    vertical-align: middle;
+    display: flex;
+    align-items: center;
 }
 </style>
