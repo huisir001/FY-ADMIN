@@ -2,7 +2,7 @@
  * @Description: 公告/通知
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-04-06 15:32:55
- * @LastEditTime: 2022-04-12 13:53:54
+ * @LastEditTime: 2022-04-12 14:03:19
 -->
 <template>
     <div class="message flex-row">
@@ -120,7 +120,9 @@ const ctxMenuList: IBtnOptions[] = [
     {
         name: '标记为已读',
         callback(el) {
-            readById(el.dataset.id!).then((res) => {
+            const id = el.dataset.id
+            readById(id!).then((res) => {
+                msgList.value.find(({ id }) => id == id)!.status = 1
                 ElMessage({ type: 'success', message: res.msg })
             })
         },
@@ -129,6 +131,9 @@ const ctxMenuList: IBtnOptions[] = [
         name: '全部已读',
         callback() {
             readAll().then((res) => {
+                msgList.value.forEach((item) => {
+                    item.status = 1
+                })
                 ElMessage({ type: 'success', message: res.msg })
             })
         },
