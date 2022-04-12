@@ -2,7 +2,7 @@
  * @Description: 通知公告
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-04-06 16:53:33
- * @LastEditTime: 2022-04-07 14:38:08
+ * @LastEditTime: 2022-04-12 13:52:44
  */
 import { rules2MockMethods } from './_helpers'
 const Prefix = '/api/msg/'
@@ -45,11 +45,18 @@ const getMsgDetail = {
 // 删除通知公告
 const delMsg = { msg: '删除成功' }
 
+// 标记已读
+const readById = { msg: '标记成功' }
+
+// 全部标记已读
+const readAll = { msg: '标记成功' }
 
 const Rules: IObj = {
     getMsgsByPage,
     getMsgDetail,
-    delMsg
+    delMsg,
+    readById,
+    readAll
 }
 
 export default rules2MockMethods(Rules, Prefix)

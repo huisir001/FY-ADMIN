@@ -2,13 +2,14 @@
  * @Description: 公告/通知
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-04-06 15:32:55
- * @LastEditTime: 2022-04-12 10:41:48
+ * @LastEditTime: 2022-04-12 13:53:54
 -->
 <template>
     <div class="message flex-row">
         <div class="sidebar">
             <div v-for="item in msgList" :key="item.id" class="li"
-                :class="{active:item.id===currMsg.id}" @click="getDetail(item.id)">
+                :class="{active:item.id===currMsg.id}" v-contextMenu="ctxMenuList"
+                :data-id="item.id" @click="getDetail(item.id)">
                 <div class="title">{{item.title}}</div>
                 <div class="time">{{item.updateTime}}</div>
                 <div v-if="item.status==0" class="dot"></div>
@@ -34,8 +35,9 @@ export default {
 <script lang="ts" setup>
 import { ref, Ref, watch, computed, onMounted } from 'vue'
 import { useStore } from '@/store'
-import { getMsgsByPage, getMsgDetail, delMsg } from '@/api/msg'
+import { getMsgsByPage, getMsgDetail, delMsg, readById, readAll } from '@/api/msg'
 import { IMessageDetail } from './types'
+import { ElMessage } from 'element-plus'
 
 // 当前页码
 const page = ref(1)
@@ -49,7 +51,7 @@ const contLoading = ref(false)
 const showContent = ref(false)
 // store
 const Store = useStore()
-const visibleAreaWidth = computed(() => Store.state.sys.visibleAreaWidth)
+const visibleAreaWidth = computed(() => Store?.state.sys.visibleAreaWidth)
 const beginVisibleAreaWidth = ref(0)
 onMounted(() => {
     // 初次进入屏宽
@@ -69,6 +71,7 @@ watch(
 // 消息列表
 const getMessages = (function fn() {
     sideLoading.value = true
+    msgList.value = []
     getMsgsByPage(page.value)
         .then((res) => {
             msgList.value = res.data.list
@@ -97,6 +100,40 @@ const getDetail = (id: string, isBegin: boolean) => {
             contLoading.value = false
         })
 }
+
+// 删除
+const deleteMsg = (id: string) => {
+    delMsg(id).then((res) => {
+        ElMessage({ type: 'success', message: res.msg })
+        getMessages()
+    })
+}
+
+// 列表右键菜单
+const ctxMenuList: IBtnOptions[] = [
+    {
+        name: '删除',
+        callback(el) {
+            deleteMsg(el.dataset.id!)
+        },
+    },
+    {
+        name: '标记为已读',
+        callback(el) {
+            readById(el.dataset.id!).then((res) => {
+                ElMessage({ type: 'success', message: res.msg })
+            })
+        },
+    },
+    {
+        name: '全部已读',
+        callback() {
+            readAll().then((res) => {
+                ElMessage({ type: 'success', message: res.msg })
+            })
+        },
+    },
+]
 </script>
 
 <style scoped lang="scss">
