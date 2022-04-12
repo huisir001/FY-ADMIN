@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2022-02-23 18:03:18
+ * @LastEditTime: 2022-04-12 11:15:32
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -38,6 +38,12 @@ const routes: RouteRecordRaw[] = [
         meta: { title: '首页', visible: false, private: true },
       },
       {
+        path: '/message',
+        name: 'Message',
+        component: () => import('../ui/pages/reserve/message.vue'),
+        meta: { title: "通知公告", visible: true, private: true, keepAlive: true },
+      },
+      {
         path: '/frame/:id',
         name: 'Frame',
         component: () => import('../ui/pages/tool/frame.vue'),
@@ -56,7 +62,7 @@ const routes: RouteRecordRaw[] = [
         name: 'Center',
         component: () => import('../views/my/center.vue'),
         meta: { title: "个人中心", visible: true, private: true, keepAlive: true },
-      }
+      },
     ]
   },
   {

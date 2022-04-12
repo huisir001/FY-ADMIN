@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-04-12 10:48:13
+ * @LastEditTime: 2022-04-12 11:26:35
 -->
 <template>
     <div class="navbar">
@@ -85,6 +85,14 @@ const breadCrumbs = computed(() => {
             {
                 title: '个人中心',
                 id: 'Center',
+                type: MenuType.route,
+            },
+        ]
+    } else if (Route.name === 'Message') {
+        crumbs = [
+            {
+                title: '通知公告',
+                id: 'Message',
                 type: MenuType.route,
             },
         ]

@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-04-06 16:05:08
+ * @LastEditTime: 2022-04-12 11:00:56
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -48,25 +48,6 @@ const resetPass = { msg: '修改密码成功' }
 // 查询当前用户菜单列表
 export const getUserMenus = {
     data: [{
-        id: '@id',
-        createTime: '@datetime',
-        updateTime: '@datetime',
-        path: '/message',
-        title: '通知公告',
-        icon: "operation",
-        parentId: null,
-        keepAlive: true,
-        visible: true,
-        private: true,
-        orderNum: 2,
-        type: 1,
-        query: null,
-        viewPath: 'ui/pages/reserve/message.vue',
-        blank: true,
-        triggerMode: null,
-        triggerMethod: null,
-        status: 1,
-    }, {
         id: '001', //主键
         createTime: '@datetime',
         updateTime: '@datetime',
