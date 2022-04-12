@@ -2,7 +2,7 @@
  * @Description: 公告/通知
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-04-06 15:32:55
- * @LastEditTime: 2022-04-07 16:36:46
+ * @LastEditTime: 2022-04-12 10:41:48
 -->
 <template>
     <div class="message flex-row">
@@ -11,6 +11,7 @@
                 :class="{active:item.id===currMsg.id}" @click="getDetail(item.id)">
                 <div class="title">{{item.title}}</div>
                 <div class="time">{{item.updateTime}}</div>
+                <div v-if="item.status==0" class="dot"></div>
             </div>
         </div>
         <div v-if="showContent" class="content">
@@ -31,7 +32,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, Ref, watch, computed } from 'vue'
+import { ref, Ref, watch, computed, onMounted } from 'vue'
 import { useStore } from '@/store'
 import { getMsgsByPage, getMsgDetail, delMsg } from '@/api/msg'
 import { IMessageDetail } from './types'
@@ -39,7 +40,7 @@ import { IMessageDetail } from './types'
 // 当前页码
 const page = ref(1)
 // 列表
-const msgList = ref([])
+const msgList: Ref<IMessageDetail[]> = ref([])
 const currMsg: Ref<IMessageDetail> = ref({})
 // loading
 const sideLoading = ref(false)
@@ -49,6 +50,12 @@ const showContent = ref(false)
 // store
 const Store = useStore()
 const visibleAreaWidth = computed(() => Store.state.sys.visibleAreaWidth)
+const beginVisibleAreaWidth = ref(0)
+onMounted(() => {
+    // 初次进入屏宽
+    beginVisibleAreaWidth.value = visibleAreaWidth.value!
+})
+
 watch(
     visibleAreaWidth,
     (val) => {
@@ -64,9 +71,8 @@ const getMessages = (function fn() {
     sideLoading.value = true
     getMsgsByPage(page.value)
         .then((res) => {
-            console.log(res)
             msgList.value = res.data.list
-            getDetail(res.data.list[0].id)
+            getDetail(res.data.list[0].id, true)
         })
         .finally(() => {
             sideLoading.value = false
@@ -75,7 +81,7 @@ const getMessages = (function fn() {
 })()
 
 // 消息列表
-const getDetail = (id: string) => {
+const getDetail = (id: string, isBegin: boolean) => {
     if (currMsg.value.id === id) {
         showContent.value = true
         return
@@ -83,9 +89,9 @@ const getDetail = (id: string) => {
     contLoading.value = true
     getMsgDetail(id)
         .then((res) => {
-            console.log('getDetail', res)
             currMsg.value = res.data
-            showContent.value = true
+            showContent.value = isBegin ? beginVisibleAreaWidth.value > 620 : true
+            msgList.value.find(({ id }) => id == id)!.status = res.data.status
         })
         .finally(() => {
             contLoading.value = false
@@ -112,8 +118,29 @@ $sidebarWidth: 30%;
             padding: 10px;
             border-bottom: var(--el-border);
             cursor: pointer;
+            position: relative;
             &.active {
                 background: #fff;
+            }
+            .title {
+                height: 24px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+                word-break: break-all;
+                padding-right: 10px;
+            }
+            .dot {
+                position: absolute;
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                background: rgb(252, 107, 45);
+                top: 15px;
+                right: 10px;
+                border-radius: 50%;
             }
         }
     }
