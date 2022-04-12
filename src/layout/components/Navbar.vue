@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-04-12 11:26:35
+ * @LastEditTime: 2022-04-12 13:57:17
 -->
 <template>
     <div class="navbar">
@@ -24,7 +24,7 @@
             <div class="nav-item" @click="fullScreen">
                 <fy-icon :name="fullScreenIcon" :size="20" color="var(--color-navbar-text)" />
             </div>
-            <div class="nav-item" @click="$router.push('message')">
+            <div class="nav-item" @click="$router.push({name:'Message'})">
                 <fy-icon name="Bell" :size="20" color="var(--color-navbar-text)" />
             </div>
             <div class="theme-nav nav-item" @click="showThemeDrawer = true">
