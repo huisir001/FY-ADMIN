@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-04-12 11:00:56
+ * @LastEditTime: 2022-04-13 10:21:56
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -259,6 +259,26 @@ export const getUserMenus = {
         type: 1,
         query: null,
         viewPath: 'views/examples/basicComp/editor.vue',
+        blank: true,
+        triggerMode: null,
+        triggerMethod: null,
+        status: 1,
+    },
+    {
+        id: '@id',
+        createTime: '@datetime',
+        updateTime: '@datetime',
+        path: '/example/stepForm',
+        title: '分步表单',
+        icon: "Edit",
+        parentId: '005',
+        keepAlive: true,
+        visible: true,
+        private: true,
+        orderNum: 2,
+        type: 1,
+        query: null,
+        viewPath: 'views/examples/formComp/stepForm.vue',
         blank: true,
         triggerMode: null,
         triggerMethod: null,
