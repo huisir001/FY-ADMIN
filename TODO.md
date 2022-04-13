@@ -32,10 +32,10 @@
 - √ 复制到剪贴板
 - √ 右键菜单
 - √ 系统公告（文章）（消息列表管理，已读、未读）
+- √ 分步表单
 - 待办列表（to do list）
 - 系统版本信息
 - 常见图表组件
-- 表单组件（基础表单、分步表单、高级表单：https://adminpro.iviewui.com/form/advanced-form）
 - 卡片列表（带分页、搜索）；
 - 详情页；
 - 内嵌异常页（403无访问权限、500服务器出错：https://adminpro.iviewui.com/exception/403）；
