@@ -2,7 +2,7 @@
  * @Description: 分步表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-04-13 10:16:37
- * @LastEditTime: 2022-04-13 14:23:27
+ * @LastEditTime: 2022-04-13 14:45:47
 -->
 <template>
     <div class="step-form">
@@ -16,10 +16,6 @@
             <step1 v-if="active==0" @next="next" />
             <step2 v-if="active==1" :info="transferInfo" @next="next" @prev="prev" />
             <step3 v-if="active==2" :info="transferInfo" @reset="active=0" />
-        </div>
-        <div class="btns">
-            <!-- <el-button type="primary" @click="next">下一步</el-button>
-            <el-button @click="prev">上一步</el-button> -->
         </div>
     </div>
 </template>
@@ -87,9 +83,6 @@ const prev = () => {
         &:deep(.el-alert) {
             margin-bottom: 20px;
         }
-    }
-    .btns {
-        text-align: center;
     }
 }
 </style>
