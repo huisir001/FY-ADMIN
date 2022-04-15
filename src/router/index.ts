@@ -2,7 +2,7 @@
  * @Description: 路由
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-01 16:37:47
- * @LastEditTime: 2022-04-12 11:15:32
+ * @LastEditTime: 2022-04-15 11:38:02
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
@@ -54,6 +54,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/my',
     component: Layout,
+    name: 'My',
     redirect: { name: 'Center' },
     meta: { title: '用户配置', visible: false, private: true, keepAlive: true },
     children: [
@@ -62,6 +63,33 @@ const routes: RouteRecordRaw[] = [
         name: 'Center',
         component: () => import('../views/my/center.vue'),
         meta: { title: "个人中心", visible: true, private: true, keepAlive: true },
+      },
+    ]
+  },
+  {
+    path: '/exception',
+    component: Layout,
+    name: 'Exception',
+    redirect: { name: 'E403' },
+    meta: { title: '异常', visible: true, private: true, keepAlive: true },
+    children: [
+      {
+        path: '403',
+        name: 'E403',
+        component: () => import('../ui/pages/exception/403.vue'),
+        meta: { title: "403", visible: true, private: true, keepAlive: true },
+      },
+      {
+        path: '404',
+        name: 'E404',
+        component: () => import('../ui/pages/exception/404.vue'),
+        meta: { title: "404", visible: true, private: true, keepAlive: true },
+      },
+      {
+        path: '500',
+        name: 'E500',
+        component: () => import('../ui/pages/exception/500.vue'),
+        meta: { title: "500", visible: true, private: true, keepAlive: true },
       },
     ]
   },

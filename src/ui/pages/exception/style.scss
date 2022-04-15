@@ -1,0 +1,22 @@
+.exception {
+    height: 50vh;
+    .pic {
+        width: 500px;
+        height: auto;
+    }
+    .cont {
+        color: #515a6e;
+        margin-left: 100px;
+        .title {
+            font-size: 72px;
+            line-height: 1;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .desc {
+            font-size: 20px;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+    }
+}

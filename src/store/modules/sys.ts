@@ -2,7 +2,7 @@
  * @Description: 临时变量
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-15 11:25:57
- * @LastEditTime: 2022-03-01 11:05:34
+ * @LastEditTime: 2022-04-15 11:38:55
  */
 
 /**
@@ -69,7 +69,7 @@ export const sys = {
          */
         addHistoryRoute(state: IObj, route: any) {
             if (!state.historyRoutes.find((item: any) => item.name === route.name)
-                && route.meta.visible && route.name && route.meta.title !== '404') {
+                && route.meta.visible && route.name) {
                 const { name, path, meta, params } = route
                 state.historyRoutes.push({ name, path, meta, params })
             }
