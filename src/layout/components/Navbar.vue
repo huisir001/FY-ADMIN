@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-04-12 13:57:17
+ * @LastEditTime: 2022-04-15 10:52:57
 -->
 <template>
     <div class="navbar">
@@ -73,30 +73,7 @@ const showThemeDrawer = ref(false)
 // 面包屑
 const breadCrumbs = computed(() => {
     let crumbs: any[] = []
-
-    // 个人中心
-    if (Route.name === 'Center') {
-        crumbs = [
-            {
-                title: '用户配置',
-                id: 'Home',
-                type: MenuType.cat,
-            },
-            {
-                title: '个人中心',
-                id: 'Center',
-                type: MenuType.route,
-            },
-        ]
-    } else if (Route.name === 'Message') {
-        crumbs = [
-            {
-                title: '通知公告',
-                id: 'Message',
-                type: MenuType.route,
-            },
-        ]
-    } else if (Route.name !== 'Home' && Route.name !== 'Dashboard' && Route.path !== '/') {
+    if (Route.name !== 'Home' && Route.name !== 'Dashboard' && Route.path !== '/') {
         const Menus = Store.state.user.menus
         const currMenu = Menus.find((item) => {
             if (Route.name === 'Frame') {
@@ -105,14 +82,23 @@ const breadCrumbs = computed(() => {
                 return item.id === Route.name
             }
         })
-        crumbs.unshift(currMenu)
-        ;(function getParentMenu(menu?: IMenu) {
-            if (menu && menu.parentId) {
-                let parentMenu = Menus.find((item) => item.id === menu.parentId)
-                crumbs.unshift(parentMenu)
-                getParentMenu(parentMenu)
-            }
-        })(currMenu)
+
+        if (currMenu) {
+            crumbs.unshift(currMenu)
+            ;(function getParentMenu(menu?: IMenu) {
+                if (menu && menu.parentId) {
+                    let parentMenu = Menus.find((item) => item.id === menu.parentId)
+                    crumbs.unshift(parentMenu)
+                    getParentMenu(parentMenu)
+                }
+            })(currMenu)
+        } else {
+            crumbs = Route.matched.map((item) => ({
+                title: item.meta.title,
+                id: item.name,
+                type: MenuType.route,
+            }))
+        }
     }
 
     // 面包屑中添加预定义的路由
