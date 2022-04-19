@@ -2,7 +2,7 @@
  * @Description: Storage缓存配置
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-21 18:23:26
- * @LastEditTime: 2021-10-21 18:33:59
+ * @LastEditTime: 2022-04-19 13:49:52
  */
 
 /**
@@ -16,6 +16,10 @@ const STORAGE_OPTIONS: IObj = {
     },
     Theme: {
         key: '_theme',
+        type: 2
+    },
+    Lang: {
+        key: '_lang',
         type: 2
     }
 }
