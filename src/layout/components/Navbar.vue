@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-04-15 10:52:57
+ * @LastEditTime: 2022-04-19 11:24:50
 -->
 <template>
     <div class="navbar">
@@ -27,6 +27,19 @@
             <div class="nav-item" @click="$router.push({name:'Message'})">
                 <fy-icon name="Bell" :size="20" color="var(--color-navbar-text)" />
             </div>
+            <el-dropdown size="medium">
+                <div class="nav-item">
+                    <fy-icon name="Lang" :size="20" color="var(--color-navbar-text)" />
+                </div>
+                <template #dropdown>
+                    <el-dropdown-menu>
+                        <el-dropdown-item v-if="$getLocale()=='en'" @click="$setLocale('zh')">简体中文
+                        </el-dropdown-item>
+                        <el-dropdown-item v-else @click="$setLocale('en')">English
+                        </el-dropdown-item>
+                    </el-dropdown-menu>
+                </template>
+            </el-dropdown>
             <div class="theme-nav nav-item" @click="showThemeDrawer = true">
                 <fy-icon name="theme" :size="20" color="var(--color-navbar-text)" />
             </div>
@@ -37,8 +50,10 @@
                 </div>
                 <template #dropdown>
                     <el-dropdown-menu style="width:90px">
-                        <el-dropdown-item command="0">个人中心</el-dropdown-item>
-                        <el-dropdown-item command="1">退出</el-dropdown-item>
+                        <el-dropdown-item command="0">{{$t('components.Navbar.5hcu1c307r00')}}
+                        </el-dropdown-item>
+                        <el-dropdown-item command="1">{{$t('components.Navbar.5hcu1c30f6g0')}}
+                        </el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -54,7 +69,7 @@ export default {
 </script>
  
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, getCurrentInstance } from 'vue'
 import { useStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
@@ -63,6 +78,7 @@ import ThemeSetDrawer from './ThemeSet.vue'
 import { MenuType, launchFullScreen, exitFullscreen, isFullScreen } from '@/ui/helpers'
 import menuJump from './menuJump'
 
+const t = getCurrentInstance()!.appContext.config.globalProperties.$t
 const Store = useStore()
 const Route = useRoute()
 const Router = useRouter()
@@ -103,7 +119,7 @@ const breadCrumbs = computed(() => {
 
     // 面包屑中添加预定义的路由
     crumbs.unshift({
-        title: '首页',
+        title: t('components.Navbar.5hcu1c30hq00'),
         id: 'Home',
         type: MenuType.route,
     })
@@ -173,9 +189,9 @@ const userNavChange = (e: any) => {
             Router.push({ name: 'Center' })
             break
         case '1':
-            ElMessageBox.confirm('您即将要登出，是否继续 ?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
+            ElMessageBox.confirm('您即将要登出，是否继续 ?', t('components.Navbar.5hcu1c30jkc0'), {
+                confirmButtonText: t('components.Navbar.5hcu1c30kog0'),
+                cancelButtonText: t('components.Navbar.5hcu1c30mww0'),
                 type: 'warning',
             })
                 .then(() => {
