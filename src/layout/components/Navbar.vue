@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-04-19 11:24:50
+ * @LastEditTime: 2022-04-19 11:34:14
 -->
 <template>
     <div class="navbar">
@@ -49,7 +49,7 @@
                     <img class="avatar" :src="userInfo.avatar">
                 </div>
                 <template #dropdown>
-                    <el-dropdown-menu style="width:90px">
+                    <el-dropdown-menu>
                         <el-dropdown-item command="0">{{$t('components.Navbar.5hcu1c307r00')}}
                         </el-dropdown-item>
                         <el-dropdown-item command="1">{{$t('components.Navbar.5hcu1c30f6g0')}}
@@ -189,11 +189,15 @@ const userNavChange = (e: any) => {
             Router.push({ name: 'Center' })
             break
         case '1':
-            ElMessageBox.confirm('您即将要登出，是否继续 ?', t('components.Navbar.5hcu1c30jkc0'), {
-                confirmButtonText: t('components.Navbar.5hcu1c30kog0'),
-                cancelButtonText: t('components.Navbar.5hcu1c30mww0'),
-                type: 'warning',
-            })
+            ElMessageBox.confirm(
+                t('components.Navbar.5hcu1c30erw0'),
+                t('components.Navbar.5hcu1c30jkc0'),
+                {
+                    confirmButtonText: t('components.Navbar.5hcu1c30kog0'),
+                    cancelButtonText: t('components.Navbar.5hcu1c30mww0'),
+                    type: 'warning',
+                }
+            )
                 .then(() => {
                     Store.dispatch('user/logout')
                 })

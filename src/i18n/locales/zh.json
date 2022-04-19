@@ -1,8 +1,15 @@
 {
   "components.Navbar.5hcu1c307r00": "个人中心",
+  "components.Navbar.5hcu1c30erw0": "您即将要登出，是否继续?",
   "components.Navbar.5hcu1c30f6g0": "退出",
   "components.Navbar.5hcu1c30hq00": "首页",
   "components.Navbar.5hcu1c30jkc0": "提示",
   "components.Navbar.5hcu1c30kog0": "确定",
-  "components.Navbar.5hcu1c30mww0": "取消"
+  "components.Navbar.5hcu1c30mww0": "取消",
+  "components.ThemeSet.5hcvwyvsu1o0": "主题配置",
+  "components.ThemeSet.5hcvwyvsxkc0": "主题色",
+  "components.ThemeSet.5hcvwyvsy4s0": "内容区",
+  "components.ThemeSet.5hcvwyvsyic0": "显示标签栏",
+  "components.ThemeSet.5hcvwyvsyuk0": "显示面包屑",
+  "components.ThemeSet.5hcvwyvsz740": "显示侧栏LOGO"
 }

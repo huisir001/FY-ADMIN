@@ -2,12 +2,13 @@
  * @Description: 主题设置抽屉
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-23 14:38:39
- * @LastEditTime: 2022-03-02 11:16:47
+ * @LastEditTime: 2022-04-19 11:40:09
 -->
 <template>
-    <el-drawer title="主题配置" :size="280" custom-class="fy-theme-drawer">
+    <el-drawer :title="$t('components.ThemeSet.5hcvwyvsu1o0')" :size="280"
+        custom-class="fy-theme-drawer">
         <div class="part">
-            <h5>主题色</h5>
+            <h5>{{$t('components.ThemeSet.5hcvwyvsxkc0')}}</h5>
             <div class="set-box row">
                 <div v-for="item in THEME_OPTIONS" :key="item.name" :style="{background:item.color}"
                     class="theme-color-radio" @click="selectColor(item.name)">
@@ -17,13 +18,16 @@
             </div>
         </div>
         <div class="part">
-            <h5>内容区</h5>
+            <h5>{{$t('components.ThemeSet.5hcvwyvsy4s0')}}</h5>
             <div class="set-box column">
-                <el-switch v-model="curPageTagNavState" inactive-text="显示标签栏">
+                <el-switch v-model="curPageTagNavState"
+                    :inactive-text="$t('components.ThemeSet.5hcvwyvsyic0')">
                 </el-switch>
-                <el-switch v-model="curBreadcrumbState" inactive-text="显示面包屑">
+                <el-switch v-model="curBreadcrumbState"
+                    :inactive-text="$t('components.ThemeSet.5hcvwyvsyuk0')">
                 </el-switch>
-                <el-switch v-model="curLogoState" inactive-text="显示侧栏LOGO">
+                <el-switch v-model="curLogoState"
+                    :inactive-text="$t('components.ThemeSet.5hcvwyvsz740')">
                 </el-switch>
             </div>
         </div>

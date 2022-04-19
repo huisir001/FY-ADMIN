@@ -1,8 +1,15 @@
 {
-    "components.Navbar.5hcu1c307r00": "Personal center",
-    "components.Navbar.5hcu1c30f6g0": "quit",
-    "components.Navbar.5hcu1c30hq00": "front page",
-    "components.Navbar.5hcu1c30jkc0": "hint",
+    "components.Navbar.5hcu1c307r00": "Center",
+    "components.Navbar.5hcu1c30f6g0": "Quit",
+    "components.Navbar.5hcu1c30hq00": "Home",
+    "components.Navbar.5hcu1c30jkc0": "Hint",
+    "components.Navbar.5hcu1c30erw0": "Are you going to log out, continue?",
     "components.Navbar.5hcu1c30kog0": "Sure",
-    "components.Navbar.5hcu1c30mww0": "Cancel"
+    "components.Navbar.5hcu1c30mww0": "Cancel",
+    "components.ThemeSet.5hcvwyvsu1o0": "Subject configuration",
+    "components.ThemeSet.5hcvwyvsxkc0": "Theme color",
+    "components.ThemeSet.5hcvwyvsy4s0": "Content area",
+    "components.ThemeSet.5hcvwyvsyic0": "Display tabbar",
+    "components.ThemeSet.5hcvwyvsyuk0": "Show breadcrumbs",
+    "components.ThemeSet.5hcvwyvsz740": "Display side bar logo"
 }
