@@ -2,7 +2,7 @@
  * @Description: 卡片组件
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-17 17:01:24
- * @LastEditTime: 2022-01-26 10:51:10
+ * @LastEditTime: 2022-08-09 13:50:29
 -->
 <template>
     <el-row>
@@ -16,7 +16,7 @@
         <el-col :span="12">
             <fy-card :type="2" title="這是標題">
                 <template #headerRight>
-                    <el-button type="text">右側</el-button>
+                    <el-button type="primary" link>右側</el-button>
                 </template>
                 <p>对比的基本思想是，要避免页面上的元素太过相似。</p>
                 <p>如果元素（字体、颜色、大小、线宽、形状、空间等）不相同，那就干脆让它们截然不同。</p>
@@ -29,7 +29,7 @@
         <el-col :span="12">
             <fy-card :type="2" title="這是標題">
                 <template #headerRight>
-                    <el-button type="text">右側</el-button>
+                    <el-button type="primary" link>右側</el-button>
                 </template>
                 <p>对比的基本思想是，要避免页面上的元素太过相似。</p>
                 <p>如果元素（字体、颜色、大小、线宽、形状、空间等）不相同，那就干脆让它们截然不同。</p>

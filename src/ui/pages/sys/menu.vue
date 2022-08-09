@@ -10,10 +10,10 @@
         <template #title="scope">
             <span>{{scope.row.title}}</span>
             <div class="sort-btn">
-                <el-button type="text" @click="handleMoveDowm(scope.$index, scope.row)">
+                <el-button link @click="handleMoveDowm(scope.$index, scope.row)">
                     <fy-icon name="sort-down" size="13" color="var(--el-color-primary)" />
                 </el-button>
-                <el-button type="text" @click="handleMoveUp(scope.$index, scope.row)">
+                <el-button link @click="handleMoveUp(scope.$index, scope.row)">
                     <fy-icon name="sort-up" size="13" color="var(--el-color-primary)" />
                 </el-button>
             </div>

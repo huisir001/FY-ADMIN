@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2022-03-01 11:08:44
+ * @LastEditTime: 2022-08-09 13:48:05
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -40,8 +40,7 @@
                     <el-popover v-model:visible="popoverVisible" placement="bottom" :width="170">
                         <p style="text-align: center; margin-bottom: 10px">选择新增文件方式</p>
                         <div>
-                            <el-button type="text"
-                                @click="popoverVisible = false;showFileUrlSetBox = true">
+                            <el-button type="primary" link @click="popoverVisible = false;showFileUrlSetBox = true">
                                 URL插入
                             </el-button>
                             <el-upload style="display:inline-block;margin-left:10px;"
