@@ -2,7 +2,7 @@
  * @Description: vite config
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-01-24 14:04:37
- * @LastEditTime: 2022-02-09 18:09:42
+ * @LastEditTime: 2022-08-02 15:44:00
  */
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -63,6 +63,7 @@ export default defineConfig(({ mode, command }) => {
     },
     // 打包配置
     build: {
+      target: "es2020",
       // 压缩
       minify: "esbuild",
       sourcemap: false, // 输出.map文件
