@@ -2,7 +2,7 @@
  * @Description: 个人中心
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-24 14:56:00
- * @LastEditTime: 2022-01-19 10:49:19
+ * @LastEditTime: 2022-08-09 17:02:13
 -->
 <template>
     <el-tabs type="card" v-model="activeTabName" class="fy-my-tabs">
@@ -89,16 +89,16 @@ export default { name: 'Center', isFull: true }
  
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import { useStore } from '@/store'
+import { useGetters } from '@/store'
 // import { ElMessage } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
 
-const Store = useStore()
+const getters = useGetters()
 const activeTabName = ref('base')
 // const userInfo = computed(() => Store.state.user.userInfo)
 
 // 用户信息copy
-let userInfoFormData = ref(Store.getters.copyUserInfo)
+let userInfoFormData = ref(getters.copyUserInfo)
 
 // 图片选择
 const avatarSelected = (file: any) => {
@@ -113,7 +113,7 @@ const onSubmitBaseUserinfo = () => {
 
 // 重置为原值
 const resetBaseUserinfo = () => {
-    userInfoFormData.value = Store.getters.copyUserInfo
+    userInfoFormData.value = getters.copyUserInfo
     console.log(userInfoFormData)
 }
 

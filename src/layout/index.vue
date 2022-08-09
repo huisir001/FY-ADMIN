@@ -2,7 +2,7 @@
  * @Description: 布局
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:20:13
- * @LastEditTime: 2022-02-08 15:55:29
+ * @LastEditTime: 2022-08-09 16:00:50
 -->
 <template>
     <div class="layout" :class="{collapse:sidebarCollapse,sidebarHide}">
@@ -28,29 +28,30 @@
  
 <script lang="ts" setup>
 import { computed, watch } from 'vue'
-import { useStore } from '@/store'
+import { useSysStore,useThemeStore } from '@/store'
 import Sidebar from './components/Sidebar.vue'
 import Navbar from './components/Navbar.vue'
 import Tabbar from './components/Tabbar.vue'
 import PageView from './components/PageView.vue'
 import { useRoute } from 'vue-router'
 
-const Store = useStore()
+const sysStore = useSysStore()
+const themeStore = useThemeStore()
 
 // 是否为框架
 const isFrame = computed(() => useRoute().name === 'Frame')
 
 // 历史路由数
 const showTabbar = computed(
-    () => Store.state.sys.historyRoutes.length > 0 && Store.state.theme.showPageTagNav
+    () => sysStore.historyRoutes.length > 0 && themeStore.showPageTagNav
 )
 
 // 侧边栏状态
-const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
-const sidebarHide = computed(() => Store.state.sys.sidebarHide)
+const sidebarCollapse = computed(() => sysStore.sidebarCollapse)
+const sidebarHide = computed(() => sysStore.sidebarHide)
 
 // 窗口宽度
-const visibleAreaWidth = computed(() => Store.state.sys.visibleAreaWidth)
+const visibleAreaWidth = computed(() => sysStore.visibleAreaWidth)
 
 // 监听窗口宽度变化做些事
 watch(
@@ -58,14 +59,13 @@ watch(
     (val) => {
         // 宽度为1000时折叠侧边栏
         if (val && val <= 1000) {
-            Store.state.sys.sidebarCollapse ||
-                Store.commit('sys/setStates', { sidebarCollapse: true })
+            sysStore.sidebarCollapse || sysStore.$patch({ sidebarCollapse: true })
         }
         // 宽度为768是隐藏侧边栏
         if (val && val <= 768) {
-            Store.state.sys.sidebarHide || Store.commit('sys/setStates', { sidebarHide: true })
+            sysStore.sidebarHide || sysStore.$patch({ sidebarHide: true })
         } else {
-            Store.state.sys.sidebarHide && Store.commit('sys/setStates', { sidebarHide: false })
+            sysStore.sidebarHide && sysStore.$patch({ sidebarHide: false })
         }
     },
     { immediate: true }
@@ -73,7 +73,7 @@ watch(
 
 // 侧边栏展开收缩
 const sidebarCollapseChenge = () => {
-    Store.commit('sys/changeSidebarCollapse')
+    sysStore.changeSidebarCollapse()
 }
 </script>
  

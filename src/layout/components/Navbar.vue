@@ -2,7 +2,7 @@
  * @Description: 导航栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:29:15
- * @LastEditTime: 2022-04-19 11:34:14
+ * @LastEditTime: 2022-08-09 18:05:31
 -->
 <template>
     <div class="navbar">
@@ -11,7 +11,7 @@
                 @click="sidebarCollapseChenge">
                 <fy-icon name="fold" :size="22" color="var(--color-navbar-text)" />
             </div>
-            <div v-if="$store.state.theme.showBreadcrumb" class="breadCrumbs nav-item">
+            <div v-if="themeStore.showBreadcrumb" class="breadCrumbs nav-item">
                 <el-breadcrumb separator="/">
                     <el-breadcrumb-item v-for="item in breadCrumbs" :key="item.title"
                         @click="bindMenuClick(item)" :class="{isLink:item.type!==MenuType.cat}">
@@ -70,7 +70,7 @@ export default {
  
 <script lang="ts" setup>
 import { computed, ref, watch, getCurrentInstance } from 'vue'
-import { useStore } from '@/store'
+import { useUserStore,useSysStore,useThemeStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import defaultAvatar from '@/assets/images/avatar.svg'
@@ -79,7 +79,9 @@ import { MenuType, launchFullScreen, exitFullscreen, isFullScreen } from '@/ui/h
 import menuJump from './menuJump'
 
 const t = getCurrentInstance()!.appContext.config.globalProperties.$t
-const Store = useStore()
+const userStore = useUserStore()
+const sysStore = useSysStore()
+const themeStore = useThemeStore()
 const Route = useRoute()
 const Router = useRouter()
 
@@ -90,7 +92,7 @@ const showThemeDrawer = ref(false)
 const breadCrumbs = computed(() => {
     let crumbs: any[] = []
     if (Route.name !== 'Home' && Route.name !== 'Dashboard' && Route.path !== '/') {
-        const Menus = Store.state.user.menus
+        const Menus = userStore.menus
         const currMenu = Menus.find((item) => {
             if (Route.name === 'Frame') {
                 return item.id === Route.params.id
@@ -130,30 +132,30 @@ const breadCrumbs = computed(() => {
 // 面包屑菜单点击
 const bindMenuClick = (menu: IMenu) => {
     if (menu.id !== Route.name) {
-        menuJump(menu, Router, Store)
+        menuJump(menu, Router)
     }
 }
 
 // 侧边栏状态
-const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
+const sidebarCollapse = computed(() => sysStore.sidebarCollapse)
 
 // 侧边栏展开收缩
 const sidebarCollapseChenge = () => {
-    Store.commit('sys/changeSidebarCollapse')
+    sysStore.changeSidebarCollapse()
 }
 
 // 用户信息
 const userInfo = computed(() => ({
-    nickname: (Store.state.user.userInfo || {}).nickname,
-    username: (Store.state.user.userInfo || {}).username,
-    avatar: (Store.state.user.userInfo || {}).avatar || defaultAvatar,
+    nickname: (userStore.userInfo || {}).nickname,
+    username: (userStore.userInfo || {}).username,
+    avatar: (userStore.userInfo || {}).avatar || defaultAvatar,
 }))
 
 // 全屏按钮icon
 const fullScreenIcon = ref('FullScreen')
 
 // 窗口高度
-const visibleAreaHeight = computed(() => Store.state.sys.visibleAreaHeight)
+const visibleAreaHeight = computed(() => sysStore.visibleAreaHeight)
 
 // 监听窗口高度变化判断是否全屏来切换全屏ICON
 watch(
@@ -199,7 +201,7 @@ const userNavChange = (e: any) => {
                 }
             )
                 .then(() => {
-                    Store.dispatch('user/logout')
+                    userStore.logout()
                 })
                 .catch(() => {})
             break

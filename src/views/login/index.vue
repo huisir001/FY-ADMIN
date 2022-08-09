@@ -2,7 +2,7 @@
  * @Description: 登录
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 14:52:06
- * @LastEditTime: 2022-01-27 09:56:05
+ * @LastEditTime: 2022-08-09 17:01:34
 -->
 <template>
     <div class="login">
@@ -34,11 +34,11 @@
 <script lang="ts" setup>
 import { TITLE } from 'settings'
 import { reactive, ref, Ref } from 'vue'
-import { useStore } from '@/store'
-import { FormRulesMap } from 'element-plus/lib/components/form/src/form.type'
+import { useUserStore } from '@/store'
+import { FormRules } from 'element-plus'
 
 // store
-const Store = useStore()
+const userStore = useUserStore()
 
 // ref
 const loginForm: Ref = ref(null)
@@ -50,7 +50,7 @@ const loginFormData: IUserInfo = reactive({
 })
 
 // 表单验证
-const loginFormRules: FormRulesMap = reactive({
+const loginFormRules: FormRules = reactive({
     username: {
         required: true,
         message: '请输入账号',
@@ -69,7 +69,7 @@ const onSubmit = () => {
     loginForm.value.validate(async (valid: boolean) => {
         if (valid) {
             // 登录
-            await Store.dispatch('user/login', loginFormData)
+            await userStore.login(loginFormData)
             return true
         }
         return false

@@ -2,7 +2,7 @@
  * @Description: 主题设置抽屉
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-23 14:38:39
- * @LastEditTime: 2022-04-19 11:40:09
+ * @LastEditTime: 2022-08-09 16:40:06
 -->
 <template>
     <el-drawer :title="$t('components.ThemeSet.5hcvwyvsu1o0')" :size="280"
@@ -42,32 +42,32 @@ export default { name: 'ThemeSetDrawer' }
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { THEME_OPTIONS } from 'settings'
-import { useStore } from '@/store'
+import { useThemeStore } from '@/store'
 
-const Store = useStore()
+const themeStore = useThemeStore()
 
 // 主题配置
-const curThemeColorState = computed(() => Store.state.theme.color)
+const curThemeColorState = computed(() => themeStore.color)
 const curPageTagNavState = computed({
-    get: () => Store.state.theme.showPageTagNav,
+    get: () => themeStore.showPageTagNav,
     set: (val) => {
-        Store.commit('theme/setStates', {
+        themeStore.setStates({
             showPageTagNav: val,
         })
     },
 })
 const curBreadcrumbState = computed({
-    get: () => Store.state.theme.showBreadcrumb,
+    get: () => themeStore.showBreadcrumb,
     set: (val) => {
-        Store.commit('theme/setStates', {
+        themeStore.setStates({
             showBreadcrumb: val,
         })
     },
 })
 const curLogoState = computed({
-    get: () => Store.state.theme.showLogo,
+    get: () => themeStore.showLogo,
     set: (val) => {
-        Store.commit('theme/setStates', {
+        themeStore.setStates({
             showLogo: val,
         })
     },
@@ -75,7 +75,7 @@ const curLogoState = computed({
 
 // 主题色改变
 const selectColor = (val: string) => {
-    Store.commit('theme/setStates', {
+    themeStore.setStates({
         color: val,
     })
 }

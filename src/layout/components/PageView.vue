@@ -2,7 +2,7 @@
  * @Description: 内容区
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:31:00
- * @LastEditTime: 2022-01-29 16:28:42
+ * @LastEditTime: 2022-08-09 16:34:50
 -->
 <template>
     <div class="page-view" :class="{full:isFull}">
@@ -25,17 +25,17 @@ export default {
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useStore } from '@/store'
+import { useSysStore } from '@/store'
 
 const Router = useRouter()
-const Store = useStore()
+const sysStore = useSysStore()
 
 const isFull = computed(
     () => (useRoute().matched[useRoute().matched.length - 1].components.default as any).isFull
 )
 
 // 历史路由name
-const historyRoutesName = computed(() => Store.state.sys.historyRoutes.map((item) => item.name))
+const historyRoutesName = computed(() => sysStore.historyRoutes.map((item) => item.name))
 
 // 这里的include中的name注意是组件的name,而不是路由的name
 // 这里特别注意：匿名组件不能被匹配，所以需要缓存的组件必须有name属性

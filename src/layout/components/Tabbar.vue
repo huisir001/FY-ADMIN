@@ -2,7 +2,7 @@
  * @Description: Tabbar
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-10 18:50:20
- * @LastEditTime: 2022-02-15 11:00:07
+ * @LastEditTime: 2022-08-09 16:39:07
 -->
 <template>
     <div ref="tabbarRef" class="tabbar">
@@ -40,10 +40,11 @@ export default {
  
 <script lang="ts" setup>
 import { computed, nextTick, ref, watch } from 'vue'
-import { useStore } from '@/store'
+import { useSysStore,useGetters } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 
-const Store = useStore()
+const sysStore = useSysStore()
+const getters = useGetters()
 const Router = useRouter()
 const Route = useRoute()
 const tabbarRef = ref()
@@ -53,15 +54,15 @@ const scrollBtnDisabled = ref<[boolean, boolean]>([false, false])
 const translateX = ref<number>(0)
 
 // 历史路由
-const historyRoutes = computed(() => Store.getters.copyHistRoutes)
+const historyRoutes = computed(() => getters.copyHistRoutes)
 
 // 当前路由
 const curRouteName = computed(() => Route.name)
 
 // 窗口宽度
-const visibleAreaWidth = computed(() => Store.state.sys.visibleAreaWidth)
+const visibleAreaWidth = computed(() => sysStore.visibleAreaWidth)
 // 窗口折叠
-const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
+const sidebarCollapse = computed(() => sysStore.sidebarCollapse)
 
 // 计算滚动超出宽度
 const getOverLength = () => itemBoxRef.value.clientWidth - tabbarRef.value.clientWidth
@@ -135,7 +136,7 @@ watch(showScrollBtn, (val, oldVal) => {
 
 // 监听侧边缩放
 watch(sidebarCollapse, () => {
-    const visibleAreaWidth = Store.state.sys.visibleAreaWidth
+    const visibleAreaWidth = sysStore.visibleAreaWidth
     if (visibleAreaWidth && visibleAreaWidth > 768) {
         nextTick(() => {
             const timer = setTimeout(() => {
@@ -166,7 +167,7 @@ const deleteRoute = (index: number, ev: any, el?: HTMLElement) => {
             Router.push({ name: 'Home' })
         }
     }
-    Store.commit('sys/delHistoryRoute', delRoute)
+    sysStore.delHistoryRoute(delRoute)
 }
 
 // 向左滚
@@ -242,14 +243,14 @@ const ctxMenuList: IBtnOptions[] = [
             const routesIndex = Number(el.dataset.index)
             const curRoute = historyRoutes.value[routesIndex]
             tabChange(routesIndex, el)
-            Store.commit('sys/setStates', { historyRoutes: [curRoute] })
+            sysStore.$patch({ historyRoutes: [curRoute] })
         },
     },
     {
         name: '关闭所有标签',
         callback() {
             Router.push({ name: 'Home' })
-            Store.commit('sys/clearHistoryRoute')
+            sysStore.clearHistoryRoute()
         },
     },
 ]

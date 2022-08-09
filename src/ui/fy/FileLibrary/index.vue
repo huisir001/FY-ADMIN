@@ -2,7 +2,7 @@
  * @Description: 文件库(只支持上传图片和zip压缩包)
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-25 12:22:55
- * @LastEditTime: 2022-08-09 13:48:05
+ * @LastEditTime: 2022-08-09 16:47:09
 -->
 <template>
     <div class="file-library-btn" @click="showFileLibraryBox = true;getList()">
@@ -174,7 +174,7 @@ import {
 import { ElMessage } from 'element-plus'
 import { debounce } from '@/ui/helpers'
 import { TOKEN_OPTIONS } from 'settings'
-import { useStore } from '@/store'
+import { useGetters } from '@/store'
 
 const props = defineProps({
     /**
@@ -200,7 +200,7 @@ const pageTotal = ref(1)
 const fileList = ref([])
 const pageLimit = 10
 const fileUrlSetFrom = ref()
-const uploadHeaders = { [TOKEN_OPTIONS.key]: useStore().getters.getToken() }
+const uploadHeaders = { [TOKEN_OPTIONS.key]: useGetters().getToken() }
 
 // 分类列表
 const groups = ref<{ id: string; name: string }[]>([])

@@ -2,11 +2,11 @@
  * @Description: 侧边栏
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-09 14:28:59
- * @LastEditTime: 2022-03-02 11:17:46
+ * @LastEditTime: 2022-08-09 18:06:05
 -->
 <template>
     <div class="sidebar">
-        <div v-if="$store.state.theme.showLogo" class="logo-box">
+        <div v-if="themeStore.showLogo" class="logo-box">
             <img v-show="sidebarCollapse" src="../../assets/images/logo_icon_w.svg">
             <img v-show="!sidebarCollapse" src="../../assets/images/logo.svg">
         </div>
@@ -67,23 +67,25 @@ export default {
 </script>
  
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { useStore } from '@/store'
+import { computed,getCurrentInstance } from 'vue'
+import { useSysStore,useGetters,useThemeStore } from '@/store'
 import { useRouter } from 'vue-router'
 import { rawList2Tree } from '@/utils/common'
 import menuJump from './menuJump'
 
-const Store = useStore()
+const sysStore = useSysStore()
+const themeStore = useThemeStore()
+const getters = useGetters()
 const Router = useRouter()
 
 // 菜单
-const Menus = computed(() => rawList2Tree(Store.getters.copyUserMenu))
+const Menus = computed(() => rawList2Tree(getters.copyUserMenu))
 
 // 侧边栏收放
-const sidebarCollapse = computed(() => Store.state.sys.sidebarCollapse)
+const sidebarCollapse = computed(() => sysStore.sidebarCollapse)
 
 // 菜单点击
-const bindMenuClick = (menu: IMenu) => menuJump(menu, Router, Store)
+const bindMenuClick = (menu: IMenu) => menuJump(menu, Router)
 </script>
  
 <style scoped lang="scss">

@@ -2,7 +2,7 @@
  * @Description: 表格封装
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-10-28 10:25:24
- * @LastEditTime: 2022-04-01 14:58:53
+ * @LastEditTime: 2022-08-09 16:47:56
 -->
 <template>
     <!-- 工具栏 -->
@@ -49,7 +49,7 @@
 import { computed, defineComponent, nextTick, PropType, Ref, ref, watch } from 'vue'
 import TableTools from './TableTools.vue'
 import { ICols, TOptionOfTools } from '../types'
-import { useStore } from '@/store'
+import { useSysStore } from '@/store'
 
 export default defineComponent({
     name: 'Table',
@@ -113,11 +113,11 @@ export default defineComponent({
         }
 
         /* 表格高度计算 */
-        const Store = useStore()
+        const sysStore = useSysStore()
         const tableBox = ref()
         let tableCalcHeight: Ref<null | number> = ref(null)
         // 窗口高度
-        const visibleAreaHeight = computed(() => Store.state.sys.visibleAreaHeight)
+        const visibleAreaHeight = computed(() => sysStore.visibleAreaHeight)
         // 监听窗口高度变化做些事
         if (height) {
             nextTick(() => {

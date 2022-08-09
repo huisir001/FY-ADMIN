@@ -2,11 +2,11 @@
  * @Description: 跳转权限-路由前置钩子
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-17 19:28:46
- * @LastEditTime: 2022-02-10 18:15:07
+ * @LastEditTime: 2022-08-09 17:06:10
  */
 import { getUserInfo } from '@/api/user'
 import { NavigationGuardWithThis } from 'vue-router'
-import { store } from '@/store'
+import { useUserStore, useSysStore, useGetters } from '@/store'
 import PageLoading from '@/utils/PageLoading'
 
 const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
@@ -14,14 +14,19 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
     // 加载loading
     PageLoading.show()
 
+    // store
+    const userStore = useUserStore()
+    const sysStore = useSysStore()
+    const getters = useGetters()
+
     // 若跳登录页，则清除登陆状态，直接跳转
     if (to.name === 'Login') {
         // 清除登录状态
-        store.commit('user/clearLoginState')
+        userStore.clearLoginState()
         // 清除菜单和路由
-        store.commit('user/clearAllMenuAndRoute')
+        userStore.clearAllMenuAndRoute()
         // 清除TAB路由
-        store.commit('sys/clearHistoryRoute')
+        sysStore.clearHistoryRoute()
         next()
         return
     }
@@ -33,13 +38,13 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
 
 
         //获取token
-        const Token: string = store.getters.getToken()
+        const Token: string = getters.getToken
 
         // 有token说明已登录(这里是获取不到登录状态的，只能通过token判断)
         if (Token) {
 
             // 登录信息
-            const UserInfo = store.state.user.userInfo
+            const UserInfo = userStore.userInfo
 
             // 没有用户信息，说明没有查询过，则查询一次（这里考虑到用户菜单转为路由后需要再次重定向一次）
             if (!UserInfo) {
@@ -49,10 +54,10 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
                 // 查询若有错误会在axios全局配置钩子中处理
                 if (ok) {
                     // 缓存用户信息
-                    store.commit('user/setStates', { loginStatus: 1, userInfo: data })
+                    userStore.setStates({ loginStatus: 1, userInfo: data })
 
                     // 登录之后查目录，处理转换为tree格式并动态添加到路由缓存
-                    await store.dispatch('user/getMenus')
+                    await userStore.getMenus()
 
                     // 由于动态路由的缘故，这里重新定向
                     next({ ...to, replace: true })
@@ -67,7 +72,7 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
             } else {
                 // 重定向后结果
                 // 登录状态（这里查询的登录状态包含已经查询过的结果）
-                const LoginStatus = store.state.user.loginStatus
+                const LoginStatus = userStore.loginStatus
 
                 // 该页面必须要登陆，且现在为未登录状态，则跳转到登录页
                 // 若为路由正常跳转时发现未登录，则弹出登录框，而不是跳转到登录页，后面处理
@@ -87,9 +92,9 @@ const permission: NavigationGuardWithThis<void> = async (to, from, next) => {
     /* 路由正常跳转 */
 
     // 如果未登录
-    if (to.meta.private && !store.state.user.loginStatus) {
+    if (to.meta.private && !userStore.loginStatus) {
         //登陆失效，弹出登陆框
-        store.commit('user/setStates', { loginStatus: 2 })
+        userStore.setStates({ loginStatus: 2 })
         // 这里不跳转
         return
     }

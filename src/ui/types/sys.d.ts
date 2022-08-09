@@ -2,7 +2,7 @@
  * @Description: 系统管理页相关类型
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-03-01 14:01:24
- * @LastEditTime: 2022-04-06 11:33:07
+ * @LastEditTime: 2022-08-09 16:14:07
  */
 
 /**
@@ -55,7 +55,6 @@ declare interface IMenu {
     query?: string //type=1/2时传参（{a=1,b=2}）
     viewPath?: string //type=1时跳转的文件路径(相对于src目录)若为null,且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
     blank: boolean //type=2时在新页面打开链接，默认为true
-    triggerMode?: 'commit' | 'dispatch' //type=3时要激活事件的方式：commit/dispatch
     triggerMethod?: string //字符串，type=3时要激活的事件
     status: 1 | 0 //1-正常；0-停用（停用时用户无法查询，且访问受限），admin能查询所有菜单，侧边栏不展示
     children?: IMenu[],

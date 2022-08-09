@@ -2,7 +2,7 @@
  * @Description: 菜单管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-22 16:57:50
- * @LastEditTime: 2022-03-01 15:08:57
+ * @LastEditTime: 2022-08-09 18:39:24
  */
 import { ICols, IFormOption, TOptionOfTools } from "@/ui/fy/types";
 import { MenuType } from '@/ui/helpers'
@@ -246,34 +246,11 @@ export default () => {
             },
         },
         {
-            label: "触发方式",
-            component: "select",
-            key: "triggerMode",
-            props: {
-                placeholder: "选择事件触发方式",
-            },
-            options: [
-                {
-                    label: "vuex:commit",
-                    value: "commit",
-                },
-                {
-                    label: "vuex:dispatch",
-                    value: "dispatch",
-                },
-            ],
-            rules: {
-                required: true,
-                trigger: "blur",
-                message: "触发方式不能为空",
-            },
-        },
-        {
             label: "事件名",
             component: "input",
             key: "triggerMethod",
             props: {
-                placeholder: "输入按钮要触发的事件名",
+                placeholder: "方法名(store->common模块)",
             },
             rules: [{
                 required: true,
@@ -281,8 +258,8 @@ export default () => {
                 message: "事件名不能为空",
             }, {
                 trigger: 'blur',
-                pattern: /^[A-Za-z]+(\/[A-Za-z]+)*(\w+)*$/,
-                message: '由英文、数字、/、_组成，以英文开头，“/”后面须为英文开头。如“user/login”',
+                pattern: /^[A-Za-z]+(\w+)*$/,
+                message: '由英文、数字、下划线组成，以英文开头，如“login”',
             }],
         },
     ] as IFormOption[]);
@@ -319,7 +296,6 @@ export default () => {
         ],
         [MenuType.button]: [
             ...commonOptions,
-            "triggerMode",
             "triggerMethod",
         ],
     };

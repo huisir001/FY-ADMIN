@@ -2,7 +2,7 @@
  * @Description: 用户数据规则
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-02 15:39:43
- * @LastEditTime: 2022-04-15 13:53:17
+ * @LastEditTime: 2022-08-09 18:33:43
  */
 import { rules2MockMethods } from './_helpers'
 import { Random } from "mockjs"
@@ -63,7 +63,6 @@ export const getUserMenus = {
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
         blank: true, //type=2时在新页面打开链接，默认为true
-        triggerMode: null, //type=3时要激活事件的方式：commit/dispatch
         triggerMethod: null, //字符串，type=3时要激活的事件
         status: 1, //1-正常；0-停用
     },
@@ -83,7 +82,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'ui/pages/sys/dept.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -102,7 +100,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'ui/pages/sys/menu.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -121,7 +118,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'ui/pages/sys/role.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -140,7 +136,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'ui/pages/sys/users.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -160,7 +155,6 @@ export const getUserMenus = {
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
         blank: true, //type=2时在新页面打开链接，默认为true
-        triggerMode: null, //type=3时要激活事件的方式：commit/dispatch
         triggerMethod: null, //字符串，type=3时要激活的事件
         status: 1, //1-正常；0-停用
     },
@@ -180,7 +174,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'views/examples/container/full.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -200,7 +193,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'views/examples/container/grid.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -220,7 +212,6 @@ export const getUserMenus = {
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
         blank: true, //type=2时在新页面打开链接，默认为true
-        triggerMode: null, //type=3时要激活事件的方式：commit/dispatch
         triggerMethod: null, //字符串，type=3时要激活的事件
         status: 1, //1-正常；0-停用
     },
@@ -240,7 +231,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'views/examples/basicComp/card.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -260,7 +250,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'views/examples/basicComp/editor.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -280,7 +269,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'views/examples/formComp/stepForm.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -300,7 +288,6 @@ export const getUserMenus = {
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
         blank: true, //type=2时在新页面打开链接，默认为true
-        triggerMode: null, //type=3时要激活事件的方式：commit/dispatch
         triggerMethod: null, //字符串，type=3时要激活的事件
         status: 1, //1-正常；0-停用
     }, {
@@ -319,7 +306,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'views/examples/directive/copyByClick.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -339,7 +325,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'views/examples/directive/contextMenu.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -359,7 +344,6 @@ export const getUserMenus = {
         query: null, //type=1/2时传参（{a=1,b=2}）
         viewPath: null, //type=1时,跳转的文件路径(相对于src目录),若为null且路由为一级路由，则渲染Layout组件;//type=2时跳转链接
         blank: true, //type=2时在新页面打开链接，默认为true
-        triggerMode: null, //type=3时要激活事件的方式：commit/dispatch
         triggerMethod: null, //字符串，type=3时要激活的事件
         status: 1, //1-正常；0-停用
     },
@@ -379,7 +363,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'views/examples/pages/success.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -399,7 +382,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'views/examples/pages/fail.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -419,7 +401,6 @@ export const getUserMenus = {
         query: null,
         viewPath: null,
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -440,7 +421,6 @@ export const getUserMenus = {
         query: null,
         viewPath: null,
         blank: false,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -461,7 +441,6 @@ export const getUserMenus = {
         query: null,
         viewPath: null,
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },
@@ -481,7 +460,6 @@ export const getUserMenus = {
         query: null,
         viewPath: null,
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -501,8 +479,7 @@ export const getUserMenus = {
         query: null,
         viewPath: null,
         blank: true,
-        triggerMode: 'commit',
-        triggerMethod: 'common/sidebarBtn1',
+        triggerMethod: 'sidebarBtn1',
         status: 1,
     }, {
         id: '@id',
@@ -521,8 +498,7 @@ export const getUserMenus = {
         query: null,
         viewPath: null,
         blank: true,
-        triggerMode: 'dispatch',
-        triggerMethod: 'common/sidebarBtn2',
+        triggerMethod: 'sidebarBtn2',
         status: 1,
     }, {
         id: '015',
@@ -540,7 +516,6 @@ export const getUserMenus = {
         query: null,
         viewPath: null,
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -559,7 +534,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'ui/pages/monitor/reqlogs.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -578,7 +552,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'ui/pages/monitor/loginlogs.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -597,7 +570,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'ui/pages/monitor/online.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -616,7 +588,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'ui/pages/monitor/server.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -635,7 +606,6 @@ export const getUserMenus = {
         query: null,
         viewPath: null,
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -654,7 +624,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'ui/pages/exception/404.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -673,7 +642,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'ui/pages/exception/403.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     }, {
@@ -692,7 +660,6 @@ export const getUserMenus = {
         query: null,
         viewPath: 'ui/pages/exception/500.vue',
         blank: true,
-        triggerMode: null,
         triggerMethod: null,
         status: 1,
     },

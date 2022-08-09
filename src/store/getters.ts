@@ -1,25 +1,28 @@
 /*
- * @Description:getters-包装 state 数据
- * @Autor: HuiSir<273250950@qq.com>
- * @Date: 2021-09-18 17:04:48
- * @LastEditTime: 2022-02-15 10:59:31
+ * @Description: 计算数据
+ * @Autor: HuiSir<github.com/huisir001>
+ * @Date: 2022-08-09 10:58:04
+ * @LastEditTime: 2022-08-09 11:08:56
  */
+import { defineStore } from 'pinia'
+import { computed } from 'vue'
 import LocalCache from '@/utils/LocalCache'
 import { STORAGE_OPTIONS } from 'settings'
-import { IState } from './index'
-export default {
+import useUserStore from './modules/user'
+import useSysStore from './modules/sys'
+
+export default defineStore('getters', () => {
     /**
      * 取Token
      * Token存store和localStorage两处,防止用户在登录状态清理浏览器缓存
      * 查询时若一处被清理则回填
      * getter在返回一个函数时，函数的返回值不会被缓存
      */
-    getToken: (state: IState) => () => {
+    const getToken = computed(() => {
+        const { token: S_TOKEN, setStates } = useUserStore()
         const C_TOKEN = LocalCache.getCache(STORAGE_OPTIONS.Token)
-        const S_TOKEN = state.user.token
-
         if (C_TOKEN) {
-            state.user.token = C_TOKEN
+            setStates({ token: C_TOKEN })
             return C_TOKEN
         } else if (S_TOKEN) {
             LocalCache.setCache(STORAGE_OPTIONS.Token, S_TOKEN)
@@ -27,20 +30,25 @@ export default {
         } else {
             return null
         }
-    },
-
+    })
     /**
      * 拷贝userInfo
      */
-    copyUserInfo: (state: IState) => JSON.parse(JSON.stringify(state.user.userInfo)),
-
+    const copyUserInfo = computed(() => JSON.parse(JSON.stringify(useUserStore().userInfo)))
     /**
      * 拷贝menu
      */
-    copyUserMenu: (state: IState) => JSON.parse(JSON.stringify(state.user.menus)),
-
+    const copyUserMenu = computed(() => JSON.parse(JSON.stringify(useUserStore().menus)))
     /**
      * 拷贝historyRoutes
      */
-    copyHistRoutes: (state: IState) => JSON.parse(JSON.stringify(state.sys.historyRoutes))
-}
+    const copyHistRoutes = computed(() => JSON.parse(JSON.stringify(useSysStore().historyRoutes)))
+
+
+    return {
+        getToken,
+        copyUserInfo,
+        copyUserMenu,
+        copyHistRoutes
+    }
+})

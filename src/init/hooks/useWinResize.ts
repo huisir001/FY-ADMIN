@@ -2,35 +2,31 @@
  * @Description: 浏览器缩放处理，用于layout
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-16 17:00:21
- * @LastEditTime: 2021-12-27 10:49:28
+ * @LastEditTime: 2022-08-09 15:36:12
  */
 
 import { debounce } from '@/ui/helpers'
-import { useStore } from '@/store'
+import { useSysStore } from '@/store'
 
 /**
  * 浏览器缩放事件,防抖
  * 注意：只调用一次(在App.vue中调用)
  */
 export default () => {
-    const Store = useStore()
+    const sysStore = useSysStore()
 
     window.onresize = debounce(() => {
 
         const currWidth = window.innerWidth
         const currHeight = window.innerHeight
 
-        if (Store.state.sys.visibleAreaWidth !== currWidth) {
+        if (sysStore.visibleAreaWidth !== currWidth) {
             // 更改屏幕可视区宽度缓存
-            Store.commit('sys/setStates', {
-                visibleAreaWidth: currWidth
-            })
+            sysStore.$patch({ visibleAreaWidth: currWidth })
         }
-        if (Store.state.sys.visibleAreaHeight !== currHeight) {
+        if (sysStore.visibleAreaHeight !== currHeight) {
             // 更改屏幕可视区高度缓存
-            Store.commit('sys/setStates', {
-                visibleAreaHeight: currHeight
-            })
+            sysStore.$patch({ visibleAreaHeight: currHeight })
         }
 
     }, 200)

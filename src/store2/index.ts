@@ -1,0 +1,39 @@
+/*
+ * @Description: store
+ * @Autor: HuiSir<273250950@qq.com>
+ * @Date: 2021-09-01 16:37:47
+ * @LastEditTime: 2022-02-08 14:36:03
+ */
+import { InjectionKey } from 'vue'
+import { createStore, useStore as baseUseStore, Store } from 'vuex'
+import { user, IUserState } from './modules/user'
+import { theme, IThemeState } from './modules/theme'
+import { sys, ISysState } from './modules/sys'
+import { common } from './modules/common'
+import getters from './getters'
+
+// State接口
+export interface IState {
+  user: IUserState
+  theme: IThemeState
+  sys: ISysState
+}
+
+// 定义类型化的 InjectionKey
+export const storeKey: InjectionKey<Store<IState>> = Symbol()
+
+// 定义自己的 `useStore` 组合式函数
+// 将类型化的 InjectionKey 传给 useStore 方法
+// 这样搞是为了让vuex支持ts类型，便与开发
+export const useStore = () => baseUseStore(storeKey)
+
+// 导出Store
+export const store = createStore<IState>({
+  modules: {
+    user,
+    theme,
+    sys,
+    common
+  },
+  getters
+})

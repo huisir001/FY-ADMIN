@@ -2,7 +2,7 @@
  * @Description: 公告/通知
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-04-06 15:32:55
- * @LastEditTime: 2022-04-12 14:03:19
+ * @LastEditTime: 2022-08-09 16:50:18
 -->
 <template>
     <div class="message flex-row">
@@ -34,7 +34,7 @@ export default {
 
 <script lang="ts" setup>
 import { ref, Ref, watch, computed, onMounted } from 'vue'
-import { useStore } from '@/store'
+import { useSysStore } from '@/store'
 import { getMsgsByPage, getMsgDetail, delMsg, readById, readAll } from '@/api/msg'
 import { IMessageDetail } from './types'
 import { ElMessage } from 'element-plus'
@@ -50,8 +50,8 @@ const contLoading = ref(false)
 // showcontent
 const showContent = ref(false)
 // store
-const Store = useStore()
-const visibleAreaWidth = computed(() => Store?.state.sys.visibleAreaWidth)
+const sysStore = useSysStore()
+const visibleAreaWidth = computed(() => sysStore.visibleAreaWidth)
 const beginVisibleAreaWidth = ref(0)
 onMounted(() => {
     // 初次进入屏宽

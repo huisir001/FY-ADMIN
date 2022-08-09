@@ -2,15 +2,14 @@
  * @Description: 辅助脚本
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2022-02-15 11:36:27
- * @LastEditTime: 2022-03-01 15:07:06
+ * @LastEditTime: 2022-08-09 18:36:29
  */
 import { Router } from 'vue-router'
-import { IState } from '@/store'
-import { Store } from 'vuex'
+import { useCommonStore } from '@/store'
 import { MenuType } from '@/ui/helpers'
 
 // 菜单点击
-export default (menu: IMenu, router: Router, store: Store<IState>) => {
+export default async (menu: IMenu, router: Router) => {
     switch (menu.type) {
         case MenuType.cat:
             return
@@ -29,7 +28,7 @@ export default (menu: IMenu, router: Router, store: Store<IState>) => {
             break
         case MenuType.button:
             // 按钮
-            store[menu.triggerMode as 'commit' | 'dispatch'](menu.triggerMethod!)
+            menu.triggerMethod && await (useCommonStore() as any)[menu.triggerMethod]()
             break
     }
 }

@@ -2,15 +2,14 @@
  * @Description: axios中间件（初始化和全局配置）
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2020-08-06 13:16:24
- * @LastEditTime: 2022-01-25 11:22:23
+ * @LastEditTime: 2022-08-09 17:06:48
  */
 import { ElMessage } from 'element-plus'
 import axios from 'axios'
 // import PageLoading from './PageLoading'
 import LocalCache from './LocalCache'
-import { store } from '@/store'
+import { useGetters, useUserStore } from '@/store'
 import { TOKEN_OPTIONS, STORAGE_OPTIONS } from 'settings'
-
 
 //初始化
 const Axios: any = axios.create({
@@ -28,7 +27,7 @@ Axios.interceptors.request.use(
         // 加载loading
         // PageLoading.show()
         // 由于执行请求时token可能已经改变，故每次请求前都要重新获取token
-        Token = store.getters.getToken()
+        Token = useGetters().getToken
         // 判断是否存在token，如果存在的话，则每个http header都加上token
         Token && (config.headers[TOKEN_OPTIONS.key] = Token)
         return config
@@ -61,7 +60,7 @@ Axios.interceptors.response.use(
         // 更新token
         const newToken = response.headers[TOKEN_OPTIONS.key]
         if (newToken && newToken !== Token) {
-            store.commit('user/setToken', newToken)
+            useUserStore().setToken(newToken)
         }
 
         return response.data
@@ -80,7 +79,7 @@ Axios.interceptors.response.use(
         const { status, data, statusText } = error.response
         // 若这里响应码为403，则改变登陆状态，弹出登录框
         if (status === 403) {
-            store.commit('user/setStates', { loginStatus: 2, token: null, userInfo: null })
+            useUserStore().setStates({ loginStatus: 2, token: null, userInfo: null })
             //删除token
             LocalCache.removeCache(STORAGE_OPTIONS.Token)
         }
