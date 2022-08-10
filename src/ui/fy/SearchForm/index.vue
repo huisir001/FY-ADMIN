@@ -2,7 +2,7 @@
  * @Description: 搜索表单
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-04 16:39:23
- * @LastEditTime: 2022-01-14 10:08:25
+ * @LastEditTime: 2022-08-10 14:07:19
 -->
 <template>
     <el-form ref="elForm" :model="params" class="fy-search-form" :inline="inline"
@@ -97,7 +97,6 @@ export default defineComponent({
 .fy-search-form:deep(.el-input),
 .fy-search-form:deep(.el-input-number),
 .fy-search-form:deep(.el-switch) {
-    width: 220px;
     max-width: 100%;
     &.el-date-editor--datetimerange {
         width: 350px !important;

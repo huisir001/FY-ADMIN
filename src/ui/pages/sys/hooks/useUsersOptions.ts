@@ -2,7 +2,7 @@
  * @Description: 用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2022-04-06 14:41:25
+ * @LastEditTime: 2022-08-10 14:10:02
  */
 import { IFormOption, ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -180,7 +180,7 @@ export default () => {
         {
             label: '操作',
             fixed: 'right',
-            minWidth: 120,
+            minWidth: 125,
             slot: 'todo',
         },
     ]

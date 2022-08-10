@@ -2,7 +2,7 @@
  * @Description: 表格操作按钮
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-12-16 16:56:44
- * @LastEditTime: 2022-08-09 13:49:16
+ * @LastEditTime: 2022-08-10 14:13:44
 -->
 <template>
     <el-button v-if="contains.includes('edit')" type="primary" link size="small"
@@ -31,8 +31,8 @@
     <el-popconfirm v-if="contains.includes('exit')" confirm-button-text="确认" cancel-button-text="取消"
         title="确认强制退出?" @confirm="$emit('todo','exit')">
         <template #reference>
-            <el-button link size="small">
-                <fy-icon name="Exit" size="13" color="var(--el-color-primary)" class="mr-3" /> 强退
+            <el-button type="danger" link size="small">
+                <fy-icon name="Exit" size="13" color="var(--el-color-danger)" class="mr-3" /> 强退
             </el-button>
         </template>
     </el-popconfirm>
