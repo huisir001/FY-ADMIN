@@ -2,7 +2,7 @@
  * @Description: 在线用户管理-配置项
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-11-05 11:41:30
- * @LastEditTime: 2022-02-28 15:05:22
+ * @LastEditTime: 2022-08-10 14:17:44
  */
 import { IFormOption, IDetailOption, ICols, TOptionOfTools } from '@/ui/fy/types'
 import { ref } from "vue"
@@ -154,8 +154,8 @@ export default () => {
         },
         {
             label: '部门',
-            key: 'dept',
-            formatter: (params: IObj) => params.dept.name,
+            key: 'deptName',
+            // formatter: (params: IObj) => params.dept.name,
         },
         {
             label: 'IP地址',
