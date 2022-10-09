@@ -2,13 +2,13 @@
  * @Description: LocalStorage临时缓存
  * @Autor: HuiSir<273250950@qq.com>
  * @Date: 2021-09-07 17:29:01
- * @LastEditTime: 2021-09-21 00:43:10
+ * @LastEditTime: 2022-10-09 12:06:38
  */
 
 /**
  * 缓存项
  */
-interface ICatchItem {
+export interface ICatchItem {
     key: string
     type: 1 | 2 // 1-sessionStorage,2-localStorage
 }
